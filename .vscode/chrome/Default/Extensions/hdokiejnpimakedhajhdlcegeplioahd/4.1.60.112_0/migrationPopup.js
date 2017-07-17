@@ -1,0 +1,1 @@
+!function(){window.addEventListener("message",function(n){if("migration_popup_init"===n.data.type){console.log(n);var o=n.data.url,e=function(){window.parent.postMessage({type:"close_migration_popup"},"*")};document.getElementById("openVault").onclick=function(){window.open(o),e()},document.getElementById("closePopup").onclick=function(){e()}}})}();
