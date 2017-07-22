@@ -11,8 +11,10 @@
   "dependencies": {
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-alpha.19",
+    "moment": "^2.18.1",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-router-dom": "^4.1.2"
   },
   "scripts": {
     "precommit": "lint-staged",
@@ -26,11 +28,8 @@
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
-      "prettier --write",
+      "prettier --single-quote --write",
       "git add"
     ]
-  },
-  "prettier": {
-    "singleQuote": true
   }
 }
