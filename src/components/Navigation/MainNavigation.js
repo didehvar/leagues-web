@@ -27,15 +27,15 @@ class MainNavigation extends Component {
   constructor(props) {
     super(props);
 
-    const value = this.links.indexOf(props.location.pathname);
+    const value = this.links.indexOf(
+      props.location.pathname.split('/').slice(0, 2).join('/')
+    );
     this.state = { value: value > -1 ? value : 0 };
   }
 
   handleChange = (event, value) => {
-    if (this.state.value !== value) {
-      this.setState({ value });
-      this.props.history.push(this.links[value]);
-    }
+    this.setState({ value });
+    this.props.history.push(this.links[value]);
   };
 
   render() {
