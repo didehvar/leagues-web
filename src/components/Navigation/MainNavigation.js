@@ -13,8 +13,8 @@ import { withRouter } from 'react-router-dom';
 
 const styleSheet = createStyleSheet('MainNavigation', theme => ({
   root: {
-    'max-width': 400,
-    'border-top': `1px solid ${theme.palette.common.faintBlack}`
+    'border-top': `1px solid ${theme.palette.common.faintBlack}`,
+    width: '100%'
   },
   button: {
     'min-width': 0
