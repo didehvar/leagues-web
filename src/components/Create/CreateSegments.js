@@ -10,7 +10,13 @@ import stravaPony from './strava-pony.jpg';
 import AddIcon from 'material-ui-icons/Add';
 import RemoveCircleIcon from 'material-ui-icons/RemoveCircle';
 import IconButton from 'material-ui/IconButton';
-import Dialog, { DialogTitle } from 'material-ui/Dialog';
+import Dialog, {
+  DialogTitle,
+  DialogContent,
+  DialogContentText
+} from 'material-ui/Dialog';
+import TextField from 'material-ui/TextField';
+import Paper from 'material-ui/Paper';
 
 const styleSheet = createStyleSheet('CreateSegments', theme => ({
   root: {
@@ -22,6 +28,9 @@ const styleSheet = createStyleSheet('CreateSegments', theme => ({
   submit: {
     margin: '0 auto'
   },
+  dialogButton: {
+    width: '100%'
+  },
   submitGrid: {
     display: 'flex',
     'justify-content': 'center'
@@ -30,7 +39,7 @@ const styleSheet = createStyleSheet('CreateSegments', theme => ({
     height: 145
   },
   card: {
-    height: 225
+    height: 245
   },
   addButton: {
     height: '100%',
@@ -49,15 +58,14 @@ const styleSheet = createStyleSheet('CreateSegments', theme => ({
 
 class CreateSegments extends React.Component {
   state = {
-    name: '',
-    date: moment().format('YYYY-MM-DD'),
-    type: 0,
+    start: moment().format('YYYY-MM-DD'),
+    end: moment().add(1, 'week').format('YYYY-MM-DD'),
     open: false
   };
 
   render() {
     const { classes } = this.props;
-    const { open } = this.state;
+    const { open, start, end } = this.state;
 
     return (
       <div className={classes.root}>
@@ -75,7 +83,7 @@ class CreateSegments extends React.Component {
                   color="accent"
                 />
               </CardMedia>
-              <CardContent>
+              <CardContent style={{ padding: 10 }}>
                 <Typography type="subheading" component="h3">
                   Dave's Cracking Segment
                 </Typography>
@@ -109,7 +117,68 @@ class CreateSegments extends React.Component {
           onRequestClose={() => this.setState({ open: false })}
           open={open}
         >
-          <DialogTitle>Segment selector</DialogTitle>
+          <DialogTitle>Add segment</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <Grid container gutter={24} justify="center">
+                <Grid item xs={12}>
+                  <TextField
+                    id="start-date"
+                    label="Start"
+                    type="date"
+                    className={classes.textField}
+                    value={start}
+                    onChange={event =>
+                      this.setState({ start: event.target.value })}
+                    margin="normal"
+                    fullWidth
+                    required
+                  />
+                  <TextField
+                    id="end-date"
+                    label="End"
+                    type="date"
+                    className={classes.textField}
+                    value={end}
+                    onChange={event =>
+                      this.setState({ end: event.target.value })}
+                    margin="normal"
+                    fullWidth
+                    required
+                  />
+                </Grid>
+                <Grid className={classes.submitGrid} item xs={12}>
+                  <Button
+                    raised
+                    color="accent"
+                    className={classes.dialogButton}
+                  >
+                    Starred
+                  </Button>
+                </Grid>
+                <Grid className={classes.submitGrid} item xs={12}>
+                  <Button
+                    raised
+                    color="accent"
+                    className={classes.dialogButton}
+                  >
+                    Search
+                  </Button>
+                </Grid>
+                <Grid className={classes.submitGrid} item xs={12}>
+                  <Button
+                    raised
+                    color="primary"
+                    className={classes.submit}
+                    component={Link}
+                    to="/create/segments"
+                  >
+                    Add
+                  </Button>
+                </Grid>
+              </Grid>
+            </DialogContentText>
+          </DialogContent>
         </Dialog>
       </div>
     );
