@@ -4,16 +4,13 @@ import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Home from '../Home/Home';
 import Create from '../Create/Create';
 import CreateSegments from '../Create/CreateSegments';
+import Search from '../Search/Search';
 
 const styleSheet = createStyleSheet('Router', theme => ({
   wrapper: {
-    height: '100%',
     display: 'flex',
-    'flex-direction': 'column',
-    'justify-content': 'center',
-    'align-items': 'center',
-    'max-width': 500,
-    margin: '0 auto'
+    'min-height': '100vh',
+    'flex-direction': 'column'
   },
   container: {
     'flex-grow': 1,
@@ -30,6 +27,7 @@ function Router({ children, classes }) {
           <Route exact path="/" component={Home} />
           <Route exact path="/create" component={Create} />
           <Route exact path="/create/segments" component={CreateSegments} />
+          <Route exact path="/search" component={Search} />
         </div>
 
         {children}

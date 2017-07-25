@@ -16,7 +16,6 @@ import Dialog, {
   DialogContentText
 } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
-import Paper from 'material-ui/Paper';
 
 const styleSheet = createStyleSheet('CreateSegments', theme => ({
   root: {
@@ -170,8 +169,7 @@ class CreateSegments extends React.Component {
                     raised
                     color="primary"
                     className={classes.submit}
-                    component={Link}
-                    to="/create/segments"
+                    onClick={() => this.setState({ open: false })}
                   >
                     Add
                   </Button>
