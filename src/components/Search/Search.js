@@ -39,6 +39,10 @@ const styleSheet = createStyleSheet('Search', theme => ({
     'max-width': '100%',
     height: 'auto',
     display: 'block'
+  },
+  card: {},
+  media: {
+    'min-height': 120
   }
 }));
 
@@ -68,18 +72,22 @@ class Search extends React.Component {
               required
             />
           </Grid>
-          {flags.map(f =>
-            <Grid item xs={12}>
-              <Card className={classes.card}>
-                <CardMedia>
-                  <img className={classes.flag} src={f} alt="flag" />
-                </CardMedia>
-                <CardContent style={{ padding: 10 }}>
-                  <Typography>Some fancy league name</Typography>
-                </CardContent>
-              </Card>
+          <Grid item xs={12}>
+            <Grid container gutter={24}>
+              {flags.map(f =>
+                <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Card className={classes.card}>
+                    <CardMedia className={classes.media}>
+                      <img className={classes.flag} src={f} alt="flag" />
+                    </CardMedia>
+                    <CardContent style={{ padding: 10 }}>
+                      <Typography>Some fancy league name</Typography>
+                    </CardContent>
+                  </Card>
+                </Grid>
+              )}
             </Grid>
-          )}
+          </Grid>
         </Grid>
       </div>
     );

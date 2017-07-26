@@ -15,7 +15,8 @@ const styleSheet = createStyleSheet('Router', theme => ({
   container: {
     'flex-grow': 1,
     display: 'flex',
-    'justify-content': 'center'
+    'justify-content': 'center',
+    'max-width': '90vw'
   }
 }));
 

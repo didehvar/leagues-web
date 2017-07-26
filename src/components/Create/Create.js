@@ -19,7 +19,8 @@ const styleSheet = createStyleSheet('Create', theme => ({
   },
   textField: {},
   paper: {
-    margin: '0 auto'
+    margin: '0 auto',
+    'max-width': 400
   },
   submit: {
     margin: '0 auto'

@@ -28,7 +28,7 @@ const styleSheet = createStyleSheet('CreateSegments', theme => ({
     margin: '0 auto'
   },
   dialogButton: {
-    width: '100%'
+    margin: theme.spacing.unit
   },
   submitGrid: {
     display: 'flex',
@@ -154,8 +154,6 @@ class CreateSegments extends React.Component {
                   >
                     Starred
                   </Button>
-                </Grid>
-                <Grid className={classes.submitGrid} item xs={12}>
                   <Button
                     raised
                     color="accent"
