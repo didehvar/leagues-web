@@ -10,7 +10,8 @@ const styleSheet = createStyleSheet('Router', theme => ({
   wrapper: {
     display: 'flex',
     'min-height': '100vh',
-    'flex-direction': 'column'
+    'flex-direction': 'column',
+    'align-items': 'center'
   },
   container: {
     'flex-grow': 1,
