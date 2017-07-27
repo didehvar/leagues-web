@@ -1,14 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Button from 'material-ui/Button';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import TextField from 'material-ui/TextField';
 import moment from 'moment';
 import Grid from 'material-ui/Grid';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Paper from 'material-ui/Paper';
-import RunIcon from 'material-ui-icons/DirectionsRun';
-import BikeIcon from 'material-ui-icons/DirectionsBike';
 import Card, { CardContent, CardMedia } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
 import gbFlag from './gb-flag.png';

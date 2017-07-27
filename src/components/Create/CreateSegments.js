@@ -22,7 +22,7 @@ const styleSheet = createStyleSheet('CreateSegments', theme => ({
     display: 'flex',
     'align-items': 'center',
     'flex-direction': 'column',
-    padding: 20
+    padding: '20px 0'
   },
   submit: {
     margin: '0 auto'
@@ -35,11 +35,14 @@ const styleSheet = createStyleSheet('CreateSegments', theme => ({
     'justify-content': 'center'
   },
   segmentImage: {
-    height: 145
+    'max-width': '100%',
+    height: 'auto',
+    display: 'block'
   },
-  card: {
-    height: 245
+  cardMedia: {
+    'min-height': 90
   },
+  card: {},
   addButton: {
     height: '100%',
     width: '100%'
@@ -59,36 +62,37 @@ class CreateSegments extends React.Component {
   state = {
     start: moment().format('YYYY-MM-DD'),
     end: moment().add(1, 'week').format('YYYY-MM-DD'),
-    open: false
+    open: false,
+    removed: false
   };
 
   render() {
     const { classes } = this.props;
-    const { open, start, end } = this.state;
+    const { open, start, end, removed } = this.state;
 
     return (
       <div className={classes.root}>
         <Grid container gutter={24} justify="center">
-          <Grid item xs={6}>
-            <Card className={classes.card}>
-              <CardMedia>
-                <img
-                  className={classes.segmentImage}
-                  src={stravaPony}
-                  alt="pony"
-                />
-                <RemoveCircleIcon
-                  className={classes.removeIcon}
-                  color="accent"
-                />
-              </CardMedia>
-              <CardContent style={{ padding: 10 }}>
-                <Typography type="subheading" component="h3">
-                  Dave's Cracking Segment
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
+          {!removed &&
+            <Grid item xs={6}>
+              <Card className={classes.card}>
+                <CardMedia className={classes.cardMedia}>
+                  <img
+                    className={classes.segmentImage}
+                    src={stravaPony}
+                    alt="pony"
+                  />
+                  <RemoveCircleIcon
+                    className={classes.removeIcon}
+                    color="accent"
+                    onClick={() => this.setState({ removed: true })}
+                  />
+                </CardMedia>
+                <CardContent style={{ padding: 10 }}>
+                  <Typography>Dave's Cracking Segment</Typography>
+                </CardContent>
+              </Card>
+            </Grid>}
           <Grid item xs={6}>
             <IconButton
               className={classes.addButton}
@@ -96,7 +100,7 @@ class CreateSegments extends React.Component {
             >
               <AddIcon
                 className={classes.addIcon}
-                style={{ width: 100, height: 100 }}
+                style={{ width: 50, height: 50 }}
               />
             </IconButton>
           </Grid>
