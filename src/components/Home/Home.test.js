@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { MuiThemeProvider } from 'material-ui/styles';
+import AppWrapper from '../App/AppWrapper';
 import Home from './Home';
 
 it('renders without crashing', () => {
   const div = document.createElement('div');
   ReactDOM.render(
-    <MuiThemeProvider>
+    <AppWrapper>
       <Home />
-    </MuiThemeProvider>,
+    </AppWrapper>,
     div
   );
 });

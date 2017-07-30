@@ -16,6 +16,7 @@ import Dialog, {
   DialogContentText
 } from 'material-ui/Dialog';
 import TextField from 'material-ui/TextField';
+import StarredSegmentsDialog from './StarredSegmentsDialog';
 
 const styleSheet = createStyleSheet('CreateSegments', theme => ({
   root: {
@@ -63,12 +64,14 @@ class CreateSegments extends React.Component {
     start: moment().format('YYYY-MM-DD'),
     end: moment().add(1, 'week').format('YYYY-MM-DD'),
     open: false,
-    removed: false
+    removed: false,
+    checked: []
   };
 
   render() {
     const { classes } = this.props;
-    const { open, start, end, removed } = this.state;
+    const { open, start, end, removed, selectedDialog, checked } = this.state;
+    console.log('create segments chcked', checked);
 
     return (
       <div className={classes.root}>
@@ -155,6 +158,7 @@ class CreateSegments extends React.Component {
                     raised
                     color="accent"
                     className={classes.dialogButton}
+                    onClick={() => this.setState({ selectedDialog: 'starred' })}
                   >
                     Starred
                   </Button>
@@ -162,6 +166,7 @@ class CreateSegments extends React.Component {
                     raised
                     color="accent"
                     className={classes.dialogButton}
+                    onClick={() => this.setState({ selectedDialog: 'search' })}
                   >
                     Search
                   </Button>
@@ -180,6 +185,16 @@ class CreateSegments extends React.Component {
             </DialogContentText>
           </DialogContent>
         </Dialog>
+        <StarredSegmentsDialog
+          onRequestClose={(event, c) => {
+            this.setState({
+              selectedDialog: '',
+              checked: c ? c : this.state.checked
+            });
+          }}
+          open={selectedDialog === 'starred'}
+          checked={checked}
+        />
       </div>
     );
   }

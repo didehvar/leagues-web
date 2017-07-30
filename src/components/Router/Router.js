@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, BrowserRouter } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { withStyles, createStyleSheet } from 'material-ui/styles';
 import Home from '../Home/Home';
 import Create from '../Create/Create';
@@ -23,18 +23,16 @@ const styleSheet = createStyleSheet('Router', theme => ({
 
 function Router({ children, classes }) {
   return (
-    <BrowserRouter>
-      <div className={classes.wrapper}>
-        <div className={classes.container}>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/create" component={Create} />
-          <Route exact path="/create/segments" component={CreateSegments} />
-          <Route exact path="/search" component={Search} />
-        </div>
-
-        {children}
+    <div className={classes.wrapper}>
+      <div className={classes.container}>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/create" component={Create} />
+        <Route exact path="/create/segments" component={CreateSegments} />
+        <Route exact path="/search" component={Search} />
       </div>
-    </BrowserRouter>
+
+      {children}
+    </div>
   );
 }
 
