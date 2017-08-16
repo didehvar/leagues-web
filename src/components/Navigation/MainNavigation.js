@@ -63,16 +63,19 @@ class MainNavigation extends Component {
             label="Create"
             icon={<AddIcon />}
           />
+          {/* TODO: grey out these buttons */}
           <BottomNavigationButton
             className={classes.button}
-            label="Friends"
+            label="Profile"
             icon={<PersonIcon />}
           />
+          {/* TODO: list of my leagues? */}
           <BottomNavigationButton
             className={classes.button}
             label="More"
             icon={<MoreHorizIcon />}
           />
+          {/* TODO:  */}
         </BottomNavigation>
       </div>
     );

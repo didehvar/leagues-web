@@ -3,12 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "devDependencies": {
+    "@storybook/addon-knobs": "^3.2.0",
+    "@storybook/react": "^3.2.4",
+    "enzyme": "^2.9.1",
     "husky": "^0.14.3",
-    "lint-staged": "^4.0.2",
+    "lint-staged": "^4.0.3",
     "prettier": "^1.5.3",
-    "react-scripts": "1.0.10"
+    "react-scripts": "^1.0.11",
+    "react-test-renderer": "^15.6.1",
+    "storybook-addon-material-ui": "next"
   },
   "dependencies": {
+    "glamor": "^2.20.40",
+    "glamorous": "^4.1.2",
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-alpha.19",
     "moment": "^2.18.1",
@@ -21,7 +28,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 9009 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": "react-app"
