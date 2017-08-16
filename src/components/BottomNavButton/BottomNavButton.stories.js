@@ -1,14 +1,19 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { action } from '@storybook/addon-actions';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
 import MenuIcon from 'material-ui-icons/Menu';
-
-import Decorators from '../../../storybook/decorators';
 
 import BottomNavButton from './index';
 
 storiesOf('BottomNavButton', module)
-  .addDecorator(Decorators.router())
+  .addDecorator(withKnobs)
   .add('default', () =>
-    <BottomNavButton label="Test" value="test" icon={<MenuIcon />} />
+    <BottomNavButton
+      label="Test"
+      value="test"
+      icon={<MenuIcon />}
+      showLabel={boolean('Show label', false)}
+      selected={boolean('Selected', false)}
+    />
   );
