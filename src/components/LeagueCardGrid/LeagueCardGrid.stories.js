@@ -1,7 +1,7 @@
 import React from 'react';
-import { Div } from 'glamorous';
+import { storiesOf } from '@storybook/react';
 
-import LeagueCardGrid from '../../components/LeagueCardGrid';
+import LeagueCardGrid from './index';
 
 const leagues = [
   {
@@ -18,12 +18,6 @@ const leagues = [
   }
 ];
 
-function SearchRoute() {
-  return (
-    <Div padding="20">
-      <LeagueCardGrid leagues={leagues} />
-    </Div>
-  );
-}
-
-export default SearchRoute;
+storiesOf('LeagueCardGrid', module).add('default', () =>
+  <LeagueCardGrid leagues={leagues} />
+);

@@ -7,7 +7,7 @@ import { getFlag } from '../../utils/flags';
 
 import * as Style from './style.js';
 
-function LeagueCard({ countryCode }) {
+function LeagueCard({ title, countryCode }) {
   return (
     <Style.Container>
       <Card>
@@ -16,7 +16,7 @@ function LeagueCard({ countryCode }) {
         </Style.FlagContainer>
         <CardContent>
           <Typography type="subheading" component="h3">
-            Suspendisse posuere tellus sit amet tortor mollis vulputate
+            {title}
           </Typography>
         </CardContent>
         <CardActions>
