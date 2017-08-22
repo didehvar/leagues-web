@@ -1,7 +1,7 @@
 import React from 'react';
 import { Div } from 'glamorous';
 
-import Button from '../../components/Button';
+import LoginButton from '../LoginButton';
 
 function HomeRoute() {
   return (
@@ -11,9 +11,7 @@ function HomeRoute() {
       justifyContent="center"
       alignItems="center"
     >
-      <Button raised color="primary">
-        Login
-      </Button>
+      <LoginButton />
     </Div>
   );
 }

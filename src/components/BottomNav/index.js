@@ -26,12 +26,14 @@ const links = [
   {
     url: Routes.profile,
     value: 'profile',
-    icon: <PersonIcon />
+    icon: <PersonIcon />,
+    disabled: true
   },
   {
     url: Routes.more,
     value: 'more',
-    icon: <MoreHorizIcon />
+    icon: <MoreHorizIcon />,
+    disabled: true
   }
 ];
 
@@ -48,12 +50,13 @@ class BottomNav extends Component {
 
     return (
       <BottomNavigation value={value} onChange={this.handleChange}>
-        {links.map(({ value, icon }) =>
+        {links.map(({ value, icon, disabled }) =>
           <BottomNavButton
             key={value}
             label={value[0].toUpperCase() + value.slice(1)}
             value={value}
             icon={icon}
+            disabled={disabled}
           />
         )}
       </BottomNavigation>
