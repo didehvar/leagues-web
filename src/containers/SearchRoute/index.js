@@ -1,7 +1,9 @@
 import React from 'react';
-import { Div } from 'glamorous';
 
+import SearchField from '../../components/SearchField';
 import LeagueCardGrid from '../../components/LeagueCardGrid';
+
+import * as Style from './style';
 
 const leagues = [
   {
@@ -20,9 +22,12 @@ const leagues = [
 
 function SearchRoute() {
   return (
-    <Div padding="20">
+    <Style.Container>
+      <Style.SearchField>
+        <SearchField />
+      </Style.SearchField>
       <LeagueCardGrid leagues={leagues} />
-    </Div>
+    </Style.Container>
   );
 }
 
