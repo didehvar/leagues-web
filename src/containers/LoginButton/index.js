@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-import Button from '../../components/Button';
+import Button from 'material-ui/Button';
 
 export default class LoginButton extends Component {
   onClick = () => {};
