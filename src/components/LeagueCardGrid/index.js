@@ -8,9 +8,9 @@ import * as Style from './style.js';
 function LeagueCardGrid({ leagues }) {
   return (
     <Style.Container>
-      {leagues.map(({ title, countryCode }) =>
-        <Style.CardWrapper>
-          <LeagueCard title={title} countryCode={countryCode} />
+      {leagues.map(league =>
+        <Style.CardWrapper key={league.id}>
+          <LeagueCard {...league} />
         </Style.CardWrapper>
       )}
     </Style.Container>
@@ -20,10 +20,7 @@ function LeagueCardGrid({ leagues }) {
 export default LeagueCardGrid;
 
 LeagueCardGrid.propTypes = {
-  leagues: PropTypes.arrayOf({
-    title: PropTypes.string.isRequired,
-    countryCode: PropTypes.string.isRequired
-  })
+  leagues: PropTypes.array
 };
 
 LeagueCardGrid.defaultProps = {

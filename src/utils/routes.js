@@ -6,7 +6,7 @@ export default {
 
   leagues: '/leagues',
   newLeague: '/leagues/new',
-  league: '/leagues/:leagueId',
+  league: id => `/leagues/${id || ':leagueId'}`,
   leagueSegments: '/leagues/:leagueId/segments',
   newLeagueSegment: '/leagues/:leagueId/segments/new'
 };

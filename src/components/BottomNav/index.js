@@ -10,11 +10,12 @@ import BottomNavigation from 'material-ui/BottomNavigation';
 import BottomNavButton from '../BottomNavButton';
 import Routes from '../../utils/routes';
 
+const defaultValue = 'search';
 const links = [
   { url: Routes.home, value: 'feed', icon: <MenuIcon /> },
   {
     url: Routes.search,
-    value: 'search',
+    value: defaultValue,
     icon: <SearchIcon />,
     matchStart: true
   },
@@ -44,9 +45,10 @@ class BottomNav extends Component {
 
   render() {
     const { location: { pathname } } = this.props;
-    const value = links.find(
+    const link = links.find(
       l => l.url === pathname || (l.matchStart && pathname.startsWith(l.url))
-    ).value;
+    );
+    const value = (link && link.value) || defaultValue;
 
     return (
       <BottomNavigation value={value} onChange={this.handleChange}>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { BottomNavigationButton } from 'material-ui/BottomNavigation';
 
 export default function BottomNavButton({ ...rest }) {

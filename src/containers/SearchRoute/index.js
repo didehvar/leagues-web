@@ -7,14 +7,17 @@ import * as Style from './style';
 
 const leagues = [
   {
+    id: 1,
     title: 'Suspendisse posuere tellus sit amet tortor mollis vulputate',
     countryCode: 'gb'
   },
   {
+    id: 2,
     title: 'Suspendisse posuere tellus sit amet tortor mollis vulputate',
     countryCode: 'de'
   },
   {
+    id: 3,
     title: 'Suspendisse posuere tellus sit amet tortor mollis vulputate',
     countryCode: 'sa'
   }
