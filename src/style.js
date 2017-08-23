@@ -7,7 +7,10 @@ export const Container = glamorous.div({
 });
 
 export const NavWrapper = glamorous.div({}, ({ theme }) => ({
-  borderTop: `1px solid ${theme.palette.grey['50']}`
+  borderTop: `1px solid ${theme.palette.grey['50']}`,
+  position: 'fixed',
+  bottom: 0,
+  width: '100%'
 }));
 
 export const BodyWrapper = glamorous.div({
