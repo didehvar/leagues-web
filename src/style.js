@@ -14,8 +14,7 @@ export const NavWrapper = glamorous.div({}, ({ theme }) => ({
 }));
 
 export const BodyWrapper = glamorous.div({
-  display: 'flex',
-  flexGrow: 1,
-  justifyContent: 'center',
-  alignItems: 'center'
+  padding: `${20 / 16}rem`,
+  height: '100%',
+  display: 'flex'
 });

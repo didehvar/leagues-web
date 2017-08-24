@@ -10,5 +10,5 @@ export const CardWrapper = glamorous.div({
   flex: '0 1 10%',
   minWidth: 230,
   maxWidth: 550,
-  margin: 20
+  margin: 10
 });

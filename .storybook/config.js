@@ -4,6 +4,8 @@ import { configure, addDecorator } from '@storybook/react';
 import { withKnobs } from '@storybook/addon-knobs';
 import { muiTheme } from 'storybook-addon-material-ui';
 
+import 'typeface-roboto';
+
 import Decorators from '../storybook/decorators';
 import theme from '../src/constants/theme';
 

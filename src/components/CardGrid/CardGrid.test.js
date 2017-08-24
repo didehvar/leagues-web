@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import LeagueCardGrid from './index';
+import CardGrid from './index';
 
-describe('<LeagueCardGrid />', () => {
+describe('<CardGrid />', () => {
   it('shallow renders without crashing', () => {
-    shallow(<LeagueCardGrid />);
+    shallow(<CardGrid />);
   });
 });

@@ -3,13 +3,20 @@ import PropTypes from 'prop-types';
 import format from 'date-fns/format';
 
 function DateRange({ start, end }) {
+  const year = ' YYYY';
+  const month = ' MMM';
+  const day = 'Do';
+
+  const now = new Date();
+  const leftMonth = start.getMonth() !== end.getMonth() ? month : '';
+  const leftYear = start.getYear() !== now.getYear() ? year : '';
+  const rightYear =
+    leftYear !== '' || end.getYear() !== now.getYear() ? year : '';
+
   return (
     <span>
-      {format(
-        start,
-        `Do${start.getMonth() === end.getMonth() ? '' : ' MMM'}`
-      )}{' '}
-      - {format(end, 'Do MMM')}
+      {format(start, `${day}${leftMonth}${leftYear}`)} -{' '}
+      {format(end, `${day}${month}${rightYear}`)}
     </span>
   );
 }

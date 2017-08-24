@@ -1,27 +1,14 @@
 import React from 'react';
 
+import CardGrid from '../../components/CardGrid';
+import LeagueCard from '../../components/LeagueCard';
 import SearchField from '../../components/SearchField';
-import LeagueCardGrid from '../../components/LeagueCardGrid';
+
+import leagueCardFaker from '../../components/LeagueCard/LeagueCard.faker';
 
 import * as Style from './style';
 
-const leagues = [
-  {
-    id: 1,
-    title: 'Suspendisse posuere tellus sit amet tortor mollis vulputate',
-    countryCode: 'gb'
-  },
-  {
-    id: 2,
-    title: 'Suspendisse posuere tellus sit amet tortor mollis vulputate',
-    countryCode: 'de'
-  },
-  {
-    id: 3,
-    title: 'Suspendisse posuere tellus sit amet tortor mollis vulputate',
-    countryCode: 'sa'
-  }
-];
+const leagues = [...Array(3)].map(leagueCardFaker);
 
 function SearchRoute() {
   return (
@@ -29,7 +16,7 @@ function SearchRoute() {
       <Style.SearchField>
         <SearchField />
       </Style.SearchField>
-      <LeagueCardGrid leagues={leagues} />
+      <CardGrid cards={leagues} component={LeagueCard} />
     </Style.Container>
   );
 }

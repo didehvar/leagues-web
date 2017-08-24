@@ -1,17 +1,18 @@
 import React from 'react';
 import { Div } from 'glamorous';
+import faker from 'faker';
 
-import LoginButton from '../LoginButton';
+import CardGrid from '../../components/CardGrid';
+import SegmentCard from '../../components/SegmentCard';
+
+import segmentCardFaker from '../../components/SegmentCard/SegmentCard.faker';
+
+const segments = [...Array(3)].map(segmentCardFaker);
 
 function LeagueRoute() {
   return (
-    <Div
-      display="flex"
-      flexGrow="1"
-      justifyContent="center"
-      alignItems="center"
-    >
-      <LoginButton />
+    <Div>
+      <CardGrid cards={segments} component={SegmentCard} />
     </Div>
   );
 }

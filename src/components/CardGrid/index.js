@@ -4,16 +4,14 @@ import { withRouter } from 'react-router-dom';
 
 import Routes from '../../utils/routes';
 
-import LeagueCard from '../LeagueCard';
-
 import * as Style from './style.js';
 
-function LeagueCardGrid({ history: { push }, leagues }) {
+function CardGrid({ history: { push }, cards, component: Component }) {
   return (
     <Style.Container>
-      {leagues.map(league =>
+      {cards.map(league =>
         <Style.CardWrapper key={league.id}>
-          <LeagueCard
+          <Component
             {...league}
             handleView={() => push(Routes.league(league.id))}
             handleJoin={() => console.log('TODO')}
@@ -24,15 +22,16 @@ function LeagueCardGrid({ history: { push }, leagues }) {
   );
 }
 
-export default withRouter(LeagueCardGrid);
+export default withRouter(CardGrid);
 
-LeagueCardGrid.propTypes = {
+CardGrid.propTypes = {
   history: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  leagues: PropTypes.array
+  cards: PropTypes.array,
+  component: PropTypes.oneOfType([PropTypes.element, PropTypes.func]).isRequired
 };
 
-LeagueCardGrid.defaultProps = {
+CardGrid.defaultProps = {
   leagues: []
 };

@@ -5,5 +5,6 @@ export const Container = glamorous.div({
 });
 
 export const Button = glamorous.button({
+  width: '100%',
   backgroundColor: 'transparent'
 });
