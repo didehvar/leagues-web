@@ -1,16 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'react-router-dom/Link';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 
 import { getFlag } from '../../utils/flags';
-import Routes from '../../utils/routes';
 
 import * as Style from './style.js';
 
-function LeagueCard({ id, title, countryCode }) {
+function LeagueCard({ id, title, countryCode, handleView, handleJoin }) {
   return (
     <Style.Container>
       <Card>
@@ -23,10 +21,10 @@ function LeagueCard({ id, title, countryCode }) {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button dense color="primary" component={Link} to={Routes.league(id)}>
+          <Button dense color="primary" onClick={handleView}>
             View
           </Button>
-          <Button dense color="accent">
+          <Button dense color="accent" onClick={handleJoin}>
             Join
           </Button>
         </CardActions>
@@ -40,7 +38,9 @@ export default LeagueCard;
 LeagueCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
-  countryCode: PropTypes.string.isRequired
+  countryCode: PropTypes.string.isRequired,
+  handleView: PropTypes.func.isRequired,
+  handleJoin: PropTypes.func.isRequired
 };
 
 LeagueCard.defaultProps = {

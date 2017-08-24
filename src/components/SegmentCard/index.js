@@ -1,36 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Link from 'react-router-dom/Link';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
-import Button from 'material-ui/Button';
+import Card, { CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
+import ButtonBase from 'material-ui/ButtonBase';
 
-import { getFlag } from '../../utils/flags';
-import Routes from '../../utils/routes';
+import DateRange from '../DateRange';
 
 import * as Style from './style.js';
 
-function SegmentCard({ id, title, countryCode }) {
+function SegmentCard({ id, name, startDate, endDate }) {
   return (
     <Style.Container>
-      <Card>
-        <Style.FlagContainer>
-          <Style.FlagImage src={getFlag(countryCode)} />
-        </Style.FlagContainer>
-        <CardContent>
-          <Typography type="subheading" component="h3">
-            {title}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button dense color="primary" component={Link} to={Routes.league(id)}>
-            View
-          </Button>
-          <Button dense color="accent">
-            Join
-          </Button>
-        </CardActions>
-      </Card>
+      <ButtonBase component={Style.Button}>
+        <Card>
+          <CardContent>
+            <Typography type="title" component="h1">
+              {name}
+            </Typography>
+            <Typography type="subheading" component="h3">
+              <DateRange start={startDate} end={endDate} />
+            </Typography>
+          </CardContent>
+        </Card>
+      </ButtonBase>
     </Style.Container>
   );
 }
@@ -39,10 +31,9 @@ export default SegmentCard;
 
 SegmentCard.propTypes = {
   id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
-  countryCode: PropTypes.string.isRequired
+  name: PropTypes.string.isRequired,
+  startDate: PropTypes.instanceOf(Date).isRequired,
+  endDate: PropTypes.instanceOf(Date).isRequired
 };
 
-SegmentCard.defaultProps = {
-  countryCode: 'gb'
-};
+SegmentCard.defaultProps = {};
