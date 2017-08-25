@@ -10,6 +10,8 @@ import Routes from './utils/routes';
 
 import { theme, muiTheme } from './constants/theme';
 
+import PaddedRoute from './components/PaddedRoute';
+
 import ScrollToTop from './containers/ScrollToTop';
 import BottomNav from './components/BottomNav';
 import HomeRoute from './containers/HomeRoute';
@@ -32,7 +34,11 @@ class App extends Component {
                 <Style.BodyWrapper>
                   <Switch>
                     <Route exact path={Routes.home} component={HomeRoute} />
-                    <Route exact path={Routes.search} component={SearchRoute} />
+                    <PaddedRoute
+                      exact
+                      path={Routes.search}
+                      component={SearchRoute}
+                    />
                     <Route
                       exact
                       path={Routes.league()}

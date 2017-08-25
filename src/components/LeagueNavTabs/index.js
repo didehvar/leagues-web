@@ -16,7 +16,7 @@ class LeagueNavTabs extends Component {
     const { tabs } = this.props;
 
     return (
-      <div>
+      <Style.Container>
         <AppBar position="static">
           <Tabs
             value={value}
@@ -39,7 +39,7 @@ class LeagueNavTabs extends Component {
             )}
           </SwipeableViews>
         </Style.ViewContainer>
-      </div>
+      </Style.Container>
     );
   }
 }

@@ -7,7 +7,6 @@ export const Container = glamorous.div({
 });
 
 export const BodyWrapper = glamorous.div({
-  padding: `${20 / 16}rem`,
   height: '100%',
   display: 'flex'
 });
