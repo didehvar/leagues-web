@@ -52,9 +52,10 @@ class App extends Component {
                   </Switch>
                 </Style.BodyWrapper>
 
-                <Style.NavWrapper>
+                <Style.FooterFix />
+                <Style.FooterNav>
                   <BottomNav />
-                </Style.NavWrapper>
+                </Style.FooterNav>
               </Style.Container>
             </ScrollToTop>
           </BrowserRouter>

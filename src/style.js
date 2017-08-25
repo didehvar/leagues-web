@@ -6,15 +6,20 @@ export const Container = glamorous.div({
   flexDirection: 'column'
 });
 
-export const NavWrapper = glamorous.div({}, ({ theme }) => ({
-  borderTop: `1px solid ${theme.palette.grey['50']}`,
-  position: 'fixed',
-  bottom: 0,
-  width: '100%'
-}));
-
 export const BodyWrapper = glamorous.div({
   padding: `${20 / 16}rem`,
   height: '100%',
   display: 'flex'
 });
+
+export const FooterFix = glamorous.div({
+  height: 60
+});
+
+export const FooterNav = glamorous.div({}, ({ theme }) => ({
+  borderTop: `1px solid ${theme.palette.grey[200]}`,
+  position: 'fixed',
+  bottom: 0,
+  left: 0,
+  width: '100%'
+}));
