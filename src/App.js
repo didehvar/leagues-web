@@ -12,18 +12,43 @@ import { theme, muiTheme } from './constants/theme';
 
 import PaddedRoute from './components/PaddedRoute';
 
-import ScrollToTop from './containers/ScrollToTop';
+import NavBar from './components/NavBar';
 import BottomNav from './components/BottomNav';
+import NavBarTitle from './components/NavBarTitle';
+
 import HomeRoute from './containers/HomeRoute';
 import SearchRoute from './containers/SearchRoute';
 import LeagueRoute from './containers/LeagueRoute';
+import ScrollToTop from './containers/ScrollToTop';
+
 // import LeaguesRoute from './containers/LeaguesRoute';
 // import NewLeagueRoute from './containers/NewLeagueRoute';
 // import NewLeagueSegmentRoute from './containers/NewLeagueSegmentRoute';
 
 import * as Style from './style';
 
+const routes = [
+  {
+    path: Routes.home,
+    component: () => <HomeRoute />,
+    navbar: () => <NavBarTitle title="Impendulo" />
+  },
+  {
+    route: PaddedRoute,
+    path: Routes.search,
+    component: () => <SearchRoute />
+  },
+  {
+    path: Routes.league(),
+    component: () => <LeagueRoute />,
+    navbar: ({ match }) => <NavBarTitle title={match.params.leagueId} />
+  }
+];
+
 class App extends Component {
+  renderRoute = ({ tag: Tag, path, exact = true, component }) =>
+    <Tag key={path} exact={exact} path={path} component={component} />;
+
   render() {
     return (
       <MuiThemeProvider theme={muiTheme}>
@@ -31,19 +56,24 @@ class App extends Component {
           <BrowserRouter>
             <ScrollToTop>
               <Style.Container>
+                <NavBar routes={routes} />
+
                 <Style.BodyWrapper>
                   <Switch>
-                    <Route exact path={Routes.home} component={HomeRoute} />
-                    <PaddedRoute
-                      exact
-                      path={Routes.search}
-                      component={SearchRoute}
-                    />
-                    <Route
-                      exact
-                      path={Routes.league()}
-                      component={LeagueRoute}
-                    />
+                    {routes.map(
+                      ({
+                        route: RouteComponent = Route,
+                        path,
+                        exact = true,
+                        component
+                      }) =>
+                        <RouteComponent
+                          key={path}
+                          exact={exact}
+                          path={path}
+                          component={component}
+                        />
+                    )}
                     {/* <Route exact path={Routes.leagues} component={LeaguesRoute} />
                     <Route
                       exact
