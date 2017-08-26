@@ -14,12 +14,13 @@ import PaddedRoute from './components/PaddedRoute';
 
 import NavBar from './components/NavBar';
 import BottomNav from './components/BottomNav';
-import NavBarTitle from './components/NavBarTitle';
 
 import HomeRoute from './containers/HomeRoute';
-import SearchRoute from './containers/SearchRoute';
 import LeagueRoute from './containers/LeagueRoute';
+import LeagueRouteNav from './containers/LeagueRoute/LeagueRouteNav';
+import SearchRoute from './containers/SearchRoute';
 import ScrollToTop from './containers/ScrollToTop';
+import NewLeagueRoute from './containers/NewLeagueRoute';
 
 // import LeaguesRoute from './containers/LeaguesRoute';
 // import NewLeagueRoute from './containers/NewLeagueRoute';
@@ -30,8 +31,7 @@ import * as Style from './style';
 const routes = [
   {
     path: Routes.home,
-    component: () => <HomeRoute />,
-    navbar: () => <NavBarTitle title="Impendulo" />
+    component: () => <HomeRoute />
   },
   {
     route: PaddedRoute,
@@ -39,9 +39,13 @@ const routes = [
     component: () => <SearchRoute />
   },
   {
+    path: Routes.newLeague,
+    component: () => <NewLeagueRoute />
+  },
+  {
     path: Routes.league(),
     component: () => <LeagueRoute />,
-    navbar: ({ match }) => <NavBarTitle title={match.params.leagueId} />
+    navbar: () => <LeagueRouteNav />
   }
 ];
 

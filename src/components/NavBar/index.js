@@ -3,8 +3,6 @@ import { Route } from 'react-router-dom';
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 
-import * as Style from './style';
-
 function NavBar({ routes }) {
   return (
     <div>
@@ -15,12 +13,10 @@ function NavBar({ routes }) {
             key={path}
             exact={exact}
             path={path}
-            component={componentProps =>
+            component={props =>
               <AppBar position="static">
                 <Toolbar>
-                  <Style.Container>
-                    <NavComponent {...componentProps} />
-                  </Style.Container>
+                  <NavComponent {...props} />
                 </Toolbar>
               </AppBar>}
           />

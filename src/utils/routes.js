@@ -1,12 +1,13 @@
+const leagueSlug = slug => slug || ':leagueSlug';
+
 export default {
   home: '/',
   search: '/search',
   profile: '/profile',
   more: '/more',
 
+  // ----- Leagues -----
   leagues: '/leagues',
   newLeague: '/leagues/new',
-  league: id => `/leagues/${id || ':leagueId'}`,
-  leagueSegments: id => `/leagues/${id || ':leagueId'}/segments`,
-  newLeagueSegment: id => `/leagues/${id || ':leagueId'}/segments/new`
+  league: slug => `/leagues/${leagueSlug(slug)}`
 };
