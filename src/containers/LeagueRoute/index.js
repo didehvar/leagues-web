@@ -48,9 +48,9 @@ const tabs = [
 
 function LeagueRoute() {
   return (
-    <div>
+    <Div flex="1">
       <LeagueNavTabs tabs={tabs} />
-    </div>
+    </Div>
   );
 }
 

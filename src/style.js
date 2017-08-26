@@ -3,7 +3,9 @@ import glamorous from 'glamorous';
 export const Container = glamorous.div({
   flex: 1,
   display: 'flex',
-  flexDirection: 'column'
+  flexDirection: 'column',
+  maxWidth: `${1230 / 16}rem`,
+  margin: '0 auto'
 });
 
 export const BodyWrapper = glamorous.div({
