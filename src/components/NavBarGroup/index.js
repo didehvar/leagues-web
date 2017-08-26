@@ -7,11 +7,11 @@ import NavBarCloseButton from '../../components/NavBarCloseButton';
 
 import * as Style from './style';
 
-const NavBarGroup = ({ close, children }) => {
+const NavBarGroup = ({ children, close, leftComponent }) => {
   return (
     <Style.Container>
       <Div flexBasis="30%">
-        {close && <NavBarCloseButton />}
+        {(close && <NavBarCloseButton />) || leftComponent()}
       </Div>
       <Div flexBasis="40%">
         <Typography type="body2" color="inherit" align="center">
@@ -25,11 +25,13 @@ const NavBarGroup = ({ close, children }) => {
 
 NavBarGroup.propTypes = {
   children: PropTypes.node.isRequired,
-  close: PropTypes.bool
+  close: PropTypes.bool,
+  leftComponent: PropTypes.func
 };
 
 NavBarGroup.defaultProps = {
-  close: false
+  close: false,
+  leftComponent: () => {}
 };
 
 export default NavBarGroup;
