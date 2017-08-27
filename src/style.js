@@ -14,7 +14,7 @@ export const BodyWrapper = glamorous.div({
 });
 
 export const FooterFix = glamorous.div({
-  height: 60
+  height: 70
 });
 
 export const FooterNav = glamorous.div({}, ({ theme }) => ({

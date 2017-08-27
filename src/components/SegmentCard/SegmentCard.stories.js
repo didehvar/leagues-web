@@ -1,4 +1,5 @@
 import React from 'react';
+import faker from 'faker';
 import { storiesOf } from '@storybook/react';
 import addMonths from 'date-fns/add_months';
 
@@ -14,5 +15,7 @@ storiesOf('SegmentCard', module)
       name="Sunt quis reprehenderit"
       startDate={new Date()}
       endDate={addMonths(new Date(), 1)}
-    />
+    >
+      {faker.lorem.paragraph()}
+    </SegmentCard>
   );

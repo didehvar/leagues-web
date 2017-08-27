@@ -1,7 +1,8 @@
 import glamorous from 'glamorous';
 
 export const Container = glamorous.div({
-  maxWidth: 550
+  maxWidth: 550,
+  flex: 1
 });
 
 export const FlagContainer = glamorous.div({

@@ -9,15 +9,17 @@ import * as Style from './style';
 
 const AppBar = ({ children, left, right }) => {
   return (
-    <MuiAppBar position="static">
+    <MuiAppBar color="default" position="static">
       <Toolbar>
         <Style.Container>
           <Div flexBasis="30%">
             {left}
           </Div>
-          <Div flexBasis="40%">
+          <Div flexBasis="40%" maxWidth="40%">
             <Typography type="body2" color="inherit" align="center">
-              {children}
+              <Style.Title>
+                {children}
+              </Style.Title>
             </Typography>
           </Div>
           <Div flexBasis="30%" textAlign="right">

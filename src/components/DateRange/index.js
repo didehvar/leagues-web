@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import format from 'date-fns/format';
 
-function DateRange({ start, end }) {
+function DateRange({ start, end, ...props }) {
   const year = ' YYYY';
   const month = ' MMM';
   const day = 'Do';
@@ -14,7 +14,7 @@ function DateRange({ start, end }) {
     leftYear !== '' || end.getYear() !== now.getYear() ? year : '';
 
   return (
-    <span>
+    <span {...props}>
       {format(start, `${day}${leftMonth}${leftYear}`)} -{' '}
       {format(end, `${day}${month}${rightYear}`)}
     </span>

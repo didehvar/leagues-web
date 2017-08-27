@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import format from 'date-fns/format';
-import isValid from 'date-fns/is_valid';
 import { Formik } from 'formik';
 import Yup from 'yup';
 import {
@@ -12,8 +11,6 @@ import {
 } from 'material-ui/Form';
 import TextField from 'material-ui/TextField';
 import Radio, { RadioGroup } from 'material-ui/Radio';
-import RunIcon from 'material-ui-icons/DirectionsRun';
-import BikeIcon from 'material-ui-icons/DirectionsBike';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 

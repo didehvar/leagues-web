@@ -1,7 +1,8 @@
 import glamorous from 'glamorous';
 
 export const Container = glamorous.div({
-  maxWidth: '100vw'
+  maxWidth: '100vw',
+  marginTop: 48
 });
 
 export const ViewContainer = glamorous.div({});

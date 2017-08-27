@@ -37,7 +37,13 @@ const tabs = [
     label: 'Segments',
     component: () =>
       <Div marginTop="0.5rem">
-        <CardGrid cards={segments} component={SegmentCard} />
+        <CardGrid
+          cards={segments}
+          component={props =>
+            <SegmentCard {...props}>
+              <LeagueStandings columns={columns} data={data} />
+            </SegmentCard>}
+        />
       </Div>
   },
   {

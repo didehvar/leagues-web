@@ -17,7 +17,7 @@ class LeagueNavTabs extends Component {
 
     return (
       <Style.Container>
-        <AppBar position="static">
+        <AppBar position="fixed">
           <Tabs
             value={value}
             onChange={(e, v) => this.handleChange(v)}
@@ -31,6 +31,7 @@ class LeagueNavTabs extends Component {
           <SwipeableViews
             index={value}
             onChangeIndex={i => this.handleChange(i)}
+            animateHeight
           >
             {tabs.map(({ label, component: Tag }) =>
               <Style.TabWrapper key={label}>

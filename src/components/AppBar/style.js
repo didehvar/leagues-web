@@ -7,3 +7,10 @@ export const Container = glamorous.div({
   flexDirection: 'row',
   alignItems: 'center'
 });
+
+export const Title = glamorous.div({
+  width: '100%',
+  whiteSpace: 'nowrap',
+  overflow: 'hidden',
+  textOverflow: 'ellipsis'
+});
