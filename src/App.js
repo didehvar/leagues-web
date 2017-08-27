@@ -44,8 +44,7 @@ const routes = [
   },
   {
     path: Routes.league(),
-    component: () => <LeagueRoute />,
-    navbar: () => <LeagueRouteNav />
+    component: () => <LeagueRoute />
   }
 ];
 

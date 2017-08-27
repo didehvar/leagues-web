@@ -1,16 +1,14 @@
 import React from 'react';
-import { Div } from 'glamorous';
+
+import NewLeagueForm from '../../components/NewLeagueForm';
+
+import * as Style from './style';
 
 function NewLeagueRoute() {
   return (
-    <Div
-      display="flex"
-      flexGrow="1"
-      justifyContent="center"
-      alignItems="center"
-    >
-      Create league
-    </Div>
+    <Style.Container>
+      <NewLeagueForm />
+    </Style.Container>
   );
 }
 
