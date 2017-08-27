@@ -12,12 +12,9 @@ import { theme, muiTheme } from './constants/theme';
 
 import PaddedRoute from './components/PaddedRoute';
 
-import NavBar from './components/NavBar';
 import BottomNav from './components/BottomNav';
-
 import HomeRoute from './containers/HomeRoute';
 import LeagueRoute from './containers/LeagueRoute';
-import LeagueRouteNav from './containers/LeagueRoute/LeagueRouteNav';
 import SearchRoute from './containers/SearchRoute';
 import ScrollToTop from './containers/ScrollToTop';
 import NewLeagueRoute from './containers/NewLeagueRoute';
@@ -59,8 +56,6 @@ class App extends Component {
           <BrowserRouter>
             <ScrollToTop>
               <Style.Container>
-                <NavBar routes={routes} />
-
                 <Style.BodyWrapper>
                   <Switch>
                     {routes.map(
