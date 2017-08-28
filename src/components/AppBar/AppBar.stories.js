@@ -3,4 +3,6 @@ import { storiesOf } from '@storybook/react';
 
 import AppBar from './index';
 
-storiesOf('AppBar', module).add('default', () => <AppBar>Hello there</AppBar>);
+storiesOf('AppBar', module).add('default', () =>
+  <AppBar title="Hello there" />
+);

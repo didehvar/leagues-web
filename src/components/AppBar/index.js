@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Div } from 'glamorous';
 import MuiAppBar from 'material-ui/AppBar';
 import Typography from 'material-ui/Typography';
 
@@ -10,17 +9,17 @@ const AppBar = ({ children, title, left, right, ...props }) => {
   return (
     <MuiAppBar {...props}>
       <Style.Toolbar>
-        <Div flexBasis="15%">
+        <Style.Side>
           {left}
-        </Div>
-        <Div flexBasis="70%" maxWidth="70%">
+        </Style.Side>
+        <Style.Center>
           <Typography type="subheading" color="inherit" align="center" noWrap>
             {title}
           </Typography>
-        </Div>
-        <Div flexBasis="15%" textAlign="right">
+        </Style.Center>
+        <Style.Side>
           {right}
-        </Div>
+        </Style.Side>
       </Style.Toolbar>
       {children}
     </MuiAppBar>

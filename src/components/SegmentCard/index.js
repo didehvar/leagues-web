@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { css } from 'glamor';
 import isAfter from 'date-fns/is_after';
 import Typography from 'material-ui/Typography';
 import Done from 'material-ui-icons/Done';
@@ -45,7 +44,6 @@ class SegmentCard extends Component {
               name={name}
               open={open}
               onClose={this.handleCloseDialog}
-              classes={{ paper: css({ overflow: 'auto', width: '100%' }) }}
               fullScreen
             >
               {children}

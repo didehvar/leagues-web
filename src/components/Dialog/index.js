@@ -9,7 +9,27 @@ import AppBar from '../AppBar';
 
 import * as Style from './style';
 
-const Dialog = ({ children, name, open, onClose, ...props }) =>
+// couldn't get this working with glamor
+const styles = {
+  paper: {
+    overflow: 'auto',
+    width: '100%'
+  },
+  paperMargin: {
+    margin: 15
+  }
+};
+
+const Dialog = ({
+  children,
+  name,
+  open,
+  closeButton,
+  onClose,
+  right,
+  classes,
+  ...props
+}) =>
   <MuiDialog
     open={open}
     onRequestClose={onClose}
@@ -17,14 +37,16 @@ const Dialog = ({ children, name, open, onClose, ...props }) =>
     {...props}
   >
     <AppBar
+      color="default"
+      position="static"
+      title={name}
       left={
+        closeButton &&
         <IconButton onClick={onClose} aria-label="Back">
           <CloseIcon />
         </IconButton>
       }
-      color="default"
-      position="static"
-      title={name}
+      right={right}
     />
     <Style.Wrapper>
       {children}
@@ -39,6 +61,7 @@ Dialog.propTypes = {
 
 Dialog.defaultProps = {
   open: false,
+  closeButton: true,
   classes: undefined
 };
 

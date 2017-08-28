@@ -2,13 +2,13 @@ import React, { Component } from 'react';
 import faker from 'faker';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import IconButton from 'material-ui/IconButton';
-import CreateIcon from 'material-ui-icons/Create';
 
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
 
 import LeagueStandings from '../LeagueStandings';
+import AddSegmentDialog from '../AddSegmentDialog';
+import JoinLeagueButton from '../JoinLeagueButton';
 
 import * as Style from './style';
 
@@ -32,12 +32,10 @@ class LeagueRoute extends Component {
     return (
       <Style.Container>
         <AppBar
+          color="default"
           title={faker.random.words()}
-          left={
-            <IconButton onClick={this.onCreate} color="inherit">
-              <CreateIcon />
-            </IconButton>
-          }
+          left={<AddSegmentDialog />}
+          right={<JoinLeagueButton />}
         >
           <Tabs
             value={value}
