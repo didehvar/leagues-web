@@ -31,7 +31,6 @@ const routes = [
     component: HomeRoute
   },
   {
-    route: PaddedRoute,
     path: Routes.search,
     component: SearchRoute
   },

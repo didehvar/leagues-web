@@ -1,6 +1,8 @@
 import glamorous from 'glamorous';
 
-export const Container = glamorous.div({});
+export const Container = glamorous.div({
+  padding: '1rem 1.25rem'
+});
 
 export const FooterNav = glamorous.div({}, ({ theme }) => ({
   borderTop: `1px solid ${theme.palette.grey[200]}`,

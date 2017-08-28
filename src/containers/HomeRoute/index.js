@@ -5,7 +5,7 @@ import LoginButton from '../LoginButton';
 
 function HomeRoute() {
   return (
-    <Div marginTop="45vh" textAlign="center">
+    <Div marginTop="40vh" textAlign="center">
       <LoginButton />
     </Div>
   );
