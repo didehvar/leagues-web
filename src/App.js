@@ -5,7 +5,6 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import 'typeface-roboto';
 
-import './utils/flags';
 import Routes from './utils/routes';
 
 import { theme, muiTheme } from './constants/theme';

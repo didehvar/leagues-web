@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import faker from 'faker';
+import faker from 'faker/locale/en_GB';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
 

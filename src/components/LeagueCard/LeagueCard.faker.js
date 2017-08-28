@@ -1,4 +1,4 @@
-import faker from 'faker';
+import faker from 'faker/locale/en_GB';
 
 export default () => ({
   id: faker.random.number(),

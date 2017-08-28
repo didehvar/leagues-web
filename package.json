@@ -25,11 +25,13 @@
     "react-dom": "^15.6.1",
     "react-router-dom": "^4.1.2",
     "react-swipeable-views": "^0.12.6",
+    "source-map-explorer": "^1.4.0",
     "typeface-roboto": "^0.0.35",
     "yarn": "^0.27.5",
     "yup": "^0.22.0"
   },
   "scripts": {
+    "analyze": "source-map-explorer build/static/js/main.*",
     "precommit": "lint-staged",
     "start": "react-scripts start",
     "build": "react-scripts build",

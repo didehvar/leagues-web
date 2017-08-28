@@ -1,5 +1,5 @@
 import React from 'react';
-import faker from 'faker';
+import faker from 'faker/locale/en_GB';
 import PropTypes from 'prop-types';
 import Avatar from 'material-ui/Avatar';
 

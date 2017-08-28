@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Div } from 'glamorous';
-import faker from 'faker';
+import faker from 'faker/locale/en_GB';
 
 import Dialog from './index';
 

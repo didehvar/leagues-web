@@ -5,15 +5,15 @@ import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import Card from 'material-ui/Card';
 
-import { getFlag } from '../../utils/flags';
-
 import * as Style from './style.js';
 
 function LeagueCard({ id, title, countryCode, onView, onJoin, ...rest }) {
   return (
     <Card {...rest}>
       <Style.FlagContainer>
-        <Style.FlagImage src={getFlag(countryCode)} />
+        <Style.FlagImage
+          src={`${process.env.PUBLIC_URL}/flags/${countryCode}.png`}
+        />
       </Style.FlagContainer>
       <CardContent>
         <Typography type="subheading" component="h3">

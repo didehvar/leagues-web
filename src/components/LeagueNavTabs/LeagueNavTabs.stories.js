@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import faker from 'faker';
+import faker from 'faker/locale/en_GB';
 import Table, {
   TableBody,
   TableCell,

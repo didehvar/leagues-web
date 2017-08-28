@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import faker from 'faker'; // TODO: remove
+import faker from 'faker/locale/en_GB'; // TODO: remove
 import Button from 'material-ui/Button';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import RunIcon from 'material-ui-icons/DirectionsRun';
