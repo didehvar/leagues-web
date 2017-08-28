@@ -7,5 +7,5 @@ export const Base = glamorous.button({
 });
 
 export const Card = glamorous.div({
-  padding: '1rem 1.5rem'
+  padding: '1rem 0.5rem'
 });

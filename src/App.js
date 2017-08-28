@@ -10,18 +10,12 @@ import Routes from './utils/routes';
 
 import { theme, muiTheme } from './constants/theme';
 
-import PaddedRoute from './components/PaddedRoute';
-
 import BottomNav from './components/BottomNav';
 import HomeRoute from './containers/HomeRoute';
 import LeagueRoute from './containers/LeagueRoute';
 import SearchRoute from './containers/SearchRoute';
 import ScrollToTop from './containers/ScrollToTop';
 import NewLeagueRoute from './containers/NewLeagueRoute';
-
-// import LeaguesRoute from './containers/LeaguesRoute';
-// import NewLeagueRoute from './containers/NewLeagueRoute';
-// import NewLeagueSegmentRoute from './containers/NewLeagueSegmentRoute';
 
 import * as Style from './style';
 

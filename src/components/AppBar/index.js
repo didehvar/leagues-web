@@ -7,22 +7,22 @@ import Typography from 'material-ui/Typography';
 
 import * as Style from './style';
 
-const AppBar = ({ children, left, right }) => {
+const AppBar = ({ children, left, right, ...props }) => {
   return (
-    <MuiAppBar color="default" position="static">
+    <MuiAppBar {...props}>
       <Toolbar>
         <Style.Container>
-          <Div flexBasis="30%">
+          <Div flexBasis="20%">
             {left}
           </Div>
-          <Div flexBasis="40%" maxWidth="40%">
+          <Div flexBasis="60%" maxWidth="60%">
             <Typography type="body2" color="inherit" align="center">
               <Style.Title>
                 {children}
               </Style.Title>
             </Typography>
           </Div>
-          <Div flexBasis="30%" textAlign="right">
+          <Div flexBasis="20%" textAlign="right">
             {right}
           </Div>
         </Style.Container>

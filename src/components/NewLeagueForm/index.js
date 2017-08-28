@@ -94,6 +94,7 @@ const NewLeagueForm = ({
   </form>;
 
 NewLeagueForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
   values: PropTypes.shape({
     name: PropTypes.string,
     startDate: PropTypes.oneOfType([
@@ -115,24 +116,16 @@ export default Formik({
     startDate: Yup.date().required(),
     type: Yup.string().required()
   }),
-  handleSubmit: (values, { props, setErrors, setSubmitting }) => {
-    // do stuff with your payload
-    // e.preventDefault(), setSubmitting, setError(undefined) are
-    // called before handleSubmit is. So you don't have to do repeat this.
-    // handleSubmit will only be executed if form values pass validation (if you specify it).
-    // CallMyApi(props.user.id, values).then(
-    //   res => {
-    //     setSubmitting(false);
-    //     // do something to show success
-    //     // MyToaster.showSuccess({ message: 'Success!' })
-    //   },
-    //   err => {
-    //     setSubmitting(false);
-    //     setErrors(transformMyAPIErrorToAnObject(err));
-    //     // do something to show a rejected api submission
-    //     // MyToaster.showError({ message: 'Shit!', error: err })
-    //   }
-    // );
-    setSubmitting(false);
+  handleSubmit: async (
+    values,
+    { props: { onSubmit }, setErrors, setSubmitting }
+  ) => {
+    try {
+      await onSubmit(values);
+    } catch (ex) {
+      setErrors(ex);
+    } finally {
+      setSubmitting(false);
+    }
   }
 })(NewLeagueForm);

@@ -22,6 +22,8 @@ const Dialog = ({ children, name, open, onClose, ...props }) =>
           <CloseIcon />
         </IconButton>
       }
+      color="default"
+      position="static"
     >
       {name}
     </AppBar>
