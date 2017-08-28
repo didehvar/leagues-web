@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import LeagueStandings from './index';
+import Table from './index';
 
-describe('<LeagueStandings />', () => {
+describe('<Table />', () => {
   it('shallow renders without crashing', () => {
-    shallow(<LeagueStandings />);
+    shallow(<Table />);
   });
 });

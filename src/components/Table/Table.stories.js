@@ -3,9 +3,7 @@ import { storiesOf } from '@storybook/react';
 import faker from 'faker';
 import Avatar from 'material-ui/Avatar';
 
-import LeagueStandings from './index';
-
-import leagueStandingsFaker from './LeagueStandings.faker';
+import Table from './index';
 
 const columns = [
   {
@@ -27,8 +25,13 @@ const columns = [
   }
 ];
 
-const data = Array(20).fill().map(leagueStandingsFaker);
+const data = Array(20).fill().map(() => ({
+  id: faker.random.number(),
+  avatar: faker.image.imageUrl(50, 50),
+  name: faker.name.findName(),
+  points: faker.random.number()
+}));
 
-storiesOf('LeagueStandings', module).add('default', () =>
-  <LeagueStandings columns={columns} data={data} />
+storiesOf('Table', module).add('default', () =>
+  <Table columns={columns} data={data} />
 );

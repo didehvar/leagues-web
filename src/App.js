@@ -28,20 +28,20 @@ import * as Style from './style';
 const routes = [
   {
     path: Routes.home,
-    component: () => <HomeRoute />
+    component: HomeRoute
   },
   {
     route: PaddedRoute,
     path: Routes.search,
-    component: () => <SearchRoute />
+    component: SearchRoute
   },
   {
     path: Routes.newLeague,
-    component: () => <NewLeagueRoute />
+    component: NewLeagueRoute
   },
   {
     path: Routes.league(),
-    component: () => <LeagueRoute />
+    component: LeagueRoute
   }
 ];
 
@@ -56,37 +56,23 @@ class App extends Component {
           <BrowserRouter>
             <ScrollToTop>
               <Style.Container>
-                <Style.BodyWrapper>
-                  <Switch>
-                    {routes.map(
-                      ({
-                        route: RouteComponent = Route,
-                        path,
-                        exact = true,
-                        component
-                      }) =>
-                        <RouteComponent
-                          key={path}
-                          exact={exact}
-                          path={path}
-                          component={component}
-                        />
-                    )}
-                    {/* <Route exact path={Routes.leagues} component={LeaguesRoute} />
-                    <Route
-                      exact
-                      path={Routes.newLeague}
-                      component={NewLeagueRoute}
-                    />
-                    <Route
-                      exact
-                      path={Routes.newLeagueSegment}
-                      component={NewLeagueSegmentRoute}
-                    /> */}
-                  </Switch>
-                </Style.BodyWrapper>
+                <Switch>
+                  {routes.map(
+                    ({
+                      route: RouteComponent = Route,
+                      path,
+                      exact = true,
+                      component
+                    }) =>
+                      <RouteComponent
+                        key={path}
+                        exact={exact}
+                        path={path}
+                        component={component}
+                      />
+                  )}
+                </Switch>
 
-                <Style.FooterFix />
                 <Style.FooterNav>
                   <BottomNav />
                 </Style.FooterNav>

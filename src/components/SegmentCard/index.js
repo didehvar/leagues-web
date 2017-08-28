@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { css } from 'glamor';
-import Card, { CardHeader, CardContent } from 'material-ui/Card';
+import isAfter from 'date-fns/is_after';
 import Typography from 'material-ui/Typography';
-import ButtonBase from 'material-ui/ButtonBase';
 import Done from 'material-ui-icons/Done';
 import Cached from 'material-ui-icons/Cached';
+import ButtonBase from 'material-ui/ButtonBase';
+import Card from 'material-ui/Card';
 
-import DateRange from '../DateRange';
 import Dialog from '../Dialog';
+import DateRange from '../DateRange';
+import InlineIcon from '../InlineIcon';
 
 import * as Style from './style.js';
 
@@ -21,37 +23,36 @@ class SegmentCard extends Component {
 
   render() {
     const { open } = this.state;
-    const { id, name, startDate, endDate, children } = this.props;
+    const { children, id, name, startDate, endDate, ...rest } = this.props;
 
     return (
-      <Style.Container>
-        <ButtonBase component={Style.Button} onClick={this.handleOpenDialog}>
-          <Card component={Style.Card}>
-            <Style.CardText>
-              <Typography type="body2" color="secondary" component="div">
-                <Style.CardIcon>
-                  {Math.random() > 0.5 ? <Done /> : <Cached />}
-                </Style.CardIcon>
-                <DateRange start={startDate} end={endDate} />
-              </Typography>
-              <Typography type="body2">
-                {name}
-              </Typography>
-            </Style.CardText>
-          </Card>
-        </ButtonBase>
-        <Dialog
-          name={name}
-          open={open}
-          onClose={this.handleCloseDialog}
-          classes={{ paper: css({ overflow: 'auto', width: '100%' }) }}
-          fullScreen
-        >
-          <Style.DialogContainer>
-            {children}
-          </Style.DialogContainer>
-        </Dialog>
-      </Style.Container>
+      <ButtonBase
+        component={Style.Base}
+        onClick={this.handleOpenDialog}
+        {...rest}
+      >
+        <Card>
+          <Style.Card>
+            <Typography type="body2" color="secondary" component="div">
+              <InlineIcon icon={isAfter(new Date(), endDate) ? Done : Cached} />
+              <DateRange start={startDate} end={endDate} />
+            </Typography>
+            <Typography type="body2">
+              {name}
+            </Typography>
+
+            <Dialog
+              name={name}
+              open={open}
+              onClose={this.handleCloseDialog}
+              classes={{ paper: css({ overflow: 'auto', width: '100%' }) }}
+              fullScreen
+            >
+              {children}
+            </Dialog>
+          </Style.Card>
+        </Card>
+      </ButtonBase>
     );
   }
 }
@@ -59,6 +60,7 @@ class SegmentCard extends Component {
 export default SegmentCard;
 
 SegmentCard.propTypes = {
+  children: PropTypes.node.isRequired,
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   startDate: PropTypes.instanceOf(Date).isRequired,

@@ -25,7 +25,9 @@ const Dialog = ({ children, name, open, onClose, ...props }) =>
     >
       {name}
     </AppBar>
-    {children}
+    <Style.Wrapper>
+      {children}
+    </Style.Wrapper>
   </MuiDialog>;
 
 Dialog.propTypes = {

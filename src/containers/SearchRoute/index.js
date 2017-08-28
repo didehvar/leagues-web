@@ -1,6 +1,7 @@
 import React from 'react';
 
-import CardGrid from '../../components/CardGrid';
+import Routes from '../../utils/routes';
+
 import LeagueCard from '../../components/LeagueCard';
 import SearchField from '../../components/SearchField';
 
@@ -10,14 +11,21 @@ import * as Style from './style';
 
 const leagues = [...Array(3)].map(leagueCardFaker);
 
-function SearchRoute() {
+function SearchRoute({ history }) {
   return (
-    <Style.Container>
+    <div>
       <Style.SearchField>
         <SearchField />
       </Style.SearchField>
-      <CardGrid cards={leagues} component={LeagueCard} />
-    </Style.Container>
+      {leagues.map(league =>
+        <LeagueCard
+          key={league.id}
+          {...league}
+          onView={() => history.push(Routes.league(league.id))}
+          style={{ marginBottom: '1rem' }}
+        />
+      )}
+    </div>
   );
 }
 

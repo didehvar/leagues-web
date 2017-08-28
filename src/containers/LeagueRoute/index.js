@@ -1,62 +1,42 @@
 import React from 'react';
-import { Div } from 'glamorous';
-import Avatar from 'material-ui/Avatar';
+import faker from 'faker';
 
-import CardGrid from '../../components/CardGrid';
 import SegmentCard from '../../components/SegmentCard';
 import LeagueNavTabs from '../../components/LeagueNavTabs';
-import LeagueStandings from '../../components/LeagueStandings';
 
-import segmentCardFaker from '../../components/SegmentCard/SegmentCard.faker';
-import leagueStandingsFaker from '../../components/LeagueStandings/LeagueStandings.faker';
+import LeagueStandings from '../LeagueStandings';
 
-const segments = [...Array(3)].map(segmentCardFaker);
-const columns = [
-  {
-    id: 'avatar',
-    disablePadding: true,
-    component: ({ value }) => <Avatar src={value} />
-  },
-  {
-    id: 'name',
-    label: 'Name',
-    disablePadding: true,
-    default: true
-  },
-  {
-    id: 'points',
-    label: 'Points',
-    disablePadding: true,
-    numeric: true
-  }
-];
-const data = Array(20).fill().map(leagueStandingsFaker);
+const segments = Array(5).fill().map(() => ({
+  id: faker.random.number(),
+  name: faker.random.words(5),
+  startDate: faker.date.past(),
+  endDate: faker.date.future()
+}));
 
 const tabs = [
   {
     label: 'Segments',
-    component: () =>
-      <Div marginTop="0.5rem">
-        <CardGrid
-          cards={segments}
-          component={props =>
-            <SegmentCard {...props}>
-              <LeagueStandings columns={columns} data={data} />
-            </SegmentCard>}
-        />
-      </Div>
+    children: (
+      <div>
+        {segments.map(segment =>
+          <SegmentCard key={segment.id} {...segment}>
+            <LeagueStandings />
+          </SegmentCard>
+        )}
+      </div>
+    )
   },
   {
     label: 'Standings',
-    component: () => <LeagueStandings columns={columns} data={data} />
+    children: <LeagueStandings />
   }
 ];
 
 function LeagueRoute() {
   return (
-    <Div flex="1">
+    <div>
       <LeagueNavTabs tabs={tabs} />
-    </Div>
+    </div>
   );
 }
 

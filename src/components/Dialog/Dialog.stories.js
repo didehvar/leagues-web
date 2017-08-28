@@ -1,18 +1,14 @@
 import React from 'react';
-import faker from 'faker';
-import { Div } from 'glamorous';
 import { storiesOf } from '@storybook/react';
+import { Div } from 'glamorous';
+import faker from 'faker';
 
 import Dialog from './index';
 
-const content = (
-  <Div padding="1rem 2rem">
-    {Array(3).fill().map(() =>
-      <p>
-        {faker.lorem.paragraph()}
-      </p>
-    )}
-  </Div>
+const content = Array(3).fill().map(() =>
+  <p>
+    {faker.lorem.paragraph()}
+  </p>
 );
 
 const props = {

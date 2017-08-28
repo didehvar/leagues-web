@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Table, {
+import MuiTable, {
   TableBody,
   TableCell,
   TableHead,
@@ -8,7 +8,7 @@ import Table, {
   TableSortLabel
 } from 'material-ui/Table';
 
-class LeagueStandings extends Component {
+class Table extends Component {
   constructor(props) {
     super(props);
 
@@ -52,53 +52,41 @@ class LeagueStandings extends Component {
     const { columns } = this.props;
 
     return (
-      <Table>
+      <MuiTable>
         <TableHead>
           <TableRow>
-            {columns.map(column =>
-              <TableCell
-                key={column.id}
-                numeric={column.numeric}
-                disablePadding={column.disablePadding}
-              >
+            {columns.map(({ id, label, component, ...rest }) =>
+              <TableCell key={id} {...rest}>
                 <TableSortLabel
-                  active={orderBy === column.id}
+                  active={orderBy === id}
                   direction={order}
-                  onClick={() => this.handleRequestSort(column.id)}
+                  onClick={() => this.handleRequestSort(id)}
                 >
-                  {column.label}
+                  {label}
                 </TableSortLabel>
               </TableCell>
             )}
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map(n => {
-            return (
-              <TableRow key={n.id} hover>
-                {columns.map((column, idx) =>
-                  <TableCell
-                    key={column.id}
-                    numeric={column.numeric}
-                    disablePadding={column.disablePadding}
-                  >
-                    {column.component
-                      ? <column.component value={n[column.id]} />
-                      : n[column.id]}
-                  </TableCell>
-                )}
-              </TableRow>
-            );
-          })}
+          {data.map(n =>
+            <TableRow key={n.id} hover>
+              {columns.map(({ id, component: Tag, ...rest }, idx) =>
+                <TableCell key={id} {...rest}>
+                  {Tag ? <Tag value={n[id]} /> : n[id]}
+                </TableCell>
+              )}
+            </TableRow>
+          )}
         </TableBody>
-      </Table>
+      </MuiTable>
     );
   }
 }
 
-export default LeagueStandings;
+export default Table;
 
-LeagueStandings.propTypes = {
+Table.propTypes = {
   columns: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
@@ -108,6 +96,11 @@ LeagueStandings.propTypes = {
       label: PropTypes.string,
       component: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
     })
-  ).isRequired,
+  ),
   data: PropTypes.arrayOf(PropTypes.object)
+};
+
+Table.defaultProps = {
+  columns: [],
+  data: []
 };

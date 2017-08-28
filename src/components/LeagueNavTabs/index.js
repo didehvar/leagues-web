@@ -33,9 +33,9 @@ class LeagueNavTabs extends Component {
             onChangeIndex={i => this.handleChange(i)}
             animateHeight
           >
-            {tabs.map(({ label, component: Tag }) =>
+            {tabs.map(({ label, children }) =>
               <Style.TabWrapper key={label}>
-                <Tag />
+                {children}
               </Style.TabWrapper>
             )}
           </SwipeableViews>
@@ -51,7 +51,7 @@ LeagueNavTabs.propTypes = {
   tabs: PropTypes.arrayOf(
     PropTypes.shape({
       label: PropTypes.string.isRequired,
-      component: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
+      children: PropTypes.oneOfType([PropTypes.element, PropTypes.func])
         .isRequired
     })
   ).isRequired

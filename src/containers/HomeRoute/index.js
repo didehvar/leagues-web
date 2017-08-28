@@ -5,12 +5,7 @@ import LoginButton from '../LoginButton';
 
 function HomeRoute() {
   return (
-    <Div
-      display="flex"
-      flexGrow="1"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <Div marginTop="45vh" textAlign="center">
       <LoginButton />
     </Div>
   );

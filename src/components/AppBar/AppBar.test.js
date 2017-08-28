@@ -1,10 +1,10 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import CardGrid from './index';
+import AppBar from './index';
 
-describe('<CardGrid />', () => {
+describe('<AppBar />', () => {
   it('shallow renders without crashing', () => {
-    shallow(<CardGrid />);
+    shallow(<AppBar />);
   });
 });

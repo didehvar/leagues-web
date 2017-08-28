@@ -1,35 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Card, { CardActions, CardContent } from 'material-ui/Card';
+import { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
+import Card from 'material-ui/Card';
 
 import { getFlag } from '../../utils/flags';
 
 import * as Style from './style.js';
 
-function LeagueCard({ id, title, countryCode, handleView, handleJoin }) {
+function LeagueCard({ id, title, countryCode, onView, onJoin, ...rest }) {
   return (
-    <Style.Container>
-      <Card>
-        <Style.FlagContainer>
-          <Style.FlagImage src={getFlag(countryCode)} />
-        </Style.FlagContainer>
-        <CardContent>
-          <Typography type="subheading" component="h3">
-            {title}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button dense color="primary" onClick={handleView}>
-            View
-          </Button>
-          <Button dense color="accent" onClick={handleJoin}>
-            Join
-          </Button>
-        </CardActions>
-      </Card>
-    </Style.Container>
+    <Card {...rest}>
+      <Style.FlagContainer>
+        <Style.FlagImage src={getFlag(countryCode)} />
+      </Style.FlagContainer>
+      <CardContent>
+        <Typography type="subheading" component="h3">
+          {title}
+        </Typography>
+      </CardContent>
+      <CardActions>
+        <Button dense color="primary" onClick={onView}>
+          View
+        </Button>
+        <Button dense color="accent" onClick={onJoin}>
+          Join
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
 
@@ -39,8 +38,8 @@ LeagueCard.propTypes = {
   id: PropTypes.number.isRequired,
   title: PropTypes.string.isRequired,
   countryCode: PropTypes.string.isRequired,
-  handleView: PropTypes.func.isRequired,
-  handleJoin: PropTypes.func.isRequired
+  onView: PropTypes.func.isRequired,
+  onJoin: PropTypes.func.isRequired
 };
 
 LeagueCard.defaultProps = {
