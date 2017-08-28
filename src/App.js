@@ -15,7 +15,7 @@ import HomeRoute from './containers/HomeRoute';
 import LeagueRoute from './containers/LeagueRoute';
 import SearchRoute from './containers/SearchRoute';
 import ScrollToTop from './containers/ScrollToTop';
-import NewLeagueRoute from './containers/NewLeagueRoute';
+import CreateLeagueRoute from './containers/CreateLeagueRoute';
 
 import * as Style from './style';
 
@@ -30,7 +30,7 @@ const routes = [
   },
   {
     path: Routes.newLeague,
-    component: NewLeagueRoute
+    component: CreateLeagueRoute
   },
   {
     path: Routes.league(),

@@ -24,9 +24,8 @@ const Dialog = ({ children, name, open, onClose, ...props }) =>
       }
       color="default"
       position="static"
-    >
-      {name}
-    </AppBar>
+      title={name}
+    />
     <Style.Wrapper>
       {children}
     </Style.Wrapper>

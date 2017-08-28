@@ -14,7 +14,7 @@ import Radio, { RadioGroup } from 'material-ui/Radio';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 
-const NewLeagueForm = ({
+const CreateLeagueForm = ({
   values,
   touched,
   errors,
@@ -93,7 +93,7 @@ const NewLeagueForm = ({
     </Grid>
   </form>;
 
-NewLeagueForm.propTypes = {
+CreateLeagueForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
   values: PropTypes.shape({
     name: PropTypes.string,
@@ -128,4 +128,4 @@ export default Formik({
       setSubmitting(false);
     }
   }
-})(NewLeagueForm);
+})(CreateLeagueForm);

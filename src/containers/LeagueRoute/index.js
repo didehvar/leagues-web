@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import faker from 'faker';
 import SwipeableViews from 'react-swipeable-views';
-import AppBar from 'material-ui/AppBar';
-import Toolbar from 'material-ui/Toolbar';
 import Tabs, { Tab } from 'material-ui/Tabs';
-import Typography from 'material-ui/Typography';
+import IconButton from 'material-ui/IconButton';
+import CreateIcon from 'material-ui-icons/Create';
 
+import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
 
 import LeagueStandings from '../LeagueStandings';
@@ -24,17 +24,21 @@ class LeagueRoute extends Component {
 
   handleChange = value => this.setState({ value });
 
+  onCreate = () => {};
+
   render() {
     const { value } = this.state;
 
     return (
       <Style.Container>
-        <AppBar>
-          <Style.Toolbar>
-            <Typography type="title" color="inherit" align="center" noWrap>
-              {faker.random.words()}
-            </Typography>
-          </Style.Toolbar>
+        <AppBar
+          title={faker.random.words()}
+          left={
+            <IconButton onClick={this.onCreate} color="inherit">
+              <CreateIcon />
+            </IconButton>
+          }
+        >
           <Tabs
             value={value}
             onChange={(e, v) => this.handleChange(v)}
