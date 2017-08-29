@@ -1,5 +1,3 @@
-const leagueSlug = slug => slug || ':leagueSlug';
-
 export default {
   home: '/',
   search: '/search',
@@ -9,5 +7,5 @@ export default {
   // ----- Leagues -----
   leagues: '/leagues',
   newLeague: '/leagues/new',
-  league: slug => `/leagues/${leagueSlug(slug)}`
+  league: (id, slug) => `/leagues/${id || ':id'}/${slug || ':slug'}`
 };

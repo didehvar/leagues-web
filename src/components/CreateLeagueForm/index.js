@@ -69,8 +69,8 @@ const CreateLeagueForm = ({
         <FormControl component="fieldset" required>
           <FormLabel component="legend">Discipline</FormLabel>
           <RadioGroup
-            name="type"
-            value={values.type}
+            name="discipline"
+            value={values.discipline}
             onChange={handleChange}
             style={{ flexDirection: 'row' }}
           >
@@ -78,10 +78,10 @@ const CreateLeagueForm = ({
             <FormControlLabel value="ride" control={<Radio />} label="Ride" />
           </RadioGroup>
 
-          {errors.type &&
-            touched.type &&
+          {errors.discipline &&
+            touched.discipline &&
             <FormHelperText error>
-              {errors.type}
+              {errors.discipline}
             </FormHelperText>}
         </FormControl>
       </Grid>
@@ -101,7 +101,7 @@ CreateLeagueForm.propTypes = {
       PropTypes.instanceOf(Date),
       PropTypes.string
     ]),
-    type: PropTypes.string
+    discipline: PropTypes.string
   })
 };
 
@@ -109,12 +109,12 @@ export default Formik({
   mapPropsToValues: () => ({
     name: '',
     startDate: new Date(),
-    type: 'run'
+    discipline: 'run'
   }),
   validationSchema: Yup.object().shape({
     name: Yup.string().required(),
     startDate: Yup.date().required(),
-    type: Yup.string().required()
+    discipline: Yup.string().required()
   }),
   handleSubmit: async (
     values,
@@ -123,7 +123,7 @@ export default Formik({
     try {
       await onSubmit(values);
     } catch (ex) {
-      setErrors(ex);
+      setErrors(ex.message);
     } finally {
       setSubmitting(false);
     }
