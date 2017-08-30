@@ -3,6 +3,8 @@ import faker from 'faker/locale/en_GB';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
 
+import api from '../../utils/api';
+
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
 
@@ -20,20 +22,33 @@ const segments = Array(5).fill().map(() => ({
 }));
 
 class LeagueRoute extends Component {
-  state = { value: 0 };
+  state = { value: 0, league: {} };
 
   handleChange = value => this.setState({ value });
 
   onCreate = () => {};
 
+  async componentDidMount() {
+    const { match: { params: { id, slug } } } = this.props;
+    const response = await api(`leagues/${id}${slug && `/${slug}`}`);
+
+    if (response.status >= 400) {
+      this.setState({ error: true });
+      return;
+    }
+
+    const { data: league } = await response.json();
+    this.setState({ league });
+  }
+
   render() {
-    const { value } = this.state;
+    const { value, league: { name } } = this.state;
 
     return (
       <Style.Container>
         <AppBar
           color="default"
-          title={faker.random.words()}
+          title={name}
           left={<AddSegmentDialog />}
           right={<JoinLeagueButton />}
         >

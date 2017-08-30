@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import api from '../../utils/api';
 
+import api from '../../utils/api';
 import Routes from '../../utils/routes';
 
 import LeagueCard from '../../components/LeagueCard';
@@ -10,6 +10,10 @@ import * as Style from './style';
 
 class SearchRoute extends Component {
   state = { leagues: [] };
+
+  onView = (id, slug) => () => this.props.history.push(Routes.league(id, slug));
+
+  onJoin = (id, slug) => () => console.log('🤔'); // TODO
 
   async componentDidMount() {
     const response = await api('leagues');
@@ -22,10 +26,6 @@ class SearchRoute extends Component {
     const { data: leagues } = await response.json();
     this.setState({ leagues });
   }
-
-  onView = (id, slug) => () => this.props.history.push(Routes.league(id, slug));
-
-  onJoin = (id, slug) => () => console.log('🤔'); // TODO
 
   render() {
     const { leagues } = this.state;
