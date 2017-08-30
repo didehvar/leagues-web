@@ -27,12 +27,13 @@ const AppBar = ({ children, title, left, right, ...props }) => {
 };
 
 AppBar.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   left: PropTypes.element,
   right: PropTypes.element
 };
 
 AppBar.defaultProps = {
+  children: undefined,
   left: undefined,
   right: undefined
 };

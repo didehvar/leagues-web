@@ -9,17 +9,6 @@ import AppBar from '../AppBar';
 
 import * as Style from './style';
 
-// couldn't get this working with glamor
-const styles = {
-  paper: {
-    overflow: 'auto',
-    width: '100%'
-  },
-  paperMargin: {
-    margin: 15
-  }
-};
-
 const Dialog = ({
   children,
   name,

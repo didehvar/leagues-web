@@ -25,7 +25,7 @@ class SegmentSelector extends Component {
 
   render() {
     const { open } = this.state;
-    const { starred, segments, onSelect, ...rest } = this.props;
+    const { starred, onSelect, ...rest } = this.props;
 
     return (
       <Button raised color="primary" onClick={this.handleOpenDialog} {...rest}>
@@ -62,8 +62,13 @@ class SegmentSelector extends Component {
     );
   }
 }
-SegmentSelector.propTypes = {};
+SegmentSelector.propTypes = {
+  starred: PropTypes.bool,
+  onSelect: PropTypes.func.isRequired
+};
 
-SegmentSelector.defaultProps = {};
+SegmentSelector.defaultProps = {
+  starred: false
+};
 
 export default SegmentSelector;
