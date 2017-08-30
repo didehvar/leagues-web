@@ -15,13 +15,13 @@ class CreateLeagueRoute extends Component {
       method: 'POST',
       body: values
     });
-    const { data: { id, slug } } = await response.json();
 
     if (response.status >= 400) {
       this.setState({ error: true });
       return;
     }
 
+    const { data: { id, slug } } = await response.json();
     history.push(Routes.league(id, slug));
   };
 

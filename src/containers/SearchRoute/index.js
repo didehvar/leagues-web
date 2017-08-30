@@ -1,32 +1,53 @@
-import React from 'react';
+import React, { Component } from 'react';
+import api from '../../utils/api';
 
 import Routes from '../../utils/routes';
 
 import LeagueCard from '../../components/LeagueCard';
 import SearchField from '../../components/SearchField';
 
-import leagueCardFaker from '../../components/LeagueCard/LeagueCard.faker';
-
 import * as Style from './style';
 
-const leagues = [...Array(3)].map(leagueCardFaker);
+class SearchRoute extends Component {
+  state = { leagues: [] };
 
-function SearchRoute({ history }) {
-  return (
-    <div>
-      <Style.SearchField>
-        <SearchField />
-      </Style.SearchField>
-      {leagues.map(league =>
-        <LeagueCard
-          key={league.id}
-          {...league}
-          onView={() => history.push(Routes.league(league.id))}
-          style={{ marginBottom: '1rem' }}
-        />
-      )}
-    </div>
-  );
+  async componentDidMount() {
+    const response = await api('leagues');
+
+    if (response.status >= 400) {
+      this.setState({ error: true });
+      return;
+    }
+
+    const { data: leagues } = await response.json();
+    this.setState({ leagues });
+  }
+
+  onView = (id, slug) => () => this.props.history.push(Routes.league(id, slug));
+
+  onJoin = (id, slug) => () => console.log('🤔'); // TODO
+
+  render() {
+    const { leagues } = this.state;
+
+    return (
+      <div>
+        <Style.SearchField>
+          <SearchField />
+        </Style.SearchField>
+        {leagues.map(({ id, slug, name }) =>
+          <LeagueCard
+            key={id}
+            id={id}
+            name={name}
+            onView={this.onView(id, slug)}
+            onJoin={this.onJoin(id, slug)}
+            style={{ marginBottom: '1rem' }}
+          />
+        )}
+      </div>
+    );
+  }
 }
 
 export default SearchRoute;

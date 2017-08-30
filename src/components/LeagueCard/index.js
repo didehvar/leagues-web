@@ -7,7 +7,7 @@ import Card from 'material-ui/Card';
 
 import * as Style from './style.js';
 
-function LeagueCard({ id, title, countryCode, onView, onJoin, ...rest }) {
+function LeagueCard({ id, name, countryCode, onView, onJoin, ...rest }) {
   return (
     <Card {...rest}>
       <Style.FlagContainer>
@@ -17,7 +17,7 @@ function LeagueCard({ id, title, countryCode, onView, onJoin, ...rest }) {
       </Style.FlagContainer>
       <CardContent>
         <Typography type="subheading" component="h3">
-          {title}
+          {name}
         </Typography>
       </CardContent>
       <CardActions>
@@ -36,7 +36,7 @@ export default LeagueCard;
 
 LeagueCard.propTypes = {
   id: PropTypes.number.isRequired,
-  title: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   countryCode: PropTypes.string.isRequired,
   onView: PropTypes.func.isRequired,
   onJoin: PropTypes.func.isRequired
