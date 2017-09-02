@@ -36,8 +36,6 @@ class SegmentSelector extends Component {
           open={open}
           onClose={this.handleCloseDialog}
           closeButton={false}
-          wrapperPadding="0.5rem"
-          fullWidthTitle
         >
           {!starred &&
             <Style.Search>
@@ -46,6 +44,7 @@ class SegmentSelector extends Component {
           <List dense>
             {Array(10).fill().map(() =>
               <ListItem
+                key={faker.random.number()}
                 button
                 divider
                 onClick={this.handleSelect(faker.random.number())}

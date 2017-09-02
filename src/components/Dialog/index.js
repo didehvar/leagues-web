@@ -30,10 +30,11 @@ const Dialog = ({
       position="static"
       title={name}
       left={
-        closeButton &&
-        <IconButton onClick={onClose} aria-label="Back">
-          <CloseIcon />
-        </IconButton>
+        closeButton
+          ? <IconButton onClick={onClose} aria-label="Back">
+              <CloseIcon />
+            </IconButton>
+          : undefined
       }
       right={right}
     />
