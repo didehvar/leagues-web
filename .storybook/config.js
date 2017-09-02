@@ -7,11 +7,11 @@ import { muiTheme } from 'storybook-addon-material-ui';
 import 'typeface-roboto';
 
 import Decorators from '../storybook/decorators';
-import { muiTheme as storybookTheme } from '../src/constants/theme';
+import theme from '../src/constants/theme';
 
 const req = require.context('../src', true, /\.stories\.js$/);
 
-addDecorator(muiTheme(storybookTheme));
+addDecorator(muiTheme(theme));
 addDecorator(withKnobs);
 
 function loadStories() {

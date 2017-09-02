@@ -27,6 +27,7 @@
     "react-swipeable-views": "^0.12.6",
     "source-map-explorer": "^1.4.0",
     "typeface-roboto": "^0.0.35",
+    "url-search-params-polyfill": "^2.0.0",
     "yarn": "^0.27.5",
     "yup": "^0.22.0"
   },

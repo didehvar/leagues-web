@@ -1,13 +1,10 @@
-import createMuiTheme from 'material-ui/styles/theme';
-import createPalette from 'material-ui/styles/palette';
+import createMuiTheme from 'material-ui/styles/createMuiTheme';
 import deepPurple from 'material-ui/colors/deepPurple';
 import teal from 'material-ui/colors/teal';
 
-export const theme = {
-  palette: createPalette({
+export default createMuiTheme({
+  palette: {
     primary: teal,
-    accent: deepPurple
-  })
-};
-
-export const muiTheme = createMuiTheme(theme);
+    secondary: deepPurple
+  }
+});
