@@ -1,8 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import Button from 'material-ui/Button';
 
-export default class LoginButton extends Component {
-  stravaUrl = [
+import { isAuthenticated } from '../../reducers';
+
+const LoginButton = ({ isAuthenticated }) => {
+  const stravaUrl = [
     `https://www.strava.com/oauth/authorize?client_id=${process.env
       .REACT_APP_STRAVA_CLIENT_ID}`,
     `redirect_uri=${encodeURIComponent(
@@ -13,11 +16,15 @@ export default class LoginButton extends Component {
     'scope=view_private'
   ].join('&');
 
-  render() {
-    return (
-      <Button raised color="primary" component="a" href={this.stravaUrl}>
-        Login
-      </Button>
-    );
-  }
-}
+  if (isAuthenticated) return null;
+
+  return (
+    <Button raised color="primary" component="a" href={stravaUrl}>
+      Login
+    </Button>
+  );
+};
+
+export default connect(state => ({ isAuthenticated: isAuthenticated(state) }))(
+  LoginButton
+);

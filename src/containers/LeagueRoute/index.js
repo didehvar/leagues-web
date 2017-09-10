@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import faker from 'faker/locale/en_GB';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
 
-import api from '../../utils/api';
+import * as leagueActions from '../../actions/leagues';
+import { getLeague } from '../../reducers';
 
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
@@ -14,41 +16,36 @@ import JoinLeagueButton from '../JoinLeagueButton';
 
 import * as Style from './style';
 
-const segments = Array(5).fill().map(() => ({
-  id: faker.random.number(),
-  name: faker.random.words(5),
-  startDate: faker.date.past(),
-  endDate: faker.date.future()
-}));
+const segments = Array(5)
+  .fill()
+  .map(() => ({
+    id: faker.random.number(),
+    name: faker.random.words(5),
+    startDate: faker.date.past(),
+    endDate: faker.date.future()
+  }));
 
 class LeagueRoute extends Component {
-  state = { value: 0, league: {} };
+  state = { value: 0 };
 
   handleChange = value => this.setState({ value });
 
   onCreate = () => {};
 
   async componentDidMount() {
-    const { match: { params: { id, slug } } } = this.props;
-    const response = await api(`leagues/${id}${slug && `/${slug}`}`);
-
-    if (response.status >= 400) {
-      this.setState({ error: true });
-      return;
-    }
-
-    const { data: league } = await response.json();
-    this.setState({ league });
+    const { fetchLeague, match } = this.props;
+    fetchLeague(match.params.id);
   }
 
   render() {
-    const { value, league: { name } } = this.state;
+    const { value } = this.state;
+    const { league } = this.props;
 
     return (
       <Style.Container>
         <AppBar
           color="default"
-          title={name}
+          title={league && league.name}
           left={<AddSegmentDialog />}
           right={<JoinLeagueButton />}
         >
@@ -67,13 +64,15 @@ class LeagueRoute extends Component {
           onChangeIndex={i => this.handleChange(i)}
           animateHeight
         >
-          <div>
-            {segments.map(segment =>
-              <SegmentCard key={segment.id} {...segment}>
-                <LeagueStandings />
-              </SegmentCard>
-            )}
-          </div>
+          {league && (
+            <div>
+              {segments.map(segment => (
+                <SegmentCard key={segment.id} {...segment}>
+                  <LeagueStandings />
+                </SegmentCard>
+              ))}
+            </div>
+          )}
           <LeagueStandings />
         </SwipeableViews>
       </Style.Container>
@@ -81,4 +80,9 @@ class LeagueRoute extends Component {
   }
 }
 
-export default LeagueRoute;
+export default connect(
+  (state, props) => ({
+    league: getLeague(state, props.match.params.id)
+  }),
+  leagueActions
+)(LeagueRoute);

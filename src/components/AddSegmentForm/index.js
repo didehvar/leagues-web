@@ -15,7 +15,7 @@ import Slide from 'material-ui/transitions/Slide';
 import CloseIcon from 'material-ui-icons/Close';
 
 import AppBar from '../AppBar';
-import SegmentSelector from '../SegmentSelector';
+import SegmentSelector from '../../containers/SegmentSelector';
 
 import * as Style from './style';
 
@@ -73,10 +73,9 @@ class AddSegmentForm extends Component {
               <Grid container justify="center">
                 <Grid item xs={12}>
                   {errors.segmentId &&
-                    touched.segmentId &&
-                    <FormHelperText error>
-                      {errors.segmentId}
-                    </FormHelperText>}
+                  touched.segmentId && (
+                    <FormHelperText error>{errors.segmentId}</FormHelperText>
+                  )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -92,10 +91,9 @@ class AddSegmentForm extends Component {
                     fullWidth
                   />
                   {errors.startDate &&
-                    touched.startDate &&
-                    <FormHelperText error>
-                      {errors.startDate}
-                    </FormHelperText>}
+                  touched.startDate && (
+                    <FormHelperText error>{errors.startDate}</FormHelperText>
+                  )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -111,10 +109,9 @@ class AddSegmentForm extends Component {
                     fullWidth
                   />
                   {errors.endDate &&
-                    touched.endDate &&
-                    <FormHelperText error>
-                      {errors.endDate}
-                    </FormHelperText>}
+                  touched.endDate && (
+                    <FormHelperText error>{errors.endDate}</FormHelperText>
+                  )}
                 </Grid>
                 <Grid item xs={12}>
                   <SegmentSelector

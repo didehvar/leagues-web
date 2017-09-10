@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import api from '../../utils/api';
+import * as leagueActions from '../../actions/leagues';
+import { getLeagues } from '../../reducers';
+
 import Routes from '../../utils/routes';
 
 import LeagueCard from '../../components/LeagueCard';
@@ -9,33 +12,24 @@ import SearchField from '../../components/SearchField';
 import * as Style from './style';
 
 class SearchRoute extends Component {
-  state = { leagues: [] };
-
   onView = (id, slug) => () => this.props.history.push(Routes.league(id, slug));
 
   onJoin = (id, slug) => () => console.log('🤔'); // TODO
 
-  async componentDidMount() {
-    const response = await api('leagues');
-
-    if (response.status >= 400) {
-      this.setState({ error: true });
-      return;
-    }
-
-    const { data: leagues } = await response.json();
-    this.setState({ leagues });
+  componentDidMount() {
+    const { fetchLeagues } = this.props;
+    fetchLeagues();
   }
 
   render() {
-    const { leagues } = this.state;
+    const { leagues } = this.props;
 
     return (
       <div>
         <Style.SearchField>
           <SearchField />
         </Style.SearchField>
-        {leagues.map(({ id, slug, name }) =>
+        {leagues.map(({ id, slug, name }) => (
           <LeagueCard
             key={id}
             id={id}
@@ -44,10 +38,13 @@ class SearchRoute extends Component {
             onJoin={this.onJoin(id, slug)}
             style={{ marginBottom: '1rem' }}
           />
-        )}
+        ))}
       </div>
     );
   }
 }
 
-export default SearchRoute;
+export default connect(
+  state => ({ leagues: getLeagues(state) }),
+  leagueActions
+)(SearchRoute);

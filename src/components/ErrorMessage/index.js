@@ -1,17 +1,17 @@
 import React from 'react';
+import { P } from 'glamorous';
 
-const ErrorMessage = ({ message }) => {
+const ErrorMessage = ({ children }) => {
   return (
-    <p style={{ color: 'red' }}>
-      <b>
-        {message}
-      </b>
-    </p>
+    <P color="red" fontWeight="bold">
+      {children}
+    </P>
   );
 };
 
 ErrorMessage.defaultProps = {
-  message: 'Something went wrong, please wait a few seconds and then try again.'
+  children:
+    'Something went wrong, please wait a few seconds and then try again.'
 };
 
 export default ErrorMessage;

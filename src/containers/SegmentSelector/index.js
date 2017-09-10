@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import faker from 'faker/locale/en_GB'; // TODO: remove
+import faker from 'faker';
 import Button from 'material-ui/Button';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import RunIcon from 'material-ui-icons/DirectionsRun';
 import BikeIcon from 'material-ui-icons/DirectionsBike';
+import api from '../../utils/api';
 
-import Dialog from '../Dialog';
-import SearchField from '../SearchField';
+import Dialog from '../../components/Dialog';
+import SearchField from '../../components/SearchField';
 
 import * as Style from './style';
 
@@ -23,6 +24,18 @@ class SegmentSelector extends Component {
     this.handleCloseDialog();
   };
 
+  async componentDidMount() {
+    const response = await api('users/:id/segments/starred');
+
+    if (response.status >= 400) {
+      this.setState({ error: true });
+      return;
+    }
+
+    const { data: leagues } = await response.json();
+    this.setState({ leagues });
+  }
+
   render() {
     const { open } = this.state;
     const { starred, onSelect, ...rest } = this.props;
@@ -37,24 +50,27 @@ class SegmentSelector extends Component {
           onClose={this.handleCloseDialog}
           closeButton={false}
         >
-          {!starred &&
+          {!starred && (
             <Style.Search>
               <SearchField />
-            </Style.Search>}
+            </Style.Search>
+          )}
           <List dense>
-            {Array(10).fill().map(() =>
-              <ListItem
-                key={faker.random.number()}
-                button
-                divider
-                onClick={this.handleSelect(faker.random.number())}
-              >
-                <ListItemIcon>
-                  {faker.random.boolean() ? <RunIcon /> : <BikeIcon />}
-                </ListItemIcon>
-                <ListItemText primary={faker.company.companyName()} />
-              </ListItem>
-            )}
+            {Array(10)
+              .fill()
+              .map(() => (
+                <ListItem
+                  key={faker.random.number()}
+                  button
+                  divider
+                  onClick={this.handleSelect(faker.random.number())}
+                >
+                  <ListItemIcon>
+                    {faker.random.boolean() ? <RunIcon /> : <BikeIcon />}
+                  </ListItemIcon>
+                  <ListItemText primary={faker.company.companyName()} />
+                </ListItem>
+              ))}
           </List>
         </Dialog>
       </Button>
