@@ -4,7 +4,7 @@ import Button from 'material-ui/Button';
 
 import { isAuthenticated } from '../../reducers';
 
-const LoginButton = ({ isAuthenticated }) => {
+const LoginButton = ({ authenticated }) => {
   const stravaUrl = [
     `https://www.strava.com/oauth/authorize?client_id=${process.env
       .REACT_APP_STRAVA_CLIENT_ID}`,
@@ -16,7 +16,7 @@ const LoginButton = ({ isAuthenticated }) => {
     'scope=view_private'
   ].join('&');
 
-  if (isAuthenticated) return null;
+  if (authenticated) return null;
 
   return (
     <Button raised color="primary" component="a" href={stravaUrl}>
@@ -25,6 +25,6 @@ const LoginButton = ({ isAuthenticated }) => {
   );
 };
 
-export default connect(state => ({ isAuthenticated: isAuthenticated(state) }))(
+export default connect(state => ({ authenticated: isAuthenticated(state) }))(
   LoginButton
 );

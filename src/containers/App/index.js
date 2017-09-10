@@ -19,6 +19,7 @@ import HomeRoute from '../HomeRoute';
 import LeagueRoute from '../LeagueRoute';
 import SearchRoute from '../SearchRoute';
 import ScrollToTop from '../ScrollToTop';
+import SettingsRoute from '../SettingsRoute';
 import CreateLeagueRoute from '../CreateLeagueRoute';
 import StravaAuthHandler from '../StravaAuthHandler';
 
@@ -42,6 +43,7 @@ const App = () => (
                 component={CreateLeagueRoute}
               />
               <Route exact path={Routes.league()} component={LeagueRoute} />
+              <Route exact path={Routes.settings} component={SettingsRoute} />
             </Switch>
 
             <Style.FooterNav>

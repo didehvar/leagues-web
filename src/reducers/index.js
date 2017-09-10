@@ -15,6 +15,10 @@ export const getAuthError = state => fromAuth.getError(state.auth);
 
 export const isAuthenticated = state => fromAuth.isAuthenticated(state.auth);
 
+export const getUser = state => fromAuth.getUser(state.auth);
+
+export const getUserToken = state => fromAuth.getUserToken(state.auth);
+
 // Leagues
 export const getLeague = (state, id) =>
   fromLeagues.getLeague(state.leagues, id);

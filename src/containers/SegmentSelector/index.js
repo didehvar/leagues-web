@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import faker from 'faker';
 import Button from 'material-ui/Button';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import RunIcon from 'material-ui-icons/DirectionsRun';
 import BikeIcon from 'material-ui-icons/DirectionsBike';
-import api from '../../utils/api';
+
+import * as segmentActions from '../../actions/segments';
 
 import Dialog from '../../components/Dialog';
 import SearchField from '../../components/SearchField';
@@ -13,6 +15,15 @@ import SearchField from '../../components/SearchField';
 import * as Style from './style';
 
 class SegmentSelector extends Component {
+  static propTypes = {
+    starred: PropTypes.bool,
+    onSelect: PropTypes.func.isRequired
+  };
+
+  static defaultProps = {
+    starred: false
+  };
+
   state = { open: false };
 
   handleOpenDialog = () => this.setState({ open: true });
@@ -24,21 +35,14 @@ class SegmentSelector extends Component {
     this.handleCloseDialog();
   };
 
-  async componentDidMount() {
-    const response = await api('users/:id/segments/starred');
-
-    if (response.status >= 400) {
-      this.setState({ error: true });
-      return;
-    }
-
-    const { data: leagues } = await response.json();
-    this.setState({ leagues });
+  componentDidMount() {
+    const { starred, fetchStarredSegments } = this.props;
+    if (starred) fetchStarredSegments();
   }
 
   render() {
     const { open } = this.state;
-    const { starred, onSelect, ...rest } = this.props;
+    const { starred, onSelect, fetchStarredSegments, ...rest } = this.props;
 
     return (
       <Button raised color="primary" onClick={this.handleOpenDialog} {...rest}>
@@ -77,13 +81,5 @@ class SegmentSelector extends Component {
     );
   }
 }
-SegmentSelector.propTypes = {
-  starred: PropTypes.bool,
-  onSelect: PropTypes.func.isRequired
-};
 
-SegmentSelector.defaultProps = {
-  starred: false
-};
-
-export default SegmentSelector;
+export default connect(null, segmentActions)(SegmentSelector);

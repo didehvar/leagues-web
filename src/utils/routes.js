@@ -2,7 +2,7 @@ export default {
   home: '/',
   search: '/search',
   profile: '/profile',
-  more: '/more',
+  settings: '/settings',
 
   // ----- Leagues -----
   leagues: '/leagues',

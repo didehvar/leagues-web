@@ -20,7 +20,12 @@ export const login = code => async dispatch => {
   dispatch({
     type: 'LOGIN_SUCCESS',
     code,
-    token: response.data.token
+    token: response.data.token,
+    user: response.data.user
   });
   return Promise.resolve();
 };
+
+export const logout = () => ({
+  type: 'LOGOUT_SUCCESS'
+});

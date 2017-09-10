@@ -31,10 +31,9 @@ const links = [
     disabled: true
   },
   {
-    url: Routes.more,
+    url: Routes.settings,
     value: 'more',
-    icon: <MoreHorizIcon />,
-    disabled: true
+    icon: <MoreHorizIcon />
   }
 ];
 
@@ -52,7 +51,7 @@ class BottomNav extends Component {
 
     return (
       <BottomNavigation value={value} onChange={this.handleChange}>
-        {links.map(({ value, icon, disabled }) =>
+        {links.map(({ value, icon, disabled }) => (
           <BottomNavButton
             key={value}
             label={value[0].toUpperCase() + value.slice(1)}
@@ -60,7 +59,7 @@ class BottomNav extends Component {
             icon={icon}
             disabled={disabled}
           />
-        )}
+        ))}
       </BottomNavigation>
     );
   }

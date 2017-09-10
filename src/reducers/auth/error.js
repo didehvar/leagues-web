@@ -4,6 +4,7 @@ const error = (state = null, action) => {
       return action.message;
     case 'LOGIN_REQUEST':
     case 'LOGIN_SUCCESS':
+    case 'LOGOUT_SUCCESS':
       return null;
     default:
       return state;
