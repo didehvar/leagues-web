@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import faker from 'faker';
 import Button from 'material-ui/Button';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import RunIcon from 'material-ui-icons/DirectionsRun';
 import BikeIcon from 'material-ui-icons/DirectionsBike';
 
 import * as segmentActions from '../../actions/segments';
+import { getStarredSegments } from '../../reducers';
 
 import Dialog from '../../components/Dialog';
 import SearchField from '../../components/SearchField';
@@ -42,7 +42,13 @@ class SegmentSelector extends Component {
 
   render() {
     const { open } = this.state;
-    const { starred, onSelect, fetchStarredSegments, ...rest } = this.props;
+    const {
+      starred,
+      onSelect,
+      fetchStarredSegments,
+      starredSegments,
+      ...rest
+    } = this.props;
 
     return (
       <Button raised color="primary" onClick={this.handleOpenDialog} {...rest}>
@@ -60,21 +66,19 @@ class SegmentSelector extends Component {
             </Style.Search>
           )}
           <List dense>
-            {Array(10)
-              .fill()
-              .map(() => (
-                <ListItem
-                  key={faker.random.number()}
-                  button
-                  divider
-                  onClick={this.handleSelect(faker.random.number())}
-                >
-                  <ListItemIcon>
-                    {faker.random.boolean() ? <RunIcon /> : <BikeIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={faker.company.companyName()} />
-                </ListItem>
-              ))}
+            {starredSegments.map(segment => (
+              <ListItem
+                key={segment.id}
+                button
+                divider
+                onClick={this.handleSelect(segment.id)}
+              >
+                <ListItemIcon>
+                  {segment.activity_type === 'Run' ? <RunIcon /> : <BikeIcon />}
+                </ListItemIcon>
+                <ListItemText primary={segment.name} />
+              </ListItem>
+            ))}
           </List>
         </Dialog>
       </Button>
@@ -82,4 +86,7 @@ class SegmentSelector extends Component {
   }
 }
 
-export default connect(null, segmentActions)(SegmentSelector);
+export default connect(
+  state => ({ starredSegments: getStarredSegments(state) }),
+  segmentActions
+)(SegmentSelector);

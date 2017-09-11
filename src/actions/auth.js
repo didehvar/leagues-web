@@ -29,3 +29,22 @@ export const login = code => async dispatch => {
 export const logout = () => ({
   type: 'LOGOUT_SUCCESS'
 });
+
+export const refreshToken = async dispatch => {
+  dispatch({ type: 'REFRESH_TOKEN_REQUEST' });
+  let response;
+
+  try {
+    response = await api('auth/token/refresh');
+  } catch (ex) {
+    const errorMessage = ex.message;
+    dispatch({ type: 'REFRESH_TOKEN_FAILURE', errorMessage });
+    return Promise.reject(errorMessage);
+  }
+
+  dispatch({
+    type: 'REFRESH_TOKEN_SUCCESS',
+    token: response.data.token
+  });
+  return Promise.resolve();
+};

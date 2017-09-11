@@ -9,7 +9,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Routes from '../../utils/routes';
-import createStore from '../../reducers/createStore';
+import createStore from '../../redux/createStore';
 
 import theme from '../../constants/theme';
 

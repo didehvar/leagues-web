@@ -9,7 +9,9 @@ class AddSegmentDialog extends Component {
 
   onClose = () => this.setState({ open: false });
 
-  onSubmit = () => {};
+  onSubmit = values => {
+    console.log('🍻', values);
+  };
 
   render() {
     const { open } = this.state;

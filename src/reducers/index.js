@@ -2,10 +2,12 @@ import { combineReducers } from 'redux';
 
 import auth, * as fromAuth from './auth';
 import leagues, * as fromLeagues from './leagues';
+import segments, * as fromSegments from './segments';
 
 const rootReducer = combineReducers({
   auth,
-  leagues
+  leagues,
+  segments
 });
 
 export default rootReducer;
@@ -24,3 +26,7 @@ export const getLeague = (state, id) =>
   fromLeagues.getLeague(state.leagues, id);
 
 export const getLeagues = state => fromLeagues.getLeauges(state.leagues);
+
+// Segments
+export const getStarredSegments = state =>
+  fromSegments.getStarredSegments(state.segments);
