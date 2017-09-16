@@ -1,8 +1,12 @@
 import glamorous from 'glamorous';
 
-export const Container = glamorous.div({
-  maxWidth: 550,
-  flex: 1
+export const Card = glamorous.div({
+  maxWidth: 400,
+  minWidth: 250,
+  margin: '0.5rem',
+  flex: '1 1 0',
+  display: 'flex',
+  flexDirection: 'column'
 });
 
 export const FlagContainer = glamorous.div({
@@ -18,3 +22,11 @@ export const FlagImage = glamorous.img({
   top: 0,
   left: 0
 });
+
+export const Content = glamorous.div(({ theme }) => ({
+  flex: '1',
+  padding: theme.spacing.unit * 2,
+  '&:last-child': {
+    paddingBottom: theme.spacing.unit * 3
+  }
+}));

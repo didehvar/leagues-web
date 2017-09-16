@@ -36,9 +36,7 @@ class SegmentCard extends Component {
               <InlineIcon icon={isAfter(new Date(), endDate) ? Done : Cached} />
               <DateRange start={startDate} end={endDate} />
             </Typography>
-            <Typography type="body2">
-              {name}
-            </Typography>
+            <Typography type="body2">{name}</Typography>
 
             <Dialog
               name={name}
@@ -61,8 +59,8 @@ SegmentCard.propTypes = {
   children: PropTypes.node.isRequired,
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
-  startDate: PropTypes.instanceOf(Date).isRequired,
-  endDate: PropTypes.instanceOf(Date).isRequired
+  startDate: PropTypes.string.isRequired,
+  endDate: PropTypes.string.isRequired
 };
 
 SegmentCard.defaultProps = {};

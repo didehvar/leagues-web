@@ -1,11 +1,11 @@
 import api from '../utils/api';
 
-export const login = code => async dispatch => {
+export const login = code => async (dispatch, getState) => {
   dispatch({ type: 'LOGIN_REQUEST', code });
   let response;
 
   try {
-    response = await api('auth/strava/exchange', {
+    response = await api('auth/strava/exchange', getState(), {
       method: 'POST',
       body: {
         code
@@ -30,12 +30,12 @@ export const logout = () => ({
   type: 'LOGOUT_SUCCESS'
 });
 
-export const refreshToken = async dispatch => {
+export const refreshToken = async (dispatch, getState) => {
   dispatch({ type: 'REFRESH_TOKEN_REQUEST' });
   let response;
 
   try {
-    response = await api('auth/token/refresh');
+    response = await api('auth/token/refresh', getState());
   } catch (ex) {
     const errorMessage = ex.message;
     dispatch({ type: 'REFRESH_TOKEN_FAILURE', errorMessage });

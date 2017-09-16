@@ -3,12 +3,12 @@ import { normalize } from 'normalizr';
 import api from '../utils/api';
 import * as schema from './schema';
 
-export const fetchLeague = id => async dispatch => {
+export const fetchLeague = id => async (dispatch, getState) => {
   dispatch({ type: 'FETCH_LEAGUE_REQUEST' });
   let response;
 
   try {
-    response = await api(`leagues/${id}`);
+    response = await api(`leagues/${id}`, getState());
   } catch (ex) {
     const errorMessage = ex.message;
     dispatch({ type: 'FETCH_LEAGUE_FAILURE', errorMessage });
@@ -22,12 +22,12 @@ export const fetchLeague = id => async dispatch => {
   return Promise.resolve();
 };
 
-export const fetchLeagues = () => async dispatch => {
+export const fetchLeagues = () => async (dispatch, getState) => {
   dispatch({ type: 'FETCH_LEAGUES_REQUEST' });
   let response;
 
   try {
-    response = await api('leagues');
+    response = await api('leagues', getState());
   } catch (ex) {
     const errorMessage = ex.message;
     dispatch({ type: 'FETCH_LEAGUES_FAILURE', errorMessage });

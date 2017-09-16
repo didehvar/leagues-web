@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardActions, CardContent } from 'material-ui/Card';
+import { CardActions } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
 import Card from 'material-ui/Card';
@@ -9,17 +9,17 @@ import * as Style from './style.js';
 
 function LeagueCard({ id, name, countryCode, onView, onJoin, ...rest }) {
   return (
-    <Card {...rest}>
+    <Card {...rest} component={Style.Card}>
       <Style.FlagContainer>
         <Style.FlagImage
           src={`${process.env.PUBLIC_URL}/flags/${countryCode}.png`}
         />
       </Style.FlagContainer>
-      <CardContent>
+      <Style.Content>
         <Typography type="subheading" component="h3">
           {name}
         </Typography>
-      </CardContent>
+      </Style.Content>
       <CardActions>
         <Button dense color="primary" onClick={onView}>
           View

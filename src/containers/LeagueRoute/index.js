@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import faker from 'faker/locale/en_GB';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
 
 import * as leagueActions from '../../actions/leagues';
-import { getLeague } from '../../reducers';
+import { getLeague, getRounds } from '../../reducers';
 
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
@@ -15,15 +14,6 @@ import AddSegmentDialog from '../AddSegmentDialog';
 import JoinLeagueButton from '../JoinLeagueButton';
 
 import * as Style from './style';
-
-const segments = Array(5)
-  .fill()
-  .map(() => ({
-    id: faker.random.number(),
-    name: faker.random.words(5),
-    startDate: faker.date.past(),
-    endDate: faker.date.future()
-  }));
 
 class LeagueRoute extends Component {
   state = { value: 0 };
@@ -39,14 +29,14 @@ class LeagueRoute extends Component {
 
   render() {
     const { value } = this.state;
-    const { league } = this.props;
+    const { league, rounds } = this.props;
 
     return (
       <Style.Container>
         <AppBar
           color="default"
           title={league && league.name}
-          left={<AddSegmentDialog />}
+          left={<AddSegmentDialog leagueId={league && league.id} />}
           right={<JoinLeagueButton />}
         >
           <Tabs
@@ -66,8 +56,8 @@ class LeagueRoute extends Component {
         >
           {league && (
             <div>
-              {segments.map(segment => (
-                <SegmentCard key={segment.id} {...segment}>
+              {rounds.map(round => (
+                <SegmentCard key={round.id} {...round}>
                   <LeagueStandings />
                 </SegmentCard>
               ))}
@@ -82,7 +72,8 @@ class LeagueRoute extends Component {
 
 export default connect(
   (state, props) => ({
-    league: getLeague(state, props.match.params.id)
+    league: getLeague(state, props.match.params.id),
+    rounds: getRounds(state)
   }),
   leagueActions
 )(LeagueRoute);

@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+
+import * as roundActions from '../../actions/rounds';
 
 import AddSegmentForm from '../../components/AddSegmentForm';
 
@@ -9,8 +13,11 @@ class AddSegmentDialog extends Component {
 
   onClose = () => this.setState({ open: false });
 
-  onSubmit = values => {
-    console.log('🍻', values);
+  onSubmit = async values => {
+    const { leagueId, createRound } = this.props;
+    console.log('🦄', values);
+    console.log(leagueId, createRound);
+    await createRound(leagueId, values);
   };
 
   render() {
@@ -27,6 +34,12 @@ class AddSegmentDialog extends Component {
   }
 }
 
-AddSegmentDialog.propTypes = {};
+AddSegmentDialog.propTypes = {
+  leagueId: PropTypes.number
+};
 
-export default AddSegmentDialog;
+AddSegmentDialog.defaultProps = {
+  leagueId: undefined
+};
+
+export default connect(null, roundActions)(AddSegmentDialog);

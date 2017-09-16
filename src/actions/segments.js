@@ -12,7 +12,7 @@ export const fetchStarredSegments = () => async (dispatch, getState) => {
   const { id } = getUser(state);
 
   try {
-    response = await api(`users/${id}/segments/starred`, undefined, state);
+    response = await api(`users/${id}/segments/starred`, state);
   } catch (ex) {
     const errorMessage = ex.message;
     dispatch({ type: 'FETCH_STARRED_SEGMENTS_FAILURE', errorMessage });

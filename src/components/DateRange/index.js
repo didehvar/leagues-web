@@ -1,22 +1,34 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import format from 'date-fns/format';
+import parse from 'date-fns/parse';
 
 function DateRange({ start, end, ...props }) {
+  if (!start && !end) return false;
+
+  const startDate = typeof start === 'string' ? parse(start) : start;
+  const endDate = typeof end === 'string' ? parse(end) : end;
+
   const year = ' YYYY';
   const month = ' MMM';
   const day = 'Do';
 
   const now = new Date();
-  const leftMonth = start.getMonth() !== end.getMonth() ? month : '';
-  const leftYear = start.getYear() !== now.getYear() ? year : '';
-  const rightYear =
-    leftYear !== '' || end.getYear() !== now.getYear() ? year : '';
+
+  let leftMonth = month;
+  let leftYear = year;
+  let rightYear = year;
+
+  if (start && end) {
+    if (startDate.getMonth() === endDate.getMonth()) leftMonth = '';
+    if (startDate.getYear() === now.getYear()) leftYear = '';
+    if (leftYear === '' || endDate.getYear() === now.getYear()) rightYear = '';
+  }
 
   return (
     <span {...props}>
-      {format(start, `${day}${leftMonth}${leftYear}`)} -{' '}
-      {format(end, `${day}${month}${rightYear}`)}
+      {format(startDate, `${day}${leftMonth}${leftYear}`)}
+      {end ? ` - ${format(endDate, `${day}${month}${rightYear}`)}` : ' onwards'}
     </span>
   );
 }
@@ -24,6 +36,11 @@ function DateRange({ start, end, ...props }) {
 export default DateRange;
 
 DateRange.propTypes = {
-  start: PropTypes.instanceOf(Date).isRequired,
-  end: PropTypes.instanceOf(Date).isRequired
+  start: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
+  end: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
+};
+
+DateRange.defaultProps = {
+  start: undefined,
+  end: undefined
 };

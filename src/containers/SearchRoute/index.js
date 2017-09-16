@@ -29,16 +29,17 @@ class SearchRoute extends Component {
         <Style.SearchField>
           <SearchField />
         </Style.SearchField>
-        {leagues.map(({ id, slug, name }) => (
-          <LeagueCard
-            key={id}
-            id={id}
-            name={name}
-            onView={this.onView(id, slug)}
-            onJoin={this.onJoin(id, slug)}
-            style={{ marginBottom: '1rem' }}
-          />
-        ))}
+        <Style.Cards>
+          {leagues.map(({ id, slug, name }) => (
+            <LeagueCard
+              key={id}
+              id={id}
+              name={name}
+              onView={this.onView(id, slug)}
+              onJoin={this.onJoin(id, slug)}
+            />
+          ))}
+        </Style.Cards>
       </div>
     );
   }

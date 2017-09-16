@@ -10,7 +10,6 @@ const jwt = ({ dispatch, getState }) => next => async action => {
 
     if (token) {
       const expiry = jwtDecode(token).exp * 1000;
-      console.log('🔫', differenceInMinutes(expiry, new Date()));
 
       if (expiry) {
         const diff = differenceInMinutes(expiry, new Date());

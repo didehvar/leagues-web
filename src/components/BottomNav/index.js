@@ -24,12 +24,12 @@ const links = [
     value: 'create',
     icon: <AddIcon />
   },
-  {
-    url: Routes.profile,
-    value: 'profile',
-    icon: <PersonIcon />,
-    disabled: true
-  },
+  // {
+  //   url: Routes.profile,
+  //   value: 'profile',
+  //   icon: <PersonIcon />,
+  //   disabled: true
+  // },
   {
     url: Routes.settings,
     value: 'more',
