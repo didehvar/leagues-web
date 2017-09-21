@@ -1,30 +1,7 @@
-import { getUserToken } from '../reducers';
-
-const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001';
-
-export const api = async (url, state, config = {}) => {
-  if (!state || typeof state !== 'object') {
-    console.error('API calls require state');
-  }
-
-  const token = getUserToken(state);
-  const response = await fetch(`${apiUrl}/${url}`, {
-    ...config,
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: token ? `Bearer ${token}` : undefined
-    },
-    body: config.body && JSON.stringify(config.body)
-  });
-
-  if (response.status < 200 || response.status >= 300) {
-    const error = new Error(response.statusText);
-    error.response = response;
-    throw error;
-  }
-
-  const { data } = await response.json();
-  return { data };
-};
+export const api = (url, options) => ({
+  type: 'API_CALL',
+  url,
+  options
+});
 
 export default api;

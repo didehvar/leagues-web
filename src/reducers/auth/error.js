@@ -1,7 +1,7 @@
 const error = (state = null, action) => {
   switch (action.type) {
     case 'LOGIN_FAILURE':
-      return action.message;
+      return action.errorMessage;
     case 'LOGIN_REQUEST':
     case 'LOGIN_SUCCESS':
     case 'LOGOUT_SUCCESS':

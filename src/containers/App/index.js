@@ -5,7 +5,8 @@ import './index.css';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from 'glamorous';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Router, Switch, Route } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Routes from '../../utils/routes';
@@ -25,11 +26,13 @@ import StravaAuthHandler from '../StravaAuthHandler';
 
 import * as Style from './style';
 
+const history = createBrowserHistory();
+
 const App = () => (
-  <Provider store={createStore()}>
+  <Provider store={createStore(history)}>
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
-        <BrowserRouter>
+        <Router history={history}>
           <Style.Container>
             <ScrollToTop />
             <StravaAuthHandler />
@@ -50,7 +53,7 @@ const App = () => (
               <BottomNav />
             </Style.FooterNav>
           </Style.Container>
-        </BrowserRouter>
+        </Router>
       </ThemeProvider>
     </MuiThemeProvider>
   </Provider>

@@ -1,3 +1,5 @@
+import { REHYDRATE } from 'redux-persist/constants';
+
 const token = (state = null, action) => {
   switch (action.type) {
     case 'LOGIN_FAILURE':
@@ -8,6 +10,8 @@ const token = (state = null, action) => {
     case 'LOGIN_SUCCESS':
     case 'REFRESH_TOKEN_SUCCESS':
       return action.token;
+    case REHYDRATE:
+      return action.payload.auth.token || state;
     default:
       return state;
   }

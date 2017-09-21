@@ -4,6 +4,8 @@ export default {
   profile: '/profile',
   settings: '/settings',
 
+  login: '/',
+
   // ----- Leagues -----
   leagues: '/leagues',
   newLeague: '/leagues/new',

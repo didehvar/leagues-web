@@ -30,23 +30,21 @@ class SegmentCard extends Component {
         onClick={this.handleOpenDialog}
         {...rest}
       >
-        <Card>
-          <Style.Card>
-            <Typography type="body2" color="secondary" component="div">
-              <InlineIcon icon={isAfter(new Date(), endDate) ? Done : Cached} />
-              <DateRange start={startDate} end={endDate} />
-            </Typography>
-            <Typography type="body2">{name}</Typography>
+        <Card component={Style.Card}>
+          <Typography type="body2" color="secondary" component="div">
+            <InlineIcon icon={isAfter(new Date(), endDate) ? Done : Cached} />
+            <DateRange start={startDate} end={endDate} />
+          </Typography>
+          <Typography type="body2">{name}</Typography>
 
-            <Dialog
-              name={name}
-              open={open}
-              onClose={this.handleCloseDialog}
-              fullScreen
-            >
-              {children}
-            </Dialog>
-          </Style.Card>
+          <Dialog
+            name={name}
+            open={open}
+            onClose={this.handleCloseDialog}
+            fullScreen
+          >
+            {children}
+          </Dialog>
         </Card>
       </ButtonBase>
     );
