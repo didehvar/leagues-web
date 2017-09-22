@@ -1,40 +1,38 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import Routes from '../../utils/routes';
-import api from '../../utils/api';
+
+import * as leagueActions from '../../actions/leagues';
+import { getLeagueError, getCurrentLeague } from '../../reducers';
 
 import CreateLeagueForm from '../../components/CreateLeagueForm';
 import ErrorMessage from '../../components/ErrorMessage';
 
 class CreateLeagueRoute extends Component {
-  state = { error: false };
-
   onCreate = async values => {
-    const { history } = this.props;
-    const response = await api('leagues', {
-      method: 'POST',
-      body: values
-    });
-
-    if (response.status >= 400) {
-      this.setState({ error: true });
-      return;
-    }
-
-    const { data: { id, slug } } = await response.json();
-    history.push(Routes.league(id, slug));
+    const { result, entities } = await this.props.createLeague(values);
+    this.props.history.push(
+      Routes.league(result, entities.leagues[result].slug)
+    );
   };
 
   render() {
-    const { error } = this.state;
+    const { errorMessage } = this.props;
 
     return (
       <div>
-        {error && <ErrorMessage />}
+        {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <CreateLeagueForm onSubmit={this.onCreate} />
       </div>
     );
   }
 }
 
-export default CreateLeagueRoute;
+export default connect(
+  (state, props) => ({
+    errorMessage: getLeagueError(state),
+    league: getCurrentLeague(state)
+  }),
+  leagueActions
+)(CreateLeagueRoute);

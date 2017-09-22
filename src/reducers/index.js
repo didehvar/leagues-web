@@ -29,6 +29,14 @@ export const getLeague = (state, id) =>
 
 export const getLeagues = state => fromLeagues.getLeauges(state.leagues);
 
+export const getLeagueError = state => fromLeagues.getError(state.leagues);
+
+export const getCurrentLeagueId = state =>
+  fromLeagues.getCurrentLeagueId(state.leagues);
+
+export const getCurrentLeague = state =>
+  fromLeagues.getCurrentLeague(state.leagues);
+
 // Rounds
 export const getRound = (state, id) => fromRounds.getRound(state.rounds, id);
 

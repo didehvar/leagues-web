@@ -9,5 +9,5 @@ export default {
   // ----- Leagues -----
   leagues: '/leagues',
   newLeague: '/leagues/new',
-  league: (id, slug) => `/leagues/${id || ':id'}/${slug || ':slug'}`
+  league: (id, slug) => `/leagues/${id || ':id'}/${id ? slug || '' : ':slug'}`
 };

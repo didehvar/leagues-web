@@ -24,7 +24,7 @@ class LeagueRoute extends Component {
 
   async componentDidMount() {
     const { fetchLeague, match } = this.props;
-    fetchLeague(match.params.id);
+    await fetchLeague(match.params.id);
   }
 
   render() {
