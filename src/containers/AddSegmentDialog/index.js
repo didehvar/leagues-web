@@ -15,8 +15,6 @@ class AddSegmentDialog extends Component {
 
   onSubmit = async values => {
     const { leagueId, createRound } = this.props;
-    console.log('🦄', values);
-    console.log(leagueId, createRound);
     await createRound(leagueId, values);
   };
 

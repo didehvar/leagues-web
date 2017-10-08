@@ -2,14 +2,14 @@ import { normalize } from 'normalizr';
 
 import api from '../utils/api';
 import * as schema from './schema';
-import { getUser } from '../reducers';
+import { getAuthUser } from '../reducers';
 
 export const fetchStarredSegments = () => async (dispatch, getState) => {
   dispatch({ type: 'FETCH_STARRED_SEGMENTS_REQUEST' });
   let response;
 
   const state = getState();
-  const { id } = getUser(state);
+  const { id } = getAuthUser(state);
 
   try {
     response = await dispatch(api(`users/${id}/segments/starred`));

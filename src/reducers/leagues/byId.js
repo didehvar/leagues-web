@@ -1,8 +1,36 @@
-const byId = (state = {}, { response }) => {
+const byId = (state = {}, { response, type, id, userId }) => {
   if (response && response.entities.leagues) {
     return { ...state, ...response.entities.leagues };
   }
-  return state;
+
+  const league = state[id];
+
+  switch (type) {
+    case 'JOIN_LEAGUE_SUCCESS':
+      if (league) {
+        return {
+          ...state,
+          [id]: {
+            ...league,
+            participants: league.participants.concat(userId)
+          }
+        };
+      }
+      return state;
+    case 'LEAVE_LEAGUE_SUCCESS':
+      if (league) {
+        return {
+          ...state,
+          [id]: {
+            ...league,
+            participants: league.participants.filter(p => p !== userId)
+          }
+        };
+      }
+      return state;
+    default:
+      return state;
+  }
 };
 
 export default byId;

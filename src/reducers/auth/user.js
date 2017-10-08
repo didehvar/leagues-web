@@ -1,3 +1,5 @@
+import { REHYDRATE } from 'redux-persist/constants';
+
 const user = (state = {}, action) => {
   switch (action.type) {
     case 'LOGIN_FAILURE':
@@ -6,6 +8,8 @@ const user = (state = {}, action) => {
       return {};
     case 'LOGIN_SUCCESS':
       return action.user;
+    case REHYDRATE:
+      return action.payload.auth.user;
     default:
       return state;
   }

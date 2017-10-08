@@ -61,3 +61,43 @@ export const createLeague = data => async dispatch => {
   });
   return Promise.resolve(league);
 };
+
+export const joinLeague = id => async dispatch => {
+  dispatch({ type: 'JOIN_LEAGUE_REQUEST' });
+  let response;
+
+  try {
+    response = await dispatch(api(`leagues/${id}/join`));
+  } catch (ex) {
+    const errorMessage = ex.message;
+    dispatch({ type: 'JOIN_LEAGUE_FAILURE', errorMessage });
+    return Promise.reject(errorMessage);
+  }
+
+  dispatch({
+    type: 'JOIN_LEAGUE_SUCCESS',
+    id,
+    userId: response.data.user.id
+  });
+  return Promise.resolve();
+};
+
+export const leaveLeague = id => async dispatch => {
+  dispatch({ type: 'LEAVE_LEAGUE_REQUEST' });
+  let response;
+
+  try {
+    response = await dispatch(api(`leagues/${id}/leave`));
+  } catch (ex) {
+    const errorMessage = ex.message;
+    dispatch({ type: 'LEAVE_LEAGUE_FAILURE', errorMessage });
+    return Promise.reject(errorMessage);
+  }
+
+  dispatch({
+    type: 'LEAVE_LEAGUE_SUCCESS',
+    id,
+    userId: response.data.user.id
+  });
+  return Promise.resolve();
+};

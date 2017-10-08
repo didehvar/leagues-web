@@ -37,16 +37,13 @@ export const refreshToken = async dispatch => {
   let response;
 
   try {
-    console.log('🍻');
     response = await dispatch(api('auth/token/refresh'));
-    console.log('👌', response);
   } catch (ex) {
     const errorMessage = ex.message;
     dispatch({ type: 'REFRESH_TOKEN_FAILURE', errorMessage });
     return Promise.reject(errorMessage);
   }
 
-  console.log('😱', response);
   dispatch({
     type: 'REFRESH_TOKEN_SUCCESS',
     token: response.data.token

@@ -4,12 +4,14 @@ import auth, * as fromAuth from './auth';
 import leagues, * as fromLeagues from './leagues';
 import rounds, * as fromRounds from './rounds';
 import segments, * as fromSegments from './segments';
+import users, * as fromUsers from './users';
 
 const rootReducer = combineReducers({
   auth,
   leagues,
   rounds,
-  segments
+  segments,
+  users
 });
 
 export default rootReducer;
@@ -19,7 +21,7 @@ export const getAuthError = state => fromAuth.getError(state.auth);
 
 export const isAuthenticated = state => fromAuth.isAuthenticated(state.auth);
 
-export const getUser = state => fromAuth.getUser(state.auth);
+export const getAuthUser = state => fromAuth.getUser(state.auth);
 
 export const getUserToken = state => fromAuth.getUserToken(state.auth);
 
@@ -45,3 +47,14 @@ export const getRounds = state => fromRounds.getRounds(state.rounds);
 // Segments
 export const getStarredSegments = state =>
   fromSegments.getStarredSegments(state.segments);
+
+// Users
+export const getUser = (state, id) => fromUsers.getUser(state.users, id);
+
+export const getUsers = state => fromUsers.getUsers(state.users);
+
+export const getParticipants = (state, id) => {
+  const league = getLeague(state, id);
+  if (!league || !league.participants) return [];
+  return league.participants.map(p => getUser(state, p));
+};

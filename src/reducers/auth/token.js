@@ -3,7 +3,6 @@ import jwtDecode from 'jwt-decode';
 import isBefore from 'date-fns/is_before';
 
 const token = (state = null, action) => {
-  console.log('🦄', action);
   switch (action.type) {
     case 'LOGIN_FAILURE':
     case 'LOGIN_REQUEST':

@@ -24,7 +24,7 @@ const CreateLeagueForm = ({
   handleBlur,
   handleSubmit,
   handleReset
-}) =>
+}) => (
   <form onSubmit={handleSubmit}>
     <Grid container justify="center">
       <Grid item xs={12}>
@@ -39,10 +39,7 @@ const CreateLeagueForm = ({
           fullWidth
         />
         {errors.name &&
-          touched.name &&
-          <FormHelperText error>
-            {errors.name}
-          </FormHelperText>}
+          touched.name && <FormHelperText error>{errors.name}</FormHelperText>}
       </Grid>
       <Grid item xs={12}>
         <TextField
@@ -51,7 +48,6 @@ const CreateLeagueForm = ({
           label="Start date"
           value={format(values.startDate, 'YYYY-MM-DD')}
           onChange={event => {
-            console.log(event.target.value, typeof event.target.value);
             return event.target.value && handleChange(event);
           }}
           onBlur={handleBlur}
@@ -60,10 +56,9 @@ const CreateLeagueForm = ({
           fullWidth
         />
         {errors.startDate &&
-          touched.startDate &&
-          <FormHelperText error>
-            {errors.startDate}
-          </FormHelperText>}
+          touched.startDate && (
+            <FormHelperText error>{errors.startDate}</FormHelperText>
+          )}
       </Grid>
       <Grid item xs={12}>
         <FormControl component="fieldset" required>
@@ -79,10 +74,9 @@ const CreateLeagueForm = ({
           </RadioGroup>
 
           {errors.discipline &&
-            touched.discipline &&
-            <FormHelperText error>
-              {errors.discipline}
-            </FormHelperText>}
+            touched.discipline && (
+              <FormHelperText error>{errors.discipline}</FormHelperText>
+            )}
         </FormControl>
       </Grid>
       <Grid item xs={12}>
@@ -91,7 +85,8 @@ const CreateLeagueForm = ({
         </Button>
       </Grid>
     </Grid>
-  </form>;
+  </form>
+);
 
 CreateLeagueForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,

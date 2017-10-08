@@ -2,9 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
+import Typography from 'material-ui/Typography';
+import some from 'lodash/some';
 
 import * as leagueActions from '../../actions/leagues';
-import { getLeague, getRounds } from '../../reducers';
+import {
+  getLeague,
+  getRounds,
+  getParticipants,
+  getAuthUser
+} from '../../reducers';
 
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
@@ -29,7 +36,7 @@ class LeagueRoute extends Component {
 
   render() {
     const { value } = this.state;
-    const { league, rounds } = this.props;
+    const { user, league, rounds, participants } = this.props;
 
     return (
       <Style.Container>
@@ -37,7 +44,12 @@ class LeagueRoute extends Component {
           color="default"
           title={league && league.name}
           left={<AddSegmentDialog leagueId={league && league.id} />}
-          right={<JoinLeagueButton />}
+          right={
+            <JoinLeagueButton
+              leagueId={league && league.id}
+              joined={user && some(participants, p => p.id === user.id)}
+            />
+          }
         >
           <Tabs
             value={value}
@@ -54,15 +66,19 @@ class LeagueRoute extends Component {
           onChangeIndex={i => this.handleChange(i)}
           animateHeight
         >
-          {league && (
-            <div>
-              {rounds.map(round => (
-                <SegmentCard key={round.id} {...round}>
-                  <LeagueStandings />
-                </SegmentCard>
-              ))}
-            </div>
-          )}
+          <div>
+            {rounds.map(round => (
+              <SegmentCard key={round.id} {...round}>
+                <LeagueStandings />
+              </SegmentCard>
+            ))}
+
+            {!rounds.length && (
+              <Typography align="center">
+                This league has no segments.
+              </Typography>
+            )}
+          </div>
           <LeagueStandings />
         </SwipeableViews>
       </Style.Container>
@@ -70,10 +86,12 @@ class LeagueRoute extends Component {
   }
 }
 
-export default connect(
-  (state, props) => ({
-    league: getLeague(state, props.match.params.id),
-    rounds: getRounds(state)
-  }),
-  leagueActions
-)(LeagueRoute);
+export default connect((state, props) => {
+  const league = getLeague(state, props.match.params.id);
+  return {
+    league,
+    rounds: getRounds(state),
+    participants: league && getParticipants(state, league.id),
+    user: getAuthUser(state)
+  };
+}, leagueActions)(LeagueRoute);
