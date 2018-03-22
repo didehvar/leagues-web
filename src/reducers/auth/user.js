@@ -9,7 +9,7 @@ const user = (state = {}, action) => {
     case 'LOGIN_SUCCESS':
       return action.user;
     case REHYDRATE:
-      return action.payload.auth.user;
+      return ((action.payload || {}).auth || {}).token || state;
     default:
       return state;
   }
