@@ -20,7 +20,7 @@ class StravaAuthHandler extends Component {
 
     if (query.has('state') && query.has('code')) {
       await login(query.get('code'));
-      history.replace(location.pathname);
+      history.replace(query.get('redirect_to') || location.pathname);
     }
   }
 

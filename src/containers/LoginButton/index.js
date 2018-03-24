@@ -10,7 +10,7 @@ const LoginButton = ({ authenticated }) => {
       .REACT_APP_STRAVA_CLIENT_ID}`,
     `redirect_uri=${encodeURIComponent(
       `${window.location.protocol}//${window.location.host}${window.location
-        .pathname}`
+        .pathname}${window.location.search}`
     )}`,
     'response_type=code',
     'scope=view_private'

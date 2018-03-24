@@ -28,7 +28,7 @@ const api = history => ({ dispatch, getState }) => next => async action => {
 
   if (response.status < 200 || response.status >= 300) {
     if (response.status === 401) {
-      history.push(Routes.login);
+      history.push(`${Routes.login}?redirect_to=${window.location.pathname}`);
     }
 
     const error = new Error(response.statusText);
