@@ -20,10 +20,15 @@ import SegmentSelector from '../../containers/SegmentSelector';
 import * as Style from './style';
 
 class AddSegmentForm extends Component {
-  onSelectSegment = segmentId =>
-    this.props.setFieldValue('segmentId', segmentId);
+  state = { segment: null };
+
+  onSelectSegment = segment => {
+    this.setState({ segment });
+    this.props.setFieldValue('segmentId', segment.id);
+  };
 
   render() {
+    const { segment } = this.state;
     const {
       open,
       onOpen,
@@ -125,6 +130,19 @@ class AddSegmentForm extends Component {
                     onSelect={this.onSelectSegment}
                   />
                 </Grid>
+
+                {segment && (
+                  <Grid item xs={12}>
+                    <TextField
+                      id="segmentName"
+                      type="text"
+                      label="Selected segment"
+                      value={segment.name}
+                      disabled
+                      fullWidth
+                    />
+                  </Grid>
+                )}
               </Grid>
             </Style.Dialog>
           </form>

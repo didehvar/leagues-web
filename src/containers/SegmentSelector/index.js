@@ -24,8 +24,8 @@ class SegmentSelector extends Component {
 
   handleCloseDialog = () => this.setState({ open: false });
 
-  handleSelect = segmentId => () => {
-    this.props.onSelect(segmentId);
+  handleSelect = segment => () => {
+    this.props.onSelect(segment);
     this.handleCloseDialog();
   };
 
@@ -58,7 +58,7 @@ class SegmentSelector extends Component {
                 key={segment.id}
                 button
                 divider
-                onClick={this.handleSelect(segment.id)}
+                onClick={this.handleSelect(segment)}
               >
                 <ListItemIcon>
                   {segment.activity_type === 'Run' ? <RunIcon /> : <BikeIcon />}
