@@ -10,19 +10,13 @@ import * as segmentActions from '../../actions/segments';
 import { getStarredSegments } from '../../reducers';
 
 import Dialog from '../../components/Dialog';
-import SearchField from '../../components/SearchField';
-
-import * as Style from './style';
 
 class SegmentSelector extends Component {
   static propTypes = {
-    starred: PropTypes.bool,
     onSelect: PropTypes.func.isRequired
   };
 
-  static defaultProps = {
-    starred: false
-  };
+  static defaultProps = {};
 
   state = { open: false };
 
@@ -36,14 +30,13 @@ class SegmentSelector extends Component {
   };
 
   componentDidMount() {
-    const { starred, fetchStarredSegments } = this.props;
-    if (starred) fetchStarredSegments();
+    const { fetchStarredSegments } = this.props;
+    fetchStarredSegments();
   }
 
   render() {
     const { open } = this.state;
     const {
-      starred,
       onSelect,
       fetchStarredSegments,
       starredSegments,
@@ -52,19 +45,13 @@ class SegmentSelector extends Component {
 
     return (
       <Button raised color="primary" onClick={this.handleOpenDialog} {...rest}>
-        {starred ? 'View starred segments' : 'Search for segment'}
-
+        View starred segments
         <Dialog
-          name={starred ? 'Starred segments' : 'Find a segment'}
+          name="Starred segments"
           open={open}
           onClose={this.handleCloseDialog}
           closeButton={false}
         >
-          {!starred && (
-            <Style.Search>
-              <SearchField />
-            </Style.Search>
-          )}
           <List dense>
             {starredSegments.map(segment => (
               <ListItem

@@ -120,13 +120,6 @@ class AddSegmentForm extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <SegmentSelector
-                    disabled={isSubmitting}
-                    onSelect={this.onSelectSegment}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <SegmentSelector
-                    starred
                     color="accent"
                     disabled={isSubmitting}
                     onSelect={this.onSelectSegment}
