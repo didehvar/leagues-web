@@ -19,6 +19,7 @@ class AddSegmentDialog extends Component {
   };
 
   render() {
+    const { children } = this.props;
     const { open } = this.state;
 
     return (
@@ -27,7 +28,9 @@ class AddSegmentDialog extends Component {
         onSubmit={this.onSubmit}
         onOpen={this.onOpen}
         onClose={this.onClose}
-      />
+      >
+        {children}
+      </AddSegmentForm>
     );
   }
 }

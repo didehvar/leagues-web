@@ -4,6 +4,8 @@ import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import some from 'lodash/some';
+import Button from 'material-ui/Button';
+import { Div } from 'glamorous';
 
 import * as leagueActions from '../../actions/leagues';
 import {
@@ -74,9 +76,21 @@ class LeagueRoute extends Component {
             ))}
 
             {!rounds.length && (
-              <Typography align="center">
-                This league has no segments.
-              </Typography>
+              <div>
+                <Typography align="center">
+                  This league has no segments.
+                </Typography>
+
+                <AddSegmentDialog leagueId={league && league.id}>
+                  {onOpen => (
+                    <Div marginTop="1rem" textAlign="center">
+                      <Button raised color="primary" onClick={onOpen}>
+                        Add a segment
+                      </Button>
+                    </Div>
+                  )}
+                </AddSegmentDialog>
+              </div>
             )}
           </div>
           <LeagueStandings />

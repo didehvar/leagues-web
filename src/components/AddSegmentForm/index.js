@@ -35,12 +35,17 @@ class AddSegmentForm extends Component {
       isSubmitting,
       handleChange,
       handleBlur,
-      handleSubmit
+      handleSubmit,
+      children
     } = this.props;
 
     return (
-      <IconButton onClick={onOpen} color="inherit">
-        <AddIcon />
+      <div>
+        {(children && children(onOpen)) || (
+            <IconButton onClick={onOpen} color="inherit">
+              <AddIcon />
+            </IconButton>
+          )}
 
         <Dialog
           open={open}
@@ -131,7 +136,7 @@ class AddSegmentForm extends Component {
             </Style.Dialog>
           </form>
         </Dialog>
-      </IconButton>
+      </div>
     );
   }
 }
