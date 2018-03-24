@@ -6,8 +6,11 @@ import Routes from '../../utils/routes';
 import * as leagueActions from '../../actions/leagues';
 import { getLeagueError, getCurrentLeague } from '../../reducers';
 
-import CreateLeagueForm from '../../components/CreateLeagueForm';
+import AppBar from '../../components/AppBar';
 import ErrorMessage from '../../components/ErrorMessage';
+import CreateLeagueForm from '../../components/CreateLeagueForm';
+
+import * as Style from './style';
 
 class CreateLeagueRoute extends Component {
   onCreate = async values => {
@@ -21,10 +24,11 @@ class CreateLeagueRoute extends Component {
     const { errorMessage } = this.props;
 
     return (
-      <div>
+      <Style.Container>
+        <AppBar color="default" title="Create your league" />
         {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         <CreateLeagueForm onSubmit={this.onCreate} />
-      </div>
+      </Style.Container>
     );
   }
 }
