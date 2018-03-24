@@ -9,7 +9,7 @@ import TextField from 'material-ui/TextField';
 import Grid from 'material-ui/Grid';
 import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
-import CreateIcon from 'material-ui-icons/Create';
+import AddIcon from 'material-ui-icons/Add';
 import Dialog from 'material-ui/Dialog';
 import Slide from 'material-ui/transitions/Slide';
 import CloseIcon from 'material-ui-icons/Close';
@@ -40,7 +40,7 @@ class AddSegmentForm extends Component {
 
     return (
       <IconButton onClick={onOpen} color="inherit">
-        <CreateIcon />
+        <AddIcon />
 
         <Dialog
           open={open}
@@ -73,9 +73,9 @@ class AddSegmentForm extends Component {
               <Grid container justify="center">
                 <Grid item xs={12}>
                   {errors.segmentId &&
-                  touched.segmentId && (
-                    <FormHelperText error>{errors.segmentId}</FormHelperText>
-                  )}
+                    touched.segmentId && (
+                      <FormHelperText error>{errors.segmentId}</FormHelperText>
+                    )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -91,9 +91,9 @@ class AddSegmentForm extends Component {
                     fullWidth
                   />
                   {errors.startDate &&
-                  touched.startDate && (
-                    <FormHelperText error>{errors.startDate}</FormHelperText>
-                  )}
+                    touched.startDate && (
+                      <FormHelperText error>{errors.startDate}</FormHelperText>
+                    )}
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
@@ -109,9 +109,9 @@ class AddSegmentForm extends Component {
                     fullWidth
                   />
                   {errors.endDate &&
-                  touched.endDate && (
-                    <FormHelperText error>{errors.endDate}</FormHelperText>
-                  )}
+                    touched.endDate && (
+                      <FormHelperText error>{errors.endDate}</FormHelperText>
+                    )}
                 </Grid>
                 <Grid item xs={12}>
                   <SegmentSelector
