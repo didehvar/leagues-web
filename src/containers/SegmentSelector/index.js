@@ -20,7 +20,11 @@ class SegmentSelector extends Component {
 
   state = { open: false };
 
-  handleOpenDialog = () => this.setState({ open: true });
+  handleOpenDialog = async () => {
+    const { fetchStarredSegments } = this.props;
+    fetchStarredSegments();
+    this.setState({ open: true });
+  };
 
   handleCloseDialog = () => this.setState({ open: false });
 
@@ -28,11 +32,6 @@ class SegmentSelector extends Component {
     this.props.onSelect(segment);
     this.handleCloseDialog();
   };
-
-  componentDidMount() {
-    const { fetchStarredSegments } = this.props;
-    fetchStarredSegments();
-  }
 
   render() {
     const { open } = this.state;
@@ -53,19 +52,25 @@ class SegmentSelector extends Component {
           closeButton={false}
         >
           <List dense>
-            {starredSegments.map(segment => (
-              <ListItem
-                key={segment.id}
-                button
-                divider
-                onClick={this.handleSelect(segment)}
-              >
-                <ListItemIcon>
-                  {segment.activity_type === 'Run' ? <RunIcon /> : <BikeIcon />}
-                </ListItemIcon>
-                <ListItemText primary={segment.name} />
-              </ListItem>
-            ))}
+            {starredSegments
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map(segment => (
+                <ListItem
+                  key={segment.id}
+                  button
+                  divider
+                  onClick={this.handleSelect(segment)}
+                >
+                  <ListItemIcon>
+                    {segment.activityType === 'Run' ? (
+                      <RunIcon />
+                    ) : (
+                      <BikeIcon />
+                    )}
+                  </ListItemIcon>
+                  <ListItemText primary={segment.name} />
+                </ListItem>
+              ))}
           </List>
         </Dialog>
       </Button>
@@ -74,6 +79,8 @@ class SegmentSelector extends Component {
 }
 
 export default connect(
-  state => ({ starredSegments: getStarredSegments(state) }),
+  state => ({
+    starredSegments: getStarredSegments(state)
+  }),
   segmentActions
 )(SegmentSelector);
