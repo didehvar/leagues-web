@@ -70,7 +70,11 @@ class LeagueRoute extends Component {
         >
           <div>
             {rounds.map(round => (
-              <SegmentCard key={round.id} {...round}>
+              <SegmentCard
+                {...round}
+                key={round.id}
+                owner={(user.id = league.userId)}
+              >
                 <LeagueStandings />
               </SegmentCard>
             ))}

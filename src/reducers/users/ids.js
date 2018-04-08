@@ -2,7 +2,10 @@ import uniq from 'lodash/uniq';
 
 const ids = (state = [], { response }) => {
   if (response && response.entities.users) {
-    return uniq([...state, ...Object.keys(response.entities.users)]);
+    return uniq([
+      ...state,
+      ...Object.values(response.entities.users).map(u => u.id)
+    ]);
   }
 
   return state;

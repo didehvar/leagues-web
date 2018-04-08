@@ -18,7 +18,7 @@ const Dialog = ({
   right,
   classes,
   ...props
-}) =>
+}) => (
   <MuiDialog
     open={open}
     onRequestClose={onClose}
@@ -30,18 +30,19 @@ const Dialog = ({
       position="static"
       title={name}
       left={
-        closeButton
-          ? <IconButton onClick={onClose} aria-label="Back">
-              <CloseIcon />
-            </IconButton>
-          : undefined
+        closeButton ? (
+          <IconButton onClick={onClose} aria-label="Back">
+            <CloseIcon />
+          </IconButton>
+        ) : (
+          undefined
+        )
       }
       right={right}
     />
-    <Style.Wrapper>
-      {children}
-    </Style.Wrapper>
-  </MuiDialog>;
+    <Style.Wrapper>{children}</Style.Wrapper>
+  </MuiDialog>
+);
 
 Dialog.propTypes = {
   children: PropTypes.node.isRequired,

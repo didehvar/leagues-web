@@ -29,3 +29,26 @@ export const createRound = (leagueId, data) => async dispatch => {
   });
   return Promise.resolve();
 };
+
+export const deleteRound = (leagueId, roundId) => async dispatch => {
+  dispatch({ type: 'DELETE_ROUND_REQUEST' });
+  let response;
+
+  try {
+    response = await dispatch(
+      api(`leagues/${leagueId}/rounds/${roundId}`, {
+        method: 'DELETE'
+      })
+    );
+  } catch (ex) {
+    const errorMessage = ex.message;
+    dispatch({ type: 'DELETE_ROUND_FAILURE', errorMessage });
+    return Promise.reject(errorMessage);
+  }
+
+  dispatch({
+    type: 'DELETE_ROUND_SUCCESS',
+    response: normalize(response.data, schema.roundList)
+  });
+  return Promise.resolve();
+};
