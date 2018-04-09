@@ -1,4 +1,5 @@
 import { normalize } from 'normalizr';
+import { stringify } from 'querystring';
 
 import api from '../utils/api';
 import * as schema from './schema';
@@ -22,12 +23,13 @@ export const fetchLeague = id => async dispatch => {
   return Promise.resolve();
 };
 
-export const fetchLeagues = () => async dispatch => {
+export const fetchLeagues = search => async dispatch => {
   dispatch({ type: 'FETCH_LEAGUES_REQUEST' });
   let response;
+  const query = stringify({ search });
 
   try {
-    response = await dispatch(api('leagues'));
+    response = await dispatch(api(`leagues${search ? `?${query}` : ''}`));
   } catch (ex) {
     const errorMessage = ex.message;
     dispatch({ type: 'FETCH_LEAGUES_FAILURE', errorMessage });
@@ -36,7 +38,7 @@ export const fetchLeagues = () => async dispatch => {
 
   dispatch({
     type: 'FETCH_LEAGUES_SUCCESS',
-    response: normalize(response.data, schema.leagueList)
+    response: normalize(response.data.results, schema.leagueList)
   });
   return Promise.resolve();
 };

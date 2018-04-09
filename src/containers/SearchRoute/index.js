@@ -16,6 +16,8 @@ class SearchRoute extends Component {
 
   onJoin = (id, slug) => () => console.log('🤔'); // TODO
 
+  onSearch = search => this.props.fetchLeagues(search);
+
   componentDidMount() {
     const { fetchLeagues } = this.props;
     fetchLeagues();
@@ -27,7 +29,7 @@ class SearchRoute extends Component {
     return (
       <div>
         <Style.SearchField>
-          <SearchField />
+          <SearchField onChange={this.onSearch} />
         </Style.SearchField>
         <Style.Cards>
           {leagues.map(({ id, slug, name }) => (
