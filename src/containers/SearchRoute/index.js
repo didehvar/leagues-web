@@ -12,11 +12,16 @@ import SearchField from '../../components/SearchField';
 import * as Style from './style';
 
 class SearchRoute extends Component {
+  timer = null;
+
   onView = (id, slug) => () => this.props.history.push(Routes.league(id, slug));
 
   onJoin = (id, slug) => () => console.log('🤔'); // TODO
 
-  onSearch = search => this.props.fetchLeagues(search);
+  onSearch = search => {
+    clearTimeout(this.timer);
+    this.timer = setTimeout(() => this.props.fetchLeagues(search), 500);
+  };
 
   componentDidMount() {
     const { fetchLeagues } = this.props;
