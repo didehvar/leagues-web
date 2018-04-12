@@ -36,3 +36,5 @@ const byId = (state = {}, { response, type, id, userId }) => {
 export default byId;
 
 export const getLeague = (state, id) => state[id];
+
+export const getLeagues = state => Object.values(state);

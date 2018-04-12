@@ -31,6 +31,8 @@ export const getLeague = (state, id) =>
 
 export const getLeagues = state => fromLeagues.getLeauges(state.leagues);
 
+export const getAllLeagues = state => fromLeagues.getAllLeagues(state.leagues);
+
 export const getLeagueError = state => fromLeagues.getError(state.leagues);
 
 export const getCurrentLeagueId = state =>
@@ -38,6 +40,9 @@ export const getCurrentLeagueId = state =>
 
 export const getCurrentLeague = state =>
   fromLeagues.getCurrentLeague(state.leagues);
+
+export const getTotalLeagues = state =>
+  fromLeagues.getTotalLeagues(state.leagues);
 
 // Rounds
 export const getRound = (state, id) => fromRounds.getRound(state.rounds, id);

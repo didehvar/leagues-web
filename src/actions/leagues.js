@@ -23,13 +23,12 @@ export const fetchLeague = id => async dispatch => {
   return Promise.resolve();
 };
 
-export const fetchLeagues = search => async dispatch => {
+export const fetchLeagues = query => async dispatch => {
   dispatch({ type: 'FETCH_LEAGUES_REQUEST' });
   let response;
-  const query = stringify({ search });
 
   try {
-    response = await dispatch(api(`leagues${search ? `?${query}` : ''}`));
+    response = await dispatch(api(`leagues?${stringify(query)}`));
   } catch (ex) {
     const errorMessage = ex.message;
     dispatch({ type: 'FETCH_LEAGUES_FAILURE', errorMessage });
@@ -38,7 +37,8 @@ export const fetchLeagues = search => async dispatch => {
 
   dispatch({
     type: 'FETCH_LEAGUES_SUCCESS',
-    response: normalize(response.data.results, schema.leagueList)
+    response: normalize(response.data.results, schema.leagueList),
+    total: response.data.total
   });
   return Promise.resolve();
 };

@@ -1,6 +1,7 @@
 import 'typeface-roboto';
 import 'url-search-params-polyfill';
 import './index.css';
+import 'react-virtualized/styles.css';
 
 import React from 'react';
 import { Provider } from 'react-redux';
