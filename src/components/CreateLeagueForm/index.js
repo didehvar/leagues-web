@@ -38,7 +38,8 @@ const CreateLeagueForm = ({
           required
           fullWidth
         />
-        {errors.name &&
+        {errors &&
+          errors.name &&
           touched.name && <FormHelperText error>{errors.name}</FormHelperText>}
       </Grid>
       <Grid item xs={12}>
