@@ -1,4 +1,5 @@
 import glamorous from 'glamorous';
+import { CardActions } from 'material-ui/Card';
 
 export const Card = glamorous.div({
   maxWidth: 400,
@@ -6,27 +7,29 @@ export const Card = glamorous.div({
   margin: '0.5rem',
   flex: '1 1 0',
   display: 'flex',
-  flexDirection: 'column'
-});
+  flexDirection: 'column',
 
-export const FlagContainer = glamorous.div({
-  width: '100%',
-  paddingBottom: '50%',
-  position: 'relative'
-});
-
-export const FlagImage = glamorous.img({
-  position: 'absolute',
-  width: '100%',
-  height: '100%',
-  top: 0,
-  left: 0
+  '> button': {
+    display: 'block',
+    textAlign: 'initial',
+    backgroundColor: '#fff'
+  }
 });
 
 export const Content = glamorous.div(({ theme }) => ({
-  flex: '1',
-  padding: theme.spacing.unit * 2,
-  '&:last-child': {
-    paddingBottom: theme.spacing.unit * 3
-  }
+  padding: theme.spacing.unit * 2
 }));
+
+export const Icon = glamorous.span({
+  verticalAlign: 'middle',
+  paddingRight: '0.5rem'
+});
+
+export const Heading = glamorous.h3({
+  overflow: 'hidden',
+  height: 31
+});
+
+export const Actions = glamorous(CardActions)({
+  justifyContent: 'flex-end'
+});

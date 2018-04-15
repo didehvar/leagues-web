@@ -1,33 +1,42 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { CardActions } from 'material-ui/Card';
 import Button from 'material-ui/Button';
+import ButtonBase from 'material-ui/ButtonBase';
 import Typography from 'material-ui/Typography';
 import Card from 'material-ui/Card';
+import RunIcon from 'material-ui-icons/DirectionsRun';
+import BikeIcon from 'material-ui-icons/DirectionsBike';
 
 import * as Style from './style.js';
 
-function LeagueCard({ id, name, countryCode, onView, onJoin, ...rest }) {
+function LeagueCard({ league, onView, onJoin, ...rest }) {
+  const { id, slug, name, discipline } = league;
+
   return (
     <Card {...rest} component={Style.Card}>
-      <Style.FlagContainer>
-        <Style.FlagImage
-          src={`${process.env.PUBLIC_URL}/flags/${countryCode}.png`}
-        />
-      </Style.FlagContainer>
-      <Style.Content>
-        <Typography type="subheading" component="h3">
-          {name}
-        </Typography>
-      </Style.Content>
-      <CardActions>
-        <Button dense color="primary" onClick={onView}>
-          View
-        </Button>
-        <Button dense color="accent" onClick={onJoin}>
+      <ButtonBase onClick={() => onView(id, slug)}>
+        <Style.Content>
+          <Typography type="subheading" component={Style.Heading}>
+            <Style.Icon>
+              {discipline &&
+                (discipline.name === 'run' ? <RunIcon /> : <BikeIcon />)}
+            </Style.Icon>
+            {name}
+          </Typography>
+        </Style.Content>
+      </ButtonBase>
+      <Style.Actions>
+        <Button
+          dense
+          color="accent"
+          onClick={e => {
+            e.preventDefault();
+            onJoin(id, slug);
+          }}
+        >
           Join
         </Button>
-      </CardActions>
+      </Style.Actions>
     </Card>
   );
 }
@@ -35,13 +44,6 @@ function LeagueCard({ id, name, countryCode, onView, onJoin, ...rest }) {
 export default LeagueCard;
 
 LeagueCard.propTypes = {
-  id: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  countryCode: PropTypes.string.isRequired,
   onView: PropTypes.func.isRequired,
   onJoin: PropTypes.func.isRequired
-};
-
-LeagueCard.defaultProps = {
-  countryCode: 'gb'
 };

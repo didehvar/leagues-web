@@ -3,6 +3,7 @@ import { stringify } from 'querystring';
 
 import api from '../utils/api';
 import * as schema from './schema';
+import { getLeagueSearch } from '../reducers';
 
 export const fetchLeague = id => async dispatch => {
   dispatch({ type: 'FETCH_LEAGUE_REQUEST' });
@@ -23,12 +24,19 @@ export const fetchLeague = id => async dispatch => {
   return Promise.resolve();
 };
 
-export const fetchLeagues = query => async dispatch => {
+export const fetchLeagues = query => async (dispatch, getState) => {
   dispatch({ type: 'FETCH_LEAGUES_REQUEST' });
   let response;
 
   try {
-    response = await dispatch(api(`leagues?${stringify(query)}`));
+    response = await dispatch(
+      api(
+        `leagues?${stringify({
+          ...query,
+          search: getLeagueSearch(getState())
+        })}`
+      )
+    );
   } catch (ex) {
     const errorMessage = ex.message;
     dispatch({ type: 'FETCH_LEAGUES_FAILURE', errorMessage });
@@ -102,4 +110,8 @@ export const leaveLeague = id => async dispatch => {
     userId: response.data.user.id
   });
   return Promise.resolve();
+};
+
+export const setSearch = search => async dispatch => {
+  dispatch({ type: 'SET_LEAGUES_SEARCH', search });
 };

@@ -44,6 +44,9 @@ export const getCurrentLeague = state =>
 export const getTotalLeagues = state =>
   fromLeagues.getTotalLeagues(state.leagues);
 
+export const getLeagueSearch = state =>
+  fromLeagues.getLeagueSearch(state.leagues);
+
 // Rounds
 export const getRound = (state, id) => fromRounds.getRound(state.rounds, id);
 

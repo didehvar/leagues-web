@@ -1,23 +1,25 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
+import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
 
-class SearchField extends Component {
-  static propTypes = {
-    onChange: PropTypes.func.isRequired
-  };
+import * as leagueActions from '../../actions/leagues';
+import { getLeagueSearch } from '../../reducers';
 
-  state = { search: '' };
+class SearchField extends Component {
+  timer = null;
 
   handleChange = event => {
+    const { setSearch, fetchLeagues } = this.props;
     const search = event.target.value;
-    this.setState({ search });
-    this.props.onChange(search);
+
+    clearTimeout(this.timer);
+    setSearch(search);
+
+    this.timer = setTimeout(() => fetchLeagues({ search }), 500);
   };
 
   render() {
-    const { search } = this.state;
+    const { search } = this.props;
 
     return (
       <TextField
@@ -30,4 +32,7 @@ class SearchField extends Component {
   }
 }
 
-export default SearchField;
+export default connect(
+  state => ({ search: getLeagueSearch(state) }),
+  leagueActions
+)(SearchField);
