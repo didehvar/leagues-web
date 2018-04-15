@@ -23,7 +23,6 @@ export const getLeague = (state, id) => fromById.getLeague(state.byId, id);
 export const getAllLeagues = state => fromById.getLeagues(state.byId);
 
 export const getLeauges = state => {
-  console.log('🤦‍♂️', getLeagueSearch(state));
   return getLeagueSearch(state)
     ? fromIds
         .getLeagueIds(state.ids)
