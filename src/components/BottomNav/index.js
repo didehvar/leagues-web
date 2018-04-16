@@ -3,7 +3,6 @@ import withRouter from 'react-router-dom/withRouter';
 import MenuIcon from 'material-ui-icons/Menu';
 import SearchIcon from 'material-ui-icons/Search';
 import AddIcon from 'material-ui-icons/Add';
-import PersonIcon from 'material-ui-icons/Person';
 import MoreHorizIcon from 'material-ui-icons/MoreHoriz';
 import BottomNavigation from 'material-ui/BottomNavigation';
 

@@ -1,41 +1,45 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'material-ui/Button';
 import ButtonBase from 'material-ui/ButtonBase';
 import Typography from 'material-ui/Typography';
 import Card from 'material-ui/Card';
 import RunIcon from 'material-ui-icons/DirectionsRun';
 import BikeIcon from 'material-ui-icons/DirectionsBike';
 
+import JoinLeagueButton from '../../containers/JoinLeagueButton';
+
 import * as Style from './style.js';
 
-function LeagueCard({ league, onView, onJoin, ...rest }) {
-  const { id, slug, name, discipline } = league;
+function LeagueCard({ league, onView, ...rest }) {
+  const { id, slug, name, discipline, countryCode } = league;
 
   return (
     <Card {...rest} component={Style.Card}>
       <ButtonBase onClick={() => onView(id, slug)}>
-        <Style.Content>
-          <Typography type="subheading" component={Style.Heading}>
-            <Style.Icon>
-              {discipline &&
-                (discipline.name === 'run' ? <RunIcon /> : <BikeIcon />)}
-            </Style.Icon>
-            {name}
-          </Typography>
-        </Style.Content>
+        <Typography type="subheading" component={Style.Heading}>
+          {name}
+        </Typography>
       </ButtonBase>
       <Style.Actions>
-        <Button
+        {countryCode && (
+          <Style.FlagImage
+            src={`${process.env.PUBLIC_URL}/flags/${countryCode}.png`}
+          />
+        )}
+
+        <Style.Icon>
+          {discipline &&
+            (discipline.name === 'run' ? <RunIcon /> : <BikeIcon />)}
+        </Style.Icon>
+
+        <JoinLeagueButton
           dense
           color="accent"
-          onClick={e => {
-            e.preventDefault();
-            onJoin(id, slug);
-          }}
+          component={Style.Button}
+          leagueId={id}
         >
           Join
-        </Button>
+        </JoinLeagueButton>
       </Style.Actions>
     </Card>
   );
@@ -44,6 +48,5 @@ function LeagueCard({ league, onView, onJoin, ...rest }) {
 export default LeagueCard;
 
 LeagueCard.propTypes = {
-  onView: PropTypes.func.isRequired,
-  onJoin: PropTypes.func.isRequired
+  onView: PropTypes.func.isRequired
 };

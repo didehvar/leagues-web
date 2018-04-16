@@ -3,17 +3,11 @@ import { connect } from 'react-redux';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
-import some from 'lodash/some';
 import Button from 'material-ui/Button';
 import { Div } from 'glamorous';
 
 import * as leagueActions from '../../actions/leagues';
-import {
-  getLeague,
-  getRounds,
-  getParticipants,
-  getAuthUser
-} from '../../reducers';
+import { getLeague, getRounds, getAuthUser } from '../../reducers';
 
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
@@ -29,8 +23,6 @@ class LeagueRoute extends Component {
 
   handleChange = value => this.setState({ value });
 
-  onCreate = () => {};
-
   async componentDidMount() {
     const { fetchLeague, match } = this.props;
     await fetchLeague(match.params.id);
@@ -38,7 +30,7 @@ class LeagueRoute extends Component {
 
   render() {
     const { value } = this.state;
-    const { user, league, rounds, participants } = this.props;
+    const { user, league, rounds } = this.props;
 
     return (
       <Style.Container>
@@ -46,12 +38,7 @@ class LeagueRoute extends Component {
           color="default"
           title={league && league.name}
           left={<AddSegmentDialog leagueId={league && league.id} />}
-          right={
-            <JoinLeagueButton
-              leagueId={league && league.id}
-              joined={user && some(participants, p => p.id === user.id)}
-            />
-          }
+          right={<JoinLeagueButton leagueId={league && league.id} />}
         >
           <Tabs
             value={value}
@@ -73,7 +60,7 @@ class LeagueRoute extends Component {
               <SegmentCard
                 {...round}
                 key={round.id}
-                owner={(user.id = league.userId)}
+                owner={user.id === league.userId}
               >
                 <LeagueStandings />
               </SegmentCard>
@@ -104,12 +91,11 @@ class LeagueRoute extends Component {
   }
 }
 
-export default connect((state, props) => {
-  const league = getLeague(state, props.match.params.id);
-  return {
-    league,
+export default connect(
+  (state, props) => ({
+    league: getLeague(state, props.match.params.id),
     rounds: getRounds(state),
-    participants: league && getParticipants(state, league.id),
     user: getAuthUser(state)
-  };
-}, leagueActions)(LeagueRoute);
+  }),
+  leagueActions
+)(LeagueRoute);

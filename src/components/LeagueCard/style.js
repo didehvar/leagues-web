@@ -1,35 +1,42 @@
 import glamorous from 'glamorous';
 import { CardActions } from 'material-ui/Card';
+import MuiButton from 'material-ui/Button';
 
-export const Card = glamorous.div({
+export const Card = glamorous.div(({ theme }) => ({
   maxWidth: 400,
   minWidth: 250,
   margin: '0.5rem',
   flex: '1 1 0',
   display: 'flex',
   flexDirection: 'column',
+  padding: '0.75rem',
 
   '> button': {
     display: 'block',
     textAlign: 'initial',
     backgroundColor: '#fff'
   }
-});
-
-export const Content = glamorous.div(({ theme }) => ({
-  padding: theme.spacing.unit * 2
 }));
 
-export const Icon = glamorous.span({
-  verticalAlign: 'middle',
-  paddingRight: '0.5rem'
+export const FlagImage = glamorous.img({
+  width: 'auto',
+  maxHeight: 22,
+  verticalAlign: 'middle'
 });
 
+export const Icon = glamorous.span({});
+
 export const Heading = glamorous.h3({
-  overflow: 'hidden',
-  height: 31
+  maxHeight: 24,
+  overflow: 'hidden'
 });
 
 export const Actions = glamorous(CardActions)({
-  justifyContent: 'flex-end'
+  display: 'flex',
+  alignItems: 'center',
+  overflow: 'hidden'
+});
+
+export const Button = glamorous(MuiButton)({
+  marginLeft: 'auto !important'
 });

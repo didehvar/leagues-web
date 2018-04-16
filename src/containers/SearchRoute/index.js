@@ -20,8 +20,6 @@ import * as Style from './style';
 class SearchRoute extends Component {
   onView = (id, slug) => this.props.history.push(Routes.league(id, slug));
 
-  onJoin = (id, slug) => console.log('🤔'); // TODO
-
   componentDidMount() {
     const { fetchLeagues } = this.props;
     fetchLeagues();
@@ -36,11 +34,7 @@ class SearchRoute extends Component {
   rowRenderer = ({ key, index, style }) => {
     return (
       <div key={key} style={style}>
-        <LeagueCard
-          league={this.props.leagues[index]}
-          onView={this.onView}
-          onJoin={this.onJoin}
-        />
+        <LeagueCard league={this.props.leagues[index]} onView={this.onView} />
       </div>
     );
   };
@@ -72,7 +66,7 @@ class SearchRoute extends Component {
                         isScrolling={isScrolling}
                         onScroll={onChildScroll}
                         rowCount={leagues.length}
-                        rowHeight={138}
+                        rowHeight={123}
                         rowRenderer={this.rowRenderer}
                         scrollTop={scrollTop}
                         width={width}
