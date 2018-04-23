@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import format from 'date-fns/format';
 import addWeeks from 'date-fns/add_weeks';
-import { Formik } from 'formik';
+import { withFormik } from 'formik';
 import Yup from 'yup';
 import { FormHelperText } from 'material-ui/Form';
 import TextField from 'material-ui/TextField';
@@ -11,7 +11,6 @@ import Button from 'material-ui/Button';
 import IconButton from 'material-ui/IconButton';
 import AddIcon from 'material-ui-icons/Add';
 import Dialog from 'material-ui/Dialog';
-import Slide from 'material-ui/transitions/Slide';
 import CloseIcon from 'material-ui-icons/Close';
 
 import AppBar from '../AppBar';
@@ -47,17 +46,12 @@ class AddSegmentForm extends Component {
     return (
       <div>
         {(children && children(onOpen)) || (
-            <IconButton onClick={onOpen} color="inherit">
-              <AddIcon />
-            </IconButton>
-          )}
+          <IconButton onClick={onOpen} color="inherit">
+            <AddIcon />
+          </IconButton>
+        )}
 
-        <Dialog
-          open={open}
-          onRequestClose={onClose}
-          transition={<Slide direction="up" />}
-          fullScreen
-        >
+        <Dialog open={open} onClose={onClose} fullScreen>
           <form onSubmit={handleSubmit}>
             <AppBar
               color="default"
@@ -70,7 +64,7 @@ class AddSegmentForm extends Component {
               }
               right={
                 <Button
-                  dense
+                  size="small"
                   type="submit"
                   color="primary"
                   disabled={(!values.segmentId && !isValid) || isSubmitting}
@@ -80,7 +74,7 @@ class AddSegmentForm extends Component {
               }
             />
             <Style.Dialog>
-              <Grid container justify="center">
+              <Grid container justify="center" spacing={16}>
                 <Grid item xs={12}>
                   {errors.segmentId &&
                     touched.segmentId && (
@@ -94,7 +88,8 @@ class AddSegmentForm extends Component {
                     label="Start date"
                     value={format(values.startDate, 'YYYY-MM-DD')}
                     onChange={event =>
-                      event.target.value && handleChange(event)}
+                      event.target.value && handleChange(event)
+                    }
                     onBlur={handleBlur}
                     inputProps={{ required: true }}
                     required
@@ -112,7 +107,8 @@ class AddSegmentForm extends Component {
                     label="End date"
                     value={format(values.endDate, 'YYYY-MM-DD')}
                     onChange={event =>
-                      event.target.value && handleChange(event)}
+                      event.target.value && handleChange(event)
+                    }
                     onBlur={handleBlur}
                     inputProps={{ required: true }}
                     required
@@ -125,7 +121,7 @@ class AddSegmentForm extends Component {
                 </Grid>
                 <Grid item xs={12}>
                   <SegmentSelector
-                    color="accent"
+                    color="secondary"
                     disabled={isSubmitting}
                     onSelect={this.onSelectSegment}
                   />
@@ -163,7 +159,7 @@ AddSegmentForm.propTypes = {
   })
 };
 
-export default Formik({
+export default withFormik({
   mapPropsToValues: () => ({
     startDate: new Date(),
     endDate: addWeeks(new Date(), 1),

@@ -8,6 +8,7 @@ import { Div } from 'glamorous';
 
 import * as leagueActions from '../../actions/leagues';
 import { getLeague, getRounds, getAuthUser } from '../../reducers';
+import Routes from '../../utils/routes';
 
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
@@ -19,14 +20,30 @@ import JoinLeagueButton from '../JoinLeagueButton';
 import * as Style from './style';
 
 class LeagueRoute extends Component {
-  state = { value: 0 };
+  constructor(props) {
+    super(props);
+    this.state = {
+      value: props.match.isExact ? 0 : 1
+    };
+  }
 
-  handleChange = value => this.setState({ value });
+  handleChange = value => {
+    const {
+      history,
+      league: { id, slug }
+    } = this.props;
+    if (value) history.push(Routes.leagueStandings(id, slug));
+    else history.push(Routes.league(id, slug));
+  };
 
   async componentDidMount() {
     const { fetchLeague, match } = this.props;
     await fetchLeague(match.params.id);
   }
+
+  static getDerivedStateFromProps = nextProps => ({
+    value: nextProps.match.isExact ? 0 : 1
+  });
 
   render() {
     const { value } = this.state;
@@ -75,7 +92,7 @@ class LeagueRoute extends Component {
                 <AddSegmentDialog leagueId={league && league.id}>
                   {onOpen => (
                     <Div marginTop="1rem" textAlign="center">
-                      <Button raised color="primary" onClick={onOpen}>
+                      <Button variant="raised" color="primary" onClick={onOpen}>
                         Add a segment
                       </Button>
                     </Div>

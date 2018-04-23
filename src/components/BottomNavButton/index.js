@@ -1,6 +1,6 @@
 import React from 'react';
-import { BottomNavigationButton } from 'material-ui/BottomNavigation';
+import { BottomNavigationAction } from 'material-ui/BottomNavigation';
 
 export default function BottomNavButton({ ...rest }) {
-  return <BottomNavigationButton style={{ minWidth: 'auto' }} {...rest} />;
+  return <BottomNavigationAction style={{ minWidth: 'auto' }} {...rest} />;
 }

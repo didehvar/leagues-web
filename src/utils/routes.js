@@ -1,3 +1,6 @@
+const league = (id, slug) =>
+  `/leagues/${id || ':id'}/${id ? slug || '' : ':slug'}`;
+
 export default {
   home: '/',
   search: '/search',
@@ -9,5 +12,6 @@ export default {
   // ----- Leagues -----
   leagues: '/leagues',
   newLeague: '/leagues/new',
-  league: (id, slug) => `/leagues/${id || ':id'}/${id ? slug || '' : ':slug'}`
+  league,
+  leagueStandings: (id, slug) => `${league(id, slug)}/standings`
 };

@@ -1,4 +1,4 @@
-import { REHYDRATE } from 'redux-persist/constants';
+import { REHYDRATE } from 'redux-persist/es/constants';
 import jwtDecode from 'jwt-decode';
 import isBefore from 'date-fns/is_before';
 

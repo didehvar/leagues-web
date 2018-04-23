@@ -43,8 +43,16 @@ class SegmentSelector extends Component {
     } = this.props;
 
     return (
-      <Button raised color="primary" onClick={this.handleOpenDialog} {...rest}>
-        View starred segments
+      <div>
+        <Button
+          variant="raised"
+          color="primary"
+          onClick={this.handleOpenDialog}
+          {...rest}
+        >
+          View starred segments
+        </Button>
+
         <Dialog
           name="Starred segments"
           open={open}
@@ -73,7 +81,7 @@ class SegmentSelector extends Component {
               ))}
           </List>
         </Dialog>
-      </Button>
+      </div>
     );
   }
 }

@@ -3,23 +3,33 @@ import {
   applyMiddleware,
   compose
 } from 'redux';
-import { persistStore } from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import thunk from 'redux-thunk';
 
 import api from './middleware/api';
 import jwt from './middleware/jwt';
 import rootReducer from '../reducers';
 
+const persistedReducer = persistReducer(
+  {
+    key: 'impendulo',
+    storage,
+    whitelist: ['auth']
+  },
+  rootReducer
+);
+
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const createStore = history => {
   const store = reduxCreateStore(
-    rootReducer,
+    persistedReducer,
     composeEnhancers(applyMiddleware(jwt, thunk, api(history)))
   );
 
-  persistStore(store, { whitelist: ['auth'] });
+  let persistor = persistStore(store);
 
-  return store;
+  return { store, persistor };
 };
 
 export default createStore;

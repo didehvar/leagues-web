@@ -55,7 +55,7 @@ class Table extends Component {
       <MuiTable>
         <TableHead>
           <TableRow>
-            {columns.map(({ id, label, component, ...rest }) =>
+            {columns.map(({ id, label, component, ...rest }) => (
               <TableCell key={id} {...rest}>
                 <TableSortLabel
                   active={orderBy === id}
@@ -65,19 +65,19 @@ class Table extends Component {
                   {label}
                 </TableSortLabel>
               </TableCell>
-            )}
+            ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map(n =>
+          {data.map(n => (
             <TableRow key={n.id} hover>
-              {columns.map(({ id, component: Tag, ...rest }, idx) =>
+              {columns.map(({ id, component: Tag, ...rest }, idx) => (
                 <TableCell key={id} {...rest}>
                   {Tag ? <Tag value={n[id]} /> : n[id]}
                 </TableCell>
-              )}
+              ))}
             </TableRow>
-          )}
+          ))}
         </TableBody>
       </MuiTable>
     );
@@ -92,7 +92,7 @@ Table.propTypes = {
       id: PropTypes.string.isRequired,
       default: PropTypes.bool,
       numeric: PropTypes.bool,
-      disablePadding: PropTypes.bool,
+      padding: PropTypes.string,
       label: PropTypes.string,
       component: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
     })

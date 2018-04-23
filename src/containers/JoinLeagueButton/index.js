@@ -16,20 +16,22 @@ class JoinLeagueButton extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { joined: this.joined(props) };
+    this.state = { joined: JoinLeagueButton.joined(props) };
   }
 
-  joined = props => {
-    const { user, participants } = props;
-    return user && some(participants, p => p.id === user.id);
-  };
+  static joined = ({ user, participants }) =>
+    user && some(participants, p => p && p.id === user.id);
+
+  static getDerivedStateFromProps = nextProps => ({
+    joined: JoinLeagueButton.joined(nextProps)
+  });
 
   onClick = async () => {
     const { joined } = this.state;
     const { leaveLeague, joinLeague, leagueId } = this.props;
 
     try {
-      if (this.joined(this.props)) {
+      if (JoinLeagueButton.joined(this.props)) {
         this.setState({ joined: false });
         await leaveLeague(leagueId);
       } else {
@@ -37,13 +39,10 @@ class JoinLeagueButton extends Component {
         await joinLeague(leagueId);
       }
     } catch (ex) {
+      console.error(ex);
       this.setState({ joined });
     }
   };
-
-  getDerivedStateFromProps(nextProps) {
-    return { joined: this.joined(nextProps) };
-  }
 
   render() {
     const { joined } = this.state;
@@ -57,7 +56,7 @@ class JoinLeagueButton extends Component {
     } = this.props;
 
     return (
-      <Button dense color="primary" onClick={this.onClick} {...rest}>
+      <Button size="small" color="primary" onClick={this.onClick} {...rest}>
         {joined ? 'Leave' : 'Join'}
       </Button>
     );

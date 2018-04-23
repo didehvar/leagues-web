@@ -28,9 +28,10 @@ import StravaAuthHandler from '../StravaAuthHandler';
 import * as Style from './style';
 
 const history = createBrowserHistory();
+const { store } = createStore(history);
 
 const App = () => (
-  <Provider store={createStore(history)}>
+  <Provider store={store}>
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
         <Router history={history}>
@@ -46,7 +47,7 @@ const App = () => (
                 path={Routes.newLeague}
                 component={CreateLeagueRoute}
               />
-              <Route exact path={Routes.league()} component={LeagueRoute} />
+              <Route path={Routes.league()} component={LeagueRoute} />
               <Route exact path={Routes.settings} component={SettingsRoute} />
             </Switch>
 

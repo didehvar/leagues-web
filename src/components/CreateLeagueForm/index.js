@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import format from 'date-fns/format';
-import { Formik } from 'formik';
+import { withFormik } from 'formik';
 import Yup from 'yup';
 import {
   FormLabel,
@@ -26,7 +26,7 @@ const CreateLeagueForm = ({
   handleReset
 }) => (
   <form onSubmit={handleSubmit}>
-    <Grid container justify="center">
+    <Grid container justify="center" spacing={16}>
       <Grid item xs={12}>
         <TextField
           id="name"
@@ -81,7 +81,12 @@ const CreateLeagueForm = ({
         </FormControl>
       </Grid>
       <Grid item xs={12}>
-        <Button raised type="submit" color="primary" disabled={isSubmitting}>
+        <Button
+          variant="raised"
+          type="submit"
+          color="primary"
+          disabled={isSubmitting}
+        >
           Create league
         </Button>
       </Grid>
@@ -101,7 +106,7 @@ CreateLeagueForm.propTypes = {
   })
 };
 
-export default Formik({
+export default withFormik({
   mapPropsToValues: () => ({
     name: '',
     startDate: new Date(),

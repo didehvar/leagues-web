@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ButtonBase from 'material-ui/ButtonBase';
 import Typography from 'material-ui/Typography';
-import Card from 'material-ui/Card';
+import Card, { CardContent, CardActions } from 'material-ui/Card';
 import RunIcon from 'material-ui-icons/DirectionsRun';
 import BikeIcon from 'material-ui-icons/DirectionsBike';
 
@@ -16,11 +16,14 @@ function LeagueCard({ league, onView, ...rest }) {
   return (
     <Card {...rest} component={Style.Card}>
       <ButtonBase onClick={() => onView(id, slug)}>
-        <Typography type="subheading" component={Style.Heading}>
-          {name}
-        </Typography>
+        <CardContent>
+          <Typography type="subheading" component={Style.Heading}>
+            {name}
+          </Typography>
+        </CardContent>
       </ButtonBase>
-      <Style.Actions>
+
+      <CardActions>
         {countryCode && (
           <Style.FlagImage
             src={`${process.env.PUBLIC_URL}/flags/${countryCode}.png`}
@@ -33,14 +36,14 @@ function LeagueCard({ league, onView, ...rest }) {
         </Style.Icon>
 
         <JoinLeagueButton
-          dense
-          color="accent"
+          size="small"
+          color="secondary"
           component={Style.Button}
           leagueId={id}
         >
           Join
         </JoinLeagueButton>
-      </Style.Actions>
+      </CardActions>
     </Card>
   );
 }

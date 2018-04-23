@@ -8,23 +8,20 @@ import Table from '../../components/Table';
 const columns = [
   {
     id: 'avatar',
-    disablePadding: true,
-    compact: true,
+    padding: 'none',
     component: ({ value }) => <Avatar src={value} />
   },
   {
     default: true,
     id: 'name',
     label: 'Name',
-    disablePadding: true,
-    compact: true
+    padding: 'none'
   },
   {
     id: 'points',
     label: 'Points',
-    disablePadding: true,
-    numeric: true,
-    compact: true
+    padding: 'none',
+    numeric: true
   }
 ];
 
@@ -38,12 +35,14 @@ LeagueStandings.propTypes = {
 
 LeagueStandings.defaultProps = {
   // TODO: remove, redux
-  leagues: Array(10).fill().map(() => ({
-    id: faker.random.number(),
-    avatar: faker.image.imageUrl(50, 50),
-    name: faker.name.findName(),
-    points: faker.random.number()
-  }))
+  leagues: Array(10)
+    .fill()
+    .map(() => ({
+      id: faker.random.number(),
+      avatar: faker.image.imageUrl(50, 50),
+      name: faker.name.findName(),
+      points: faker.random.number()
+    }))
 };
 
 export default LeagueStandings;

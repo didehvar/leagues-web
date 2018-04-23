@@ -66,7 +66,7 @@ class SearchRoute extends Component {
                         isScrolling={isScrolling}
                         onScroll={onChildScroll}
                         rowCount={leagues.length}
-                        rowHeight={123}
+                        rowHeight={156}
                         rowRenderer={this.rowRenderer}
                         scrollTop={scrollTop}
                         width={width}

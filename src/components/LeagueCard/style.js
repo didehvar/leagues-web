@@ -1,5 +1,4 @@
 import glamorous from 'glamorous';
-import { CardActions } from 'material-ui/Card';
 import MuiButton from 'material-ui/Button';
 
 export const Card = glamorous.div(({ theme }) => ({
@@ -28,12 +27,6 @@ export const Icon = glamorous.span({});
 
 export const Heading = glamorous.h3({
   maxHeight: 24,
-  overflow: 'hidden'
-});
-
-export const Actions = glamorous(CardActions)({
-  display: 'flex',
-  alignItems: 'center',
   overflow: 'hidden'
 });
 

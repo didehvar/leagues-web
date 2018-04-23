@@ -9,6 +9,8 @@ import AppBar from '../AppBar';
 
 import * as Style from './style';
 
+const Transition = props => <Slide direction="up" {...props} />;
+
 const Dialog = ({
   children,
   name,
@@ -19,12 +21,7 @@ const Dialog = ({
   classes,
   ...props
 }) => (
-  <MuiDialog
-    open={open}
-    onRequestClose={onClose}
-    transition={<Slide direction="up" />}
-    {...props}
-  >
+  <MuiDialog open={open} onClose={onClose} transition={Transition} {...props}>
     <AppBar
       color="default"
       position="static"
@@ -47,13 +44,15 @@ const Dialog = ({
 Dialog.propTypes = {
   children: PropTypes.node.isRequired,
   open: PropTypes.bool,
-  onClose: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  right: PropTypes.node
 };
 
 Dialog.defaultProps = {
   open: false,
   closeButton: true,
-  classes: undefined
+  classes: undefined,
+  right: null
 };
 
 export default Dialog;

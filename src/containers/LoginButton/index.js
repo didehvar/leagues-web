@@ -6,11 +6,13 @@ import { isAuthenticated } from '../../reducers';
 
 const LoginButton = ({ authenticated }) => {
   const stravaUrl = [
-    `https://www.strava.com/oauth/authorize?client_id=${process.env
-      .REACT_APP_STRAVA_CLIENT_ID}`,
+    `https://www.strava.com/oauth/authorize?client_id=${
+      process.env.REACT_APP_STRAVA_CLIENT_ID
+    }`,
     `redirect_uri=${encodeURIComponent(
-      `${window.location.protocol}//${window.location.host}${window.location
-        .pathname}${window.location.search}`
+      `${window.location.protocol}//${window.location.host}${
+        window.location.pathname
+      }${window.location.search}`
     )}`,
     'response_type=code',
     'scope=view_private'
@@ -19,7 +21,7 @@ const LoginButton = ({ authenticated }) => {
   if (authenticated) return null;
 
   return (
-    <Button raised color="primary" component="a" href={stravaUrl}>
+    <Button variant="raised" color="primary" component="a" href={stravaUrl}>
       Login
     </Button>
   );
