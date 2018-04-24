@@ -5,6 +5,7 @@ import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import { Div } from 'glamorous';
+import { parse } from 'querystring';
 
 import * as leagueActions from '../../actions/leagues';
 import { getLeague, getRounds, getAuthUser } from '../../reducers';
@@ -23,7 +24,11 @@ class LeagueRoute extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.match.isExact ? 0 : 1
+      value: props.match.isExact ? 0 : 1,
+      defaultRoundId: parseInt(
+        parse(props.location.search.substr(1)).segment,
+        10
+      )
     };
   }
 
@@ -45,8 +50,27 @@ class LeagueRoute extends Component {
     value: nextProps.match.isExact ? 0 : 1
   });
 
+  segmentOnOpen = id => {
+    const {
+      location: { pathname },
+      history
+    } = this.props;
+    history.push({
+      pathname: pathname,
+      search: `?segment=${id}`
+    });
+  };
+
+  segmentOnClose = () => {
+    const {
+      location: { pathname },
+      history
+    } = this.props;
+    history.push(pathname);
+  };
+
   render() {
-    const { value } = this.state;
+    const { value, defaultRoundId } = this.state;
     const { user, league, rounds } = this.props;
 
     return (
@@ -78,6 +102,9 @@ class LeagueRoute extends Component {
                 {...round}
                 key={round.id}
                 owner={user.id === league.userId}
+                onOpen={this.segmentOnOpen}
+                onClose={this.segmentOnClose}
+                defaultOpen={round.id === defaultRoundId}
               >
                 <LeagueStandings />
               </SegmentCard>

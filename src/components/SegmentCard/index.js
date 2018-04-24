@@ -25,18 +25,32 @@ class SegmentCard extends Component {
     name: PropTypes.string.isRequired,
     startDate: PropTypes.string.isRequired,
     endDate: PropTypes.string.isRequired,
-    owner: PropTypes.bool
+    owner: PropTypes.bool,
+    onOpen: PropTypes.func.isRequired,
+    onClose: PropTypes.func.isRequired,
+    defaultOpen: PropTypes.bool
   };
 
   static defaultProps = {
     owner: false
   };
 
-  state = { open: false };
+  constructor(props) {
+    super(props);
+    this.state = {
+      open: props.defaultOpen
+    };
+  }
 
-  handleOpenDialog = () => this.setState({ open: true });
+  handleOpenDialog = () => {
+    this.props.onOpen(this.props.id);
+    this.setState({ open: true });
+  };
 
-  handleCloseDialog = () => this.setState({ open: false });
+  handleCloseDialog = () => {
+    this.props.onClose(this.props.id);
+    this.setState({ open: false });
+  };
 
   deleteSegment = async () => {
     this.handleCloseDialog();
@@ -56,37 +70,39 @@ class SegmentCard extends Component {
     } = this.props;
 
     return (
-      <ButtonBase
-        component={Style.Base}
-        onClick={this.handleOpenDialog}
-        {...rest}
-      >
-        <Card component={Style.Card}>
-          <Typography type="body2" color="secondary" component="div">
-            <InlineIcon icon={isAfter(new Date(), endDate) ? Done : Cached} />
-            <DateRange start={startDate} end={endDate} />
-          </Typography>
-          <Typography type="body2">{name}</Typography>
+      <div>
+        <ButtonBase
+          component={Style.Base}
+          onClick={this.handleOpenDialog}
+          {...rest}
+        >
+          <Card component={Style.Card}>
+            <Typography type="body2" color="secondary" component="div">
+              <InlineIcon icon={isAfter(new Date(), endDate) ? Done : Cached} />
+              <DateRange start={startDate} end={endDate} />
+            </Typography>
+            <Typography type="body2">{name}</Typography>
+          </Card>
+        </ButtonBase>
 
-          <Dialog
-            name={name}
-            open={open}
-            onClose={this.handleCloseDialog}
-            fullScreen
-            right={
-              owner ? (
-                <IconButton onClick={this.deleteSegment} aria-label="Back">
-                  <DeleteIcon />
-                </IconButton>
-              ) : (
-                undefined
-              )
-            }
-          >
-            {children}
-          </Dialog>
-        </Card>
-      </ButtonBase>
+        <Dialog
+          name={name}
+          open={open}
+          onClose={this.handleCloseDialog}
+          fullScreen
+          right={
+            owner ? (
+              <IconButton onClick={this.deleteSegment} aria-label="Back">
+                <DeleteIcon />
+              </IconButton>
+            ) : (
+              undefined
+            )
+          }
+        >
+          {children}
+        </Dialog>
+      </div>
     );
   }
 }
