@@ -74,10 +74,12 @@ class SegmentCard extends Component {
             onClose={this.handleCloseDialog}
             fullScreen
             right={
-              owner && (
+              owner ? (
                 <IconButton onClick={this.deleteSegment} aria-label="Back">
                   <DeleteIcon />
                 </IconButton>
+              ) : (
+                undefined
               )
             }
           >

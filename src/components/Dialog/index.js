@@ -52,7 +52,7 @@ Dialog.defaultProps = {
   open: false,
   closeButton: true,
   classes: undefined,
-  right: null
+  right: undefined
 };
 
 export default Dialog;
