@@ -81,6 +81,33 @@ const CreateLeagueForm = ({
         </FormControl>
       </Grid>
       <Grid item xs={12}>
+        <FormControl component="fieldset" required>
+          <FormLabel component="legend">Type</FormLabel>
+          <RadioGroup
+            name="type"
+            value={values.type}
+            onChange={handleChange}
+            style={{ flexDirection: 'row' }}
+          >
+            <FormControlLabel
+              value="fastest"
+              control={<Radio />}
+              label="Fastest"
+            />
+            <FormControlLabel
+              value="distance"
+              control={<Radio />}
+              label="Distance"
+            />
+          </RadioGroup>
+
+          {errors.type &&
+            touched.type && (
+              <FormHelperText error>{errors.type}</FormHelperText>
+            )}
+        </FormControl>
+      </Grid>
+      <Grid item xs={12}>
         <Button
           variant="raised"
           type="submit"
@@ -102,7 +129,8 @@ CreateLeagueForm.propTypes = {
       PropTypes.instanceOf(Date),
       PropTypes.string
     ]),
-    discipline: PropTypes.string
+    discipline: PropTypes.string,
+    type: PropTypes.string
   })
 };
 
@@ -110,12 +138,14 @@ export default withFormik({
   mapPropsToValues: () => ({
     name: '',
     startDate: new Date(),
-    discipline: 'run'
+    discipline: 'run',
+    type: 'fastest'
   }),
   validationSchema: Yup.object().shape({
     name: Yup.string().required(),
     startDate: Yup.date().required(),
-    discipline: Yup.string().required()
+    discipline: Yup.string().required(),
+    type: Yup.string().required()
   }),
   handleSubmit: async (
     values,
