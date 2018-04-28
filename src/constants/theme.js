@@ -1,10 +1,18 @@
 import createMuiTheme from 'material-ui/styles/createMuiTheme';
-import deepPurple from 'material-ui/colors/deepPurple';
-import teal from 'material-ui/colors/teal';
 
 export default createMuiTheme({
   palette: {
-    primary: teal,
-    secondary: deepPurple
+    primary: {
+      light: '#62e1ff',
+      main: '#00c3f4',
+      dark: '#0096c6',
+      contrastText: '#000000'
+    },
+    secondary: {
+      light: '#ffa842',
+      main: '#ff7700',
+      dark: '#c54700',
+      contrastText: '#000000'
+    }
   }
 });
