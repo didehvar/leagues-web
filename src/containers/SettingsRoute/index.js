@@ -7,12 +7,19 @@ import * as authActions from '../../actions/auth';
 import { isAuthenticated } from '../../reducers';
 
 import * as Style from './style';
+import Routes from '../../utils/routes';
 
-const SettingsRoute = ({ logout, authenticated }) => (
+const SettingsRoute = ({ logout, authenticated, history }) => (
   <Style.Container>
     <List>
       {authenticated && (
-        <ListItem button onClick={logout}>
+        <ListItem
+          button
+          onClick={() => {
+            logout();
+            history.push(Routes.home);
+          }}
+        >
           <ListItemIcon>
             <ExitIcon />
           </ListItemIcon>
