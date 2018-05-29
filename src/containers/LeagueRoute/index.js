@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import last from 'lodash/last';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs, { Tab } from 'material-ui/Tabs';
 import Typography from 'material-ui/Typography';
@@ -73,12 +74,23 @@ class LeagueRoute extends Component {
     const { value, defaultRoundId } = this.state;
     const { user, league, rounds } = this.props;
 
+    console.log(rounds);
+    console.log(last(rounds));
+
+    const startDate =
+      league &&
+      new Date(rounds.length ? last(rounds).endDate : league.startDate);
+
     return (
       <Style.Container>
         <AppBar
           color="default"
           title={league && league.name}
-          left={<AddSegmentDialog leagueId={league && league.id} />}
+          left={
+            league && (
+              <AddSegmentDialog leagueId={league.id} startDate={startDate} />
+            )
+          }
           right={<JoinLeagueButton leagueId={league && league.id} />}
         >
           <Tabs
@@ -116,15 +128,21 @@ class LeagueRoute extends Component {
                   This league has no segments.
                 </Typography>
 
-                <AddSegmentDialog leagueId={league && league.id}>
-                  {onOpen => (
-                    <Div marginTop="1rem" textAlign="center">
-                      <Button variant="raised" color="primary" onClick={onOpen}>
-                        Add a segment
-                      </Button>
-                    </Div>
-                  )}
-                </AddSegmentDialog>
+                {league && (
+                  <AddSegmentDialog leagueId={league.id} startDate={startDate}>
+                    {onOpen => (
+                      <Div marginTop="1rem" textAlign="center">
+                        <Button
+                          variant="raised"
+                          color="primary"
+                          onClick={onOpen}
+                        >
+                          Add a segment
+                        </Button>
+                      </Div>
+                    )}
+                  </AddSegmentDialog>
+                )}
               </div>
             )}
           </div>

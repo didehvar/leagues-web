@@ -150,6 +150,7 @@ class AddSegmentForm extends Component {
 
 AddSegmentForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
+  startDate: PropTypes.instanceOf(Date),
   values: PropTypes.shape({
     startDate: PropTypes.oneOfType([
       PropTypes.instanceOf(Date),
@@ -160,11 +161,14 @@ AddSegmentForm.propTypes = {
 };
 
 export default withFormik({
-  mapPropsToValues: () => ({
-    startDate: new Date(),
-    endDate: addWeeks(new Date(), 1),
-    segmentId: undefined
-  }),
+  mapPropsToValues: ({ startDate }) => {
+    const date = startDate || new Date();
+    return {
+      startDate: date,
+      endDate: addWeeks(date, 2),
+      segmentId: undefined
+    };
+  },
   validationSchema: Yup.object().shape({
     startDate: Yup.date().required(),
     endDate: Yup.date().required(),

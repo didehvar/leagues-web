@@ -19,7 +19,7 @@ class AddSegmentDialog extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, startDate } = this.props;
     const { open } = this.state;
 
     return (
@@ -28,6 +28,7 @@ class AddSegmentDialog extends Component {
         onSubmit={this.onSubmit}
         onOpen={this.onOpen}
         onClose={this.onClose}
+        startDate={startDate}
       >
         {children}
       </AddSegmentForm>
@@ -36,7 +37,8 @@ class AddSegmentDialog extends Component {
 }
 
 AddSegmentDialog.propTypes = {
-  leagueId: PropTypes.number
+  leagueId: PropTypes.number,
+  startDate: PropTypes.instanceOf(Date)
 };
 
 AddSegmentDialog.defaultProps = {
