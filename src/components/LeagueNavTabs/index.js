@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import SwipeableViews from 'react-swipeable-views';
-import AppBar from 'material-ui/AppBar';
-import Tabs, { Tab } from 'material-ui/Tabs';
+import AppBar from '@material-ui/core/AppBar';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 
 import * as Style from './style';
 
@@ -33,11 +34,9 @@ class LeagueNavTabs extends Component {
             onChangeIndex={i => this.handleChange(i)}
             animateHeight
           >
-            {tabs.map(({ label, children }) =>
-              <Style.TabWrapper key={label}>
-                {children}
-              </Style.TabWrapper>
-            )}
+            {tabs.map(({ label, children }) => (
+              <Style.TabWrapper key={label}>{children}</Style.TabWrapper>
+            ))}
           </SwipeableViews>
         </Style.ViewContainer>
       </Style.Container>

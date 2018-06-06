@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import last from 'lodash/last';
 import SwipeableViews from 'react-swipeable-views';
-import Tabs, { Tab } from 'material-ui/Tabs';
-import Typography from 'material-ui/Typography';
-import Button from 'material-ui/Button';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 import { Div } from 'glamorous';
 import { parse } from 'querystring';
 
@@ -14,7 +15,9 @@ import Routes from '../../utils/routes';
 
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
+import LeagueInviteBanner from '../../components/LeagueInviteBanner';
 
+import LeagueInvite from '../LeagueInvite';
 import LeagueStandings from '../LeagueStandings';
 import AddSegmentDialog from '../AddSegmentDialog';
 import JoinLeagueButton from '../JoinLeagueButton';
@@ -25,13 +28,24 @@ class LeagueRoute extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: props.match.isExact ? 0 : 1,
+      value: LeagueRoute.getValueFromProps(props),
       defaultRoundId: parseInt(
         parse(props.location.search.substr(1)).segment,
         10
       )
     };
   }
+
+  static getValueFromProps = props => {
+    const path = props.location.pathname;
+    if (path.includes('/standings')) return 1;
+    if (path.includes('/invite')) return 2;
+    return 0;
+  };
+
+  static getDerivedStateFromProps = nextProps => ({
+    value: LeagueRoute.getValueFromProps(nextProps)
+  });
 
   handleChange = value => {
     const {
@@ -47,9 +61,12 @@ class LeagueRoute extends Component {
     await fetchLeague(match.params.id);
   }
 
-  static getDerivedStateFromProps = nextProps => ({
-    value: nextProps.match.isExact ? 0 : 1
-  });
+  componentDidUpdate(prevProps) {
+    const { match, league, history } = this.props;
+    if (!match.params.slug && !prevProps.league && league) {
+      history.push(Routes.league(league.id, league.slug));
+    }
+  }
 
   segmentOnOpen = id => {
     const {
@@ -70,12 +87,17 @@ class LeagueRoute extends Component {
     history.push(pathname);
   };
 
+  invite = () => {
+    const {
+      history,
+      league: { id, slug }
+    } = this.props;
+    history.push(Routes.leagueInvite(id, slug));
+  };
+
   render() {
     const { value, defaultRoundId } = this.state;
     const { user, league, rounds } = this.props;
-
-    console.log(rounds);
-    console.log(last(rounds));
 
     const startDate =
       league &&
@@ -101,13 +123,11 @@ class LeagueRoute extends Component {
           >
             <Tab label="Segments" />
             <Tab label="Standings" />
+            <Tab label="Invite" style={{ display: 'none' }} />
           </Tabs>
         </AppBar>
-        <SwipeableViews
-          index={value}
-          onChangeIndex={i => this.handleChange(i)}
-          animateHeight
-        >
+
+        <SwipeableViews index={value} onChangeIndex={i => this.handleChange(i)}>
           <div>
             {rounds.map(round => (
               <SegmentCard
@@ -146,8 +166,13 @@ class LeagueRoute extends Component {
               </div>
             )}
           </div>
+
           <LeagueStandings />
+
+          <LeagueInvite league={league} />
         </SwipeableViews>
+
+        <LeagueInviteBanner onClick={this.invite} />
       </Style.Container>
     );
   }

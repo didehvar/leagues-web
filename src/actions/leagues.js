@@ -115,3 +115,50 @@ export const leaveLeague = id => async dispatch => {
 export const setSearch = search => async dispatch => {
   dispatch({ type: 'SET_LEAGUES_SEARCH', search });
 };
+
+export const getInvite = id => async dispatch => {
+  dispatch({ type: 'GET_LEAGUE_INVITE_REQUEST' });
+  let response;
+
+  try {
+    response = await dispatch(api(`leagues/${id}/invite`));
+  } catch (ex) {
+    const errorMessage = ex.message;
+    dispatch({ type: 'GET_LEAGUE_INVITE_FAILURE', errorMessage });
+    return Promise.reject(errorMessage);
+  }
+
+  dispatch({
+    type: 'GET_LEAGUE_INVITE_SUCCESS',
+    id,
+    ...response.data
+  });
+  return Promise.resolve();
+};
+
+export const useInvite = (id, code) => async dispatch => {
+  dispatch({ type: 'USE_LEAGUE_INVITE_REQUEST' });
+  let response;
+
+  try {
+    response = await dispatch(
+      api(`leagues/${id}/use-invite`, {
+        method: 'POST',
+        body: {
+          code
+        }
+      })
+    );
+  } catch (ex) {
+    const errorMessage = ex.message;
+    dispatch({ type: 'USE_LEAGUE_INVITE_FAILURE', errorMessage });
+    return Promise.reject(errorMessage);
+  }
+
+  dispatch({
+    type: 'USE_LEAGUE_INVITE_SUCCESS',
+    id,
+    userId: response.data.user.id
+  });
+  return Promise.resolve();
+};

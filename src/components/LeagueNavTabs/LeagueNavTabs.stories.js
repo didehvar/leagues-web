@@ -1,44 +1,43 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import faker from 'faker/locale/en_GB';
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from 'material-ui/Table';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 import LeagueNavTabs from './index';
 
-const tabs = Array(2).fill().map((value, idx) => {
-  const index = idx + 1;
-  const paragraphs = Array(3).fill().map(() =>
-    <p>
-      {faker.lorem.paragraph()}
-    </p>
-  );
+const tabs = Array(2)
+  .fill()
+  .map((value, idx) => {
+    const index = idx + 1;
+    const paragraphs = Array(3)
+      .fill()
+      .map(() => <p>{faker.lorem.paragraph()}</p>);
 
-  return {
-    label: faker.lorem.word(),
-    children: (
-      <div>
-        <h1>
-          Tab {index}
-        </h1>
-        {paragraphs}
-      </div>
-    )
-  };
-});
+    return {
+      label: faker.lorem.word(),
+      children: (
+        <div>
+          <h1>Tab {index}</h1>
+          {paragraphs}
+        </div>
+      )
+    };
+  });
 
-const data = Array(5).fill().map(() => ({
-  id: faker.random.number(),
-  name: faker.commerce.productName(),
-  calories: faker.random.number(),
-  fat: faker.random.number(),
-  carbs: faker.random.number(),
-  protein: faker.random.number()
-}));
+const data = Array(5)
+  .fill()
+  .map(() => ({
+    id: faker.random.number(),
+    name: faker.commerce.productName(),
+    calories: faker.random.number(),
+    fat: faker.random.number(),
+    carbs: faker.random.number(),
+    protein: faker.random.number()
+  }));
 
 const tableTabs = [
   ...tabs,
@@ -59,21 +58,11 @@ const tableTabs = [
           {data.map(n => {
             return (
               <TableRow key={n.id}>
-                <TableCell>
-                  {n.name}
-                </TableCell>
-                <TableCell numeric>
-                  {n.calories}
-                </TableCell>
-                <TableCell numeric>
-                  {n.fat}
-                </TableCell>
-                <TableCell numeric>
-                  {n.carbs}
-                </TableCell>
-                <TableCell numeric>
-                  {n.protein}
-                </TableCell>
+                <TableCell>{n.name}</TableCell>
+                <TableCell numeric>{n.calories}</TableCell>
+                <TableCell numeric>{n.fat}</TableCell>
+                <TableCell numeric>{n.carbs}</TableCell>
+                <TableCell numeric>{n.protein}</TableCell>
               </TableRow>
             );
           })}

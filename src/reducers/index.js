@@ -47,6 +47,8 @@ export const getTotalLeagues = state =>
 export const getLeagueSearch = state =>
   fromLeagues.getLeagueSearch(state.leagues);
 
+export const getLeagueInvite = state => fromLeagues.getInvite(state.leagues);
+
 // Rounds
 export const getRound = (state, id) => fromRounds.getRound(state.rounds, id);
 

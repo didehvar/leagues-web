@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ButtonBase from 'material-ui/ButtonBase';
-import Typography from 'material-ui/Typography';
-import Card, { CardContent, CardActions } from 'material-ui/Card';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Typography from '@material-ui/core/Typography';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardActions from '@material-ui/core/CardActions';
 import RunIcon from 'material-ui-icons/DirectionsRun';
 import BikeIcon from 'material-ui-icons/DirectionsBike';
 

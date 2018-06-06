@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import TextField from 'material-ui/TextField';
+import TextField from '@material-ui/core/TextField';
 
 import * as leagueActions from '../../actions/leagues';
 import { getLeagueSearch } from '../../reducers';

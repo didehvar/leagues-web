@@ -1,5 +1,5 @@
 import glamorous from 'glamorous';
-import MuiButton from 'material-ui/Button';
+import MuiButton from '@material-ui/core/Button';
 
 export const Card = glamorous.div(({ theme }) => ({
   maxWidth: 400,

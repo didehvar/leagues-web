@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import MuiTable, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  TableSortLabel
-} from 'material-ui/Table';
+import MuiTable from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import TableSortLabel from '@material-ui/core/TableSortLabel';
 
 class Table extends Component {
   constructor(props) {

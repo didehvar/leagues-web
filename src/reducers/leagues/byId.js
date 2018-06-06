@@ -7,6 +7,7 @@ const byId = (state = {}, { response, type, id, userId }) => {
 
   switch (type) {
     case 'JOIN_LEAGUE_SUCCESS':
+    case 'USE_LEAGUE_INVITE_SUCCESS':
       if (league) {
         return {
           ...state,

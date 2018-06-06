@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import isAfter from 'date-fns/is_after';
-import Typography from 'material-ui/Typography';
-import IconButton from 'material-ui/IconButton';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from 'material-ui-icons/Delete';
-import ButtonBase from 'material-ui/ButtonBase';
-import Card from 'material-ui/Card';
+import ButtonBase from '@material-ui/core/ButtonBase';
+import Card from '@material-ui/core/Card';
 import Done from 'material-ui-icons/Done';
 import Cached from 'material-ui-icons/Cached';
 

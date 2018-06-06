@@ -4,7 +4,7 @@ import MenuIcon from 'material-ui-icons/Menu';
 import SearchIcon from 'material-ui-icons/Search';
 import AddIcon from 'material-ui-icons/Add';
 import MoreHorizIcon from 'material-ui-icons/MoreHoriz';
-import BottomNavigation from 'material-ui/BottomNavigation';
+import BottomNavigation from '@material-ui/core/BottomNavigation';
 
 import BottomNavButton from '../BottomNavButton';
 import Routes from '../../utils/routes';
@@ -42,7 +42,9 @@ class BottomNav extends Component {
   };
 
   render() {
-    const { location: { pathname } } = this.props;
+    const {
+      location: { pathname }
+    } = this.props;
     const link = links.find(
       l => l.url === pathname || (l.matchStart && pathname.startsWith(l.url))
     );

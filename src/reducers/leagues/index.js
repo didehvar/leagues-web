@@ -6,6 +6,7 @@ import id, * as fromId from './id';
 import ids, * as fromIds from './ids';
 import total, * as fromTotal from './total';
 import search, * as fromSearch from './search';
+import invite, * as fromInvite from './invite';
 
 const leagueReducers = combineReducers({
   byId,
@@ -13,7 +14,8 @@ const leagueReducers = combineReducers({
   id,
   ids,
   total,
-  search
+  search,
+  invite
 });
 
 export default leagueReducers;
@@ -40,3 +42,5 @@ export const getCurrentLeague = state =>
 export const getTotalLeagues = state => fromTotal.getTotalLeagues(state.total);
 
 export const getLeagueSearch = state => fromSearch.getSearch(state.search);
+
+export const getInvite = state => fromInvite.getInvite(state.invite);

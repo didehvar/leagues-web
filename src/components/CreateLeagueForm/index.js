@@ -3,16 +3,15 @@ import PropTypes from 'prop-types';
 import format from 'date-fns/format';
 import { withFormik } from 'formik';
 import Yup from 'yup';
-import {
-  FormLabel,
-  FormControl,
-  FormControlLabel,
-  FormHelperText
-} from 'material-ui/Form';
-import TextField from 'material-ui/TextField';
-import Radio, { RadioGroup } from 'material-ui/Radio';
-import Grid from 'material-ui/Grid';
-import Button from 'material-ui/Button';
+import FormLabel from '@material-ui/core/FormLabel';
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormHelperText from '@material-ui/core/FormHelperText';
+import TextField from '@material-ui/core/TextField';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import Grid from '@material-ui/core/Grid';
+import Button from '@material-ui/core/Button';
 
 const CreateLeagueForm = ({
   values,
