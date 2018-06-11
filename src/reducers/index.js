@@ -29,7 +29,10 @@ export const getUserToken = state => fromAuth.getUserToken(state.auth);
 export const getLeague = (state, id) =>
   fromLeagues.getLeague(state.leagues, id);
 
-export const getLeagues = state => fromLeagues.getLeauges(state.leagues);
+export const getLeagues = state =>
+  fromLeagues
+    .getLeauges(state.leagues)
+    .map(l => ({ ...l, rounds: l.rounds.map(r => getRound(state, r)) }));
 
 export const getAllLeagues = state => fromLeagues.getAllLeagues(state.leagues);
 

@@ -5,15 +5,18 @@ import Typography from '@material-ui/core/Typography';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import RunIcon from 'material-ui-icons/DirectionsRun';
 import BikeIcon from 'material-ui-icons/DirectionsBike';
+import last from 'lodash/last';
+import isAfter from 'date-fns/is_after';
 
 import JoinLeagueButton from '../../containers/JoinLeagueButton';
 
 import * as Style from './style.js';
 
 function LeagueCard({ league, onView, ...rest }) {
-  const { id, slug, name, discipline, countryCode } = league;
+  const { id, slug, name, discipline, countryCode, rounds } = league;
 
   return (
     <Card {...rest} component={Style.Card}>
@@ -36,6 +39,10 @@ function LeagueCard({ league, onView, ...rest }) {
           {discipline &&
             (discipline.name === 'run' ? <RunIcon /> : <BikeIcon />)}
         </Style.Icon>
+
+        {isAfter((last(rounds) || {}).endDate, new Date()) && (
+          <CircularProgress size={20} />
+        )}
 
         <JoinLeagueButton
           size="small"
