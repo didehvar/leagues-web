@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import MuiDialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
 import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from 'material-ui-icons/Close';
+import CloseIcon from '@material-ui/icons/Close';
 
 import AppBar from '../AppBar';
 

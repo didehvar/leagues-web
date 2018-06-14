@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import withRouter from 'react-router-dom/withRouter';
-import MenuIcon from 'material-ui-icons/Menu';
-import SearchIcon from 'material-ui-icons/Search';
-import AddIcon from 'material-ui-icons/Add';
-import MoreHorizIcon from 'material-ui-icons/MoreHoriz';
+import MenuIcon from '@material-ui/icons/Menu';
+import SearchIcon from '@material-ui/icons/Search';
+import AddIcon from '@material-ui/icons/Add';
+import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import BottomNavigation from '@material-ui/core/BottomNavigation';
 
 import BottomNavButton from '../BottomNavButton';

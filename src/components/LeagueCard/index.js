@@ -6,8 +6,8 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import RunIcon from 'material-ui-icons/DirectionsRun';
-import BikeIcon from 'material-ui-icons/DirectionsBike';
+import RunIcon from '@material-ui/icons/DirectionsRun';
+import BikeIcon from '@material-ui/icons/DirectionsBike';
 import last from 'lodash/last';
 import isAfter from 'date-fns/is_after';
 

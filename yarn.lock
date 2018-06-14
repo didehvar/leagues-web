@@ -6048,9 +6048,9 @@ material-colors@^1.2.1:
   version "1.2.5"
   resolved "https://registry.yarnpkg.com/material-colors/-/material-colors-1.2.5.tgz#5292593e6754cb1bcc2b98030e4e0d6a3afc9ea1"
 
-material-ui-icons@^1.0.0-alpha.19:
+@material-ui/icons@^1.0.0-alpha.19:
   version "1.0.0-beta.36"
-  resolved "https://registry.yarnpkg.com/material-ui-icons/-/material-ui-icons-1.0.0-beta.36.tgz#86390a61f4c83f718eaba77ccce575834f2cf2a8"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/@material-ui/icons-1.0.0-beta.36.tgz#86390a61f4c83f718eaba77ccce575834f2cf2a8"
   dependencies:
     recompose "^0.26.0"
 
@@ -8802,7 +8802,7 @@ storybook-addon-material-ui@next:
   resolved "https://registry.yarnpkg.com/storybook-addon-material-ui/-/storybook-addon-material-ui-0.9.0-alpha.1.tgz#0e8110dd097fd75cb71534b17c65e84cd2619c2f"
   dependencies:
     js-beautify "^1.6.8"
-    material-ui-icons "^1.0.0-alpha.19"
+    @material-ui/icons "^1.0.0-alpha.19"
     react-material-color-picker "^1.1.0"
     react-split-pane "^0.1.50"
     react-tap-event-plugin "^2.0.1"
