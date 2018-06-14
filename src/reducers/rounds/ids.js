@@ -10,6 +10,10 @@ const ids = (state = initialState, { response, type }) => {
   if (!response) return state;
 
   if (response.entities.rounds) {
+    if (type === 'FETCH_LEAGUE_SUCCESS') {
+      return Object.values(response.entities.rounds).map(r => r.id);
+    }
+
     return uniq([
       ...state,
       ...Object.values(response.entities.rounds).map(r => r.id)
