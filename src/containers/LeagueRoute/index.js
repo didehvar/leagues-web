@@ -138,7 +138,7 @@ class LeagueRoute extends Component {
                 onClose={this.segmentOnClose}
                 defaultOpen={round.id === defaultRoundId}
               >
-                <LeagueStandings />
+                <LeagueStandings leagueId={league.id} roundId={round.id} />
               </SegmentCard>
             ))}
 
@@ -169,7 +169,7 @@ class LeagueRoute extends Component {
 
           <LeagueStandings />
 
-          <LeagueInvite league={league} />
+          <LeagueInvite />
         </SwipeableViews>
 
         <LeagueInviteBanner onClick={this.invite} />

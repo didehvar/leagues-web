@@ -1,7 +1,9 @@
 import React from 'react';
-import faker from 'faker/locale/en_GB';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
+
+import { getRound, getLeague, getParticipants } from '../../reducers';
 
 import Table from '../../components/Table';
 
@@ -25,24 +27,43 @@ const columns = [
   }
 ];
 
-const LeagueStandings = ({ leagues }) => {
-  return <Table columns={columns} data={leagues} />;
-};
+class LeagueStandings extends React.Component {
+  constructor(props) {
+    super(props);
+
+    const { round = {}, participants } = props;
+    const { points = [] } = round;
+    this.state = {
+      points: points.map(({ id, userId, points }) => {
+        const user = participants.find(pa => pa.id === userId);
+        return {
+          id,
+          avatar: user.avatar,
+          name: user.name,
+          points
+        };
+      })
+    };
+  }
+
+  render() {
+    const { points } = this.state;
+    return <Table columns={columns} data={points} />;
+  }
+}
 
 LeagueStandings.propTypes = {
-  leagues: PropTypes.arrayOf(PropTypes.object)
+  roundId: PropTypes.number,
+  leagueId: PropTypes.number
 };
 
 LeagueStandings.defaultProps = {
-  // TODO: remove, redux
-  leagues: Array(10)
-    .fill()
-    .map(() => ({
-      id: faker.random.number(),
-      avatar: faker.image.imageUrl(50, 50),
-      name: faker.name.findName(),
-      points: faker.random.number()
-    }))
+  roundId: null,
+  leagueId: null
 };
 
-export default LeagueStandings;
+export default connect((state, props) => ({
+  league: getLeague(state, props.leagueId),
+  round: getRound(state, props.roundId),
+  participants: getParticipants(state, props.leagueId)
+}))(LeagueStandings);
