@@ -21,7 +21,7 @@ import Routes from '../../utils/routes';
 
 import * as LeagueActions from '../../actions/leagues';
 
-import { getLeagueInvite } from '../../reducers';
+import { getLeagueInvite, getCurrentLeague } from '../../reducers';
 
 import * as Style from './style';
 
@@ -124,6 +124,9 @@ LeagueInvite.defaultProps = {
 };
 
 export default connect(
-  state => ({ invite: getLeagueInvite(state) }),
+  state => ({
+    invite: getLeagueInvite(state),
+    league: getCurrentLeague(state)
+  }),
   LeagueActions
 )(LeagueInvite);
