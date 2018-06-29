@@ -1,9 +1,9 @@
 const error = (state = null, action) => {
   switch (action.type) {
-    case 'CREATE_LEAGUE_FAILURE':
+    case 'CREATE_ROUND_FAILURE':
       return action.message;
-    case 'CREATE_LEAGUE_REQUEST':
-    case 'CREATE_LEAGUE_SUCCESS':
+    case 'CREATE_ROUND_REQUEST':
+    case 'CREATE_ROUND_SUCCESS':
       return null;
     default:
       return state;

@@ -18,9 +18,9 @@ export const createRound = (leagueId, data) => async dispatch => {
       })
     );
   } catch (ex) {
-    const errorMessage = ex.message;
-    dispatch({ type: 'CREATE_ROUND_FAILURE', errorMessage });
-    return Promise.reject(errorMessage);
+    const { message } = await ex.response.json();
+    dispatch({ type: 'CREATE_ROUND_FAILURE', message });
+    return Promise.reject(ex.message);
   }
 
   dispatch({

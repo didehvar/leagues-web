@@ -57,6 +57,8 @@ export const getRound = (state, id) => fromRounds.getRound(state.rounds, id);
 
 export const getRounds = state => fromRounds.getRounds(state.rounds);
 
+export const getRoundError = state => fromRounds.getError(state.rounds);
+
 // Segments
 export const getStarredSegments = state =>
   fromSegments.getStarredSegments(state.segments);

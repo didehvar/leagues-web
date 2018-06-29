@@ -55,7 +55,8 @@ const CreateLeagueForm = ({
           required
           fullWidth
         />
-        {errors.startDate &&
+        {errors &&
+          errors.startDate &&
           touched.startDate && (
             <FormHelperText error>{errors.startDate}</FormHelperText>
           )}
@@ -73,7 +74,8 @@ const CreateLeagueForm = ({
             <FormControlLabel value="ride" control={<Radio />} label="Ride" />
           </RadioGroup>
 
-          {errors.discipline &&
+          {errors &&
+            errors.discipline &&
             touched.discipline && (
               <FormHelperText error>{errors.discipline}</FormHelperText>
             )}
@@ -100,7 +102,8 @@ const CreateLeagueForm = ({
             />
           </RadioGroup>
 
-          {errors.type &&
+          {errors &&
+            errors.type &&
             touched.type && (
               <FormHelperText error>{errors.type}</FormHelperText>
             )}

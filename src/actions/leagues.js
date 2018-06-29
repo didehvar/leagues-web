@@ -58,9 +58,9 @@ export const createLeague = data => async dispatch => {
   try {
     response = await dispatch(api('leagues', { method: 'POST', body: data }));
   } catch (ex) {
-    const errorMessage = ex.message;
-    dispatch({ type: 'CREATE_LEAGUE_FAILURE', errorMessage });
-    return Promise.reject(errorMessage);
+    const { message } = await ex.response.json();
+    dispatch({ type: 'CREATE_LEAGUE_FAILURE', message });
+    return Promise.reject(ex.message);
   }
 
   const league = normalize(response.data, schema.league);

@@ -10,11 +10,17 @@ import { Div } from 'glamorous';
 import { parse } from 'querystring';
 
 import * as leagueActions from '../../actions/leagues';
-import { getLeague, getRounds, getAuthUser } from '../../reducers';
+import {
+  getLeague,
+  getRounds,
+  getAuthUser,
+  getRoundError
+} from '../../reducers';
 import Routes from '../../utils/routes';
 
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
+import ErrorMessage from '../../components/ErrorMessage';
 import LeagueInviteBanner from '../../components/LeagueInviteBanner';
 
 import LeagueInvite from '../LeagueInvite';
@@ -97,7 +103,7 @@ class LeagueRoute extends Component {
 
   render() {
     const { value, defaultRoundId } = this.state;
-    const { user, league, rounds } = this.props;
+    const { user, league, rounds, roundError } = this.props;
 
     const startDate =
       league &&
@@ -129,6 +135,7 @@ class LeagueRoute extends Component {
 
         <SwipeableViews index={value} onChangeIndex={i => this.handleChange(i)}>
           <div>
+            {roundError && <ErrorMessage>{roundError}</ErrorMessage>}
             {rounds.map(round => (
               <SegmentCard
                 {...round}
@@ -141,7 +148,6 @@ class LeagueRoute extends Component {
                 <LeagueStandings leagueId={league.id} roundId={round.id} />
               </SegmentCard>
             ))}
-
             {!rounds.length && (
               <div>
                 <Typography align="center">
@@ -182,7 +188,8 @@ export default connect(
   (state, props) => ({
     league: getLeague(state, props.match.params.id),
     rounds: getRounds(state),
-    user: getAuthUser(state)
+    user: getAuthUser(state),
+    roundError: getRoundError(state)
   }),
   leagueActions
 )(LeagueRoute);
