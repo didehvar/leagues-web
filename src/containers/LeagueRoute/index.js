@@ -43,9 +43,12 @@ class LeagueRoute extends Component {
   }
 
   static getValueFromProps = props => {
-    const path = props.location.pathname;
+    const { league, location } = props;
+    const fastest = league && league.type && league.type.name === 'fastest';
+    const path = location.pathname;
     if (path.includes('/standings')) return 1;
     if (path.includes('/invite')) return 2;
+    if (!fastest) return 1;
     return 0;
   };
 
@@ -56,9 +59,10 @@ class LeagueRoute extends Component {
   handleChange = value => {
     const {
       history,
-      league: { id, slug }
+      league: { id, slug, type }
     } = this.props;
-    if (value) history.push(Routes.leagueStandings(id, slug));
+    const fastest = type && type.name === 'fastest';
+    if (!fastest || value) history.push(Routes.leagueStandings(id, slug));
     else history.push(Routes.league(id, slug));
   };
 
@@ -109,6 +113,8 @@ class LeagueRoute extends Component {
       league &&
       new Date(rounds.length ? last(rounds).endDate : league.startDate);
 
+    const fastest = league && league.type && league.type.name === 'fastest';
+
     return (
       <Style.Container>
         <AppBar
@@ -127,7 +133,10 @@ class LeagueRoute extends Component {
             centered
             fullWidth
           >
-            <Tab label="Segments" />
+            <Tab
+              label="Segments"
+              style={{ display: fastest ? 'inline-flex' : 'none' }}
+            />
             <Tab label="Standings" />
             <Tab label="Invite" style={{ display: 'none' }} />
           </Tabs>
@@ -135,45 +144,52 @@ class LeagueRoute extends Component {
 
         <SwipeableViews index={value} onChangeIndex={i => this.handleChange(i)}>
           <div>
-            {roundError && <ErrorMessage>{roundError}</ErrorMessage>}
-            {rounds.map(round => (
-              <SegmentCard
-                {...round}
-                key={round.id}
-                owner={user.id === league.userId}
-                onOpen={this.segmentOnOpen}
-                onClose={this.segmentOnClose}
-                defaultOpen={round.id === defaultRoundId}
-              >
-                <LeagueStandings leagueId={league.id} roundId={round.id} />
-              </SegmentCard>
-            ))}
-            {!rounds.length && (
+            {fastest && (
               <div>
-                <Typography align="center">
-                  This league has no segments.
-                </Typography>
+                {roundError && <ErrorMessage>{roundError}</ErrorMessage>}
+                {rounds.map(round => (
+                  <SegmentCard
+                    {...round}
+                    key={round.id}
+                    owner={user.id === league.userId}
+                    onOpen={this.segmentOnOpen}
+                    onClose={this.segmentOnClose}
+                    defaultOpen={round.id === defaultRoundId}
+                  >
+                    <LeagueStandings leagueId={league.id} roundId={round.id} />
+                  </SegmentCard>
+                ))}
+                {!rounds.length && (
+                  <div>
+                    <Typography align="center">
+                      This league has no segments.
+                    </Typography>
 
-                {league && (
-                  <AddSegmentDialog leagueId={league.id} startDate={startDate}>
-                    {onOpen => (
-                      <Div marginTop="1rem" textAlign="center">
-                        <Button
-                          variant="raised"
-                          color="primary"
-                          onClick={onOpen}
-                        >
-                          Add a segment
-                        </Button>
-                      </Div>
+                    {league && (
+                      <AddSegmentDialog
+                        leagueId={league.id}
+                        startDate={startDate}
+                      >
+                        {onOpen => (
+                          <Div marginTop="1rem" textAlign="center">
+                            <Button
+                              variant="raised"
+                              color="primary"
+                              onClick={onOpen}
+                            >
+                              Add a segment
+                            </Button>
+                          </Div>
+                        )}
+                      </AddSegmentDialog>
                     )}
-                  </AddSegmentDialog>
+                  </div>
                 )}
               </div>
             )}
           </div>
 
-          <LeagueStandings />
+          <LeagueStandings leagueId={league && league.id} />
 
           <LeagueInvite />
         </SwipeableViews>

@@ -3,14 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 
-import { getRound, getLeague, getParticipants } from '../../reducers';
+import { getPoints } from '../../reducers';
 
 import Table from '../../components/Table';
 
 const columns = [
   {
     id: 'avatar',
-    padding: 'none',
+    padding: 'dense',
     component: ({ value }) => <Avatar src={value} />
   },
   {
@@ -22,48 +22,26 @@ const columns = [
   {
     id: 'points',
     label: 'Points',
-    padding: 'none',
+    padding: 'dense',
     numeric: true
   }
 ];
 
 class LeagueStandings extends React.Component {
-  constructor(props) {
-    super(props);
-
-    const { round = {}, participants } = props;
-    const { points = [] } = round;
-    this.state = {
-      points: points.map(({ id, userId, points }) => {
-        const user = participants.find(pa => pa.id === userId);
-        return {
-          id,
-          avatar: user.avatar,
-          name: user.name,
-          points
-        };
-      })
-    };
-  }
-
   render() {
-    const { points } = this.state;
+    const { points } = this.props;
     return <Table columns={columns} data={points} />;
   }
 }
 
 LeagueStandings.propTypes = {
-  roundId: PropTypes.number,
-  leagueId: PropTypes.number
+  points: PropTypes.array
 };
 
 LeagueStandings.defaultProps = {
-  roundId: null,
-  leagueId: null
+  points: []
 };
 
 export default connect((state, props) => ({
-  league: getLeague(state, props.leagueId),
-  round: getRound(state, props.roundId),
-  participants: getParticipants(state, props.leagueId)
+  points: getPoints(state, props.leagueId, props.roundId)
 }))(LeagueStandings);

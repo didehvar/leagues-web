@@ -57,6 +57,12 @@ export const getRound = (state, id) => fromRounds.getRound(state.rounds, id);
 
 export const getRounds = state => fromRounds.getRounds(state.rounds);
 
+export const getLeagueRounds = (state, leagueId) => {
+  const league = getLeague(state, leagueId);
+  if (!league) return [];
+  return league.rounds.map(roundId => getRound(state, roundId));
+};
+
 export const getRoundError = state => fromRounds.getError(state.rounds);
 
 // Segments
@@ -72,4 +78,42 @@ export const getParticipants = (state, id) => {
   const league = getLeague(state, id);
   if (!league || !league.participants) return [];
   return league.participants.map(p => getUser(state, p));
+};
+
+export const getPoints = (state, leagueId, roundId) => {
+  const league = getLeague(state, leagueId);
+  if (!league) return [];
+
+  const allPoints = () => {
+    const all = getLeagueRounds(state, leagueId).reduce((previous, current) => {
+      for (const { userId, points } of current.points) {
+        previous[userId] = (previous[userId] || 0) + points;
+      }
+      return previous;
+    }, {});
+
+    return Object.keys(all).map(userId => ({
+      userId: parseInt(userId, 10),
+      points: all[userId]
+    }));
+  };
+
+  const points =
+    league.type.name === 'fastest'
+      ? roundId
+        ? getRound(state, roundId).points
+        : allPoints()
+      : league.points;
+
+  return getParticipants(state, leagueId).map(
+    ({ id, avatar, firstname, lastname }) => {
+      const point = points.find(p => p.userId === id) || {};
+      return {
+        id,
+        avatar,
+        name: `${firstname} ${lastname}`,
+        points: point.points || 0
+      };
+    }
+  );
 };

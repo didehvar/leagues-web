@@ -7,19 +7,31 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 
+const DEFAULT_ORDER = 'asc';
+
 class Table extends Component {
   constructor(props) {
     super(props);
 
-    const order = 'asc';
-    const orderBy = props.columns.find(c => c.default).id;
-
+    const order = DEFAULT_ORDER;
+    const orderBy = this.orderBy(props);
     this.state = {
       order,
       orderBy,
       data: this.sortData(order, orderBy, props.data)
     };
   }
+
+  componentDidUpdate(prevProps) {
+    const { data } = this.props;
+    if (prevProps.data !== data) {
+      this.setState({
+        data: this.sortData(DEFAULT_ORDER, this.orderBy(this.props), data)
+      });
+    }
+  }
+
+  orderBy = props => props.columns.find(c => c.default).id;
 
   sortData = (order, orderBy, data) => {
     const sort = (a, b) =>
