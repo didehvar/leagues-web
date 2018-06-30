@@ -12,6 +12,7 @@ import IconButton from '@material-ui/core/IconButton';
 import AddIcon from '@material-ui/icons/Add';
 import Dialog from '@material-ui/core/Dialog';
 import CloseIcon from '@material-ui/icons/Close';
+import startOfDay from 'date-fns/start_of_day';
 
 import AppBar from '../AppBar';
 import SegmentSelector from '../../containers/SegmentSelector';
@@ -29,6 +30,7 @@ class AddSegmentForm extends Component {
   render() {
     const { segment } = this.state;
     const {
+      distance,
       open,
       onOpen,
       onClose,
@@ -56,7 +58,7 @@ class AddSegmentForm extends Component {
             <AppBar
               color="default"
               position="static"
-              title="Add segment"
+              title={`Add ${distance ? 'round' : 'segment'}`}
               left={
                 <IconButton onClick={onClose} aria-label="Back">
                   <CloseIcon />
@@ -67,7 +69,9 @@ class AddSegmentForm extends Component {
                   size="small"
                   type="submit"
                   color="primary"
-                  disabled={(!values.segmentId && !isValid) || isSubmitting}
+                  disabled={
+                    (!distance && !values.segmentId && !isValid) || isSubmitting
+                  }
                 >
                   Add
                 </Button>
@@ -81,6 +85,27 @@ class AddSegmentForm extends Component {
                       <FormHelperText error>{errors.segmentId}</FormHelperText>
                     )}
                 </Grid>
+
+                {distance && (
+                  <Grid item xs={12}>
+                    <TextField
+                      id="name"
+                      label="Name"
+                      type="text"
+                      value={values.name}
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      required
+                      fullWidth
+                    />
+                    {errors &&
+                      errors.name &&
+                      touched.name && (
+                        <FormHelperText error>{errors.name}</FormHelperText>
+                      )}
+                  </Grid>
+                )}
+
                 <Grid item xs={12}>
                   <TextField
                     id="startDate"
@@ -95,7 +120,8 @@ class AddSegmentForm extends Component {
                     required
                     fullWidth
                   />
-                  {errors.startDate &&
+                  {errors &&
+                    errors.startDate &&
                     touched.startDate && (
                       <FormHelperText error>{errors.startDate}</FormHelperText>
                     )}
@@ -114,18 +140,22 @@ class AddSegmentForm extends Component {
                     required
                     fullWidth
                   />
-                  {errors.endDate &&
+                  {errors &&
+                    errors.endDate &&
                     touched.endDate && (
                       <FormHelperText error>{errors.endDate}</FormHelperText>
                     )}
                 </Grid>
-                <Grid item xs={12}>
-                  <SegmentSelector
-                    color="secondary"
-                    disabled={isSubmitting}
-                    onSelect={this.onSelectSegment}
-                  />
-                </Grid>
+
+                {!distance && (
+                  <Grid item xs={12}>
+                    <SegmentSelector
+                      color="secondary"
+                      disabled={isSubmitting}
+                      onSelect={this.onSelectSegment}
+                    />
+                  </Grid>
+                )}
 
                 {segment && (
                   <Grid item xs={12}>
@@ -149,6 +179,7 @@ class AddSegmentForm extends Component {
 }
 
 AddSegmentForm.propTypes = {
+  distance: PropTypes.bool,
   onSubmit: PropTypes.func.isRequired,
   startDate: PropTypes.instanceOf(Date),
   values: PropTypes.shape({
@@ -160,19 +191,25 @@ AddSegmentForm.propTypes = {
   })
 };
 
+AddSegmentForm.defaultProps = {
+  distance: false
+};
+
 export default withFormik({
   mapPropsToValues: ({ startDate }) => {
-    const date = startDate || new Date();
+    const date = startOfDay(startDate || new Date());
     return {
       startDate: date,
       endDate: addWeeks(date, 2),
-      segmentId: undefined
+      segmentId: undefined,
+      name: undefined
     };
   },
   validationSchema: Yup.object().shape({
     startDate: Yup.date().required(),
     endDate: Yup.date().required(),
-    segmentId: Yup.number().required()
+    segmentId: Yup.number(),
+    name: Yup.string()
   }),
   handleSubmit: async (
     values,

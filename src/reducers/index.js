@@ -84,26 +84,7 @@ export const getPoints = (state, leagueId, roundId) => {
   const league = getLeague(state, leagueId);
   if (!league) return [];
 
-  const allPoints = () => {
-    const all = getLeagueRounds(state, leagueId).reduce((previous, current) => {
-      for (const { userId, points } of current.points) {
-        previous[userId] = (previous[userId] || 0) + points;
-      }
-      return previous;
-    }, {});
-
-    return Object.keys(all).map(userId => ({
-      userId: parseInt(userId, 10),
-      points: all[userId]
-    }));
-  };
-
-  const points =
-    league.type.name === 'fastest'
-      ? roundId
-        ? getRound(state, roundId).points
-        : allPoints()
-      : league.points;
+  const points = roundId ? getRound(state, roundId).points : league.points;
 
   return getParticipants(state, leagueId).map(
     ({ id, avatar, firstname, lastname }) => {

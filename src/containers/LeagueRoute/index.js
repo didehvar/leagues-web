@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import last from 'lodash/last';
+import capitalize from 'lodash/capitalize';
 import SwipeableViews from 'react-swipeable-views';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -8,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Div } from 'glamorous';
 import { parse } from 'querystring';
+import max from 'date-fns/max';
 
 import * as leagueActions from '../../actions/leagues';
 import {
@@ -43,12 +45,10 @@ class LeagueRoute extends Component {
   }
 
   static getValueFromProps = props => {
-    const { league, location } = props;
-    const fastest = league && league.type && league.type.name === 'fastest';
+    const { location } = props;
     const path = location.pathname;
     if (path.includes('/standings')) return 1;
     if (path.includes('/invite')) return 2;
-    if (!fastest) return 1;
     return 0;
   };
 
@@ -59,10 +59,9 @@ class LeagueRoute extends Component {
   handleChange = value => {
     const {
       history,
-      league: { id, slug, type }
+      league: { id, slug }
     } = this.props;
-    const fastest = type && type.name === 'fastest';
-    if (!fastest || value) history.push(Routes.leagueStandings(id, slug));
+    if (value) history.push(Routes.leagueStandings(id, slug));
     else history.push(Routes.league(id, slug));
   };
 
@@ -109,11 +108,14 @@ class LeagueRoute extends Component {
     const { value, defaultRoundId } = this.state;
     const { user, league, rounds, roundError } = this.props;
 
+    const distance = league && league.type && league.type.name === 'distance';
+    const roundName = distance ? 'round' : 'segment';
+
     const startDate =
       league &&
-      new Date(rounds.length ? last(rounds).endDate : league.startDate);
-
-    const fastest = league && league.type && league.type.name === 'fastest';
+      new Date(
+        rounds.length ? last(rounds).endDate : max(new Date(), league.startDate)
+      );
 
     return (
       <Style.Container>
@@ -133,10 +135,7 @@ class LeagueRoute extends Component {
             centered
             fullWidth
           >
-            <Tab
-              label="Segments"
-              style={{ display: fastest ? 'inline-flex' : 'none' }}
-            />
+            <Tab label={`${capitalize(roundName)}s`} />
             <Tab label="Standings" />
             <Tab label="Invite" style={{ display: 'none' }} />
           </Tabs>
@@ -144,46 +143,43 @@ class LeagueRoute extends Component {
 
         <SwipeableViews index={value} onChangeIndex={i => this.handleChange(i)}>
           <div>
-            {fastest && (
+            {roundError && <ErrorMessage>{roundError}</ErrorMessage>}
+            {rounds.map(round => (
+              <SegmentCard
+                {...round}
+                key={round.id}
+                owner={user.id === league.userId}
+                onOpen={this.segmentOnOpen}
+                onClose={this.segmentOnClose}
+                defaultOpen={round.id === defaultRoundId}
+              >
+                <LeagueStandings leagueId={league.id} roundId={round.id} />
+              </SegmentCard>
+            ))}
+            {!rounds.length && (
               <div>
-                {roundError && <ErrorMessage>{roundError}</ErrorMessage>}
-                {rounds.map(round => (
-                  <SegmentCard
-                    {...round}
-                    key={round.id}
-                    owner={user.id === league.userId}
-                    onOpen={this.segmentOnOpen}
-                    onClose={this.segmentOnClose}
-                    defaultOpen={round.id === defaultRoundId}
-                  >
-                    <LeagueStandings leagueId={league.id} roundId={round.id} />
-                  </SegmentCard>
-                ))}
-                {!rounds.length && (
-                  <div>
-                    <Typography align="center">
-                      This league has no segments.
-                    </Typography>
+                <Typography align="center">
+                  This league has no {`${roundName}s`}.
+                </Typography>
 
-                    {league && (
-                      <AddSegmentDialog
-                        leagueId={league.id}
-                        startDate={startDate}
-                      >
-                        {onOpen => (
-                          <Div marginTop="1rem" textAlign="center">
-                            <Button
-                              variant="raised"
-                              color="primary"
-                              onClick={onOpen}
-                            >
-                              Add a segment
-                            </Button>
-                          </Div>
-                        )}
-                      </AddSegmentDialog>
+                {league && (
+                  <AddSegmentDialog
+                    leagueId={league.id}
+                    startDate={startDate}
+                    distance={distance}
+                  >
+                    {onOpen => (
+                      <Div marginTop="1rem" textAlign="center">
+                        <Button
+                          variant="raised"
+                          color="primary"
+                          onClick={onOpen}
+                        >
+                          Add a {roundName}
+                        </Button>
+                      </Div>
                     )}
-                  </div>
+                  </AddSegmentDialog>
                 )}
               </div>
             )}

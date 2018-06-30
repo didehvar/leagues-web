@@ -12,8 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
-import addWeeks from 'date-fns/add_weeks';
-import endOfDay from 'date-fns/end_of_day';
+import startOfDay from 'date-fns/start_of_day';
 
 const CreateLeagueForm = ({
   values,
@@ -110,28 +109,6 @@ const CreateLeagueForm = ({
               <FormHelperText error>{errors.type}</FormHelperText>
             )}
         </FormControl>
-        {values.type === 'distance' && (
-          <Grid item xs={12}>
-            <TextField
-              id="endDate"
-              type="date"
-              label="End date"
-              value={format(values.endDate, 'YYYY-MM-DD')}
-              onChange={event => {
-                return event.target.value && handleChange(event);
-              }}
-              onBlur={handleBlur}
-              inputProps={{ required: true }}
-              required
-              fullWidth
-            />
-            {errors &&
-              errors.endDate &&
-              touched.endDate && (
-                <FormHelperText error>{errors.endDate}</FormHelperText>
-              )}
-          </Grid>
-        )}
       </Grid>
       <Grid item xs={12}>
         <Button
@@ -163,17 +140,15 @@ CreateLeagueForm.propTypes = {
 export default withFormik({
   mapPropsToValues: () => ({
     name: '',
-    startDate: endOfDay(new Date()),
+    startDate: startOfDay(new Date()),
     discipline: 'run',
-    type: 'fastest',
-    endDate: addWeeks(endOfDay(new Date()), 2)
+    type: 'fastest'
   }),
   validationSchema: Yup.object().shape({
     name: Yup.string().required(),
     startDate: Yup.date().required(),
     discipline: Yup.string().required(),
-    type: Yup.string().required(),
-    endDate: Yup.date()
+    type: Yup.string().required()
   }),
   handleSubmit: async (
     values,

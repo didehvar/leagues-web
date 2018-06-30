@@ -19,7 +19,7 @@ class AddSegmentDialog extends Component {
   };
 
   render() {
-    const { children, startDate } = this.props;
+    const { children, startDate, distance } = this.props;
     const { open } = this.state;
 
     return (
@@ -29,6 +29,7 @@ class AddSegmentDialog extends Component {
         onOpen={this.onOpen}
         onClose={this.onClose}
         startDate={startDate}
+        distance={distance}
       >
         {children}
       </AddSegmentForm>
@@ -38,11 +39,16 @@ class AddSegmentDialog extends Component {
 
 AddSegmentDialog.propTypes = {
   leagueId: PropTypes.number,
-  startDate: PropTypes.instanceOf(Date)
+  startDate: PropTypes.instanceOf(Date),
+  distance: PropTypes.bool
 };
 
 AddSegmentDialog.defaultProps = {
-  leagueId: undefined
+  leagueId: undefined,
+  distance: false
 };
 
-export default connect(null, roundActions)(AddSegmentDialog);
+export default connect(
+  null,
+  roundActions
+)(AddSegmentDialog);
