@@ -15,7 +15,7 @@ const LoginButton = ({ authenticated }) => {
       }${window.location.search}`
     )}`,
     'response_type=code',
-    'scope=view_private'
+    'scope=view_private',
   ].join('&');
 
   if (authenticated) return null;

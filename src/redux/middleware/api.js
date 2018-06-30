@@ -20,8 +20,8 @@ const api = history => ({ dispatch, getState }) => next => async action => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: token && `Bearer ${token}`
-        }
+          Authorization: token && `Bearer ${token}`,
+        },
       },
       { body: options.body && JSON.stringify(options.body) }
     )

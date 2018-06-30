@@ -11,7 +11,7 @@ const rootReducer = combineReducers({
   leagues,
   rounds,
   segments,
-  users
+  users,
 });
 
 export default rootReducer;
@@ -51,6 +51,11 @@ export const getLeagueSearch = state =>
   fromLeagues.getLeagueSearch(state.leagues);
 
 export const getLeagueInvite = state => fromLeagues.getInvite(state.leagues);
+
+export const getOwnedLeagues = state => {
+  const user = getAuthUser(state);
+  return getAllLeagues(state).filter(l => l.userId === user.id);
+};
 
 // Rounds
 export const getRound = (state, id) => fromRounds.getRound(state.rounds, id);
@@ -93,7 +98,7 @@ export const getPoints = (state, leagueId, roundId) => {
         id,
         avatar,
         name: `${firstname} ${lastname}`,
-        points: point.points || 0
+        points: point.points || 0,
       };
     }
   );

@@ -77,11 +77,11 @@ class SegmentCard extends Component {
           {...rest}
         >
           <Card component={Style.Card}>
-            <Typography type="body2" color="secondary" component="div">
+            <Typography variant="body2" color="secondary" component="div">
               <InlineIcon icon={isAfter(new Date(), endDate) ? Done : Cached} />
               <DateRange start={startDate} end={endDate} />
             </Typography>
-            <Typography type="body2">{name}</Typography>
+            <Typography variant="body2">{name}</Typography>
           </Card>
         </ButtonBase>
 

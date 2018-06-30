@@ -22,7 +22,7 @@ function LeagueCard({ league, onView, ...rest }) {
     <Card {...rest} component={Style.Card}>
       <ButtonBase onClick={() => onView(id, slug)}>
         <CardContent>
-          <Typography type="subheading" component={Style.Heading}>
+          <Typography variant="subheading" component={Style.Heading}>
             {name}
           </Typography>
         </CardContent>
@@ -60,5 +60,5 @@ function LeagueCard({ league, onView, ...rest }) {
 export default LeagueCard;
 
 LeagueCard.propTypes = {
-  onView: PropTypes.func.isRequired
+  onView: PropTypes.func.isRequired,
 };

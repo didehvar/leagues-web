@@ -19,7 +19,7 @@ export const fetchLeague = id => async dispatch => {
 
   dispatch({
     type: 'FETCH_LEAGUE_SUCCESS',
-    response: normalize(response.data, schema.league)
+    response: normalize(response.data, schema.league),
   });
   return Promise.resolve();
 };
@@ -33,7 +33,7 @@ export const fetchLeagues = query => async (dispatch, getState) => {
       api(
         `leagues?${stringify({
           ...query,
-          search: getLeagueSearch(getState())
+          search: getLeagueSearch(getState()),
         })}`
       )
     );
@@ -46,7 +46,7 @@ export const fetchLeagues = query => async (dispatch, getState) => {
   dispatch({
     type: 'FETCH_LEAGUES_SUCCESS',
     response: normalize(response.data.results, schema.leagueList),
-    total: response.data.total
+    total: response.data.total,
   });
   return Promise.resolve();
 };
@@ -67,7 +67,7 @@ export const createLeague = data => async dispatch => {
 
   dispatch({
     type: 'CREATE_LEAGUE_SUCCESS',
-    response: league
+    response: league,
   });
   return Promise.resolve(league);
 };
@@ -87,7 +87,7 @@ export const joinLeague = id => async dispatch => {
   dispatch({
     type: 'JOIN_LEAGUE_SUCCESS',
     id,
-    userId: response.data.user.id
+    userId: response.data.user.id,
   });
   return Promise.resolve();
 };
@@ -107,7 +107,7 @@ export const leaveLeague = id => async dispatch => {
   dispatch({
     type: 'LEAVE_LEAGUE_SUCCESS',
     id,
-    userId: response.data.user.id
+    userId: response.data.user.id,
   });
   return Promise.resolve();
 };
@@ -131,7 +131,7 @@ export const getInvite = id => async dispatch => {
   dispatch({
     type: 'GET_LEAGUE_INVITE_SUCCESS',
     id,
-    ...response.data
+    ...response.data,
   });
   return Promise.resolve();
 };
@@ -145,8 +145,8 @@ export const useInvite = (id, code) => async dispatch => {
       api(`leagues/${id}/use-invite`, {
         method: 'POST',
         body: {
-          code
-        }
+          code,
+        },
       })
     );
   } catch (ex) {
@@ -158,7 +158,7 @@ export const useInvite = (id, code) => async dispatch => {
   dispatch({
     type: 'USE_LEAGUE_INVITE_SUCCESS',
     id,
-    userId: response.data.user.id
+    userId: response.data.user.id,
   });
   return Promise.resolve();
 };

@@ -11,7 +11,12 @@ const AppBar = ({ children, title, left, right, ...props }) => {
       <Style.Toolbar>
         <Style.Side>{left}</Style.Side>
         <Style.Center>
-          <Typography type="subheading" color="inherit" align="center" noWrap>
+          <Typography
+            variant="subheading"
+            color="inherit"
+            align="center"
+            noWrap
+          >
             {title}
           </Typography>
         </Style.Center>
@@ -25,13 +30,13 @@ const AppBar = ({ children, title, left, right, ...props }) => {
 AppBar.propTypes = {
   children: PropTypes.node,
   left: PropTypes.element,
-  right: PropTypes.element
+  right: PropTypes.element,
 };
 
 AppBar.defaultProps = {
   children: undefined,
   left: undefined,
-  right: undefined
+  right: undefined,
 };
 
 export default AppBar;

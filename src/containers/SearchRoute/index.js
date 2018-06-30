@@ -4,7 +4,7 @@ import {
   List,
   WindowScroller,
   AutoSizer,
-  InfiniteLoader
+  InfiniteLoader,
 } from 'react-virtualized';
 
 import * as leagueActions from '../../actions/leagues';
@@ -88,7 +88,7 @@ class SearchRoute extends Component {
 export default connect(
   state => ({
     leagues: getLeagues(state),
-    totalLeagues: getTotalLeagues(state)
+    totalLeagues: getTotalLeagues(state),
   }),
   leagueActions
 )(SearchRoute);
