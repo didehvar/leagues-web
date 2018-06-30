@@ -7,18 +7,16 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 
-const DEFAULT_ORDER = 'asc';
-
 class Table extends Component {
   constructor(props) {
     super(props);
 
-    const order = DEFAULT_ORDER;
+    const order = props.order;
     const orderBy = this.orderBy(props);
     this.state = {
       order,
       orderBy,
-      data: this.sortData(order, orderBy, props.data)
+      data: this.sortData(props.data, { order, orderBy }),
     };
   }
 
@@ -26,14 +24,15 @@ class Table extends Component {
     const { data } = this.props;
     if (prevProps.data !== data) {
       this.setState({
-        data: this.sortData(DEFAULT_ORDER, this.orderBy(this.props), data)
+        data: this.sortData(data),
       });
     }
   }
 
   orderBy = props => props.columns.find(c => c.default).id;
 
-  sortData = (order, orderBy, data) => {
+  sortData = (data, state = null) => {
+    const { order, orderBy } = state || this.state;
     const sort = (a, b) =>
       typeof a === 'string' ? a.localeCompare(b) : a > b ? 1 : -1;
 
@@ -48,13 +47,18 @@ class Table extends Component {
   handleRequestSort = property => {
     const { orderBy, order, data } = this.state;
 
-    const newOrder = orderBy === property && order === 'desc' ? 'asc' : 'desc';
+    const newOrder =
+      orderBy === property ? (order === 'desc' ? 'asc' : 'desc') : 'desc';
     const newOrderBy = property;
 
-    this.setState({
-      data: this.sortData(newOrder, newOrderBy, data),
+    const newState = {
       order: newOrder,
-      orderBy: newOrderBy
+      orderBy: newOrderBy,
+    };
+
+    this.setState({
+      data: this.sortData(data, newState),
+      ...newState,
     });
   };
 
@@ -105,13 +109,15 @@ Table.propTypes = {
       numeric: PropTypes.bool,
       padding: PropTypes.string,
       label: PropTypes.string,
-      component: PropTypes.oneOfType([PropTypes.func, PropTypes.element])
+      component: PropTypes.oneOfType([PropTypes.func, PropTypes.element]),
     })
   ),
-  data: PropTypes.arrayOf(PropTypes.object)
+  data: PropTypes.arrayOf(PropTypes.object),
+  order: PropTypes.oneOf(['asc', 'desc']),
 };
 
 Table.defaultProps = {
   columns: [],
-  data: []
+  data: [],
+  order: 'asc',
 };

@@ -11,37 +11,37 @@ const columns = [
   {
     id: 'avatar',
     padding: 'dense',
-    component: ({ value }) => <Avatar src={value} />
+    component: ({ value }) => <Avatar src={value} />,
+  },
+  {
+    id: 'name',
+    label: 'Name',
+    padding: 'none',
   },
   {
     default: true,
-    id: 'name',
-    label: 'Name',
-    padding: 'none'
-  },
-  {
     id: 'points',
     label: 'Points',
     padding: 'dense',
-    numeric: true
-  }
+    numeric: true,
+  },
 ];
 
 class LeagueStandings extends React.Component {
   render() {
     const { points } = this.props;
-    return <Table columns={columns} data={points} />;
+    return <Table columns={columns} data={points} order="desc" />;
   }
 }
 
 LeagueStandings.propTypes = {
-  points: PropTypes.array
+  points: PropTypes.array,
 };
 
 LeagueStandings.defaultProps = {
-  points: []
+  points: [],
 };
 
 export default connect((state, props) => ({
-  points: getPoints(state, props.leagueId, props.roundId)
+  points: getPoints(state, props.leagueId, props.roundId),
 }))(LeagueStandings);
