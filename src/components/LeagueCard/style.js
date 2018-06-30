@@ -4,7 +4,7 @@ import MuiButton from '@material-ui/core/Button';
 export const Card = glamorous.div(({ theme }) => ({
   maxWidth: 400,
   minWidth: 250,
-  margin: '0.5rem',
+  margin: '0 auto',
   flex: '1 1 0',
   display: 'flex',
   flexDirection: 'column',
@@ -13,23 +13,23 @@ export const Card = glamorous.div(({ theme }) => ({
   '> button': {
     display: 'block',
     textAlign: 'initial',
-    backgroundColor: '#fff'
-  }
+    backgroundColor: '#fff',
+  },
 }));
 
 export const FlagImage = glamorous.img({
   width: 'auto',
   maxHeight: 22,
-  verticalAlign: 'middle'
+  verticalAlign: 'middle',
 });
 
 export const Icon = glamorous.span({});
 
 export const Heading = glamorous.h3({
   maxHeight: 24,
-  overflow: 'hidden'
+  overflow: 'hidden',
 });
 
 export const Button = glamorous(MuiButton)({
-  marginLeft: 'auto !important'
+  marginLeft: 'auto !important',
 });

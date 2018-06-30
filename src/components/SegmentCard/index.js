@@ -28,17 +28,17 @@ class SegmentCard extends Component {
     owner: PropTypes.bool,
     onOpen: PropTypes.func.isRequired,
     onClose: PropTypes.func.isRequired,
-    defaultOpen: PropTypes.bool
+    defaultOpen: PropTypes.bool,
   };
 
   static defaultProps = {
-    owner: false
+    owner: false,
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      open: props.defaultOpen
+      open: props.defaultOpen,
     };
   }
 
@@ -107,4 +107,7 @@ class SegmentCard extends Component {
   }
 }
 
-export default connect(null, roundActions)(SegmentCard);
+export default connect(
+  null,
+  roundActions
+)(SegmentCard);

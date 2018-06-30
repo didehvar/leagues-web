@@ -1,12 +1,16 @@
 import glamorous from 'glamorous';
 
+export const Container = glamorous.div({
+  margin: '0 auto',
+});
+
 export const Base = glamorous.button({
   width: '100%',
   padding: 0,
-  textAlign: 'left'
+  textAlign: 'left',
 });
 
 export const Card = glamorous.div({
   padding: '1rem 0.5rem',
-  width: '100%'
+  width: '100%',
 });

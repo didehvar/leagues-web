@@ -1,7 +1,9 @@
 import glamorous from 'glamorous';
 
 export const Container = glamorous.div({
-  padding: '1rem 1.25rem'
+  padding: '1rem 1.25rem',
+  margin: '0 auto',
+  maxWidth: 768,
 });
 
 export const FooterNav = glamorous.div({}, ({ theme }) => ({
@@ -9,5 +11,5 @@ export const FooterNav = glamorous.div({}, ({ theme }) => ({
   position: 'fixed',
   bottom: 0,
   left: 0,
-  width: '100%'
+  width: '100%',
 }));

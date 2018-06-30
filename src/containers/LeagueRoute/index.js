@@ -16,7 +16,7 @@ import {
   getLeague,
   getRounds,
   getAuthUser,
-  getRoundError
+  getRoundError,
 } from '../../reducers';
 import Routes from '../../utils/routes';
 
@@ -40,7 +40,7 @@ class LeagueRoute extends Component {
       defaultRoundId: parseInt(
         parse(props.location.search.substr(1)).segment,
         10
-      )
+      ),
     };
   }
 
@@ -53,13 +53,13 @@ class LeagueRoute extends Component {
   };
 
   static getDerivedStateFromProps = nextProps => ({
-    value: LeagueRoute.getValueFromProps(nextProps)
+    value: LeagueRoute.getValueFromProps(nextProps),
   });
 
   handleChange = value => {
     const {
       history,
-      league: { id, slug }
+      league: { id, slug },
     } = this.props;
     if (value) history.push(Routes.leagueStandings(id, slug));
     else history.push(Routes.league(id, slug));
@@ -80,18 +80,18 @@ class LeagueRoute extends Component {
   segmentOnOpen = id => {
     const {
       location: { pathname },
-      history
+      history,
     } = this.props;
     history.push({
       pathname: pathname,
-      search: `?segment=${id}`
+      search: `?segment=${id}`,
     });
   };
 
   segmentOnClose = () => {
     const {
       location: { pathname },
-      history
+      history,
     } = this.props;
     history.push(pathname);
   };
@@ -99,7 +99,7 @@ class LeagueRoute extends Component {
   invite = () => {
     const {
       history,
-      league: { id, slug }
+      league: { id, slug },
     } = this.props;
     history.push(Routes.leagueInvite(id, slug));
   };
@@ -201,7 +201,7 @@ export default connect(
     league: getLeague(state, props.match.params.id),
     rounds: getRounds(state),
     user: getAuthUser(state),
-    roundError: getRoundError(state)
+    roundError: getRoundError(state),
   }),
   leagueActions
 )(LeagueRoute);
