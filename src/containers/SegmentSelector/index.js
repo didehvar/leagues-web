@@ -8,6 +8,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import RunIcon from '@material-ui/icons/DirectionsRun';
 import BikeIcon from '@material-ui/icons/DirectionsBike';
+import Typography from '@material-ui/core/Typography';
+import { Div } from 'glamorous';
 
 import * as segmentActions from '../../actions/segments';
 import { getStarredSegments } from '../../reducers';
@@ -16,7 +18,7 @@ import Dialog from '../../components/Dialog';
 
 class SegmentSelector extends Component {
   static propTypes = {
-    onSelect: PropTypes.func.isRequired
+    onSelect: PropTypes.func.isRequired,
   };
 
   static defaultProps = {};
@@ -62,6 +64,24 @@ class SegmentSelector extends Component {
           onClose={this.handleCloseDialog}
           closeButton={false}
         >
+          {starredSegments &&
+            !starredSegments.length && (
+              <Div textAlign="center">
+                <Typography paragraph>
+                  You don't have any starred segments. Star some on Strava!
+                </Typography>
+                <Button
+                  variant="raised"
+                  color="primary"
+                  component="a"
+                  href="https://www.strava.com/segments/explore"
+                  target="_blank"
+                >
+                  Go to Strava
+                </Button>
+              </Div>
+            )}
+
           <List dense>
             {starredSegments
               .sort((a, b) => a.name.localeCompare(b.name))
@@ -91,7 +111,7 @@ class SegmentSelector extends Component {
 
 export default connect(
   state => ({
-    starredSegments: getStarredSegments(state)
+    starredSegments: getStarredSegments(state),
   }),
   segmentActions
 )(SegmentSelector);

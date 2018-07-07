@@ -44,7 +44,7 @@ class Feed extends React.Component {
         </Div>
 
         {leagues &&
-          leagues.length && (
+          leagues.length > 0 && (
             <div>
               <Typography
                 variant="title"
