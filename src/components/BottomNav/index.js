@@ -16,12 +16,12 @@ const links = [
     url: Routes.search,
     value: defaultValue,
     icon: <SearchIcon />,
-    matchStart: true
+    matchStart: true,
   },
   {
     url: Routes.newLeague,
     value: 'create',
-    icon: <AddIcon />
+    icon: <AddIcon />,
   },
   // {
   //   url: Routes.profile,
@@ -32,8 +32,8 @@ const links = [
   {
     url: Routes.settings,
     value: 'more',
-    icon: <MoreHorizIcon />
-  }
+    icon: <MoreHorizIcon />,
+  },
 ];
 
 class BottomNav extends Component {
@@ -43,7 +43,7 @@ class BottomNav extends Component {
 
   render() {
     const {
-      location: { pathname }
+      location: { pathname },
     } = this.props;
     const link = links.find(
       l => l.url === pathname || (l.matchStart && pathname.startsWith(l.url))
@@ -51,7 +51,7 @@ class BottomNav extends Component {
     const value = (link && link.value) || defaultValue;
 
     return (
-      <BottomNavigation value={value} onChange={this.handleChange}>
+      <BottomNavigation value={value} onChange={this.handleChange} showLabels>
         {links.map(({ value, icon, disabled }) => (
           <BottomNavButton
             key={value}
