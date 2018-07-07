@@ -42,7 +42,7 @@ class AddSegmentForm extends Component {
       handleChange,
       handleBlur,
       handleSubmit,
-      children
+      children,
     } = this.props;
 
     return (
@@ -185,14 +185,17 @@ AddSegmentForm.propTypes = {
   values: PropTypes.shape({
     startDate: PropTypes.oneOfType([
       PropTypes.instanceOf(Date),
-      PropTypes.string
+      PropTypes.string,
     ]),
-    endDate: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string])
-  })
+    endDate: PropTypes.oneOfType([
+      PropTypes.instanceOf(Date),
+      PropTypes.string,
+    ]),
+  }),
 };
 
 AddSegmentForm.defaultProps = {
-  distance: false
+  distance: false,
 };
 
 export default withFormik({
@@ -202,14 +205,14 @@ export default withFormik({
       startDate: date,
       endDate: addWeeks(date, 2),
       segmentId: undefined,
-      name: undefined
+      name: '',
     };
   },
   validationSchema: Yup.object().shape({
     startDate: Yup.date().required(),
     endDate: Yup.date().required(),
     segmentId: Yup.number(),
-    name: Yup.string()
+    name: Yup.string(),
   }),
   handleSubmit: async (
     values,
@@ -223,5 +226,5 @@ export default withFormik({
       setSubmitting(false);
       onClose();
     }
-  }
+  },
 })(AddSegmentForm);

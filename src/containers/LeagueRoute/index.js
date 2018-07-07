@@ -117,16 +117,22 @@ class LeagueRoute extends Component {
         rounds.length ? last(rounds).endDate : max(new Date(), league.startDate)
       );
 
+    const segmentDialog = children => (
+      <AddSegmentDialog
+        leagueId={league.id}
+        startDate={startDate}
+        distance={distance}
+      >
+        {children}
+      </AddSegmentDialog>
+    );
+
     return (
       <Style.Container>
         <AppBar
           color="default"
           title={league && league.name}
-          left={
-            league && (
-              <AddSegmentDialog leagueId={league.id} startDate={startDate} />
-            )
-          }
+          left={league && segmentDialog()}
           right={<JoinLeagueButton leagueId={league && league.id} />}
         >
           <Tabs
@@ -162,25 +168,14 @@ class LeagueRoute extends Component {
                   This league has no {`${roundName}s`}.
                 </Typography>
 
-                {league && (
-                  <AddSegmentDialog
-                    leagueId={league.id}
-                    startDate={startDate}
-                    distance={distance}
-                  >
-                    {onOpen => (
-                      <Div marginTop="1rem" textAlign="center">
-                        <Button
-                          variant="raised"
-                          color="primary"
-                          onClick={onOpen}
-                        >
-                          Add a {roundName}
-                        </Button>
-                      </Div>
-                    )}
-                  </AddSegmentDialog>
-                )}
+                {league &&
+                  segmentDialog(onOpen => (
+                    <Div marginTop="1rem" textAlign="center">
+                      <Button variant="raised" color="primary" onClick={onOpen}>
+                        Add a {roundName}
+                      </Button>
+                    </Div>
+                  ))}
               </div>
             )}
           </div>
