@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { isAuthenticated } from '../../reducers';
 import LoginButton from '../LoginButton';
 import Feed from '../Feed';
+import Typography from '@material-ui/core/Typography';
 
 class HomeRoute extends React.Component {
   render() {
@@ -12,8 +13,17 @@ class HomeRoute extends React.Component {
 
     if (!authenticated) {
       return (
-        <Div marginTop="40vh" textAlign="center">
-          <LoginButton />
+        <Div textAlign="center" marginTop="30vh">
+          <Typography variant="display1" gutterBottom>
+            Impendulo
+          </Typography>
+          <Typography variant="subheading">
+            The unofficial league builder for Strava athletes
+          </Typography>
+
+          <Div marginTop="5rem">
+            <LoginButton />
+          </Div>
         </Div>
       );
     }

@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import { Div } from 'glamorous';
 
 import * as leagueActions from '../../actions/leagues';
 import { getOwnedLeagues, getAuthUser } from '../../reducers';
@@ -23,6 +25,8 @@ class Feed extends React.Component {
 
   onView = (id, slug) => this.props.history.push(Routes.league(id, slug));
 
+  createLeague = () => this.props.history.push(Routes.newLeague);
+
   componentDidMount() {
     const { fetchLeagues, userId } = this.props;
     fetchLeagues({ userId });
@@ -33,15 +37,32 @@ class Feed extends React.Component {
 
     return (
       <div>
-        <Typography variant="title" color="inherit" align="center" noWrap>
-          Your leagues
-        </Typography>
+        <Div textAlign="center" margin="2rem">
+          <Button variant="raised" color="primary" onClick={this.createLeague}>
+            Create league
+          </Button>
+        </Div>
 
-        {leagues.map(league => (
-          <Style.Card key={league.id}>
-            <LeagueCard league={league} onView={this.onView} />
-          </Style.Card>
-        ))}
+        {leagues &&
+          leagues.length && (
+            <div>
+              <Typography
+                variant="title"
+                color="inherit"
+                align="center"
+                noWrap
+                gutterBottom
+              >
+                Your leagues
+              </Typography>
+
+              {leagues.map(league => (
+                <Style.Card key={league.id}>
+                  <LeagueCard league={league} onView={this.onView} />
+                </Style.Card>
+              ))}
+            </div>
+          )}
       </div>
     );
   }
