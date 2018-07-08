@@ -29,10 +29,7 @@ const createStore = history => {
 
   let persistor = persistStore(store);
 
-  history.listen(function(location) {
-    window.ga('set', 'page', location.pathname + location.search);
-    window.ga('send', 'pageview', location.pathname + location.search);
-  });
+  history.listen(location => window.impGtagPageviewgtag(location.pathname));
 
   return { store, persistor };
 };

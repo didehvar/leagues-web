@@ -28,7 +28,8 @@
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
 
-    gtag('config', 'UA-76511305-1');
+    window.impGtagPageviewgtag = page_path => gtag('config', 'UA-76511305-1', page_path && { page_path });
+    window.impGtagPageviewgtag();
   </script>
 </head>
 
