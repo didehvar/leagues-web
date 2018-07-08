@@ -1,7 +1,7 @@
 import {
   createStore as reduxCreateStore,
   applyMiddleware,
-  compose
+  compose,
 } from 'redux';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
@@ -15,7 +15,7 @@ const persistedReducer = persistReducer(
   {
     key: 'impendulo',
     storage,
-    whitelist: ['auth']
+    whitelist: ['auth'],
   },
   rootReducer
 );
@@ -28,6 +28,11 @@ const createStore = history => {
   );
 
   let persistor = persistStore(store);
+
+  history.listen(function(location) {
+    window.ga('set', 'page', location.pathname + location.search);
+    window.ga('send', 'pageview', location.pathname + location.search);
+  });
 
   return { store, persistor };
 };
