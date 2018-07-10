@@ -7,7 +7,7 @@ import {
   InfiniteLoader,
 } from 'react-virtualized';
 
-import * as leagueActions from '../../actions/leagues';
+import { fetchLeagues } from '../../ducks/leagues';
 import { getLeagues, getTotalLeagues } from '../../reducers';
 
 import Routes from '../../utils/routes';
@@ -90,5 +90,5 @@ export default connect(
     leagues: getLeagues(state),
     totalLeagues: getTotalLeagues(state),
   }),
-  leagueActions
+  { fetchLeagues }
 )(SearchRoute);
