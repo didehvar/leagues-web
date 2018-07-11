@@ -7,8 +7,8 @@ import {
   InfiniteLoader,
 } from 'react-virtualized';
 
-import { fetchLeagues } from '../../ducks/leagues';
-import { getLeagues, getTotalLeagues } from '../../reducers';
+import { fetchLeagues, getLeagues } from '../../ducks/leagues';
+import { getTotalLeagues } from '../../reducers';
 
 import Routes from '../../utils/routes';
 

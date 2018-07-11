@@ -1,0 +1,5 @@
+export default {
+  FETCH_LEAGUES: 'imp/leagues/FETCH_LEAGUES',
+  FETCH_LEAGUES_SUCCEEDED: 'imp/leagues/FETCH_LEAGUES_SUCCEEDED',
+  FETCH_LEAGUES_FAILED: 'imp/leagues/FETCH_LEAGUES_FAILED',
+};

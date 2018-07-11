@@ -5,7 +5,7 @@ import leagues, * as fromLeagues from './leagues';
 import rounds, * as fromRounds from './rounds';
 import segments, * as fromSegments from './segments';
 import users, * as fromUsers from './users';
-import ducks from '../ducks';
+import ducks from '../ducks/reducers';
 
 const rootReducer = combineReducers({
   auth,

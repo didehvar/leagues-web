@@ -11,7 +11,7 @@ import createSagaMiddleware from 'redux-saga';
 import api from './middleware/api';
 import jwt from './middleware/jwt';
 import rootReducer from '../reducers';
-import { registerSagas } from '../ducks';
+import registerSagas from '../ducks/sagas';
 
 const persistedReducer = persistReducer(
   {

@@ -1,4 +1,4 @@
-import * as leagues from './leagues';
+import * as leagues from './leagues/sagas';
 
 const sagas = {
   ...leagues,

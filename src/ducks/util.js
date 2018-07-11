@@ -15,5 +15,6 @@ export const api = async (url, state = {}, options = {}) => {
     body: options.body && JSON.stringify(options.body),
   });
 
-  return await response.json();
+  const { data } = await response.json();
+  return data;
 };
