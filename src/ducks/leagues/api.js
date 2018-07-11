@@ -1,3 +1,4 @@
 import { api } from '../util';
 
-export const fetchLeagues = async state => await api('leagues', state);
+export const fetchLeagues = async (state, query) =>
+  await api({ url: 'leagues', query }, state);

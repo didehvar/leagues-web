@@ -7,8 +7,7 @@ import {
   InfiniteLoader,
 } from 'react-virtualized';
 
-import { fetchLeagues, getLeagues } from '../../ducks/leagues';
-import { getTotalLeagues } from '../../reducers';
+import { fetchLeagues, getSearchLeagues, getTotal } from '../../ducks/leagues';
 
 import Routes from '../../utils/routes';
 
@@ -28,7 +27,7 @@ class SearchRoute extends Component {
   isRowLoaded = ({ index }) => !!this.props.leagues[index];
 
   loadMoreRows = async ({ startIndex, stopIndex }) => {
-    await this.props.fetchLeagues({ startIndex, stopIndex });
+    await this.props.fetchLeagues(startIndex, stopIndex);
   };
 
   rowRenderer = ({ key, index, style }) => {
@@ -87,8 +86,8 @@ class SearchRoute extends Component {
 
 export default connect(
   state => ({
-    leagues: getLeagues(state),
-    totalLeagues: getTotalLeagues(state),
+    leagues: getSearchLeagues(state),
+    totalLeagues: getTotal(state),
   }),
   { fetchLeagues }
 )(SearchRoute);

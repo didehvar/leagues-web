@@ -108,6 +108,8 @@ class LeagueRoute extends Component {
     const { value, defaultRoundId } = this.state;
     const { user, league, rounds, roundError } = this.props;
 
+    if (!league) return false;
+
     const distance = league && league.type && league.type.name === 'distance';
     const roundName = distance ? 'round' : 'segment';
 

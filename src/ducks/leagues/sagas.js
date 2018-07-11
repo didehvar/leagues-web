@@ -2,16 +2,22 @@ import { call, select, put, takeLatest } from 'redux-saga/effects';
 
 import types from './types';
 import { fetchLeagues } from './api';
+import { fetchLeaguesSucceeded, fetchLeaguesFailed, getSearch } from './';
 
-function* getLeagues() {
+function* getLeagues({ payload }) {
   try {
-    const payload = yield call(fetchLeagues, yield select());
-    yield put({ type: types.FETCH_LEAGUES_SUCCEEDED, payload });
+    const state = yield select();
+    const { results, total } = yield call(fetchLeagues, state, {
+      ...payload,
+      search: getSearch(state),
+    });
+    yield put(fetchLeaguesSucceeded(results, total));
   } catch (ex) {
-    yield put({ type: types.FETCH_LEAGUES_FAILED, error: ex.message });
+    yield put(fetchLeaguesFailed(ex.message));
   }
 }
 
 export function* watchSagas() {
   yield takeLatest(types.FETCH_LEAGUES, getLeagues);
+  yield takeLatest(types.SEARCH, getLeagues);
 }
