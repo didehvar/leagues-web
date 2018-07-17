@@ -9,6 +9,8 @@ export default {
 
   login: '/',
 
+  _leagues: '/v2/leagues',
+
   // ----- Leagues -----
   leagues: '/leagues',
   newLeague: '/leagues/new',
@@ -17,5 +19,5 @@ export default {
   leagueInvite: (id, slug) => `${league(id, slug)}/invite`,
   leagueUseInvite: (id, slug, code) =>
     `${league(id, slug)}/join/${code || ':code'}`,
-  leagueStandings: (id, slug) => `${league(id, slug)}/standings`
+  leagueStandings: (id, slug) => `${league(id, slug)}/standings`,
 };
