@@ -7,9 +7,5 @@ body {
 }
 
 .chaport-container .chaport-launcher .chaport-launcher-button {
-  bottom: 4.5rem !important;
-}
-
-.chaport-window {
-  bottom: 145px !important;
+  display: none;
 }
