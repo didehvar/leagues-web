@@ -2,11 +2,13 @@ import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import League from '../components/League';
+import LeagueAppBar from '../components/League/AppBar';
 
-const LeaguePage = () => (
+const LeaguePage = () => [
+  <LeagueAppBar />,
   <Switch>
     <Route path="/" component={League} />
-  </Switch>
-);
+  </Switch>,
+];
 
 export default LeaguePage;

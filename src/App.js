@@ -22,6 +22,7 @@ import StravaAuthHandler from './containers/StravaAuthHandler';
 import LeagueUseInviteRoute from './containers/LeagueUseInviteRoute';
 
 import * as Style from './style';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const LeaguePage = Loadable({
   loader: () => import('./pages/League'),
@@ -30,6 +31,7 @@ const LeaguePage = Loadable({
 
 const App = () => (
   <Style.Container>
+    <CssBaseline />
     <ScrollToTop />
     <StravaAuthHandler />
 
