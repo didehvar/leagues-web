@@ -3,10 +3,10 @@ import { Switch, Route } from 'react-router-dom';
 
 import Settings from '../components/Settings';
 
-const SettingsPage = () => [
+const SettingsPage = () => (
   <Switch>
     <Route path="/" component={Settings} />
-  </Switch>,
-];
+  </Switch>
+);
 
 export default SettingsPage;
