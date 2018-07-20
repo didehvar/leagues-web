@@ -2,9 +2,12 @@ import { combineReducers } from 'redux';
 import uniq from 'lodash/uniq';
 import types from './types';
 
+import rounds from './rounds/reducer';
+
 function byId(state = {}, action = {}) {
   switch (action.type) {
     case types.FETCH_LEAGUES_SUCCEEDED:
+    case types.FETCH_LEAGUE_SUCCEEDED:
       return { ...state, ...action.payload.leagues };
 
     default:
@@ -86,4 +89,5 @@ export default combineReducers({
   searchIds,
   isFetching,
   errorMessage,
+  rounds,
 });

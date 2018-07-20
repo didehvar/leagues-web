@@ -32,7 +32,7 @@ export const fetchLeague = id => ({
   },
 });
 
-export const fetchLeagueSucceeded = (league, total = 0) => ({
+export const fetchLeagueSucceeded = league => ({
   type: types.FETCH_LEAGUE_SUCCEEDED,
   payload: normalize(league, schema.league).entities,
 });
