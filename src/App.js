@@ -5,29 +5,23 @@ import 'react-virtualized/styles.css';
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Loadable from 'react-loadable';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 import Routes from './utils/routes';
 
-import Loading from './components/Loading';
 import BottomNav from './components/BottomNav';
 
 import HomeRoute from './containers/HomeRoute';
 import LeagueRoute from './containers/LeagueRoute';
 import SearchRoute from './containers/SearchRoute';
 import ScrollToTop from './containers/ScrollToTop';
-import SettingsRoute from './containers/SettingsRoute';
 import CreateLeagueRoute from './containers/CreateLeagueRoute';
 import StravaAuthHandler from './containers/StravaAuthHandler';
 import LeagueUseInviteRoute from './containers/LeagueUseInviteRoute';
 
-import * as Style from './style';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import * as pages from './pages';
 
-const LeaguePage = Loadable({
-  loader: () => import('./pages/League'),
-  loading: Loading,
-});
+import * as Style from './style';
 
 const App = () => (
   <Style.Container>
@@ -48,9 +42,8 @@ const App = () => (
       <Route exact path={Routes.leagueWithouSlug} component={LeagueRoute} />
       <Route path={Routes.league()} component={LeagueRoute} />
 
-      <Route exact path={Routes.settings} component={SettingsRoute} />
-
-      <Route path={Routes._leagues} component={LeaguePage} />
+      <Route path={Routes._leagues} component={pages.League} />
+      <Route exact path={Routes.settings} component={pages.Settings} />
     </Switch>
 
     <Style.FooterNav>
