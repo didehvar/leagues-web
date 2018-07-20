@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom';
 
 import League from '../components/League';
 
-const LeaguePage = () => (
+const LeaguePage = ({ match: { path } }) => (
   <Switch>
-    <Route path="/" component={League} />
+    <Route path={`${path}/:id`} component={League} />
   </Switch>
 );
 

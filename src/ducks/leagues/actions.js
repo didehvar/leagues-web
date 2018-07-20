@@ -18,10 +18,29 @@ export const fetchLeaguesSucceeded = (leagues, total = 0) => ({
   },
 });
 
-export const fetchLeaguesFailed = error => ({
+export const fetchLeaguesFailed = message => ({
   type: types.FETCH_LEAGUES_FAILED,
   payload: {
-    error,
+    message,
+  },
+});
+
+export const fetchLeague = id => ({
+  type: types.FETCH_LEAGUE,
+  payload: {
+    id,
+  },
+});
+
+export const fetchLeagueSucceeded = (league, total = 0) => ({
+  type: types.FETCH_LEAGUE_SUCCEEDED,
+  payload: normalize(league, schema.league).entities,
+});
+
+export const fetchLeagueFailed = message => ({
+  type: types.FETCH_LEAGUE_FAILED,
+  payload: {
+    message,
   },
 });
 

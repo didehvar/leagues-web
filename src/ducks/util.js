@@ -15,6 +15,11 @@ export const api = async ({ url, query, method = 'GET', body }, state = {}) => {
     },
   });
 
-  const { data } = await response.json();
+  const { data, error, message } = await response.json();
+
+  if (error) {
+    throw new Error(message);
+  }
+
   return data;
 };

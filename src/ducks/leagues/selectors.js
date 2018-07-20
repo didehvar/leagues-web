@@ -10,3 +10,7 @@ export const getSearchLeagues = state =>
 export const getTotal = state => reducer(state).total;
 
 export const getSearch = state => reducer(state).search;
+
+export const isFetching = state => reducer(state).isFetching;
+
+export const errorMessage = state => reducer(state).errorMessage;
