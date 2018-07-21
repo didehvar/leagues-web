@@ -1,8 +1,8 @@
+import React from 'react';
 import { connect } from 'react-redux';
 import flowRight from 'lodash/flowRight';
 
 import withFetchId from '../../hocs/withFetchId';
-import League from './League';
 import {
   fetchLeague,
   getLeague,
@@ -10,6 +10,8 @@ import {
   isFetching,
   errorMessage,
 } from '../../ducks/leagues';
+
+import League from './League';
 
 export default flowRight(
   connect(

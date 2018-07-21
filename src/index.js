@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
+import Router from 'react-router-dom/Router';
 import { PersistGate } from 'redux-persist/integration/react';
 import createBrowserHistory from 'history/createBrowserHistory';
 

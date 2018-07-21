@@ -7,15 +7,17 @@ import { MenuButton, Title } from './AppBar.style';
 
 class LeagueAppBar extends React.PureComponent {
   render() {
+    const { name } = this.props;
+
     return (
       <AppBar>
-        <Toolbar variant="dense">
-          <MenuButton color="inherit" aria-label="Menu">
+        <Toolbar>
+          {/* <MenuButton color="inherit" aria-label="Menu">
             <MenuIcon />
-          </MenuButton>
+          </MenuButton> */}
 
-          <Title variant="title" color="inherit">
-            League
+          <Title noWrap variant="title" color="inherit">
+            {name}
           </Title>
         </Toolbar>
       </AppBar>

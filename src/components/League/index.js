@@ -1,3 +1,1 @@
-import League from './League.container';
-
-export default League;
+export { default } from './League.container';

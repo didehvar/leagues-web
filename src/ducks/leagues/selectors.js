@@ -3,6 +3,7 @@ import { getRound } from './rounds';
 const reducer = state => state.ducks.leagues;
 
 export const getLeague = (state, id) => reducer(state).byId[id];
+export const getLeagueName = (state, id) => getLeague(state, id).name;
 
 export const getLeagues = state => Object.values(reducer(state).byId);
 
