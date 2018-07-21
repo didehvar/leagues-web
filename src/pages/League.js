@@ -10,7 +10,7 @@ export const Container = styled.div`
   margin-bottom: 7rem;
 `;
 
-const LeaguePage = ({ match: { path } }) => (
+const LeaguePage = ({ match: { path }, location: { pathname } }) => (
   <React.Fragment>
     <Container>
       <Switch>
@@ -18,7 +18,7 @@ const LeaguePage = ({ match: { path } }) => (
       </Switch>
     </Container>
 
-    <BottomActions />
+    <BottomActions rootPath={path} currentPath={pathname} />
   </React.Fragment>
 );
 
