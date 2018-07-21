@@ -55,7 +55,7 @@ function isFetching(state = false, action = {}) {
       return true;
 
     case types.FETCH_LEAGUES_SUCCEEDED:
-    case types.FECH_LEAGUE_SUCCEEDED:
+    case types.FETCH_LEAGUE_SUCCEEDED:
     case types.FETCH_LEAGUES_FAILED:
     case types.FETCH_LEAGUE_FAILED:
       return false;
@@ -74,7 +74,7 @@ function errorMessage(state = null, action = {}) {
     case types.FETCH_LEAGUES:
     case types.FETCH_LEAGUE:
     case types.FETCH_LEAGUES_SUCCEEDED:
-    case types.FECH_LEAGUE_SUCCEEDED:
+    case types.FETCH_LEAGUE_SUCCEEDED:
       return null;
 
     default:

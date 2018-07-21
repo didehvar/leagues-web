@@ -5,6 +5,7 @@ const Loading = ({ error, retry, pastDelay }) => {
     return (
       <div>
         Error! <button onClick={retry}>Retry</button>
+        <code>{error.message}</code>
       </div>
     );
   }

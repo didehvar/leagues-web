@@ -3,8 +3,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 function withFetchId() {
-  return WrappedComponent =>
-    class extends React.PureComponent {
+  return WrappedComponent => {
+    class WithFetchId extends React.PureComponent {
       componentDidMount() {
         this.fetch();
       }
@@ -44,7 +44,14 @@ function withFetchId() {
 
         return <WrappedComponent {...props} />;
       }
-    };
+    }
+
+    const displayName =
+      WrappedComponent.displayName || WrappedComponent.name || 'Component';
+
+    WithFetchId.displayName = `WithFetchId(${displayName})`;
+    return WithFetchId;
+  };
 }
 
 export default withFetchId;
