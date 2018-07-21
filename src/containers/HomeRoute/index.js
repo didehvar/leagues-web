@@ -1,11 +1,13 @@
 import React from 'react';
+import flowRight from 'lodash/flowRight';
 import { Div } from 'glamorous';
 import { connect } from 'react-redux';
+import Typography from '@material-ui/core/Typography';
 
+import withTransition from '../../hocs/withTransition';
 import { isAuthenticated } from '../../reducers';
 import LoginButton from '../LoginButton';
 import Feed from '../Feed';
-import Typography from '@material-ui/core/Typography';
 
 class HomeRoute extends React.Component {
   render() {
@@ -32,6 +34,9 @@ class HomeRoute extends React.Component {
   }
 }
 
-export default connect(state => ({
-  authenticated: isAuthenticated(state),
-}))(HomeRoute);
+export default flowRight(
+  connect(state => ({
+    authenticated: isAuthenticated(state),
+  })),
+  withTransition
+)(HomeRoute);

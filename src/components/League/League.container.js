@@ -27,5 +27,5 @@ export default flowRight(
     },
     { fetch: fetchLeague }
   ),
-  withFetchId()
+  withFetchId
 )(League);

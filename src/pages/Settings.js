@@ -2,6 +2,7 @@ import React from 'react';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 
+import withTransition from '../hocs/withTransition';
 import Settings from '../components/Settings';
 
 const SettingsPage = () => (
@@ -10,4 +11,4 @@ const SettingsPage = () => (
   </Switch>
 );
 
-export default SettingsPage;
+export default withTransition(SettingsPage);

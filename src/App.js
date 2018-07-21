@@ -12,7 +12,7 @@ import BottomNav from './components/BottomNav';
 import ScrollToTop from './containers/ScrollToTop';
 import StravaAuthHandler from './containers/StravaAuthHandler';
 
-import { Container } from './App.style';
+import { Container, transitionClass } from './App.style';
 
 const App = () => (
   <React.Fragment>
@@ -20,7 +20,10 @@ const App = () => (
       <CssBaseline />
       <ScrollToTop />
       <StravaAuthHandler />
-      <Routes />
+
+      <div className={transitionClass}>
+        <Routes />
+      </div>
     </Container>
 
     <BottomNav />
