@@ -1,27 +1,63 @@
 import React from 'react';
+import withRouter from 'react-router-dom/withRouter';
+import memoize from 'lodash/memoize';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import MenuIcon from '@material-ui/icons/Menu';
 import GroupIcon from '@material-ui/icons/Group';
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 
+import routes from '../../utils/routes';
 import { BottomNavigation } from './BottomNav.style';
 
 class BottomNav extends React.PureComponent {
-  state = {
-    value: 0,
-  };
+  static routes = [
+    {
+      label: 'Feed',
+      icon: <MenuIcon />,
+      route: routes.home,
+    },
+    {
+      label: 'Leagues',
+      icon: <GroupIcon />,
+      route: routes._leagues,
+    },
+    {
+      label: 'Settings',
+      icon: <MoreHorizIcon />,
+      route: routes.settings,
+    },
+  ];
+
+  value = memoize(
+    pathname =>
+      [...BottomNav.routes].reverse().find(r => pathname.startsWith(r.route))
+        .route
+  );
 
   render() {
-    const { value } = this.state;
+    const {
+      history,
+      location: { pathname },
+    } = this.props;
 
     return (
-      <BottomNavigation showLabels value={value} onChange={this.handleChange}>
-        <BottomNavigationAction label="Feed" icon={<MenuIcon />} />
-        <BottomNavigationAction label="Leagues" icon={<GroupIcon />} />
-        <BottomNavigationAction label="Settings" icon={<MoreHorizIcon />} />
+      <BottomNavigation
+        showLabels
+        value={this.value(pathname)}
+        onChange={this.handleChange}
+      >
+        {BottomNav.routes.map(({ label, icon, route }) => (
+          <BottomNavigationAction
+            key={label}
+            label={label}
+            icon={icon}
+            value={route}
+            onClick={() => history.push(route)}
+          />
+        ))}
       </BottomNavigation>
     );
   }
 }
 
-export default BottomNav;
+export default withRouter(BottomNav);
