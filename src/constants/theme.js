@@ -8,4 +8,7 @@ export default createMuiTheme({
       main: '#ffb74d',
     },
   },
+  spacing: {
+    page: '1rem 1.25rem',
+  },
 });

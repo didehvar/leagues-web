@@ -21,35 +21,35 @@ import LeagueUseInviteRoute from './containers/LeagueUseInviteRoute';
 
 import * as pages from './pages';
 
-import * as Style from './style';
+import { Container } from './App.style';
 
 const App = () => (
-  <Style.Container>
-    <CssBaseline />
-    <ScrollToTop />
-    <StravaAuthHandler />
+  <React.Fragment>
+    <Container>
+      <CssBaseline />
+      <ScrollToTop />
+      <StravaAuthHandler />
 
-    <Switch>
-      <Route exact path={Routes.home} component={HomeRoute} />
-      <Route exact path={Routes.search} component={SearchRoute} />
+      <Switch>
+        <Route exact path={Routes.home} component={HomeRoute} />
+        <Route exact path={Routes.search} component={SearchRoute} />
 
-      <Route exact path={Routes.newLeague} component={CreateLeagueRoute} />
-      <Route
-        exact
-        path={Routes.leagueUseInvite()}
-        component={LeagueUseInviteRoute}
-      />
-      <Route exact path={Routes.leagueWithouSlug} component={LeagueRoute} />
-      <Route path={Routes.league()} component={LeagueRoute} />
+        <Route exact path={Routes.newLeague} component={CreateLeagueRoute} />
+        <Route
+          exact
+          path={Routes.leagueUseInvite()}
+          component={LeagueUseInviteRoute}
+        />
+        <Route exact path={Routes.leagueWithouSlug} component={LeagueRoute} />
+        <Route path={Routes.league()} component={LeagueRoute} />
 
-      <Route path={Routes._leagues} component={pages.League} />
-      <Route exact path={Routes.settings} component={pages.Settings} />
-    </Switch>
+        <Route path={Routes._leagues} component={pages.League} />
+        <Route exact path={Routes.settings} component={pages.Settings} />
+      </Switch>
+    </Container>
 
-    <Style.FooterNav>
-      <BottomNav />
-    </Style.FooterNav>
-  </Style.Container>
+    <BottomNav />
+  </React.Fragment>
 );
 
 export default App;
