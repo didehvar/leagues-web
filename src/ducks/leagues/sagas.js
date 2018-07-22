@@ -1,4 +1,4 @@
-import { call, select, put, takeLatest } from 'redux-saga/effects';
+import { call, select, put, throttle } from 'redux-saga/effects';
 
 import types from './types';
 import { fetchLeagues, fetchLeague } from './api';
@@ -29,7 +29,7 @@ function* getLeague({ payload: { id } }) {
 }
 
 export function* watchSagas() {
-  yield takeLatest(types.FETCH_LEAGUES, getLeagues);
-  yield takeLatest(types.FETCH_LEAGUE, getLeague);
-  yield takeLatest(types.SEARCH, getLeagues);
+  yield throttle(5000, types.FETCH_LEAGUES, getLeagues);
+  yield throttle(5000, types.FETCH_LEAGUE, getLeague);
+  yield throttle(100, types.SEARCH, getLeagues);
 }

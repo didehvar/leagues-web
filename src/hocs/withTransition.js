@@ -17,7 +17,7 @@ export default WrappedComponent => {
   }
 
   WithTransition.displayName = `WithTransition(${displayName(
-    WrappedComponent
+    WrappedComponent,
   )})`;
   return WithTransition;
 };

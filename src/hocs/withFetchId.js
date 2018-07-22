@@ -24,10 +24,6 @@ export default WrappedComponent => {
     render() {
       const { isFetching, errorMessage, fetch, ...props } = this.props;
 
-      if (isFetching) {
-        return false;
-      }
-
       if (errorMessage) {
         return (
           <React.Fragment>

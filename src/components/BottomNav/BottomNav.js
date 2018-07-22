@@ -19,7 +19,7 @@ class BottomNav extends React.PureComponent {
     {
       label: 'Leagues',
       icon: <GroupIcon />,
-      route: routes._leagues,
+      route: '/v2/leagues/19706',
     },
     {
       label: 'Settings',
@@ -31,7 +31,7 @@ class BottomNav extends React.PureComponent {
   value = memoize(
     pathname =>
       [...BottomNav.routes].reverse().find(r => pathname.startsWith(r.route))
-        .route
+        .route,
   );
 
   render() {

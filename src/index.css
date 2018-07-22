@@ -1,9 +1,10 @@
-html {
+html,
+body,
+#root {
+  width: 100%;
   height: 100%;
-}
-
-body {
-  margin: 0 0 60px;
+  margin: 0;
+  padding: 0;
 }
 
 .chaport-container .chaport-launcher .chaport-launcher-button {
