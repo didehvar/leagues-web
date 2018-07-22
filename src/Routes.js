@@ -13,12 +13,13 @@ import LeagueUseInviteRoute from './containers/LeagueUseInviteRoute';
 import { League, Settings } from './pages';
 import routes from './utils/routes';
 
-class Routes extends React.PureComponent {
+class Routes extends React.Component {
   render() {
     const { location } = this.props;
 
     return (
       <Transition
+        native
         keys={location.pathname}
         from={{ opacity: 0 }}
         enter={{ opacity: 1 }}

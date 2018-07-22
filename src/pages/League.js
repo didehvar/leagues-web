@@ -1,9 +1,14 @@
 import React from 'react';
+import Loadable from 'react-loadable';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 
-import withTransition from '../hocs/withTransition';
-import League from '../components/League';
+import Loading from '../components/Loading';
+
+const League = Loadable({
+  loader: () => import('../components/League'),
+  loading: Loading,
+});
 
 const LeaguePage = ({ match: { path }, location: { pathname } }) => (
   <Switch>
@@ -11,4 +16,4 @@ const LeaguePage = ({ match: { path }, location: { pathname } }) => (
   </Switch>
 );
 
-export default withTransition(LeaguePage);
+export default LeaguePage;

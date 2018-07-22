@@ -1,4 +1,3 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import flowRight from 'lodash/flowRight';
 
@@ -25,7 +24,7 @@ export default flowRight(
         errorMessage: errorMessage(state),
       };
     },
-    { fetch: fetchLeague }
+    { fetch: fetchLeague },
   ),
-  withFetchId
+  withFetchId,
 )(League);

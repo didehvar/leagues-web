@@ -1,13 +1,7 @@
-import Loadable from 'react-loadable';
+import withTransition from '../hocs/withTransition';
 
-import Loading from '../components/Loading';
+import LeaguePage from './League';
+import SettingsPage from './Settings';
 
-export const League = Loadable({
-  loader: () => import('./League'),
-  loading: Loading,
-});
-
-export const Settings = Loadable({
-  loader: () => import('./Settings'),
-  loading: Loading,
-});
+export const League = withTransition(LeaguePage);
+export const Settings = withTransition(SettingsPage);
