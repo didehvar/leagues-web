@@ -2,15 +2,29 @@ import { getRound } from './rounds';
 
 const reducer = state => state.ducks.leagues;
 
-export const getLeague = (state, id) => reducer(state).byId[id];
+const getDiscipline = (state, id) => reducer(state).discipline[id].name;
+const getType = (state, id) => reducer(state).type[id].name;
+
+export const getLeague = (state, id) => {
+  const league = reducer(state).byId[id];
+  return {
+    ...league,
+    discipline: getDiscipline(state, league.discipline),
+    type: getType(state, league.type),
+  };
+};
+
 export const getLeagueName = (state, id) => getLeague(state, id).name;
 
 export const getLeagues = state => Object.values(reducer(state).byId);
 
+export const getUsersLeagues = (state, userId) =>
+  getLeagues(state).filter(l => l.user === userId);
+
+export const getSearchTotal = state => reducer(state).searchTotal;
+
 export const getSearchLeagues = state =>
   reducer(state).searchIds.map(id => getLeague(state, id));
-
-export const getTotal = state => reducer(state).total;
 
 export const getSearch = state => reducer(state).search;
 

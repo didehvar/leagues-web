@@ -5,7 +5,7 @@ import AddIcon from '@material-ui/icons/Add';
 
 import Spacer from '../UI/Spacer';
 import SearchBox from './SearchBox';
-import List from './List';
+import List from './List.container';
 
 import { Container, AddFab } from './Search.style';
 

@@ -5,15 +5,15 @@ import Route from 'react-router-dom/Route';
 
 import Loading from '../components/Loading';
 
-const Settings = Loadable({
-  loader: () => import('../components/Settings'),
+const Feed = Loadable({
+  loader: () => import('../components/Feed'),
   loading: Loading,
 });
 
-const SettingsPage = ({ match: { path } }) => (
+const FeedPage = ({ match: { path } }) => (
   <Switch>
-    <Route path={path} component={Settings} />
+    <Route exact path={path} component={Feed} />
   </Switch>
 );
 
-export default SettingsPage;
+export default FeedPage;

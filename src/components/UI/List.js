@@ -1,7 +1,5 @@
 import React from 'react';
-import withRouter from 'react-router-dom/withRouter';
-import flowRight from 'lodash/flowRight';
-import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import {
   List as VirtualizedList,
   WindowScroller,
@@ -11,29 +9,34 @@ import {
   CellMeasurerCache,
 } from 'react-virtualized';
 
-import routes from '../../utils/routes';
-import { fetchLeagues, getSearchLeagues, getTotal } from '../../ducks/leagues';
-
-import LeagueCard from './LeagueCard';
-
 class List extends React.PureComponent {
+  static propTypes = {
+    component: PropTypes.func.isRequired,
+    data: PropTypes.array,
+    totalCount: PropTypes.number,
+    fetch: PropTypes.func.isRequired,
+  };
+
+  static defaultProps = {
+    data: [],
+    totalCount: 0,
+  };
+
   cache = new CellMeasurerCache({
     fixedWidth: true,
   });
 
   componentDidMount() {
-    this.props.fetchLeagues();
+    this.props.fetch();
   }
 
-  onClickCard = id => this.props.history.push(`${routes._leagues}/${id}`);
-
-  isRowLoaded = ({ index }) => !!this.props.leagues[index];
+  isRowLoaded = ({ index }) => !!this.props.data[index];
 
   loadMoreRows = ({ startIndex, stopIndex }) =>
-    this.props.fetchLeagues(startIndex, stopIndex);
+    this.props.fetch({ startIndex, stopIndex });
 
   rowRenderer = ({ key, index, parent, style }) => {
-    const { id, name, startDate, discipline, type } = this.props.leagues[index];
+    const { component: Component, data } = this.props;
 
     return (
       <div key={key} style={style}>
@@ -45,21 +48,14 @@ class List extends React.PureComponent {
           rowIndex={index}
           width={this._mostRecentWidth}
         >
-          <LeagueCard
-            id={id}
-            name={name}
-            startDate={startDate}
-            discipline={discipline.name}
-            type={type.name}
-            onClick={this.onClickCard}
-          />
+          <Component {...data[index]} />
         </CellMeasurer>
       </div>
     );
   };
 
   render() {
-    const { totalLeagues, leagues } = this.props;
+    const { totalCount, data } = this.props;
 
     return (
       <WindowScroller>
@@ -70,7 +66,7 @@ class List extends React.PureComponent {
                 <InfiniteLoader
                   isRowLoaded={this.isRowLoaded}
                   loadMoreRows={this.loadMoreRows}
-                  rowCount={totalLeagues}
+                  rowCount={totalCount}
                 >
                   {({ onRowsRendered, registerChild }) => (
                     <VirtualizedList
@@ -79,7 +75,7 @@ class List extends React.PureComponent {
                       height={height}
                       isScrolling={isScrolling}
                       onScroll={onChildScroll}
-                      rowCount={leagues.length}
+                      rowCount={data.length}
                       rowRenderer={this.rowRenderer}
                       scrollTop={scrollTop}
                       width={width}
@@ -99,13 +95,4 @@ class List extends React.PureComponent {
   }
 }
 
-export default flowRight(
-  withRouter,
-  connect(
-    state => ({
-      leagues: getSearchLeagues(state),
-      totalLeagues: getTotal(state),
-    }),
-    { fetchLeagues },
-  ),
-)(List);
+export default List;

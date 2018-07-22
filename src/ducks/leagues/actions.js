@@ -2,11 +2,16 @@ import { normalize } from 'normalizr';
 import * as schema from '../schema';
 import types from './types';
 
-export const fetchLeagues = (startIndex = 0, stopIndex = 20) => ({
+export const fetchLeagues = ({
+  startIndex = 0,
+  stopIndex = 20,
+  userId,
+} = {}) => ({
   type: types.FETCH_LEAGUES,
   payload: {
     startIndex,
     stopIndex,
+    userId,
   },
 });
 

@@ -3,6 +3,8 @@ const league = (id, slug) =>
 
 export default {
   home: '/',
+  feed: '/',
+
   profile: '/profile',
   settings: '/settings',
 

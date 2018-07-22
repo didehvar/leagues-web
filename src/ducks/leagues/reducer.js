@@ -15,7 +15,7 @@ function byId(state = {}, action = {}) {
   }
 }
 
-function total(state = 0, action = {}) {
+function searchTotal(state = 0, action = {}) {
   switch (action.type) {
     case types.FETCH_LEAGUES_SUCCEEDED:
       return action.payload.total;
@@ -82,12 +82,36 @@ function errorMessage(state = null, action = {}) {
   }
 }
 
+function discipline(state = {}, action = {}) {
+  switch (action.type) {
+    case types.FETCH_LEAGUES_SUCCEEDED:
+    case types.FETCH_LEAGUE_SUCCEEDED:
+      return { ...state, ...action.payload.discipline };
+
+    default:
+      return state;
+  }
+}
+
+function type(state = {}, action = {}) {
+  switch (action.type) {
+    case types.FETCH_LEAGUES_SUCCEEDED:
+    case types.FETCH_LEAGUE_SUCCEEDED:
+      return { ...state, ...action.payload.type };
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
+  rounds,
   byId,
-  total,
   search,
+  searchTotal,
   searchIds,
   isFetching,
   errorMessage,
-  rounds,
+  discipline,
+  type,
 });
