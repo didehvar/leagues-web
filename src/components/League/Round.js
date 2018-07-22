@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import format from 'date-fns/format';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 
+import { formatDate } from '../../utils/helpers';
 import { ClickableCard } from './Round.style';
 
 class Round extends React.PureComponent {
@@ -14,14 +14,8 @@ class Round extends React.PureComponent {
     endDate: PropTypes.string.isRequired,
   };
 
-  formatDate(date) {
-    return format(date, 'Do MMM');
-  }
-
   render() {
-    const { name, startDate, endDate, ...props } = this.props;
-
-    console.log(props);
+    const { name, startDate, endDate } = this.props;
 
     return (
       <Card>
@@ -31,7 +25,7 @@ class Round extends React.PureComponent {
               {name}
             </Typography>
             <Typography variant="subheading" color="textSecondary">
-              {this.formatDate(startDate)} &mdash; {this.formatDate(endDate)}
+              {formatDate(startDate)} &mdash; {formatDate(endDate)}
             </Typography>
           </CardContent>
         </ClickableCard>
