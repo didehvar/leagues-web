@@ -5,13 +5,9 @@ export const Container = styled.div`
   margin: 0 0 7rem;
 `;
 
-export const SearchInput = styled.div`
-  margin-bottom: 1rem;
-`;
-
 export const AddFab = styled.div`
-  position: absolute;
-  bottom: 0;
+  position: fixed;
+  bottom: ${props => props.theme.spacing.unit * 9}px;
   right: ${props => props.theme.spacing.unit * 2}px;
   z-index: 10;
 `;

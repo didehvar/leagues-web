@@ -14,7 +14,7 @@ import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import theme from './constants/theme';
+import theme from './utils/theme';
 import createStore from './redux/createStore';
 
 const history = createBrowserHistory();
@@ -43,7 +43,7 @@ ReactDOM.render(
       </PersistGate>
     </Provider>
   </JssProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );
 
 registerServiceWorker();

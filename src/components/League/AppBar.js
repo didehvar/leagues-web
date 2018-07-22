@@ -1,16 +1,16 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
+import MaterialAppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 // import MenuIcon from '@material-ui/icons/Menu';
 
 import { /* MenuButton, */ Title } from './AppBar.style';
 
-class LeagueAppBar extends React.PureComponent {
+class AppBar extends React.PureComponent {
   render() {
     const { name } = this.props;
 
     return (
-      <AppBar>
+      <MaterialAppBar>
         <Toolbar>
           {/* <MenuButton color="inherit" aria-label="Menu">
             <MenuIcon />
@@ -20,9 +20,9 @@ class LeagueAppBar extends React.PureComponent {
             {name}
           </Title>
         </Toolbar>
-      </AppBar>
+      </MaterialAppBar>
     );
   }
 }
 
-export default LeagueAppBar;
+export default AppBar;

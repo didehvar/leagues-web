@@ -5,4 +5,5 @@ export const BottomNavigation = styled(MuiBottomNavigation)`
   width: 100%;
   position: fixed;
   bottom: 0;
+  box-shadow: ${props => props.theme.shadows[4]};
 `;

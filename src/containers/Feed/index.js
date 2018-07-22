@@ -9,10 +9,6 @@ import * as leagueActions from '../../actions/leagues';
 import { getOwnedLeagues, getAuthUser } from '../../reducers';
 import routes from '../../utils/routes';
 
-import LeagueCard from '../../components/LeagueCard';
-
-import * as Style from './style';
-
 class Feed extends React.Component {
   static propTypes = {
     leagues: PropTypes.array,
@@ -55,12 +51,6 @@ class Feed extends React.Component {
               >
                 Your leagues
               </Typography>
-
-              {leagues.map(league => (
-                <Style.Card key={league.id}>
-                  <LeagueCard league={league} onView={this.onView} />
-                </Style.Card>
-              ))}
             </div>
           )}
       </div>

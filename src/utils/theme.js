@@ -9,5 +9,6 @@ export default createMuiTheme({
   },
   spacing: {
     page: '1rem 1.25rem',
+    gap: 16,
   },
 });
