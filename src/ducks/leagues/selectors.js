@@ -7,6 +7,7 @@ const getType = (state, id) => reducer(state).type[id].name;
 
 export const getLeague = (state, id) => {
   const league = reducer(state).byId[id];
+  if (!league) return {};
   return {
     ...league,
     discipline: getDiscipline(state, league.discipline),

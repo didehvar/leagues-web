@@ -1,7 +1,9 @@
 import * as leagues from './leagues/sagas';
+import * as users from './leagues/sagas';
 
 const sagas = {
   ...leagues,
+  ...users,
 };
 
 export default function registerSagas(middleware) {

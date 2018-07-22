@@ -3,9 +3,7 @@ import { schema } from 'normalizr';
 export const round = new schema.Entity('rounds');
 export const roundList = [round];
 
-export const user = new schema.Entity('users', {
-  leagues: league,
-});
+export const user = new schema.Entity('users');
 export const userList = [user];
 
 export const discipline = new schema.Entity('discipline');
