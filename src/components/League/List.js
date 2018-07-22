@@ -33,7 +33,7 @@ class List extends React.PureComponent {
     this.props.fetchLeagues(startIndex, stopIndex);
 
   rowRenderer = ({ key, index, parent, style }) => {
-    const { id, name, startDate } = this.props.leagues[index];
+    const { id, name, startDate, discipline, type } = this.props.leagues[index];
 
     return (
       <div key={key} style={style}>
@@ -49,6 +49,8 @@ class List extends React.PureComponent {
             id={id}
             name={name}
             startDate={startDate}
+            discipline={discipline.name}
+            type={type.name}
             onClick={this.onClickCard}
           />
         </CellMeasurer>

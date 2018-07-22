@@ -14,6 +14,8 @@ import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import startOfDay from 'date-fns/start_of_day';
 
+import config from '../../utils/config';
+
 const CreateLeagueForm = ({
   values,
   touched,
@@ -23,7 +25,7 @@ const CreateLeagueForm = ({
   handleChange,
   handleBlur,
   handleSubmit,
-  handleReset
+  handleReset,
 }) => (
   <form onSubmit={handleSubmit}>
     <Grid container justify="center" spacing={16}>
@@ -71,8 +73,16 @@ const CreateLeagueForm = ({
             onChange={handleChange}
             style={{ flexDirection: 'row' }}
           >
-            <FormControlLabel value="run" control={<Radio />} label="Run" />
-            <FormControlLabel value="ride" control={<Radio />} label="Ride" />
+            <FormControlLabel
+              value={config.league.running}
+              control={<Radio />}
+              label="Run"
+            />
+            <FormControlLabel
+              value={config.league.cycling}
+              control={<Radio />}
+              label="Ride"
+            />
           </RadioGroup>
 
           {errors &&
@@ -94,12 +104,12 @@ const CreateLeagueForm = ({
             <FormControlLabel
               value="fastest"
               control={<Radio />}
-              label="Fastest"
+              label={config.league.fastest}
             />
             <FormControlLabel
               value="distance"
               control={<Radio />}
-              label="Distance"
+              label={config.league.distance}
             />
           </RadioGroup>
 
@@ -130,11 +140,11 @@ CreateLeagueForm.propTypes = {
     name: PropTypes.string,
     startDate: PropTypes.oneOfType([
       PropTypes.instanceOf(Date),
-      PropTypes.string
+      PropTypes.string,
     ]),
     discipline: PropTypes.string,
-    type: PropTypes.string
-  })
+    type: PropTypes.string,
+  }),
 };
 
 export default withFormik({
@@ -142,17 +152,17 @@ export default withFormik({
     name: '',
     startDate: startOfDay(new Date()),
     discipline: 'run',
-    type: 'fastest'
+    type: 'fastest',
   }),
   validationSchema: Yup.object().shape({
     name: Yup.string().required(),
     startDate: Yup.date().required(),
     discipline: Yup.string().required(),
-    type: Yup.string().required()
+    type: Yup.string().required(),
   }),
   handleSubmit: async (
     values,
-    { props: { onSubmit }, setErrors, setSubmitting }
+    { props: { onSubmit }, setErrors, setSubmitting },
   ) => {
     try {
       await onSubmit(values);
@@ -161,5 +171,5 @@ export default withFormik({
     } finally {
       setSubmitting(false);
     }
-  }
+  },
 })(CreateLeagueForm);
