@@ -14,10 +14,10 @@ import {
   TwitterIcon,
   WhatsappIcon,
   RedditIcon,
-  EmailIcon
+  EmailIcon,
 } from 'react-share';
 
-import Routes from '../../utils/routes';
+import routes from '../../utils/routes';
 
 import * as LeagueActions from '../../actions/leagues';
 
@@ -56,10 +56,10 @@ class LeagueInvite extends Component {
 
     if (!league || !invite) return <div />;
 
-    const url = `${window.location.origin}${Routes.leagueUseInvite(
+    const url = `${window.location.origin}${routes.leagueUseInvite(
       league.id,
       league.slug,
-      invite.code
+      invite.code,
     )}`;
 
     return (
@@ -116,17 +116,17 @@ class LeagueInvite extends Component {
 }
 
 LeagueInvite.propTypes = {
-  league: PropTypes.object
+  league: PropTypes.object,
 };
 
 LeagueInvite.defaultProps = {
-  league: null
+  league: null,
 };
 
 export default connect(
   state => ({
     invite: getLeagueInvite(state),
-    league: getCurrentLeague(state)
+    league: getCurrentLeague(state),
   }),
-  LeagueActions
+  LeagueActions,
 )(LeagueInvite);

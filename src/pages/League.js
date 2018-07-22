@@ -10,8 +10,14 @@ const League = Loadable({
   loading: Loading,
 });
 
-const LeaguePage = ({ match: { path }, location: { pathname } }) => (
+const Search = Loadable({
+  loader: () => import('../components/League/Search'),
+  loading: Loading,
+});
+
+const LeaguePage = ({ match: { path } }) => (
   <Switch>
+    <Route exact path={path} component={Search} />
     <Route path={`${path}/:id`} component={League} />
   </Switch>
 );

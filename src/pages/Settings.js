@@ -4,9 +4,9 @@ import Route from 'react-router-dom/Route';
 
 import Settings from '../components/Settings';
 
-const SettingsPage = () => (
+const SettingsPage = ({ match: { path } }) => (
   <Switch>
-    <Route path="/" component={Settings} />
+    <Route path={path} component={Settings} />
   </Switch>
 );
 

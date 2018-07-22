@@ -18,7 +18,7 @@ import {
   getAuthUser,
   getRoundError,
 } from '../../reducers';
-import Routes from '../../utils/routes';
+import routes from '../../utils/routes';
 
 import AppBar from '../../components/AppBar';
 import SegmentCard from '../../components/SegmentCard';
@@ -39,7 +39,7 @@ class LeagueRoute extends Component {
       value: LeagueRoute.getValueFromProps(props),
       defaultRoundId: parseInt(
         parse(props.location.search.substr(1)).segment,
-        10
+        10,
       ),
     };
   }
@@ -61,8 +61,8 @@ class LeagueRoute extends Component {
       history,
       league: { id, slug },
     } = this.props;
-    if (value) history.push(Routes.leagueStandings(id, slug));
-    else history.push(Routes.league(id, slug));
+    if (value) history.push(routes.leagueStandings(id, slug));
+    else history.push(routes.league(id, slug));
   };
 
   async componentDidMount() {
@@ -73,7 +73,7 @@ class LeagueRoute extends Component {
   componentDidUpdate(prevProps) {
     const { match, league, history } = this.props;
     if (!match.params.slug && !prevProps.league && league) {
-      history.push(Routes.league(league.id, league.slug));
+      history.push(routes.league(league.id, league.slug));
     }
   }
 
@@ -101,7 +101,7 @@ class LeagueRoute extends Component {
       history,
       league: { id, slug },
     } = this.props;
-    history.push(Routes.leagueInvite(id, slug));
+    history.push(routes.leagueInvite(id, slug));
   };
 
   render() {
@@ -116,7 +116,9 @@ class LeagueRoute extends Component {
     const startDate =
       league &&
       new Date(
-        rounds.length ? last(rounds).endDate : max(new Date(), league.startDate)
+        rounds.length
+          ? last(rounds).endDate
+          : max(new Date(), league.startDate),
       );
 
     const segmentDialog = children => (
@@ -200,5 +202,5 @@ export default connect(
     user: getAuthUser(state),
     roundError: getRoundError(state),
   }),
-  leagueActions
+  leagueActions,
 )(LeagueRoute);

@@ -20,7 +20,7 @@ export const errorMessage = state => reducer(state).errorMessage;
 
 export const getRounds = (state, id) => {
   const league = getLeague(state, id);
-  if (!league) return [];
+  if (!league || !league.rounds) return [];
 
   return league.rounds.map(roundId => getRound(state, roundId));
 };

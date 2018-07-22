@@ -1,6 +1,6 @@
 import merge from 'lodash/merge';
 
-import Routes from '../../utils/routes';
+import routes from '../../utils/routes';
 import { getUserToken } from '../../reducers';
 import { logout } from '../../actions/auth';
 
@@ -23,14 +23,14 @@ const api = history => ({ dispatch, getState }) => next => async action => {
           Authorization: token && `Bearer ${token}`,
         },
       },
-      { body: options.body && JSON.stringify(options.body) }
-    )
+      { body: options.body && JSON.stringify(options.body) },
+    ),
   );
 
   if (response.status < 200 || response.status >= 300) {
     if (response.status === 401) {
       await dispatch(logout());
-      history.push(`${Routes.login}?redirect_to=${window.location.pathname}`);
+      history.push(`${routes.login}?redirect_to=${window.location.pathname}`);
     }
 
     const error = new Error(response.statusText);

@@ -7,7 +7,7 @@ import { Div } from 'glamorous';
 
 import * as leagueActions from '../../actions/leagues';
 import { getOwnedLeagues, getAuthUser } from '../../reducers';
-import Routes from '../../utils/routes';
+import routes from '../../utils/routes';
 
 import LeagueCard from '../../components/LeagueCard';
 
@@ -23,9 +23,9 @@ class Feed extends React.Component {
     leagues: [],
   };
 
-  onView = (id, slug) => this.props.history.push(Routes.league(id, slug));
+  onView = (id, slug) => this.props.history.push(routes.league(id, slug));
 
-  createLeague = () => this.props.history.push(Routes.newLeague);
+  createLeague = () => this.props.history.push(routes.newLeague);
 
   componentDidMount() {
     const { fetchLeagues, userId } = this.props;
@@ -73,5 +73,5 @@ export default connect(
     leagues: getOwnedLeagues(state),
     userId: (getAuthUser(state) || {}).id,
   }),
-  leagueActions
+  leagueActions,
 )(Feed);

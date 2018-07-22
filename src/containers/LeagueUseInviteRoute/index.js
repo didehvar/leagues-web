@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import * as leagueActions from '../../actions/leagues';
 
-import Routes from '../../utils/routes';
+import routes from '../../utils/routes';
 
 class LeagueUseInviteRoute extends Component {
   state = { error: null };
@@ -13,7 +13,7 @@ class LeagueUseInviteRoute extends Component {
 
     try {
       await useInvite(match.params.id, match.params.code);
-      history.push(Routes.league(match.params.id, match.params.slug));
+      history.push(routes.league(match.params.id, match.params.slug));
     } catch (ex) {
       this.setState({ error: ex.message });
     }
@@ -25,4 +25,7 @@ class LeagueUseInviteRoute extends Component {
   }
 }
 
-export default connect(null, leagueActions)(LeagueUseInviteRoute);
+export default connect(
+  null,
+  leagueActions,
+)(LeagueUseInviteRoute);

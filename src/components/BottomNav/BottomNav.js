@@ -19,7 +19,7 @@ class BottomNav extends React.PureComponent {
     {
       label: 'Leagues',
       icon: <GroupIcon />,
-      route: '/v2/leagues/19706',
+      route: routes._leagues,
     },
     {
       label: 'Settings',

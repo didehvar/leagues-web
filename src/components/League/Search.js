@@ -7,17 +7,16 @@ import {
   InfiniteLoader,
 } from 'react-virtualized';
 
+import routes from '../../utils/routes';
 import { fetchLeagues, getSearchLeagues, getTotal } from '../../ducks/leagues';
-
-import Routes from '../../utils/routes';
 
 import LeagueCard from '../../components/LeagueCard';
 import SearchField from '../../components/SearchField';
 
-import * as Style from './style';
+import { Container, SearchInput } from './Search.style';
 
-class SearchRoute extends Component {
-  onView = (id, slug) => this.props.history.push(Routes.league(id, slug));
+class Search extends Component {
+  onView = id => this.props.history.push(`${routes._leagues}/${id}`);
 
   componentDidMount() {
     const { fetchLeagues } = this.props;
@@ -44,10 +43,10 @@ class SearchRoute extends Component {
     return (
       <WindowScroller>
         {({ height, isScrolling, onChildScroll, scrollTop, registerChild }) => (
-          <div>
-            <Style.SearchField>
+          <Container>
+            <SearchInput>
               <SearchField />
-            </Style.SearchField>
+            </SearchInput>
 
             <div ref={registerChild}>
               <AutoSizer disableHeight>
@@ -77,7 +76,7 @@ class SearchRoute extends Component {
                 )}
               </AutoSizer>
             </div>
-          </div>
+          </Container>
         )}
       </WindowScroller>
     );
@@ -89,5 +88,5 @@ export default connect(
     leagues: getSearchLeagues(state),
     totalLeagues: getTotal(state),
   }),
-  { fetchLeagues }
-)(SearchRoute);
+  { fetchLeagues },
+)(Search);

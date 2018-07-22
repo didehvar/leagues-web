@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import Routes from '../../utils/routes';
+import routes from '../../utils/routes';
 
 import * as leagueActions from '../../actions/leagues';
 import { getLeagueError, getCurrentLeague } from '../../reducers';
@@ -16,7 +16,7 @@ class CreateLeagueRoute extends Component {
   onCreate = async values => {
     const { result, entities } = await this.props.createLeague(values);
     this.props.history.push(
-      Routes.league(result, entities.leagues[result].slug)
+      routes.league(result, entities.leagues[result].slug),
     );
   };
 
@@ -36,7 +36,7 @@ class CreateLeagueRoute extends Component {
 export default connect(
   (state, props) => ({
     errorMessage: getLeagueError(state),
-    league: getCurrentLeague(state)
+    league: getCurrentLeague(state),
   }),
-  leagueActions
+  leagueActions,
 )(CreateLeagueRoute);

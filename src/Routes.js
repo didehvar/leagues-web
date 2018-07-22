@@ -4,7 +4,6 @@ import Route from 'react-router-dom/Route';
 
 import HomeRoute from './containers/HomeRoute';
 import LeagueRoute from './containers/LeagueRoute';
-import SearchRoute from './containers/SearchRoute';
 import CreateLeagueRoute from './containers/CreateLeagueRoute';
 import LeagueUseInviteRoute from './containers/LeagueUseInviteRoute';
 
@@ -27,7 +26,6 @@ class Routes extends React.Component {
           path={routes.home}
           render={props => <HomeRoute {...props} style={style} />}
         />
-        <Route exact path={routes.search} component={SearchRoute} />
 
         <Route exact path={routes.newLeague} component={CreateLeagueRoute} />
         <Route
