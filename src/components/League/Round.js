@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import format from 'date-fns/format';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,12 +8,18 @@ import Typography from '@material-ui/core/Typography';
 import { ClickableCard } from './Round.style';
 
 class Round extends React.PureComponent {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    startDate: PropTypes.string.isRequired,
+    endDate: PropTypes.string.isRequired,
+  };
+
   formatDate(date) {
     return format(date, 'Do MMM');
   }
 
   render() {
-    const { startDate, endDate, name, ...props } = this.props;
+    const { name, startDate, endDate, ...props } = this.props;
 
     console.log(props);
 
