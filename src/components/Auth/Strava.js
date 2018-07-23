@@ -4,7 +4,9 @@ import withRouter from 'react-router-dom/withRouter';
 import flowRight from 'lodash/flowRight';
 import { connect } from 'react-redux';
 
+import routes from '../../utils/routes';
 import withLoading from '../../hocs/withLoading';
+import { login, getUserAuthenticated } from '../../ducks/users';
 
 import ErrorMessage from '../../components/ErrorMessage';
 
@@ -15,15 +17,14 @@ class Strava extends React.PureComponent {
   };
 
   componentDidMount() {
-    const { login, history, location } = this.props;
+    const { authenticated, login, history, location } = this.props;
     const query = new URLSearchParams(location.search);
-    console.log(query);
 
-    if (query.has('state') && query.has('code')) {
-      console.log('should handle auth');
-      // await login(query.get('code'));
-      // history.replace(query.get('redirect_to') || location.pathname);
+    if (!authenticated && query.has('state') && query.has('code')) {
+      login(query.get('code'));
     }
+
+    history.replace(query.get('redirect_to') || routes.home);
   }
 
   render() {
@@ -43,5 +44,11 @@ class Strava extends React.PureComponent {
 
 export default flowRight(
   withRouter,
+  connect(
+    state => ({
+      authenticated: getUserAuthenticated(state),
+    }),
+    { login },
+  ),
   withLoading,
 )(Strava);

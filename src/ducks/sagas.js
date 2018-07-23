@@ -1,5 +1,5 @@
 import * as leagues from './leagues/sagas';
-import * as users from './leagues/sagas';
+import * as users from './users/sagas';
 
 const sagas = {
   ...leagues,

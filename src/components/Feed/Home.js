@@ -2,7 +2,7 @@ import React from 'react';
 
 import Spacer from '../UI/Spacer';
 import MobileFullPage from '../UI/MobileFullPage';
-import LoginButton from './LoginButton';
+import LoginButton from '../Auth/LoginButton';
 
 import poweredByStrava from './assets/home.strava-powered-white.svg';
 

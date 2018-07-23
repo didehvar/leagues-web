@@ -7,8 +7,8 @@ import * as actions from './actions';
 function* doLogin({ payload }) {
   try {
     const state = yield select();
-    const data = yield call(login, state, payload.code);
-    yield put(actions.loginSucceeded(data));
+    const { token, user } = yield call(login, state, payload.code);
+    yield put(actions.loginSucceeded(token, user));
   } catch (ex) {
     yield put(actions.loginFailed(ex.message));
   }

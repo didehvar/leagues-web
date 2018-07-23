@@ -14,7 +14,7 @@ class LoginButton extends React.PureComponent {
       }`,
       `redirect_uri=${encodeURIComponent(
         `${window.location.origin}${routes.authStrava}?${stringify({
-          redirectTo: window.location.href,
+          redirect_to: `${window.location.pathname}${window.location.search}`,
         })}`,
       )}`,
       'response_type=code',
