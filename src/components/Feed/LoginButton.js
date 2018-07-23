@@ -1,5 +1,6 @@
 import React from 'react';
-import Button from '@material-ui/core/Button';
+
+import stravaButton from './assets/login.strava-orange.svg';
 
 class LoginButton extends React.PureComponent {
   render() {
@@ -17,14 +18,9 @@ class LoginButton extends React.PureComponent {
     ].join('&');
 
     return (
-      <Button
-        variant="contained"
-        color="primary"
-        component="a"
-        href={stravaUrl}
-      >
-        Login
-      </Button>
+      <a href={stravaUrl}>
+        <img src={stravaButton} alt="Connect with Strava" />
+      </a>
     );
   }
 }

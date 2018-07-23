@@ -6,10 +6,11 @@ export const Container = styled.div`
   width: 100%;
 
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  text-align: center;
 
+  text-align: center;
   padding: ${props => props.theme.spacing.page};
 `;
 
@@ -36,6 +37,13 @@ export const HeroImage = styled.div`
 
 export const Wrapper = styled.div`
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const CenterWrapper = styled.div`
+  flex: 1;
 `;
 
 export const Text = styled(Typography)`
@@ -48,4 +56,12 @@ export const Text = styled(Typography)`
       line-height: 1.2em;
       font-size: 1.25rem;
     `};
+`;
+
+export const Footer = styled.div`
+  width: 100%;
+
+  img {
+    width: 200px;
+  }
 `;
