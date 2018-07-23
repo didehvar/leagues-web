@@ -7,7 +7,7 @@ import Route from 'react-router-dom/Route';
 // import CreateLeagueRoute from './containers/CreateLeagueRoute';
 // import LeagueUseInviteRoute from './containers/LeagueUseInviteRoute';
 
-import { Feed, League, Settings } from './pages';
+import { Auth, Feed, League, Settings } from './pages';
 import routes from './utils/routes';
 
 class Routes extends React.Component {
@@ -23,17 +23,20 @@ class Routes extends React.Component {
       <Switch location={location}>
         <Route exact path={routes.feed} render={this.route(Feed)} />
 
-        {/* <Route exact path={routes.newLeague} component={CreateLeagueRoute} />
-        <Route
-          exact
-          path={routes.leagueUseInvite()}
-          component={LeagueUseInviteRoute}
-        />
-        <Route exact path={routes.leagueWithouSlug} component={LeagueRoute} />
-        <Route path={routes.league()} component={LeagueRoute} /> */}
+        <Route path={routes.auth} render={this.route(Auth)} />
 
         <Route path={routes._leagues} render={this.route(League)} />
-        <Route exact path={routes.settings} render={this.route(Settings)} />
+
+        <Route path={routes.settings} render={this.route(Settings)} />
+
+        {/* <Route exact path={routes.newLeague} component={CreateLeagueRoute} />
+<Route
+  exact
+  path={routes.leagueUseInvite()}
+  component={LeagueUseInviteRoute}
+/>
+<Route exact path={routes.leagueWithouSlug} component={LeagueRoute} />
+<Route path={routes.league()} component={LeagueRoute} /> */}
       </Switch>
     );
   }

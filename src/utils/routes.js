@@ -10,6 +10,9 @@ export default {
 
   login: '/',
 
+  auth: '/auth',
+  authStrava: '/auth/strava',
+
   _leagues: '/v2/leagues',
 
   // ----- Leagues -----

@@ -14,7 +14,6 @@ import Routes from './Routes';
 import BottomNav from './components/BottomNav';
 
 import ScrollToTop from './containers/ScrollToTop';
-import StravaAuthHandler from './containers/StravaAuthHandler';
 
 import { Container, transitionClass } from './App.style';
 
@@ -26,7 +25,6 @@ class App extends React.PureComponent {
       <React.Fragment>
         <CssBaseline />
         <ScrollToTop />
-        <StravaAuthHandler />
 
         <Container nav={authenticated} className={transitionClass}>
           <Route
