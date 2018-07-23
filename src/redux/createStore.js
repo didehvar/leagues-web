@@ -17,9 +17,9 @@ const persistedReducer = persistReducer(
   {
     key: 'impendulo',
     storage,
-    whitelist: ['auth'],
+    whitelist: ['auth', 'ducks'],
   },
-  rootReducer
+  rootReducer,
 );
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -29,7 +29,7 @@ const createStore = history => {
 
   const store = reduxCreateStore(
     persistedReducer,
-    composeEnhancers(applyMiddleware(jwt, thunk, sagaMiddleware, api(history)))
+    composeEnhancers(applyMiddleware(jwt, thunk, sagaMiddleware, api(history))),
   );
 
   registerSagas(sagaMiddleware);

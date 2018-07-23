@@ -3,7 +3,7 @@ import Loadable from 'react-loadable';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 
-import Loading from '../components/Loading';
+import Loading from '../components/UI/Loading';
 
 const Settings = Loadable({
   loader: () => import('../components/Settings'),

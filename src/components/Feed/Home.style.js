@@ -5,7 +5,7 @@ export const Text = styled(Typography)`
   color: ${props => props.theme.palette.grey[50]};
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 
-  ${props => console.log(props.theme)} ${props =>
+  ${props =>
     props.variant === 'subheading' &&
     css`
       line-height: 1.2em;

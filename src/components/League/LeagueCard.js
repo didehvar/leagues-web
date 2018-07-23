@@ -33,8 +33,6 @@ class LeagueCard extends React.PureComponent {
   render() {
     const { name, startDate, discipline, type } = this.props;
 
-    console.log(this.props);
-
     return (
       <ClickableCard onClick={this.onClick}>
         <CardContent>

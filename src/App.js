@@ -19,14 +19,12 @@ import { Container, transitionClass } from './App.style';
 
 class App extends React.PureComponent {
   render() {
-    const { authenticated } = this.props;
-
     return (
       <React.Fragment>
         <CssBaseline />
         <ScrollToTop />
 
-        <Container nav={authenticated} className={transitionClass}>
+        <Container className={transitionClass}>
           <Route
             render={({ location }) => (
               <Transition
@@ -42,12 +40,10 @@ class App extends React.PureComponent {
           />
         </Container>
 
-        {authenticated && <BottomNav />}
+        <Route component={BottomNav} />
       </React.Fragment>
     );
   }
 }
 
-export default connect(state => ({
-  authenticated: getUserAuthenticated(state),
-}))(App);
+export default App;

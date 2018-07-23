@@ -1,5 +1,7 @@
 import React from 'react';
 
+import FullPageLoading from '../UI/FullPageLoading';
+
 const Loading = ({ error, retry, pastDelay }) => {
   if (error) {
     return (
@@ -11,7 +13,7 @@ const Loading = ({ error, retry, pastDelay }) => {
   }
 
   if (pastDelay) {
-    return <div>Loading...</div>;
+    return <FullPageLoading />;
   }
 
   return null;

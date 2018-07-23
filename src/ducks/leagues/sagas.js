@@ -28,7 +28,7 @@ function* getLeague({ payload: { id } }) {
   }
 }
 
-export function* watchSagas() {
+export default function* sagas() {
   yield takeLatest(types.FETCH_LEAGUES, getLeagues);
   yield takeLatest(types.FETCH_LEAGUE, getLeague);
   yield throttle(100, types.SEARCH, getLeagues);

@@ -4,7 +4,7 @@ import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 
 import routes from '../utils/routes';
-import Loading from '../components/Loading';
+import Loading from '../components/UI/Loading';
 
 const Strava = Loadable({
   loader: () => import('../components/Auth/Strava'),

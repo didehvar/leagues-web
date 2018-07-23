@@ -14,6 +14,6 @@ function* doLogin({ payload }) {
   }
 }
 
-export function* watchSagas() {
+export default function* sagas() {
   yield takeLatest(types.LOGIN, doLogin);
 }

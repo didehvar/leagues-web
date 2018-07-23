@@ -5,10 +5,10 @@ import flowRight from 'lodash/flowRight';
 import { connect } from 'react-redux';
 
 import routes from '../../utils/routes';
-import withLoading from '../../hocs/withLoading';
 import { login, getUserAuthenticated } from '../../ducks/users';
 
 import ErrorMessage from '../../components/ErrorMessage';
+import FullPageLoading from '../UI/FullPageLoading';
 
 class Strava extends React.PureComponent {
   static propTypes = {
@@ -38,7 +38,7 @@ class Strava extends React.PureComponent {
       );
     }
 
-    return null;
+    return <FullPageLoading />;
   }
 }
 
@@ -50,5 +50,4 @@ export default flowRight(
     }),
     { login },
   ),
-  withLoading,
 )(Strava);
