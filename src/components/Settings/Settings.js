@@ -19,11 +19,49 @@ class Settings extends React.PureComponent {
     authenticated: false,
   };
 
-  contact() {
-    window.chaport.on('ready', function() {
+  state = {
+    loadingChaport: false,
+  };
+
+  componentDidMount() {
+    this.loadChaport();
+  }
+
+  loadChaport = () => {
+    const _q = [];
+    const _l = {};
+    const chaport = {
+      app_id: '5b3685c88b93487d061037ad',
+      _q,
+      _l,
+      q: (...args) => chaport._q.push(...args),
+      on: (e, fn) => {
+        chaport._l[e] = chaport._l[e] || [];
+        chaport._l[e].push(fn);
+      },
+    };
+    window.chaport = chaport;
+
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://app.chaport.com/javascripts/insert.js';
+    script.async = 1;
+    document.body.appendChild(script);
+  };
+
+  contact = () => {
+    const timeout = setTimeout(
+      () => this.setState({ loadingChaport: true }),
+      100,
+    );
+
+    window.chaport.on('ready', () => {
+      if (timeout) clearTimeout(timeout);
+      this.setState({ loadingChaport: false });
+
       window.chaport.open();
     });
-  }
+  };
 
   logout = () => {
     const { logout, history } = this.props;
@@ -32,6 +70,7 @@ class Settings extends React.PureComponent {
   };
 
   render() {
+    const { loadingChaport } = this.state;
     const { authenticated } = this.props;
 
     return (
@@ -49,7 +88,9 @@ class Settings extends React.PureComponent {
           <ListItemIcon>
             <SupportIcon />
           </ListItemIcon>
-          <ListItemText primary="Contact us" />
+          <ListItemText
+            primary={loadingChaport ? 'Loading...' : 'Contact us'}
+          />
         </ListItem>
       </List>
     );

@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Typography from '@material-ui/core/Typography';
 
 export const Container = styled.div`
@@ -20,7 +20,7 @@ export const HeroImage = styled.div`
   left: 0;
   right: 0;
   bottom: 0;
-  filter: brightness(90%);
+  filter: brightness(80%);
 
   &,
   > div {
@@ -41,4 +41,11 @@ export const Wrapper = styled.div`
 export const Text = styled(Typography)`
   color: ${props => props.theme.palette.grey[50]};
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+
+  ${props => console.log(props.theme)} ${props =>
+    props.variant === 'subheading' &&
+    css`
+      line-height: 1.2em;
+      font-size: 1.25rem;
+    `};
 `;

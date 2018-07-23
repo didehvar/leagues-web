@@ -8,6 +8,7 @@ import Loading from '../components/Loading';
 const Feed = Loadable({
   loader: () => import('../components/Feed'),
   loading: Loading,
+  delay: 300,
 });
 
 const FeedPage = ({ match: { path } }) => (

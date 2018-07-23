@@ -22,15 +22,13 @@ class Home extends React.PureComponent {
         <Wrapper>
           <Text variant="display2">Impendulo</Text>
 
-          <Text variant="title">
+          <Text variant="subheading">
             The unofficial league builder for Strava athletes
           </Text>
 
           <Spacer />
 
-          <div>
-            <LoginButton />
-          </div>
+          <LoginButton />
         </Wrapper>
       </Container>
     );
