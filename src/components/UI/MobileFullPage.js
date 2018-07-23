@@ -12,12 +12,12 @@ import cycle598614Thumb from './assets/backgrounds/cycle.un598614.thumb.jpg';
 import cycle681403 from './assets/backgrounds/cycle.un681403.jpg';
 import cycle681403Thumb from './assets/backgrounds/cycle.un681403.thumb.jpg';
 
-import running5581 from './assets/backgrounds/run.un5581.jpg';
-import running5581Thumb from './assets/backgrounds/run.un5581.thumb.jpg';
-import running418618 from './assets/backgrounds/run.un418618.jpg';
-import running418618Thumb from './assets/backgrounds/run.un418618.thumb.jpg';
-import running553145 from './assets/backgrounds/run.un553145.jpg';
-import running553145Thumb from './assets/backgrounds/run.un553145.thumb.jpg';
+import run5581 from './assets/backgrounds/run.un5581.jpg';
+import run5581Thumb from './assets/backgrounds/run.un5581.thumb.jpg';
+import run418618 from './assets/backgrounds/run.un418618.jpg';
+import run418618Thumb from './assets/backgrounds/run.un418618.thumb.jpg';
+import run553145 from './assets/backgrounds/run.un553145.jpg';
+import run553145Thumb from './assets/backgrounds/run.un553145.thumb.jpg';
 
 import ProgressiveImage from './ProgressiveImage';
 
@@ -33,13 +33,13 @@ class MobileFullPage extends React.PureComponent {
   images = [
     { image: cycle216027, thumb: cycle216027Thumb, position: 'center bottom' },
     { image: cycle311391, thumb: cycle311391Thumb, position: 'center bottom' },
-    { image: cycle439410, thumb: cycle439410Thumb, position: 'center top' },
+    { image: cycle439410, thumb: cycle439410Thumb, position: 'center bottom' },
     { image: cycle598614, thumb: cycle598614Thumb, position: 'right bottom' },
     { image: cycle681403, thumb: cycle681403Thumb, position: 'center bottom' },
 
-    { image: running5581, thumb: running5581Thumb, position: 'center top' },
-    { image: running418618, thumb: running418618Thumb, position: 'center top' },
-    { image: running553145, thumb: running553145Thumb, position: 'center top' },
+    { image: run5581, thumb: run5581Thumb, position: 'center top' },
+    { image: run418618, thumb: run418618Thumb, position: 'center top' },
+    { image: run553145, thumb: run553145Thumb, position: 'center bottom' },
   ];
 
   constructor(props) {

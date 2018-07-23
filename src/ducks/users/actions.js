@@ -21,3 +21,7 @@ export const loginFailed = message => ({
     message,
   },
 });
+
+export const logout = () => ({
+  type: types.LOGOUT,
+});

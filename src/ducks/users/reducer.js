@@ -8,6 +8,7 @@ function current(state = {}, action = {}) {
 
     case types.LOGIN:
     case types.LOGIN_FAILED:
+    case types.LOGOUT:
       return {};
 
     default:

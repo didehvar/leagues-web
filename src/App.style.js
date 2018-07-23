@@ -13,6 +13,5 @@ injectGlobal`
 `;
 
 export const Container = styled.div`
-  margin-bottom: ${({ theme, nav }) =>
-    nav ? theme.mixins.toolbar.minHeight : 0}px;
+  margin-bottom: ${props => props.theme.mixins.toolbar.minHeight}px;
 `;

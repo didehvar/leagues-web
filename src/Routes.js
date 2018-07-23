@@ -7,7 +7,7 @@ import Route from 'react-router-dom/Route';
 // import CreateLeagueRoute from './containers/CreateLeagueRoute';
 // import LeagueUseInviteRoute from './containers/LeagueUseInviteRoute';
 
-import { Auth, Feed, League, Settings } from './pages';
+import { Auth, Feed, Home, League, Settings } from './pages';
 import routes from './utils/routes';
 
 class Routes extends React.Component {
@@ -21,6 +21,7 @@ class Routes extends React.Component {
 
     return (
       <Switch location={location}>
+        <Route exact path={routes.home} render={this.route(Home)} />
         <Route exact path={routes.feed} render={this.route(Feed)} />
 
         <Route path={routes.auth} render={this.route(Auth)} />

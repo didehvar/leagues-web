@@ -8,13 +8,16 @@ import { StravaButton } from './LoginButton.style';
 
 class LoginButton extends React.PureComponent {
   render() {
+    const redirectTo =
+      window.location.pathname === '/' ? routes.feed : window.location.pathname;
+
     const stravaUrl = [
       `https://www.strava.com/oauth/authorize?client_id=${
         process.env.REACT_APP_STRAVA_CLIENT_ID
       }`,
       `redirect_uri=${encodeURIComponent(
         `${window.location.origin}${routes.authStrava}?${stringify({
-          redirect_to: `${window.location.pathname}${window.location.search}`,
+          redirect_to: `${redirectTo}${window.location.search}`,
         })}`,
       )}`,
       'response_type=code',

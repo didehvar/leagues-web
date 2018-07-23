@@ -15,7 +15,7 @@ export const Container = styled.div`
 
 export const Background = styled.div`
   z-index: -1;
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;

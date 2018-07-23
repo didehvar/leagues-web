@@ -24,7 +24,7 @@ class Strava extends React.PureComponent {
       login(query.get('code'));
     }
 
-    history.replace(query.get('redirect_to') || routes.home);
+    history.replace(query.get('redirect_to'));
   }
 
   render() {

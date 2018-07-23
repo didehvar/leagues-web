@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
 
-import { logout } from '../../actions/auth';
-import { isAuthenticated } from '../../reducers';
+import { logout, getUserAuthenticated } from '../../ducks/users';
 import Settings from './Settings';
 
 export default connect(
-  state => ({ authenticated: isAuthenticated(state) }),
-  { logout }
+  state => ({ authenticated: getUserAuthenticated(state) }),
+  { logout },
 )(Settings);

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import routes from '../../utils/routes';
 import Spacer from '../UI/Spacer';
 import MobileFullPage from '../UI/MobileFullPage';
 import LoginButton from '../Auth/LoginButton';
