@@ -3,9 +3,10 @@ import './index.css';
 import 'react-virtualized/styles.css';
 
 import React from 'react';
+import Router from 'react-router-dom/Router';
+import Route from 'react-router-dom/Route';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Transition, animated } from 'react-spring';
-import Router from 'react-router-dom/Router';
 import WebFont from 'webfontloader';
 
 import Routes from './Routes';
@@ -38,7 +39,7 @@ class App extends React.Component {
                 <FullPageLoading />
               ) : (
                 <Router history={history}>
-                  <Routes />
+                  <Route component={Routes} />
                 </Router>
               )}
             </animated.div>
