@@ -36,8 +36,8 @@ class BottomNav extends React.PureComponent {
         <BottomNavigationAction
           label={'Leagues'}
           icon={<GroupIcon />}
-          value={routes._leagues}
-          onClick={this.onClick(routes._leagues)}
+          value={routes.leagues}
+          onClick={this.onClick(routes.leagues)}
         />
 
         <BottomNavigationAction

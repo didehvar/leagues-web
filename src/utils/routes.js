@@ -1,27 +1,14 @@
-const league = (id, slug) =>
-  `/leagues/${id || ':id'}/${id ? slug || '' : ':slug'}`;
-
 export default {
   home: '/',
   login: '/',
 
   feed: '/feed',
 
-  profile: '/profile',
-  settings: '/settings',
-
   auth: '/auth',
   authStrava: '/auth/strava',
 
-  _leagues: '/v2/leagues',
+  leagues: '/v2/leagues',
+  leaguesCreate: '/v2/leagues/create',
 
-  // ----- Leagues -----
-  leagues: '/leagues',
-  newLeague: '/leagues/new',
-  leagueWithouSlug: '/leagues/:id',
-  league,
-  leagueInvite: (id, slug) => `${league(id, slug)}/invite`,
-  leagueUseInvite: (id, slug, code) =>
-    `${league(id, slug)}/join/${code || ':code'}`,
-  leagueStandings: (id, slug) => `${league(id, slug)}/standings`,
+  settings: '/settings',
 };

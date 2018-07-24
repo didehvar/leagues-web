@@ -11,7 +11,7 @@ const Strava = Loadable({
   loading: Loading,
 });
 
-const AuthPage = ({ match: { path } }) => (
+const AuthPage = () => (
   <Switch>
     <Route path={routes.authStrava} component={Strava} />
   </Switch>

@@ -2,6 +2,7 @@ import React from 'react';
 import Loadable from 'react-loadable';
 import Route from 'react-router-dom/Route';
 
+import routes from '../utils/routes';
 import Loading from '../components/UI/Loading';
 
 const Home = Loadable({
@@ -10,8 +11,6 @@ const Home = Loadable({
   delay: 500,
 });
 
-const HomePage = ({ match: { path } }) => (
-  <Route exact path={path} component={Home} />
-);
+const HomePage = () => <Route exact path={routes.home} component={Home} />;
 
 export default HomePage;

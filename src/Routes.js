@@ -57,7 +57,7 @@ class Routes extends React.Component {
               <PrivateRoute
                 style={style}
                 authenticated={authenticated}
-                path={routes._leagues}
+                path={routes.leagues}
                 component={League}
               />
               <PrivateRoute

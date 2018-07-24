@@ -3,6 +3,7 @@ import Loadable from 'react-loadable';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 
+import routes from '../utils/routes';
 import Loading from '../components/UI/Loading';
 
 const League = Loadable({
@@ -15,10 +16,11 @@ const Search = Loadable({
   loading: Loading,
 });
 
-const LeaguePage = ({ match: { path } }) => (
+const LeaguePage = () => (
   <Switch>
-    <Route exact path={path} component={Search} />
-    <Route path={`${path}/:id`} component={League} />
+    <Route exact path={routes.leagues} component={Search} />
+    <Route path={`${routes.leagues}/:id`} component={League} />
+    <Route path={routes.leaguesCreate} component={League} />
   </Switch>
 );
 
