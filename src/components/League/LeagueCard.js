@@ -37,7 +37,7 @@ class LeagueCard extends React.PureComponent {
       <ClickableCard onClick={this.onClick}>
         <CardContent>
           <Typography variant="headline" component="h2">
-            {name}
+            {name.length > 90 ? `${name.substring(0, 90)}...` : name}
           </Typography>
 
           <Typography variant="subheading" color="textSecondary" paragraph>
