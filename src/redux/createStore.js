@@ -6,7 +6,6 @@ import {
 import { persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
-import jwt from './middleware/jwt';
 import rootReducer from '../ducks/reducers';
 import registerSagas from '../ducks/sagas';
 
@@ -17,7 +16,7 @@ const createStore = history => {
 
   const store = reduxCreateStore(
     rootReducer,
-    composeEnhancers(applyMiddleware(jwt, sagaMiddleware)),
+    composeEnhancers(applyMiddleware(sagaMiddleware)),
   );
 
   registerSagas(sagaMiddleware);

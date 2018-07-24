@@ -6,8 +6,9 @@ import leagues from './leagues/reducer';
 import users from './users/reducer';
 
 const usersPersistConfig = {
-  key: 'current',
+  key: 'impendulo.users',
   storage: storage,
+  whitelist: ['current'],
 };
 
 export default combineReducers({

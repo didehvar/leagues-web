@@ -1,7 +1,7 @@
 import { call, select, put, takeLatest } from 'redux-saga/effects';
 
 import types from './types';
-import { login } from './api';
+import { login, fetchRefreshToken } from './api';
 import * as actions from './actions';
 
 function* doLogin({ payload }) {
@@ -14,6 +14,17 @@ function* doLogin({ payload }) {
   }
 }
 
+function* getRefreshToken() {
+  try {
+    const state = yield select();
+    const { token } = yield call(fetchRefreshToken, state);
+    yield put(actions.fetchRefreshTokenSucceeded(token));
+  } catch (ex) {
+    yield put(actions.fetchRefreshTokenFailed(ex.message));
+  }
+}
+
 export default function* sagas() {
   yield takeLatest(types.LOGIN, doLogin);
+  yield takeLatest(types.FETCH_REFRESH_TOKEN, getRefreshToken);
 }

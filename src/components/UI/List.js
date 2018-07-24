@@ -32,7 +32,7 @@ class List extends React.PureComponent {
 
   isRowLoaded = ({ index }) => !!this.props.data[index];
 
-  loadMoreRows = ({ startIndex, stopIndex }) =>
+  loadMoreRows = async ({ startIndex, stopIndex }) =>
     this.props.fetch({ startIndex, stopIndex });
 
   rowRenderer = ({ key, index, parent, style }) => {

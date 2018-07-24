@@ -25,3 +25,18 @@ export const loginFailed = message => ({
 export const logout = () => ({
   type: types.LOGOUT,
 });
+
+export const fetchRefreshToken = () => ({
+  type: types.FETCH_REFRESH_TOKEN,
+});
+
+export const fetchRefreshTokenSucceeded = () => ({
+  type: types.FETCH_REFRESH_TOKEN_SUCCEEDED,
+});
+
+export const fetchRefreshTokenFailed = message => ({
+  type: types.FETCH_REFRESH_TOKEN_FAILED,
+  payload: {
+    message,
+  },
+});

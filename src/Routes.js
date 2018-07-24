@@ -16,8 +16,6 @@ import BottomNav from './components/BottomNav';
 import { Container } from './Routes.style';
 import AnimatedRoute from './components/UI/AnimatedRoute';
 
-console.log(Feed);
-
 class Routes extends React.Component {
   render() {
     const { authenticated, location } = this.props;
