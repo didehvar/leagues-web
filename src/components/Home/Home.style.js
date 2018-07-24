@@ -8,7 +8,7 @@ export const Text = styled(Typography)`
   ${props =>
     props.variant === 'subheading' &&
     css`
-      line-height: 1.2em;
+      line-height: 1.3em;
       font-size: 1.25rem;
     `};
 `;

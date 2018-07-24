@@ -3,20 +3,18 @@ import Typography from '@material-ui/core/Typography';
 
 import List from '../League/List.container';
 
-import { Container } from './Feed.style';
-
 class Feed extends React.PureComponent {
   render() {
     const { userId } = this.props;
 
     return (
-      <Container>
+      <React.Fragment>
         <Typography paragraph variant="headline">
           My leagues
         </Typography>
 
         <List userId={userId} />
-      </Container>
+      </React.Fragment>
     );
   }
 }

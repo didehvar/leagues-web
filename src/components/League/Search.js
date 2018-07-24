@@ -7,17 +7,15 @@ import Spacer from '../UI/Spacer';
 import SearchBox from './SearchBox';
 import List from './List.container';
 
-import { Container, AddFab } from './Search.style';
+import { AddFab } from './Search.style';
 
 class Search extends React.PureComponent {
   render() {
     return (
       <React.Fragment>
-        <Container>
-          <SearchBox />
-          <Spacer />
-          <List />
-        </Container>
+        <SearchBox />
+        <Spacer />
+        <List />
 
         <AddFab>
           <Zoom in>

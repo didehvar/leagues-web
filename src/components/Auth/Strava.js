@@ -4,7 +4,6 @@ import withRouter from 'react-router-dom/withRouter';
 import flowRight from 'lodash/flowRight';
 import { connect } from 'react-redux';
 
-import routes from '../../utils/routes';
 import { login, getUserAuthenticated } from '../../ducks/users';
 
 import ErrorMessage from '../../components/ErrorMessage';

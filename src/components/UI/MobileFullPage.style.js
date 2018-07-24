@@ -10,7 +10,6 @@ export const Container = styled.div`
   justify-content: center;
 
   text-align: center;
-  padding: ${props => props.theme.spacing.page};
 `;
 
 export const Background = styled.div`

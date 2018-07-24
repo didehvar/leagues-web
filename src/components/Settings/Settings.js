@@ -28,6 +28,8 @@ class Settings extends React.PureComponent {
   }
 
   loadChaport = () => {
+    if (window.chaport) return false;
+
     const _q = [];
     const _l = {};
     const chaport = {

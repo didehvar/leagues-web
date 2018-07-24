@@ -4,7 +4,7 @@ import { Div } from 'glamorous';
 import { connect } from 'react-redux';
 import Typography from '@material-ui/core/Typography';
 
-import withTransition from '../../hocs/withTransition';
+import withTransitionDiv from '../../hocs/withTransitionDiv';
 import { isAuthenticated } from '../../reducers';
 import LoginButton from '../LoginButton';
 import Feed from '../Feed';
@@ -38,5 +38,5 @@ export default flowRight(
   connect(state => ({
     authenticated: isAuthenticated(state),
   })),
-  withTransition
+  withTransitionDiv,
 )(HomeRoute);

@@ -1,27 +1,29 @@
-import 'typeface-roboto';
 import 'url-search-params-polyfill';
 import './index.css';
 import 'react-virtualized/styles.css';
 
 import React from 'react';
-import { connect } from 'react-redux';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { Transition } from 'react-spring';
 import Route from 'react-router-dom/Route';
+import WebFont from 'webfontloader';
 
 import Routes from './Routes';
 import BottomNav from './components/BottomNav';
 
-import ScrollToTop from './containers/ScrollToTop';
+import { Container, fullPageClass } from './App.style';
 
-import { Container, transitionClass } from './App.style';
+WebFont.load({
+  google: {
+    families: ['Roboto'],
+  },
+});
 
 const App = () => (
   <React.Fragment>
     <CssBaseline />
-    <ScrollToTop />
 
-    <Container className={transitionClass}>
+    <Container className={fullPageClass}>
       <Route
         render={({ location }) => (
           <Transition
