@@ -1,6 +1,6 @@
 import { getRound } from './rounds';
 
-const reducer = state => state.ducks.leagues;
+const reducer = state => state.leagues;
 
 const getDiscipline = (state, id) => reducer(state).discipline[id].name;
 const getType = (state, id) => reducer(state).type[id].name;
@@ -31,7 +31,7 @@ export const getSearch = state => reducer(state).search;
 
 export const isFetching = state => reducer(state).isFetching;
 
-export const errorMessage = state => reducer(state).errorMessage;
+export const getErrorMessage = state => reducer(state).errorMessage;
 
 export const getRounds = (state, id) => {
   const league = getLeague(state, id);

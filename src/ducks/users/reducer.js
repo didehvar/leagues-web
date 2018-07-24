@@ -16,6 +16,22 @@ function current(state = {}, action = {}) {
   }
 }
 
+function errorMessage(state = null, action = {}) {
+  switch (action.type) {
+    case types.LOGIN_FAILED:
+      return action.payload.message;
+
+    case types.LOGIN:
+    case types.LOGIN_SUCCEEDED:
+    case types.LOGOUT:
+      return null;
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   current,
+  errorMessage,
 });
