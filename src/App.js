@@ -4,14 +4,12 @@ import 'react-virtualized/styles.css';
 
 import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Transition } from 'react-spring';
-import Route from 'react-router-dom/Route';
+import { Transition, animated } from 'react-spring';
+import Router from 'react-router-dom/Router';
 import WebFont from 'webfontloader';
 
 import Routes from './Routes';
-import BottomNav from './components/BottomNav';
-
-import { Container, fullPageClass } from './App.style';
+import FullPageLoading from './components/UI/FullPageLoading';
 
 WebFont.load({
   google: {
@@ -19,28 +17,36 @@ WebFont.load({
   },
 });
 
-const App = () => (
-  <React.Fragment>
-    <CssBaseline />
+class App extends React.Component {
+  render() {
+    const { loading, history } = this.props;
 
-    <Container className={fullPageClass}>
-      <Route
-        render={({ location }) => (
-          <Transition
-            native
-            keys={location.pathname}
-            from={{ opacity: 0 }}
-            enter={{ opacity: 1 }}
-            leave={{ opacity: 0 }}
-          >
-            {style => <Routes style={style} location={location} />}
-          </Transition>
-        )}
-      />
-    </Container>
+    return (
+      <React.Fragment>
+        <CssBaseline />
 
-    <BottomNav />
-  </React.Fragment>
-);
+        <Transition
+          native
+          keys={loading ? 'loading' : 'loaded'}
+          from={{ opacity: 0 }}
+          enter={{ opacity: 1 }}
+          leave={{ opacity: 0 }}
+        >
+          {style => (
+            <animated.div style={style}>
+              {loading ? (
+                <FullPageLoading />
+              ) : (
+                <Router history={history}>
+                  <Routes />
+                </Router>
+              )}
+            </animated.div>
+          )}
+        </Transition>
+      </React.Fragment>
+    );
+  }
+}
 
 export default App;

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import withRouter from 'react-router-dom/withRouter';
 import flowRight from 'lodash/flowRight';
-import memoize from 'lodash/memoize';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import MenuIcon from '@material-ui/icons/Menu';
 import GroupIcon from '@material-ui/icons/Group';
@@ -14,37 +13,14 @@ import { getUserAuthenticated } from '../../ducks/users';
 import { BottomNavigation } from './BottomNav.style';
 
 class BottomNav extends React.PureComponent {
-  static routes = [
-    {
-      label: 'Feed',
-      icon: <MenuIcon />,
-      route: routes.feed,
-    },
-    {
-      label: 'Leagues',
-      icon: <GroupIcon />,
-      route: routes._leagues,
-    },
-    {
-      label: 'Settings',
-      icon: <MoreHorizIcon />,
-      route: routes.settings,
-    },
-  ];
-
-  value = memoize(
-    pathname =>
-      (
-        [...BottomNav.routes]
-          .reverse()
-          .find(r => pathname.startsWith(r.route)) || {}
-      ).route,
-  );
+  onClick = route => () => {
+    const { history } = this.props;
+    history.push(route);
+  };
 
   render() {
     const {
       authenticated,
-      history,
       location: { pathname },
     } = this.props;
 
@@ -53,18 +29,29 @@ class BottomNav extends React.PureComponent {
     return (
       <BottomNavigation
         showLabels
-        value={this.value(pathname)}
+        value={pathname}
         onChange={this.handleChange}
       >
-        {BottomNav.routes.map(({ label, icon, route }) => (
-          <BottomNavigationAction
-            key={label}
-            label={label}
-            icon={icon}
-            value={route}
-            onClick={() => history.push(route)}
-          />
-        ))}
+        <BottomNavigationAction
+          label={'Feed'}
+          icon={<MenuIcon />}
+          value={routes.feed}
+          onClick={this.onClick(routes.feed)}
+        />
+
+        <BottomNavigationAction
+          label={'Leagues'}
+          icon={<GroupIcon />}
+          value={routes._leagues}
+          onClick={this.onClick(routes._leagues)}
+        />
+
+        <BottomNavigationAction
+          label={'Settings'}
+          icon={<MoreHorizIcon />}
+          value={routes.settings}
+          onClick={this.onClick(routes.settings)}
+        />
       </BottomNavigation>
     );
   }

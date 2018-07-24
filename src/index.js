@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import Router from 'react-router-dom/Router';
 import { PersistGate } from 'redux-persist/integration/react';
 import createBrowserHistory from 'history/createBrowserHistory';
 
@@ -15,8 +14,6 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import theme from './utils/theme';
 import createStore from './redux/createStore';
-
-import FullPageLoading from './components/UI/FullPageLoading';
 
 const history = createBrowserHistory();
 const { store, persistor } = createStore(history);
@@ -33,10 +30,8 @@ ReactDOM.render(
     <MuiThemeProvider theme={theme}>
       <ThemeProvider theme={theme}>
         <Provider store={store}>
-          <PersistGate loading={<FullPageLoading />} persistor={persistor}>
-            <Router history={history}>
-              <App />
-            </Router>
+          <PersistGate persistor={persistor}>
+            {loaded => <App loading={!loaded} history={history} />}
           </PersistGate>
         </Provider>
       </ThemeProvider>

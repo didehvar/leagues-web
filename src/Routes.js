@@ -1,44 +1,65 @@
 import React from 'react';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
-
-// import HomeRoute from './containers/HomeRoute';
-// import LeagueRoute from './containers/LeagueRoute';
-// import CreateLeagueRoute from './containers/CreateLeagueRoute';
-// import LeagueUseInviteRoute from './containers/LeagueUseInviteRoute';
+import { Transition } from 'react-spring';
 
 import { Auth, Feed, Home, League, Settings } from './pages';
 import routes from './utils/routes';
+import BottomNav from './components/BottomNav';
+
+import { Container } from './Routes.style';
+import { fullPageClass } from './App.style';
 
 class Routes extends React.Component {
-  route(Component) {
-    const { style } = this.props;
+  route(Component, style) {
     return props => <Component {...props} style={style} />;
   }
 
   render() {
-    const { location } = this.props;
-
     return (
-      <Switch location={location}>
-        <Route exact path={routes.home} render={this.route(Home)} />
-        <Route exact path={routes.feed} render={this.route(Feed)} />
+      <Container className={fullPageClass}>
+        <BottomNav />
 
-        <Route path={routes.auth} render={this.route(Auth)} />
+        <Route
+          render={({ location }) => (
+            <Transition
+              native
+              keys={location.pathname}
+              from={{ opacity: 0 }}
+              enter={{ opacity: 1 }}
+              leave={{ opacity: 0 }}
+            >
+              {style => (
+                <Switch location={location}>
+                  <Route
+                    exact
+                    path={routes.home}
+                    render={this.route(Home, style)}
+                  />
 
-        <Route path={routes._leagues} render={this.route(League)} />
+                  <Route
+                    exact
+                    path={routes.feed}
+                    render={this.route(Feed, style)}
+                  />
 
-        <Route path={routes.settings} render={this.route(Settings)} />
+                  <Route path={routes.auth} render={this.route(Auth, style)} />
 
-        {/* <Route exact path={routes.newLeague} component={CreateLeagueRoute} />
-<Route
-  exact
-  path={routes.leagueUseInvite()}
-  component={LeagueUseInviteRoute}
-/>
-<Route exact path={routes.leagueWithouSlug} component={LeagueRoute} />
-<Route path={routes.league()} component={LeagueRoute} /> */}
-      </Switch>
+                  <Route
+                    path={routes._leagues}
+                    render={this.route(League, style)}
+                  />
+
+                  <Route
+                    path={routes.settings}
+                    render={this.route(Settings, style)}
+                  />
+                </Switch>
+              )}
+            </Transition>
+          )}
+        />
+      </Container>
     );
   }
 }
