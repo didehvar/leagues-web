@@ -1,7 +1,7 @@
 import React from 'react';
 import { animated } from 'react-spring';
 
-import { fullPageClass } from '../App.style.js';
+import config from '../utils/config';
 import { displayName } from '../utils/helpers';
 
 export default WrappedComponent => {
@@ -10,7 +10,7 @@ export default WrappedComponent => {
       const { style, ...props } = this.props;
 
       return (
-        <animated.div className={fullPageClass} style={style}>
+        <animated.div className={config.css.fullPage} style={style}>
           <WrappedComponent {...props} />
         </animated.div>
       );

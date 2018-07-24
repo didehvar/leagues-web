@@ -3,12 +3,12 @@ const league = (id, slug) =>
 
 export default {
   home: '/',
+  login: '/',
+
   feed: '/feed',
 
   profile: '/profile',
   settings: '/settings',
-
-  login: '/',
 
   auth: '/auth',
   authStrava: '/auth/strava',

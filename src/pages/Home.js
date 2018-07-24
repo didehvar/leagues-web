@@ -12,9 +12,7 @@ const Home = Loadable({
 });
 
 const HomePage = ({ match: { path } }) => (
-  <Switch>
-    <Route exact path={path} component={Home} />
-  </Switch>
+  <Route exact path={path} component={Home} />
 );
 
 export default HomePage;

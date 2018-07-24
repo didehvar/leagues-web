@@ -1,14 +1,14 @@
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { fullPageClass } from '../../App.style';
+import config from '../../utils/config';
 
 import { Container } from './FullPageLoading.style';
 
 class FullPageLoading extends React.PureComponent {
   render() {
     return (
-      <Container className={fullPageClass}>
+      <Container className={config.css.fullPage}>
         <CircularProgress />
       </Container>
     );

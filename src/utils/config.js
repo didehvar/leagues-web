@@ -5,4 +5,7 @@ export default {
     fastest: 'Fastest',
     distance: 'Distance',
   },
+  css: {
+    fullPage: 'full-page',
+  },
 };

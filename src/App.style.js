@@ -1,9 +1,9 @@
 import { injectGlobal } from 'styled-components';
 
-export const fullPageClass = 'transition-page-fill';
+import config from './utils/config';
 
 injectGlobal`
-  .${fullPageClass} {
+  .${config.css.fullPage} {
     position: absolute;
     left: 0px;
     right: 0px;

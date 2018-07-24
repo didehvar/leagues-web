@@ -1,74 +1,50 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import Router from 'react-router-dom/Router';
-import Switch from 'react-router-dom/Switch';
+import flowRight from 'lodash/flowRight';
+import withRouter from 'react-router-dom/withRouter';
 import Route from 'react-router-dom/Route';
-import { Transition, animated } from 'react-spring';
 
-import { Auth, Feed, Home, League, Settings } from './pages';
 import routes from './utils/routes';
+import config from './utils/config';
+import { getUserAuthenticated } from './ducks/users';
+import { Auth, Feed, Home, League, Settings } from './pages';
+import AnimatedSwitch from './components/UI/AnimatedSwitch';
+import PrivateRoute from './components/UI/PrivateRoute';
 import BottomNav from './components/BottomNav';
 
 import { Container } from './Routes.style';
-import { fullPageClass } from './App.style';
-import { getUserAuthenticated } from './ducks/users';
 
 class Routes extends React.Component {
-  route(Component, style) {
-    return props => <Component {...props} style={style} />;
-  }
-
-  componentDidMount() {
-    this.redirectAuth();
-  }
-
-  componentDidUpdate() {
-    this.redirectAuth();
-  }
-
-  redirectAuth = () => {};
-
   render() {
     const { authenticated, location } = this.props;
 
     return (
-      <Container className={fullPageClass}>
-        <BottomNav />
+      <Container className={config.css.fullPage}>
+        {authenticated && <BottomNav />}
 
-        <Transition
-          native
-          keys={location.pathname}
+        <AnimatedSwitch
+          location={location}
           from={{ opacity: 0 }}
           enter={{ opacity: 1 }}
           leave={{ opacity: 0 }}
         >
-          {style => (
-            <Switch location={location}>
-              <Route
-                exact
-                path={routes.feed}
-                render={this.route(Feed, style)}
-              />
+          <Route exact path={routes.home} component={Home} />
+          <Route path={routes.auth} component={Auth} />
 
-              <Route path={routes.auth} render={this.route(Auth, style)} />
+          <PrivateRoute exact path={routes.feed} component={Feed} />
+          <PrivateRoute path={routes._leagues} component={League} />
+          <PrivateRoute path={routes.settings} component={Settings} />
 
-              <Route
-                path={routes._leagues}
-                render={this.route(League, style)}
-              />
-
-              <Route
-                path={routes.settings}
-                render={this.route(Settings, style)}
-              />
-            </Switch>
-          )}
-        </Transition>
+          <Route component={() => <div>Oops</div>} />
+        </AnimatedSwitch>
       </Container>
     );
   }
 }
 
-export default connect(state => ({
-  authenticated: getUserAuthenticated(state),
-}))(Routes);
+export default flowRight(
+  withRouter,
+  connect(state => ({
+    authenticated: getUserAuthenticated(state),
+  })),
+)(Routes);
