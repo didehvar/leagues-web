@@ -18,12 +18,20 @@ class Strava extends React.Component {
   };
 
   componentDidMount() {
-    const { login, location, history } = this.props;
+    const { login, location } = this.props;
     const query = new URLSearchParams(location.search);
 
     if (query.has('state') && query.has('code')) {
       login(query.get('code'));
-      history.replace(query.get('redirect_to') || routes.home);
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { authenticated, history, location } = this.props;
+    const query = new URLSearchParams(location.search);
+
+    if (!prevProps.authenticated && authenticated) {
+      history.replace(query.get('redirect_to') || routes.feed);
     }
   }
 

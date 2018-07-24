@@ -1,23 +1,51 @@
 import React from 'react';
-import Route from 'react-router-dom/Route';
-import Redirect from 'react-router-dom/Redirect';
 
 import routes from '../../utils/routes';
+import AnimatedRoute from './AnimatedRoute';
 
-class PrivateRoute extends React.Component {
-  componentDidUpdate() {}
+class RouteAuth extends React.PureComponent {
+  componentDidMount() {
+    this.checkAuthenticated();
+  }
+
+  componentDidUpdate() {
+    this.checkAuthenticated();
+  }
 
   checkAuthenticated = () => {
     const { authenticated, history, location } = this.props;
     if (!authenticated) {
-      history.replace(routes.login, { from: location });
+      history.replace(routes.login, { from: location.pathname });
     }
   };
 
   render() {
-    const { authenticated, component: Component, ...props } = this.props;
+    const { component: Component, authenticated, ...props } = this.props;
 
-    return <Route {...props} component={Component} />;
+    if (!authenticated) {
+      return null;
+    }
+
+    return <Component {...props} />;
+  }
+}
+
+class PrivateRoute extends React.Component {
+  render() {
+    const { component: Component, authenticated, ...rest } = this.props;
+
+    return (
+      <AnimatedRoute
+        {...rest}
+        render={props => (
+          <RouteAuth
+            component={Component}
+            authenticated={authenticated}
+            {...props}
+          />
+        )}
+      />
+    );
   }
 }
 

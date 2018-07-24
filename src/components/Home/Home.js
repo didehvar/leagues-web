@@ -10,6 +10,9 @@ import { Text, PoweredByImg } from './Home.style';
 
 class Home extends React.PureComponent {
   render() {
+    const { location } = this.props;
+    const redirectTo = location.state && location.state.from;
+
     return (
       <MobileFullPage
         footer={<PoweredByImg src={poweredByStrava} alt="Powered by Strava" />}
@@ -22,7 +25,7 @@ class Home extends React.PureComponent {
 
         <Spacer />
 
-        <LoginButton />
+        <LoginButton redirectTo={redirectTo} />
       </MobileFullPage>
     );
   }

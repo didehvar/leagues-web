@@ -11,13 +11,10 @@ import routes from '../../utils/routes';
 
 class Settings extends React.PureComponent {
   static propTypes = {
-    authenticated: PropTypes.bool,
     logout: PropTypes.func.isRequired,
   };
 
-  static defaultProps = {
-    authenticated: false,
-  };
+  static defaultProps = {};
 
   state = {
     loadingChaport: false,
@@ -73,18 +70,15 @@ class Settings extends React.PureComponent {
 
   render() {
     const { loadingChaport } = this.state;
-    const { authenticated } = this.props;
 
     return (
       <List>
-        {authenticated && (
-          <ListItem button onClick={this.logout}>
-            <ListItemIcon>
-              <ExitIcon />
-            </ListItemIcon>
-            <ListItemText primary="Sign out" />
-          </ListItem>
-        )}
+        <ListItem button onClick={this.logout}>
+          <ListItemIcon>
+            <ExitIcon />
+          </ListItemIcon>
+          <ListItemText primary="Sign out" />
+        </ListItem>
 
         <ListItem button onClick={this.contact}>
           <ListItemIcon>
