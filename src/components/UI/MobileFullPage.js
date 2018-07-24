@@ -34,11 +34,11 @@ class MobileFullPage extends React.PureComponent {
     { image: cycle216027, thumb: cycle216027Thumb, position: 'center bottom' },
     { image: cycle311391, thumb: cycle311391Thumb, position: 'center bottom' },
     { image: cycle439410, thumb: cycle439410Thumb, position: 'center bottom' },
-    { image: cycle598614, thumb: cycle598614Thumb, position: 'right bottom' },
+    { image: cycle598614, thumb: cycle598614Thumb, position: '75% bottom' },
     { image: cycle681403, thumb: cycle681403Thumb, position: 'center bottom' },
 
     { image: run5581, thumb: run5581Thumb, position: 'center top' },
-    { image: run418618, thumb: run418618Thumb, position: 'center top' },
+    { image: run418618, thumb: run418618Thumb, position: 'center bottom' },
     { image: run553145, thumb: run553145Thumb, position: 'center bottom' },
   ];
 
@@ -69,9 +69,6 @@ class MobileFullPage extends React.PureComponent {
             position={position}
           />
         </Background>
-        {/* <HeroImage>
-          <ProgressiveImage thumb={previewImage} src={fullImage} />
-        </HeroImage> */}
 
         <Wrapper>
           <CenterWrapper>{children}</CenterWrapper>

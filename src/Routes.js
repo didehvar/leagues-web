@@ -28,7 +28,6 @@ class Routes extends React.Component {
 
         <Transition
           native
-          config={config.slow}
           keys={location.pathname}
           from={{ opacity: 0 }}
           enter={{ opacity: 1 }}

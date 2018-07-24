@@ -21,8 +21,8 @@ class ProgressiveImage extends React.PureComponent {
   componentDidMount() {
     this.mounted = true;
     const buffer = new Image();
-    buffer.onload = () => this.mounted && this.setState({ ready: true });
     buffer.src = `${window.location.origin}${this.props.src}`;
+    buffer.onload = () => this.mounted && this.setState({ ready: true });
   }
 
   componentWillUnmount() {

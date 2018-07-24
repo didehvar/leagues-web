@@ -11,7 +11,7 @@ export const Container = styled.div`
       background-image: url(${props.src});
       background-size: cover;
       background-position: ${props.position};
-      transition: background 1s linear, filter 1s linear;
+      transition: filter 1s linear;
       transform: scale(1.1);
 
       ${!props.ready &&
