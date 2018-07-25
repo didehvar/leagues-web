@@ -1,6 +1,14 @@
 import { combineReducers } from 'redux';
 import types from './types';
 
+function byId(state = {}, action = {}) {
+  if (action.payload && action.payload.users) {
+    return { ...state, ...action.payload.users };
+  }
+
+  return state;
+}
+
 function current(state = {}, action = {}) {
   switch (action.type) {
     case types.LOGIN_SUCCEEDED:
@@ -38,6 +46,7 @@ function errorMessage(state = null, action = {}) {
 }
 
 export default combineReducers({
+  byId,
   current,
   errorMessage,
 });

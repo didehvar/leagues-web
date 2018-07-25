@@ -1,4 +1,5 @@
 import { getRound } from './rounds';
+import { getUser } from '../users';
 
 const reducer = state => state.leagues;
 
@@ -40,3 +41,22 @@ export const getRounds = (state, id) => {
 
   return league.rounds.map(roundId => getRound(state, roundId));
 };
+
+export const getPoints = state => reducer(state).points;
+
+export const getLeaguePoints = (state, pointIds = []) =>
+  Object.values(
+    pointIds.reduce((acc, pointId) => {
+      const { user, points } = getPoints(state)[pointId];
+
+      if (!acc[user]) {
+        acc[user] = {
+          ...getUser(state, user),
+          points: 0,
+        };
+      }
+
+      acc[user].points += points;
+      return acc;
+    }, {}),
+  ).sort((a, b) => a.points < b.points);

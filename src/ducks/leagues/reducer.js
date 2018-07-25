@@ -104,6 +104,17 @@ function type(state = {}, action = {}) {
   }
 }
 
+function points(state = {}, action = {}) {
+  switch (action.type) {
+    case types.FETCH_LEAGUES_SUCCEEDED:
+    case types.FETCH_LEAGUE_SUCCEEDED:
+      return { ...state, ...action.payload.points };
+
+    default:
+      return state;
+  }
+}
+
 export default combineReducers({
   rounds,
   byId,
@@ -114,4 +125,5 @@ export default combineReducers({
   errorMessage,
   discipline,
   type,
+  points,
 });

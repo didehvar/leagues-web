@@ -19,8 +19,9 @@ class League extends React.PureComponent {
         <AppBar name={league.name} />
 
         <Container>
-          <StandingsPreview />
-          <Spacer />
+          <StandingsPreview pointIds={league.points} />
+
+          <Spacer small />
 
           {rounds.map(r => <RoundCard key={r.id} {...r} />)}
         </Container>

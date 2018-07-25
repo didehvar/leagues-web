@@ -1,5 +1,7 @@
 const reducer = state => state.users;
 
+export const getUser = (state, id) => reducer(state).byId[id];
+
 export const getCurrentUser = state => reducer(state).current;
 
 export const getCurrentUserId = state => getCurrentUser(state).id;
