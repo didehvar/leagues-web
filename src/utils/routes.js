@@ -11,4 +11,6 @@ export default {
   leaguesCreate: '/v2/leagues/create',
 
   settings: '/settings',
+
+  test: '/test',
 };

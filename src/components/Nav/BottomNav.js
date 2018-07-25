@@ -1,5 +1,6 @@
 import React from 'react';
 import withRouter from 'react-router-dom/withRouter';
+import Link from 'react-router-dom/Link';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import MenuIcon from '@material-ui/icons/Menu';
 import GroupIcon from '@material-ui/icons/Group';
@@ -10,11 +11,6 @@ import routes from '../../utils/routes';
 import { BottomNavigation } from './BottomNav.style';
 
 class BottomNav extends React.PureComponent {
-  onClick = route => () => {
-    const { history } = this.props;
-    history.push(route);
-  };
-
   render() {
     const {
       location: { pathname },
@@ -27,24 +23,27 @@ class BottomNav extends React.PureComponent {
         onChange={this.handleChange}
       >
         <BottomNavigationAction
-          label={'Feed'}
+          component={Link}
+          label="Feed"
           icon={<MenuIcon />}
           value={routes.feed}
-          onClick={this.onClick(routes.feed)}
+          to={routes.feed}
         />
 
         <BottomNavigationAction
-          label={'Leagues'}
+          component={Link}
+          label="Leagues"
           icon={<GroupIcon />}
           value={routes.leagues}
-          onClick={this.onClick(routes.leagues)}
+          to={routes.leagues}
         />
 
         <BottomNavigationAction
-          label={'Settings'}
+          component={Link}
+          label="Settings"
           icon={<MoreHorizIcon />}
           value={routes.settings}
-          onClick={this.onClick(routes.settings)}
+          to={routes.settings}
         />
       </BottomNavigation>
     );

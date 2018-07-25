@@ -1,14 +1,5 @@
 import styled from 'styled-components';
-
-export const Container = styled.div`
-  ${props => props.theme.breakpoints.up('md')} {
-    z-index: 1;
-    overflow: hidden;
-    position: relative;
-    display: flex;
-    width: 100%;
-  }
-`;
+import NavLink from 'react-router-dom/NavLink';
 
 export const Title = styled.div`
   display: flex;
@@ -23,4 +14,14 @@ export const TitleContent = styled.div`
   justify-content: center;
 
   ${props => props.theme.mixins.toolbarPx};
+`;
+
+const activeClassName = 'nav-item-active';
+export const Link = styled(NavLink).attrs({
+  activeClassName,
+})`
+  &.${activeClassName} span {
+    color: ${props => props.theme.palette.primary.main};
+    font-weight: 500;
+  }
 `;

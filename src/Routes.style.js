@@ -15,9 +15,8 @@ injectGlobal`
     padding: 1rem 1.25rem;
 
     ${theme.breakpoints.up('md')} {
-      margin-top: 64px;
+      margin: 64px 0 0 240px;
       position: inherit;
-      padding: 0;
     }
   }
 `;

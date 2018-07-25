@@ -13,7 +13,7 @@ import FullPageLoading from './components/UI/FullPageLoading';
 
 WebFont.load({
   google: {
-    families: ['Roboto'],
+    families: ['Roboto:300,400,500'],
   },
 });
 

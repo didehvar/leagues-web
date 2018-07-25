@@ -4,7 +4,7 @@ import flowRight from 'lodash/flowRight';
 import withRouter from 'react-router-dom/withRouter';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
-import { Transition } from 'react-spring';
+import { Transition, config } from 'react-spring';
 
 import routes from './utils/routes';
 import { getUserAuthenticated } from './ducks/users';
@@ -21,53 +21,54 @@ class Routes extends React.Component {
 
     return (
       <Container>
-        <Nav authenticated={authenticated}>
-          <Transition
-            native
-            keys={location.pathname}
-            from={{ opacity: 0 }}
-            enter={{ opacity: 1 }}
-            leave={{ opacity: 0 }}
-          >
-            {style => (
-              <Switch location={location}>
-                <AnimatedRoute
-                  style={style}
-                  exact
-                  path={routes.home}
-                  component={Home}
-                />
-                <AnimatedRoute
-                  style={style}
-                  path={routes.auth}
-                  component={Auth}
-                />
+        <Nav authenticated={authenticated} />
 
-                <PrivateRoute
-                  style={style}
-                  authenticated={authenticated}
-                  exact
-                  path={routes.feed}
-                  component={Feed}
-                />
-                <PrivateRoute
-                  style={style}
-                  authenticated={authenticated}
-                  path={routes.leagues}
-                  component={League}
-                />
-                <PrivateRoute
-                  style={style}
-                  authenticated={authenticated}
-                  path={routes.settings}
-                  component={Settings}
-                />
+        <Transition
+          native
+          config={config.slow}
+          keys={location.pathname}
+          from={{ opacity: 0 }}
+          enter={{ opacity: 1 }}
+          leave={{ opacity: 0 }}
+        >
+          {style => (
+            <Switch location={location}>
+              <AnimatedRoute
+                style={style}
+                exact
+                path={routes.home}
+                component={Home}
+              />
+              <AnimatedRoute
+                style={style}
+                path={routes.auth}
+                component={Auth}
+              />
 
-                <Route component={() => <div>Oops</div>} />
-              </Switch>
-            )}
-          </Transition>
-        </Nav>
+              <PrivateRoute
+                style={style}
+                authenticated={authenticated}
+                exact
+                path={routes.feed}
+                component={Feed}
+              />
+              <PrivateRoute
+                style={style}
+                authenticated={authenticated}
+                path={routes.leagues}
+                component={League}
+              />
+              <PrivateRoute
+                style={style}
+                authenticated={authenticated}
+                path={routes.settings}
+                component={Settings}
+              />
+
+              <Route component={() => <div>Oops</div>} />
+            </Switch>
+          )}
+        </Transition>
       </Container>
     );
   }

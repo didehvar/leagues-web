@@ -8,6 +8,7 @@ import ExitIcon from '@material-ui/icons/ExitToApp';
 import SupportIcon from '@material-ui/icons/ContactSupport';
 
 import routes from '../../utils/routes';
+import Logout from '../Auth/Logout';
 
 class Settings extends React.PureComponent {
   static propTypes = {
@@ -62,23 +63,21 @@ class Settings extends React.PureComponent {
     });
   };
 
-  logout = () => {
-    const { logout, history } = this.props;
-    logout();
-    history.push(routes.home);
-  };
-
   render() {
     const { loadingChaport } = this.state;
 
     return (
       <List>
-        <ListItem button onClick={this.logout}>
-          <ListItemIcon>
-            <ExitIcon />
-          </ListItemIcon>
-          <ListItemText primary="Sign out" />
-        </ListItem>
+        <Logout>
+          {logout => (
+            <ListItem button onClick={logout}>
+              <ListItemIcon>
+                <ExitIcon />
+              </ListItemIcon>
+              <ListItemText primary="Sign out" />
+            </ListItem>
+          )}
+        </Logout>
 
         <ListItem button onClick={this.contact}>
           <ListItemIcon>
