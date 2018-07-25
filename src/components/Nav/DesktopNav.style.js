@@ -16,12 +16,27 @@ export const TitleContent = styled.div`
   ${props => props.theme.mixins.toolbarPx};
 `;
 
+export const Content = styled.nav`
+  flex-grow: 1;
+`;
+
 const activeClassName = 'nav-item-active';
 export const Link = styled(NavLink).attrs({
   activeClassName,
 })`
-  &.${activeClassName} span {
+  &.${activeClassName} span,
+  &.${activeClassName} svg {
     color: ${props => props.theme.palette.primary.main};
     font-weight: 500;
   }
+`;
+
+export const Footer = styled.div`
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+
+  ${props => props.theme.mixins.toolbarPx};
 `;

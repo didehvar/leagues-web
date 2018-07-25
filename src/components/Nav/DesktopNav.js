@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import GroupIcon from '@material-ui/icons/Group';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -16,8 +15,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 
 import routes from '../../utils/routes';
 import Logout from '../Auth/Logout';
+import ChaportListItem from '../External/ChaportListItem';
 
-import { Title, TitleContent, Link } from './DesktopNav.style';
+import { Title, TitleContent, Content, Link, Footer } from './DesktopNav.style';
 
 class DesktopNav extends React.Component {
   render() {
@@ -53,7 +53,7 @@ class DesktopNav extends React.Component {
 
           <Divider />
 
-          <List component="nav">
+          <List component={Content}>
             <ListItem button component={Link} to={routes.feed}>
               <ListItemIcon>
                 <MenuIcon />
@@ -68,24 +68,23 @@ class DesktopNav extends React.Component {
               <ListItemText primary="Leagues" />
             </ListItem>
 
-            <ListItem button component={Link} to={routes.settings}>
-              <ListItemIcon>
-                <MoreHorizIcon />
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItem>
-
             <Logout>
               {logout => (
                 <ListItem button onClick={logout}>
                   <ListItemIcon>
                     <ExitToAppIcon />
                   </ListItemIcon>
-                  <ListItemText primary="Sign out" />
+                  <ListItemText primary="Sign Out" />
                 </ListItem>
               )}
             </Logout>
           </List>
+
+          <Divider />
+
+          <Footer>
+            <ChaportListItem />
+          </Footer>
         </Drawer>
       </React.Fragment>
     );
