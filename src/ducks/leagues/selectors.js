@@ -17,7 +17,8 @@ export const getLeague = (state, id) => {
 
 export const getLeagueName = (state, id) => getLeague(state, id).name;
 
-export const getLeagues = state => Object.values(reducer(state).byId);
+export const getLeagues = state =>
+  Object.keys(reducer(state).byId).map(id => getLeague(state, id));
 
 export const getUsersLeagues = (state, userId) =>
   getLeagues(state).filter(l => l.user === userId);
