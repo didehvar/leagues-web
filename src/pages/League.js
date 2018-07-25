@@ -19,7 +19,7 @@ const Search = Loadable({
 const LeaguePage = () => (
   <Switch>
     <Route exact path={routes.leagues} component={Search} />
-    <Route path={`${routes.leagues}/:id`} component={League} />
+    <Route path={routes.league} component={League} />
     <Route path={routes.leaguesCreate} component={League} />
   </Switch>
 );

@@ -22,7 +22,7 @@ class League extends React.PureComponent {
           <StandingsPreview />
           <Spacer />
 
-          {rounds.map(r => <RoundCard {...r} />)}
+          {rounds.map(r => <RoundCard key={r.id} {...r} />)}
         </Container>
 
         <BottomActions />

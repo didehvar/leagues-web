@@ -9,6 +9,11 @@ export default {
 
   leagues: '/leagues',
   leaguesCreate: '/leagues/create',
+  league: '/leagues/:id',
+  toLeague: id => `/leagues/${id}`,
+  leagueRound: '/leagues/:id/rounds/:roundId',
+  toLeagueRound: (leagueId, roundId) =>
+    `/leagues/${leagueId}/rounds/${roundId}`,
 
   settings: '/settings',
 
