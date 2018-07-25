@@ -17,13 +17,11 @@ import Badge from '@material-ui/core/Badge';
 import { getLeaguePoints } from '../../ducks/leagues';
 
 import {
-  Star,
-  ListItemPoints,
   TopStandings,
   AllStandings,
   StandingsList,
-  Name,
   PointsBadge,
+  ListItemWrap,
 } from './StandingsPreview.style';
 
 class StandingItem extends React.PureComponent {
@@ -31,39 +29,15 @@ class StandingItem extends React.PureComponent {
     const { index, id, avatar, firstname, lastname, points } = this.props;
 
     return (
-      <ListItem>
+      <ListItem disableGutters>
         <ListItemAvatar>
           <PointsBadge badgeContent={points} color="primary" index={index}>
             <Avatar src={avatar} />
           </PointsBadge>
         </ListItemAvatar>
 
-        <ListItemText primary={firstname} secondary={lastname} />
+        <ListItemWrap primary={firstname} secondary={lastname} />
       </ListItem>
-
-      // <ListItem dense disableGutters key={id}>
-      //   <ListItemAvatar>
-      //     <Badge badgeContent={points} color="primary">
-      //       <Avatar src={avatar} />
-      //     </Badge>
-      //   </ListItemAvatar>
-
-      //   {index !== undefined && (
-      //     <ListItemIcon>
-      //       <Star index={index} />
-      //     </ListItemIcon>
-      //   )}
-
-      //   {/* <ListItemPoints>
-      //     <Typography>{points}</Typography>
-      //   </ListItemPoints> */}
-
-      //   <ListItemText>
-      //     <Name>
-      //       {firstname} {lastname}
-      //     </Name>
-      //   </ListItemText>
-      // </ListItem>
     );
   }
 }
