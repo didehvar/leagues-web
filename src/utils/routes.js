@@ -7,8 +7,8 @@ export default {
   auth: '/auth',
   authStrava: '/auth/strava',
 
-  leagues: '/v2/leagues',
-  leaguesCreate: '/v2/leagues/create',
+  leagues: '/leagues',
+  leaguesCreate: '/leagues/create',
 
   settings: '/settings',
 

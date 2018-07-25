@@ -14,6 +14,10 @@ export const Container = styled.div`
       transition: filter 1s linear;
       transform: scale(1.1);
 
+      ${props.theme.breakpoints.up('md')} {
+        background-position: ${props.positionMd || props.position};
+      }
+
       ${!props.ready &&
         css`
           filter: blur(8px);

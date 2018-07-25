@@ -1,16 +1,19 @@
 import React from 'react';
 import { animated } from 'react-spring';
 import Route from 'react-router-dom/Route';
-import config from '../../utils/config';
+
+import FullPageContainer from './FullPageContainer';
+
+const AnimatedFull = animated(FullPageContainer);
 
 class AnimatedRoute extends React.PureComponent {
   render() {
-    const { style, ...props } = this.props;
+    const { style, full, ...props } = this.props;
 
     return (
-      <animated.div style={style} className={config.css.fullPage}>
+      <AnimatedFull style={style} full={full}>
         <Route {...props} />
-      </animated.div>
+      </AnimatedFull>
     );
   }
 }

@@ -21,7 +21,7 @@ class Routes extends React.Component {
 
     return (
       <Container>
-        <Nav authenticated={authenticated} />
+        {location.pathname !== routes.home && <Nav />}
 
         <Transition
           native
@@ -38,7 +38,9 @@ class Routes extends React.Component {
                 exact
                 path={routes.home}
                 component={Home}
+                full
               />
+
               <AnimatedRoute
                 style={style}
                 path={routes.auth}
@@ -52,12 +54,14 @@ class Routes extends React.Component {
                 path={routes.feed}
                 component={Feed}
               />
-              <PrivateRoute
+
+              <AnimatedRoute
                 style={style}
                 authenticated={authenticated}
                 path={routes.leagues}
                 component={League}
               />
+
               <PrivateRoute
                 style={style}
                 authenticated={authenticated}

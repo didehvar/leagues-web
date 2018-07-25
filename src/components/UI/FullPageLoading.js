@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import config from '../../utils/config';
+import FullPageContainer from './FullPageContainer';
 
 import { Container } from './FullPageLoading.style';
 
@@ -18,7 +18,7 @@ class FullPageLoading extends React.PureComponent {
     const { errorMessage, retry } = this.props;
 
     return (
-      <Container className={config.css.fullPage}>
+      <FullPageContainer component={Container}>
         {errorMessage ? (
           <React.Fragment>
             <Typography variant="title" color="error" paragraph>
@@ -32,7 +32,7 @@ class FullPageLoading extends React.PureComponent {
         ) : (
           <CircularProgress />
         )}
-      </Container>
+      </FullPageContainer>
     );
   }
 }

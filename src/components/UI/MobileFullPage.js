@@ -3,8 +3,6 @@ import random from 'lodash/random';
 
 import cycle216027 from './assets/backgrounds/cycle.un216027.jpg';
 import cycle216027Thumb from './assets/backgrounds/cycle.un216027.thumb.jpg';
-import cycle311391 from './assets/backgrounds/cycle.un311391.jpg';
-import cycle311391Thumb from './assets/backgrounds/cycle.un311391.thumb.jpg';
 import cycle439410 from './assets/backgrounds/cycle.un439410.jpg';
 import cycle439410Thumb from './assets/backgrounds/cycle.un439410.thumb.jpg';
 import cycle598614 from './assets/backgrounds/cycle.un598614.jpg';
@@ -31,43 +29,37 @@ import {
 
 class MobileFullPage extends React.PureComponent {
   images = [
-    { image: cycle216027, thumb: cycle216027Thumb, position: 'center bottom' },
-    { image: cycle311391, thumb: cycle311391Thumb, position: 'center bottom' },
-    { image: cycle439410, thumb: cycle439410Thumb, position: 'center bottom' },
-    { image: cycle598614, thumb: cycle598614Thumb, position: '75% bottom' },
-    { image: cycle681403, thumb: cycle681403Thumb, position: 'center bottom' },
+    { src: cycle216027, thumb: cycle216027Thumb, position: 'center bottom' },
+    {
+      src: cycle439410,
+      thumb: cycle439410Thumb,
+      position: 'center bottom',
+      positionMd: 'center center',
+    },
+    { src: cycle598614, thumb: cycle598614Thumb, position: '75% bottom' },
+    { src: cycle681403, thumb: cycle681403Thumb, position: 'center bottom' },
 
-    { image: run5581, thumb: run5581Thumb, position: 'center top' },
-    { image: run418618, thumb: run418618Thumb, position: 'center bottom' },
-    { image: run553145, thumb: run553145Thumb, position: 'center bottom' },
+    { src: run5581, thumb: run5581Thumb, position: 'center top' },
+    { src: run418618, thumb: run418618Thumb, position: 'center bottom' },
+    { src: run553145, thumb: run553145Thumb, position: 'center bottom' },
   ];
 
   constructor(props) {
     super(props);
 
-    const { image, thumb, position } = this.images[
-      random(this.images.length - 1)
-    ];
     this.state = {
-      image,
-      thumb,
-      position,
+      ...this.images[random(this.images.length - 1)],
     };
   }
 
   render() {
-    const { image, thumb, position } = this.state;
+    const { ...state } = this.state;
     const { children, footer } = this.props;
 
     return (
       <Container>
         <Background>
-          <ProgressiveImage
-            background
-            src={image}
-            thumb={thumb}
-            position={position}
-          />
+          <ProgressiveImage background {...state} />
         </Background>
 
         <Wrapper>

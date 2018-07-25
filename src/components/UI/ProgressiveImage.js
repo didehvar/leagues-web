@@ -9,10 +9,12 @@ class ProgressiveImage extends React.PureComponent {
     src: PropTypes.string.isRequired,
     thumb: PropTypes.string.isRequired,
     position: PropTypes.string,
+    positionMd: PropTypes.string,
   };
 
   static defaultProps = {
     position: 'center center',
+    positionMd: undefined,
   };
 
   state = { ready: false };
@@ -30,7 +32,7 @@ class ProgressiveImage extends React.PureComponent {
   }
 
   render() {
-    const { background, src, thumb, position } = this.props;
+    const { background, src, thumb, position, positionMd } = this.props;
     const { ready } = this.state;
 
     if (background) {
@@ -38,6 +40,7 @@ class ProgressiveImage extends React.PureComponent {
         <Container
           background
           position={position}
+          positionMd={positionMd}
           src={ready ? src : thumb}
           ready={ready}
         />
