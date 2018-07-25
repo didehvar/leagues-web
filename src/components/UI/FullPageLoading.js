@@ -18,20 +18,22 @@ class FullPageLoading extends React.PureComponent {
     const { errorMessage, retry } = this.props;
 
     return (
-      <FullPageContainer component={Container}>
-        {errorMessage ? (
-          <React.Fragment>
-            <Typography variant="title" color="error" paragraph>
-              {errorMessage}
-            </Typography>
+      <FullPageContainer>
+        <Container>
+          {errorMessage ? (
+            <React.Fragment>
+              <Typography variant="title" color="error" paragraph>
+                {errorMessage}
+              </Typography>
 
-            <Button variant="outlined" onClick={this.retry}>
-              {retry ? 'Retry' : 'Back home'}
-            </Button>
-          </React.Fragment>
-        ) : (
-          <CircularProgress />
-        )}
+              <Button variant="outlined" onClick={this.retry}>
+                {retry ? 'Retry' : 'Back home'}
+              </Button>
+            </React.Fragment>
+          ) : (
+            <CircularProgress />
+          )}
+        </Container>
       </FullPageContainer>
     );
   }

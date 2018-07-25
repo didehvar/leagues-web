@@ -5,4 +5,8 @@ export const AddFab = styled.div`
   bottom: ${props => props.theme.spacing.unit * 9}px;
   right: ${props => props.theme.spacing.unit * 2}px;
   z-index: 10;
+
+  ${props => props.theme.breakpoints.up('md')} {
+    bottom: ${props => props.theme.spacing.unit * 2}px;
+  }
 `;
