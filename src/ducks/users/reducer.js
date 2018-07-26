@@ -12,7 +12,7 @@ function byId(state = {}, action = {}) {
 function current(state = {}, action = {}) {
   switch (action.type) {
     case types.LOGIN_SUCCEEDED:
-      return { ...action.payload };
+      return Object.values(action.payload.users)[0];
 
     case types.FETCH_REFRESH_TOKEN:
       return { ...state, lastRefresh: new Date() };
@@ -25,6 +25,14 @@ function current(state = {}, action = {}) {
     default:
       return state;
   }
+}
+
+function rolesById(state = {}, action = {}) {
+  if (action.payload && action.payload.role) {
+    return { ...state, ...action.payload.role };
+  }
+
+  return state;
 }
 
 function errorMessage(state = null, action = {}) {
@@ -48,5 +56,6 @@ function errorMessage(state = null, action = {}) {
 export default combineReducers({
   byId,
   current,
+  rolesById,
   errorMessage,
 });

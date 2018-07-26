@@ -1,18 +1,33 @@
 import React from 'react';
+import Route from 'react-router-dom/Route';
+import { connect } from 'react-redux';
 
-import AnimatedRoute from './AnimatedRoute';
+import routes from '../../utils/routes';
+import { currentUserHasRole } from '../../ducks/users';
 import Page from './Page';
-import PrivateRoute from './PrivateRoute';
+import FullPageContainer from '../UI/FullPageContainer';
 
 class RouteWithSubRoutes extends React.Component {
-  shouldComponentUpdate() {
-    console.log('scu', this.props);
-    return true;
+  componentDidMount() {
+    this.checkAuthenticated();
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.authenticated !== this.props.authenticated) {
+      this.checkAuthenticated();
+    }
+  }
+
+  checkAuthenticated = () => {
+    const { hasRole, authenticated, history, location } = this.props;
+
+    if (!hasRole && !authenticated) {
+      history.replace(routes.home.path, { from: location.pathname });
+    }
+  };
 
   render() {
     const {
-      private: requiresAuth,
       authenticated,
       exact,
       path,
@@ -22,26 +37,30 @@ class RouteWithSubRoutes extends React.Component {
       style,
     } = this.props;
 
-    const RouteComponent = requiresAuth ? PrivateRoute : AnimatedRoute;
-
     return (
-      <RouteComponent
+      <Route
         authenticated={authenticated}
         full={full}
         exact={exact}
         path={path}
         style={style}
         render={props => (
-          <Page
-            {...props}
-            component={component}
-            routes={routes}
-            authenticated={authenticated}
-          />
+          <FullPageContainer>
+            <Page
+              {...props}
+              component={component}
+              routes={routes}
+              authenticated={authenticated}
+            />
+          </FullPageContainer>
         )}
       />
     );
   }
 }
 
-export default RouteWithSubRoutes;
+export default connect((state, ownProps) => ({
+  hasRole: ownProps.requiredRole
+    ? currentUserHasRole(state, ownProps.requiredRole)
+    : true,
+}))(RouteWithSubRoutes);

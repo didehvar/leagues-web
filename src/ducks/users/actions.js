@@ -1,3 +1,5 @@
+import { normalize } from 'normalizr';
+import * as schema from '../schema';
 import types from './types';
 
 export const login = code => ({
@@ -11,7 +13,7 @@ export const loginSucceeded = (token, user) => ({
   type: types.LOGIN_SUCCEEDED,
   payload: {
     token,
-    ...user,
+    ...normalize(user, schema.user).entities,
   },
 });
 

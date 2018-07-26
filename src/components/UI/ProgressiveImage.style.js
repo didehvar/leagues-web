@@ -11,7 +11,7 @@ export const Container = styled.div`
       background-image: url(${props.src});
       background-size: cover;
       background-position: ${props.position};
-      transition: filter 1s linear;
+      transition: filter 700ms ease;
       transform: scale(1.1);
 
       ${props.theme.breakpoints.up('md')} {
@@ -20,7 +20,7 @@ export const Container = styled.div`
 
       ${!props.ready &&
         css`
-          filter: blur(8px);
+          filter: blur(50px);
         `};
     `};
 `;

@@ -1,57 +1,40 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import flowRight from 'lodash/flowRight';
+import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import withRouter from 'react-router-dom/withRouter';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
-import { Transition, config } from 'react-spring';
 
 import routes from './utils/routes';
-import { getUserAuthenticated } from './ducks/users';
 import Nav from './components/Nav';
 import RouteWithSubRoutes from './components/Route/RouteWithSubRoutes';
+import FullPageLoading from './components/UI/FullPageLoading';
 
-import { Container } from './Routes.style';
+import { Container, Content } from './Routes.style';
 
 class Routes extends React.Component {
   render() {
-    const { authenticated, location } = this.props;
+    const { history, loading, location } = this.props;
 
     return (
       <Container>
         {location.pathname !== routes.home.path && <Nav />}
 
-        <Transition
-          native
-          config={config.slow}
-          keys={location.pathname}
-          from={{ opacity: 0 }}
-          enter={{ opacity: 1 }}
-          leave={{ opacity: 0 }}
-        >
-          {style => (
-            <Switch location={location}>
-              {Object.values(routes).map((route, i) => (
-                <RouteWithSubRoutes
-                  key={i}
-                  authenticated={authenticated}
-                  style={style}
-                  {...route}
-                />
-              ))}
+        <Content>
+          <TransitionGroup>
+            <CSSTransition key={location.key} classNames="fade" timeout={300}>
+              <Switch location={location}>
+                {loading && <Route component={FullPageLoading} />}
 
-              <Route component={() => <div>Oops</div>} />
-            </Switch>
-          )}
-        </Transition>
+                {Object.values(routes).map((route, i) => (
+                  <RouteWithSubRoutes key={i} history={history} {...route} />
+                ))}
+              </Switch>
+            </CSSTransition>
+          </TransitionGroup>
+        </Content>
       </Container>
     );
   }
 }
 
-export default flowRight(
-  withRouter,
-  connect(state => ({
-    authenticated: getUserAuthenticated(state),
-  })),
-)(Routes);
+export default withRouter(Routes);

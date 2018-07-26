@@ -1,5 +1,6 @@
 import Loadable from 'react-loadable';
 
+import config from './config';
 import Loading from '../components/UI/Loading';
 
 const loadable = (path, delay = 200) =>
@@ -20,13 +21,13 @@ export default {
   feed: {
     path: '/feed',
     component: loadable('Feed'),
-    private: true,
+    requiredRole: config.auth.user,
   },
 
   settings: {
     path: '/settings',
     component: loadable('Settings'),
-    private: true,
+    requiredRole: config.auth.user,
   },
 
   authStrava: {

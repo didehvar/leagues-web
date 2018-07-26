@@ -2,11 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import {
-  login,
-  getUserAuthenticated,
-  getErrorMessage,
-} from '../../ducks/users';
+import { login, isAuthenticated, getErrorMessage } from '../../ducks/users';
 import routes from '../../utils/routes';
 
 import FullPageLoading from '../UI/FullPageLoading';
@@ -48,7 +44,7 @@ class Strava extends React.Component {
 
 export default connect(
   state => ({
-    authenticated: getUserAuthenticated(state),
+    authenticated: isAuthenticated(state),
     errorMessage: getErrorMessage(state),
   }),
   { login },

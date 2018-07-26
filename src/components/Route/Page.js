@@ -13,7 +13,7 @@ class Page extends React.Component {
 
     return (
       <React.Fragment>
-        {Component && <Component {...props} />}
+        <Component {...props} />
 
         {Object.values(routes).map((route, i) => (
           <RouteWithSubRoutes
