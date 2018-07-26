@@ -8,7 +8,6 @@ class Page extends React.Component {
       component: Component,
       routes = {},
       authenticated,
-      location,
       ...props
     } = this.props;
 
