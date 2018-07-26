@@ -24,6 +24,7 @@ const RouteWithSubRoutes = ({
   routes,
   component,
   full,
+  style,
 }) => {
   const RouteComponent = requiresAuth ? PrivateRoute : AnimatedRoute;
 
@@ -33,6 +34,7 @@ const RouteWithSubRoutes = ({
       full={full}
       exact={exact}
       path={path}
+      style={style}
       render={props => (
         // pass the sub-routes down to keep nesting
         <Page
@@ -83,45 +85,10 @@ class Routes extends React.Component {
                 <RouteWithSubRoutes
                   key={i}
                   authenticated={authenticated}
+                  style={style}
                   {...route}
                 />
               ))}
-
-              {/* <AnimatedRoute
-                style={style}
-                exact
-                path={routes.home}
-                component={Home}
-                full
-              />
-
-              <AnimatedRoute
-                style={style}
-                path={routes.auth}
-                component={Auth}
-              />
-
-              <PrivateRoute
-                style={style}
-                authenticated={authenticated}
-                exact
-                path={routes.feed}
-                component={Feed}
-              />
-
-              <AnimatedRoute
-                style={style}
-                authenticated={authenticated}
-                path={routes.leagues}
-                component={League}
-              />
-
-              <PrivateRoute
-                style={style}
-                authenticated={authenticated}
-                path={routes.settings}
-                component={Settings}
-              /> */}
 
               <Route component={() => <div>Oops</div>} />
             </Switch>
