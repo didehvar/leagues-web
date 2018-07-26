@@ -18,7 +18,7 @@ class FullPageLoading extends React.PureComponent {
     const { errorMessage, retry } = this.props;
 
     return (
-      <FullPageContainer>
+      <FullPageContainer fixed>
         <Container>
           {errorMessage ? (
             <React.Fragment>

@@ -8,12 +8,58 @@ import { Transition, config } from 'react-spring';
 
 import routes from './utils/routes';
 import { getUserAuthenticated } from './ducks/users';
-import { Auth, Feed, Home, League, Settings } from './pages';
 import PrivateRoute from './components/UI/PrivateRoute';
+import AnimatedRoute from './components/UI/AnimatedRoute';
 import Nav from './components/Nav';
 
 import { Container } from './Routes.style';
-import AnimatedRoute from './components/UI/AnimatedRoute';
+
+console.log(routes);
+
+const RouteWithSubRoutes = ({
+  private: requiresAuth,
+  authenticated,
+  exact,
+  path,
+  routes,
+  component,
+  full,
+}) => {
+  const RouteComponent = requiresAuth ? PrivateRoute : AnimatedRoute;
+
+  return (
+    <RouteComponent
+      authenticated={authenticated}
+      full={full}
+      exact={exact}
+      path={path}
+      render={props => (
+        // pass the sub-routes down to keep nesting
+        <Page
+          {...props}
+          component={component}
+          routes={routes}
+          authenticated={authenticated}
+        />
+      )}
+    />
+  );
+};
+
+const Page = ({
+  component: Component,
+  routes = {},
+  authenticated,
+  ...props
+}) => (
+  <React.Fragment>
+    {Component && <Component {...props} />}
+
+    {Object.values(routes).map((route, i) => (
+      <RouteWithSubRoutes key={i} authenticated={authenticated} {...route} />
+    ))}
+  </React.Fragment>
+);
 
 class Routes extends React.Component {
   render() {
@@ -21,7 +67,7 @@ class Routes extends React.Component {
 
     return (
       <Container>
-        {location.pathname !== routes.home && <Nav />}
+        {location.pathname !== routes.home.path && <Nav />}
 
         <Transition
           native
@@ -33,7 +79,15 @@ class Routes extends React.Component {
         >
           {style => (
             <Switch location={location}>
-              <AnimatedRoute
+              {Object.values(routes).map((route, i) => (
+                <RouteWithSubRoutes
+                  key={i}
+                  authenticated={authenticated}
+                  {...route}
+                />
+              ))}
+
+              {/* <AnimatedRoute
                 style={style}
                 exact
                 path={routes.home}
@@ -67,7 +121,7 @@ class Routes extends React.Component {
                 authenticated={authenticated}
                 path={routes.settings}
                 component={Settings}
-              />
+              /> */}
 
               <Route component={() => <div>Oops</div>} />
             </Switch>

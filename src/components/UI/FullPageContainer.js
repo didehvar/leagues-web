@@ -13,7 +13,7 @@ const FullPageContainer = styled.div`
     css`
       ${props.theme.breakpoints.up('md')} {
         margin: 64px 0 0 240px;
-        position: fixed;
+        position: ${props => (props.fixed ? 'fixed' : 'inherit')};
       }
     `};
 `;

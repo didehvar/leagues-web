@@ -54,14 +54,14 @@ class DesktopNav extends React.Component {
           <Divider />
 
           <List component={Content}>
-            <ListItem button component={Link} to={routes.feed}>
+            <ListItem button component={Link} to={routes.feed.path}>
               <ListItemIcon>
                 <MenuIcon />
               </ListItemIcon>
               <ListItemText primary="Feed" />
             </ListItem>
 
-            <ListItem button component={Link} to={routes.leagues}>
+            <ListItem button component={Link} to={routes.leagues.path}>
               <ListItemIcon>
                 <GroupIcon />
               </ListItemIcon>

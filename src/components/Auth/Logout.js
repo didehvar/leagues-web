@@ -10,7 +10,7 @@ class Logout extends React.PureComponent {
   logout = () => {
     const { logout, history } = this.props;
     logout();
-    history.push(routes.home);
+    history.push(routes.home.path);
   };
 
   render() {

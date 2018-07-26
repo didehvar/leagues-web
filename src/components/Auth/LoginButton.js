@@ -12,7 +12,7 @@ class LoginButton extends React.PureComponent {
     const redirect =
       redirectTo ||
       (window.location.pathname === '/'
-        ? routes.feed
+        ? routes.feed.path
         : window.location.pathname);
 
     const stravaUrl = [
@@ -20,9 +20,11 @@ class LoginButton extends React.PureComponent {
         process.env.REACT_APP_STRAVA_CLIENT_ID
       }`,
       `redirect_uri=${encodeURIComponent(
-        `${window.location.origin}${routes.authStrava}?${stringify({
-          redirect_to: redirect || `${redirectTo}${window.location.search}`,
-        })}`,
+        `${window.location.origin}${routes.auth.routes.strava.path}?${stringify(
+          {
+            redirect_to: redirect || `${redirectTo}${window.location.search}`,
+          },
+        )}`,
       )}`,
       'response_type=code',
       'scope=view_private',

@@ -26,24 +26,24 @@ class BottomNav extends React.PureComponent {
           component={Link}
           label="Feed"
           icon={<MenuIcon />}
-          value={routes.feed}
-          to={routes.feed}
+          value={routes.feed.path}
+          to={routes.feed.path}
         />
 
         <BottomNavigationAction
           component={Link}
           label="Leagues"
           icon={<GroupIcon />}
-          value={routes.leagues}
-          to={routes.leagues}
+          value={routes.leagues.path}
+          to={routes.leagues.path}
         />
 
         <BottomNavigationAction
           component={Link}
           label="Settings"
           icon={<MoreHorizIcon />}
-          value={routes.settings}
-          to={routes.settings}
+          value={routes.settings.path}
+          to={routes.settings.path}
         />
       </BottomNavigation>
     );

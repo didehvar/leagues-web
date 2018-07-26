@@ -35,7 +35,7 @@ class Strava extends React.Component {
     const query = new URLSearchParams(location.search);
 
     if (!prevProps.authenticated && authenticated) {
-      history.replace(query.get('redirect_to') || routes.feed);
+      history.replace(query.get('redirect_to') || routes.feed.path);
     }
   }
 
