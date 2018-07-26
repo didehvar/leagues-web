@@ -29,37 +29,30 @@ export default {
     private: true,
   },
 
-  auth: {
-    path: '/auth',
-    routes: {
-      strava: {
-        path: '/auth/strava',
-        component: loadable('Auth/Strava'),
-      },
-    },
+  authStrava: {
+    path: '/auth/strava',
+    component: loadable('Auth/Strava'),
   },
 
   leagues: {
     path: '/leagues',
     component: loadable('League/Search'),
-    routes: {
-      view: {
-        path: '/leagues/:id',
-        pathWith: id => `/leagues/${id}`,
-        component: loadable('League'),
-        routes: {
-          round: {
-            path: '/leagues/:id/rounds/:roundId',
-            pathWith: (id, roundId) => `/leagues/${id}/rounds/${roundId}`,
-            component: loadable('League'),
-          },
-        },
-      },
+  },
 
-      create: {
-        path: '/leagues/create',
-        component: loadable('League'),
-      },
-    },
+  league: {
+    path: '/leagues/:id',
+    pathWith: id => `/leagues/${id}`,
+    component: loadable('League'),
+  },
+
+  leagueCreate: {
+    path: '/leagues/create',
+    component: loadable('League'),
+  },
+
+  round: {
+    path: '/leagues/:id/rounds/:roundId',
+    pathWith: (id, roundId) => `/leagues/${id}/rounds/${roundId}`,
+    component: loadable('League'),
   },
 };

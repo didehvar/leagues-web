@@ -8,60 +8,10 @@ import { Transition, config } from 'react-spring';
 
 import routes from './utils/routes';
 import { getUserAuthenticated } from './ducks/users';
-import PrivateRoute from './components/UI/PrivateRoute';
-import AnimatedRoute from './components/UI/AnimatedRoute';
 import Nav from './components/Nav';
+import RouteWithSubRoutes from './components/Route/RouteWithSubRoutes';
 
 import { Container } from './Routes.style';
-
-console.log(routes);
-
-const RouteWithSubRoutes = ({
-  private: requiresAuth,
-  authenticated,
-  exact,
-  path,
-  routes,
-  component,
-  full,
-  style,
-}) => {
-  const RouteComponent = requiresAuth ? PrivateRoute : AnimatedRoute;
-
-  return (
-    <RouteComponent
-      authenticated={authenticated}
-      full={full}
-      exact={exact}
-      path={path}
-      style={style}
-      render={props => (
-        // pass the sub-routes down to keep nesting
-        <Page
-          {...props}
-          component={component}
-          routes={routes}
-          authenticated={authenticated}
-        />
-      )}
-    />
-  );
-};
-
-const Page = ({
-  component: Component,
-  routes = {},
-  authenticated,
-  ...props
-}) => (
-  <React.Fragment>
-    {Component && <Component {...props} />}
-
-    {Object.values(routes).map((route, i) => (
-      <RouteWithSubRoutes key={i} authenticated={authenticated} {...route} />
-    ))}
-  </React.Fragment>
-);
 
 class Routes extends React.Component {
   render() {

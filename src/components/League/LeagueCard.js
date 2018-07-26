@@ -27,7 +27,7 @@ class LeagueCard extends React.PureComponent {
 
   onClick = () => {
     const { history, id } = this.props;
-    history.push(routes.leagues.routes.view.pathWith(id));
+    history.push(routes.league.pathWith(id));
   };
 
   render() {

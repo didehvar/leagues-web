@@ -17,9 +17,7 @@ class RoundCard extends React.PureComponent {
 
   onClick = () => {
     const { history, id, leagueId } = this.props;
-    history.push(
-      routes.leagues.routes.view.routes.round.pathWith(leagueId, id),
-    );
+    history.push(routes.round.pathWith(leagueId, id));
   };
 
   render() {

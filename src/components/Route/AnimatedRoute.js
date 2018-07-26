@@ -2,7 +2,7 @@ import React from 'react';
 import { animated } from 'react-spring';
 import Route from 'react-router-dom/Route';
 
-import FullPageContainer from './FullPageContainer';
+import FullPageContainer from '../UI/FullPageContainer';
 
 const AnimatedFull = animated(FullPageContainer);
 
