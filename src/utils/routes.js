@@ -15,7 +15,7 @@ export default {
     path: '/',
     component: loadable('Home', 500),
     exact: true,
-    full: true,
+    fullPage: true,
   },
 
   feed: {

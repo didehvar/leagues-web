@@ -33,19 +33,18 @@ class RouteWithSubRoutes extends React.Component {
       path,
       routes,
       component,
-      full,
+      fullPage,
       style,
     } = this.props;
 
     return (
       <Route
         authenticated={authenticated}
-        full={full}
         exact={exact}
         path={path}
         style={style}
         render={props => (
-          <FullPageContainer>
+          <FullPageContainer full={fullPage}>
             <Page
               {...props}
               component={component}
