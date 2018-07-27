@@ -8,7 +8,7 @@ function* getLeagues({ payload }) {
   try {
     const state = yield select();
     const { results, total } = yield call(fetchLeagues, state, payload);
-    yield put(actions.fetchLeaguesSucceeded(results, total));
+    yield put(actions.fetchLeaguesSucceeded(results, total, payload));
   } catch (ex) {
     yield put(actions.fetchLeaguesFailed(ex.message));
   }
@@ -27,5 +27,4 @@ function* getLeague({ payload: { id } }) {
 export default function* sagas() {
   yield takeLatest(types.FETCH_LEAGUES, getLeagues);
   yield takeLatest(types.FETCH_LEAGUE, getLeague);
-  yield throttle(100, types.SEARCH, getLeagues);
 }

@@ -17,11 +17,12 @@ export const fetchLeagues = ({
   },
 });
 
-export const fetchLeaguesSucceeded = (leagues, total = 0) => ({
+export const fetchLeaguesSucceeded = (leagues, total = 0, payload = {}) => ({
   type: types.FETCH_LEAGUES_SUCCEEDED,
   payload: {
     ...normalize(leagues, schema.leagueList).entities,
     total,
+    ...payload,
   },
 });
 

@@ -29,22 +29,25 @@ class List extends React.PureComponent {
   });
 
   componentDidMount() {
-    this.props.fetch();
+    this.fetch();
   }
 
   componentDidUpdate(prevProps) {
     if (prevProps.search !== this.props.search) {
+      this.fetch();
       this.cache.clearAll();
       this.infiniteLoaderRef.current.resetLoadMoreRowsCache();
     }
   }
+
+  fetch = args => this.props.fetch({ ...args, search: this.props.search });
 
   onResize = () => this.cache.clearAll();
 
   isRowLoaded = ({ index }) => !!this.props.data[index];
 
   loadMoreRows = async ({ startIndex, stopIndex }) =>
-    this.props.fetch({ startIndex, stopIndex });
+    this.fetch({ startIndex, stopIndex });
 
   rowRenderer = ({ key, index, parent, style }) => {
     const { component: Component, data } = this.props;

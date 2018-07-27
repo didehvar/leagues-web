@@ -30,12 +30,9 @@ export default connect(
   (state, { userId }) => ({
     data: userId ? getUsersLeagues(state, userId) : getSearchLeagues(state),
     totalCount: getSearchTotal(state),
-    search: getSearch(state),
+    search: userId ? undefined : getSearch(state),
   }),
-  (dispatch, { userId, search }) => ({
-    fetch: args =>
-      dispatch(
-        fetchLeagues({ userId, search: userId ? undefined : search, ...args }),
-      ),
+  (dispatch, { userId }) => ({
+    fetch: args => dispatch(fetchLeagues({ userId, ...args })),
   }),
 )(ListContainer);
