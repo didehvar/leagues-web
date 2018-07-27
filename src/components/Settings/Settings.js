@@ -3,7 +3,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ExitIcon from '@material-ui/icons/ExitToApp';
+import ExitToApp from '@material-ui/icons/ExitToApp';
 
 import Logout from '../Auth/Logout';
 import ChaportListItem from '../External/ChaportListItem';
@@ -16,7 +16,7 @@ class Settings extends React.PureComponent {
           {logout => (
             <ListItem button onClick={logout}>
               <ListItemIcon>
-                <ExitIcon />
+                <ExitToApp />
               </ListItemIcon>
               <ListItemText primary="Sign out" />
             </ListItem>

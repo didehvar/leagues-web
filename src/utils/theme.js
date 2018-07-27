@@ -8,16 +8,8 @@ export default createMuiTheme({
     secondary: orange,
   },
   spacing: {
-    page: '1rem 1.25rem',
+    page: '1em 1.25em',
     gap: 16,
-  },
-  mixins: {
-    toolbarPx: {
-      '@media (min-width:0px) and (orientation: landscape)': {
-        minHeight: '48px',
-      },
-      '@media (min-width:600px)': { minHeight: '64px' },
-      minHeight: '56px',
-    },
+    maxWidth: '60em',
   },
 });

@@ -1,7 +1,6 @@
 import React from 'react';
 
 import Spacer from '../UI/Spacer';
-import AppBar from './AppBar';
 import BottomActions from './BottomActions';
 import RoundCard from './RoundCard';
 import StandingsPreview from './StandingsPreview';
@@ -16,8 +15,6 @@ class League extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <AppBar name={league.name} />
-
         <Container>
           <StandingsPreview pointIds={league.points} />
 

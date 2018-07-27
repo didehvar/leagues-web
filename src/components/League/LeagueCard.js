@@ -4,10 +4,10 @@ import withRouter from 'react-router-dom/withRouter';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import CardContent from '@material-ui/core/CardContent';
-import RunIcon from '@material-ui/icons/DirectionsRun';
-import BikeIcon from '@material-ui/icons/DirectionsBike';
-import TimerIcon from '@material-ui/icons/Timer';
-import ShowChartIcon from '@material-ui/icons/ShowChart';
+import DirectionsRun from '@material-ui/icons/DirectionsRun';
+import DirectionsBike from '@material-ui/icons/DirectionsBike';
+import Timer from '@material-ui/icons/Timer';
+import ShowChart from '@material-ui/icons/ShowChart';
 
 import config from '../../utils/config';
 import routes from '../../utils/routes';
@@ -48,9 +48,9 @@ class LeagueCard extends React.PureComponent {
             avatar={
               <Avatar>
                 {discipline === config.leagues.running ? (
-                  <RunIcon />
+                  <DirectionsRun />
                 ) : (
-                  <BikeIcon />
+                  <DirectionsBike />
                 )}
               </Avatar>
             }
@@ -60,11 +60,7 @@ class LeagueCard extends React.PureComponent {
           <Chip
             avatar={
               <Avatar>
-                {type === config.leagues.distance ? (
-                  <ShowChartIcon />
-                ) : (
-                  <TimerIcon />
-                )}
+                {type === config.leagues.distance ? <ShowChart /> : <Timer />}
               </Avatar>
             }
             label={type}

@@ -1,9 +1,7 @@
 import styled from 'styled-components';
-import StarIcon from '@material-ui/icons/Star';
 import List from '@material-ui/core/List';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import Typography from '@material-ui/core/Typography';
 import Badge from '@material-ui/core/Badge';
 import ListItemText from '@material-ui/core/ListItemText';
 

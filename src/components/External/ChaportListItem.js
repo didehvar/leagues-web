@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import SupportIcon from '@material-ui/icons/ContactSupport';
+import ContactSupport from '@material-ui/icons/ContactSupport';
 
 const ListItemWrapper = styled(ListItem)`
   span,
@@ -75,7 +75,7 @@ class ChaportListItem extends React.PureComponent {
     return (
       <ListItemWrapper button open={open} onClick={this.contact}>
         <ListItemIcon>
-          <SupportIcon />
+          <ContactSupport />
         </ListItemIcon>
         <ListItemText
           primary={open ? 'Close' : loading ? 'Loading...' : 'Contact us'}

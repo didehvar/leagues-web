@@ -2,17 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import ExpandMore from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
-import Typography from '@material-ui/core/Typography';
-import Badge from '@material-ui/core/Badge';
 
 import { getLeaguePoints } from '../../ducks/leagues';
 
@@ -48,7 +43,7 @@ class StandingsPreview extends React.PureComponent {
 
     return (
       <ExpansionPanel>
-        <TopStandings expandIcon={<ExpandMoreIcon />}>
+        <TopStandings expandIcon={<ExpandMore />}>
           <StandingsList dense>
             {users
               .slice(0, 3)

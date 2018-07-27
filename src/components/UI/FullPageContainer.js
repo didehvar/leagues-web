@@ -11,10 +11,8 @@ const FullPageContainer = styled.div`
   ${props =>
     !props.full &&
     css`
-      ${props.theme.breakpoints.up('md')} {
-        margin: 64px 0 0 240px;
-        position: ${props => (props.fixed ? 'fixed' : 'inherit')};
-      }
+      max-width: ${props => props.theme.spacing.maxWidth};
+      margin: 64px auto 0;
     `};
 `;
 
