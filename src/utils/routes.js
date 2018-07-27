@@ -40,6 +40,7 @@ export default {
   leagues: {
     path: '/leagues',
     component: loadable('League/Search'),
+    exact: true,
     navTitle: 'Leagues',
   },
 

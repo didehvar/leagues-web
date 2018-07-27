@@ -1,11 +1,10 @@
 import React from 'react';
+import List from '@material-ui/core/List';
+import ListSubheader from '@material-ui/core/ListSubheader';
+import Divider from '@material-ui/core/Divider';
 
-import Spacer from '../UI/Spacer';
-import BottomActions from './BottomActions';
-import RoundCard from './RoundCard';
+import RoundListItem from './RoundListItem';
 import StandingsPreview from './StandingsPreview';
-
-import { Container } from './League.style';
 
 class League extends React.PureComponent {
   render() {
@@ -15,15 +14,17 @@ class League extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <Container>
-          <StandingsPreview pointIds={league.points} />
+        <StandingsPreview limit={3} pointIds={league.points} />
+        {league.points && league.points.length > 0 && <Divider />}
 
-          <Spacer small />
-
-          {rounds.map(r => <RoundCard key={r.id} {...r} />)}
-        </Container>
-
-        <BottomActions />
+        {rounds.length > 0 && (
+          <List>
+            <ListSubheader disableSticky color="primary">
+              Rounds
+            </ListSubheader>
+            {rounds.map(r => <RoundListItem key={r.id} {...r} />)}
+          </List>
+        )}
       </React.Fragment>
     );
   }

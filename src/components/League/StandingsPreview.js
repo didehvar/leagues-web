@@ -1,37 +1,25 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelActions from '@material-ui/core/ExpansionPanelActions';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import ExpandMore from '@material-ui/icons/ExpandMore';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
 import Avatar from '@material-ui/core/Avatar';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListSubheader from '@material-ui/core/ListSubheader';
 
 import { getLeaguePoints } from '../../ducks/leagues';
 
-import {
-  TopStandings,
-  AllStandings,
-  StandingsList,
-  PointsBadge,
-  ListItemWrap,
-} from './StandingsPreview.style';
+import { ListItemText, PointsBadge } from './StandingsPreview.style';
 
 class StandingItem extends React.PureComponent {
   render() {
-    const { index, id, avatar, firstname, lastname, points } = this.props;
+    const { index, avatar, firstname, lastname, points } = this.props;
 
     return (
-      <ListItem disableGutters>
-        <ListItemAvatar>
-          <PointsBadge badgeContent={points} color="primary" index={index}>
-            <Avatar src={avatar} />
-          </PointsBadge>
-        </ListItemAvatar>
+      <ListItem>
+        <PointsBadge badgeContent={points} color="primary" index={index}>
+          <Avatar src={avatar} />
+        </PointsBadge>
 
-        <ListItemWrap primary={firstname} secondary={lastname} />
+        <ListItemText primary={firstname} secondary={lastname} />
       </ListItem>
     );
   }
@@ -41,40 +29,22 @@ class StandingsPreview extends React.PureComponent {
   render() {
     const { users } = this.props;
 
+    if (!users.length) return null;
+
     return (
-      <ExpansionPanel>
-        <TopStandings expandIcon={<ExpandMore />}>
-          <StandingsList dense>
-            {users
-              .slice(0, 3)
-              .map((user, index) => (
-                <StandingItem key={user.id} {...user} index={index} />
-              ))}
-          </StandingsList>
-        </TopStandings>
+      <List>
+        <ListSubheader disableSticky color="primary">
+          Top Standings
+        </ListSubheader>
 
-        <Divider />
-
-        <AllStandings>
-          <StandingsList dense>
-            {users
-              .slice(3, 10)
-              .map((user, index) => <StandingItem key={user.id} {...user} />)}
-          </StandingsList>
-        </AllStandings>
-
-        <Divider />
-
-        <ExpansionPanelActions>
-          <Button size="small" color="primary">
-            View all standings
-          </Button>
-        </ExpansionPanelActions>
-      </ExpansionPanel>
+        {users.map((user, index) => (
+          <StandingItem key={user.id} {...user} index={index} />
+        ))}
+      </List>
     );
   }
 }
 
 export default connect((state, ownProps) => ({
-  users: getLeaguePoints(state, ownProps.pointIds),
+  users: getLeaguePoints(state, ownProps.pointIds).slice(0, ownProps.limit),
 }))(StandingsPreview);

@@ -1,25 +1,9 @@
 import styled from 'styled-components';
-import List from '@material-ui/core/List';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Badge from '@material-ui/core/Badge';
-import ListItemText from '@material-ui/core/ListItemText';
+import MuiListItemText from '@material-ui/core/ListItemText';
 
-export const TopStandings = styled(ExpansionPanelSummary)`
-  max-width: 100%;
-
-  div {
-    max-width: 100%;
-    flex-direction: column;
-  }
-`;
-
-export const AllStandings = styled(ExpansionPanelDetails)`
-  padding: 8px 24px;
-`;
-
-export const StandingsList = styled(List)`
-  max-width: 100%;
+export const ListItemText = styled(MuiListItemText)`
+  word-wrap: break-word;
 `;
 
 export const PointsBadge = styled(Badge)`
@@ -39,12 +23,5 @@ export const PointsBadge = styled(Badge)`
           return props.theme.palette.primary.main;
       }
     }};
-  }
-`;
-
-export const ListItemWrap = styled(ListItemText)`
-  span,
-  p {
-    word-wrap: break-word;
   }
 `;
