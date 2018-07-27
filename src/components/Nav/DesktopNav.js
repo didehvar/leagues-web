@@ -18,31 +18,33 @@ import Logout from '../Auth/Logout';
 import ChaportListItem from '../External/ChaportListItem';
 import NavRoutes from '../Route/NavRoutes';
 
-import { Title, TitleContent, Content, Link, Footer } from './DesktopNav.style';
+import {
+  Title,
+  TitleContent,
+  Content,
+  Link,
+  Footer,
+  TopBar,
+  paperStyle,
+} from './DesktopNav.style';
 
 class DesktopNav extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <AppBar
-          position="fixed"
-          style={{ width: `calc(100% - ${240}px)`, marginLeft: 240 }}
-        >
+        <TopBar position="fixed">
           <Toolbar>
             <Typography variant="title" color="inherit">
               <NavRoutes />
             </Typography>
           </Toolbar>
-        </AppBar>
+        </TopBar>
 
         <Drawer
           variant="permanent"
           anchor="left"
           PaperProps={{
-            style: {
-              position: 'fixed',
-              width: 240,
-            },
+            style: paperStyle,
           }}
         >
           <Title>

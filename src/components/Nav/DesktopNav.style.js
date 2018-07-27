@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import NavLink from 'react-router-dom/NavLink';
+import AppBar from '@material-ui/core/AppBar';
 
 export const Title = styled.div`
   display: flex;
@@ -40,3 +41,13 @@ export const Footer = styled.div`
 
   ${props => props.theme.mixins.toolbarPx};
 `;
+
+export const TopBar = styled(AppBar)`
+  width: calc(100% - 240px);
+  margin-left: 240px;
+`;
+
+export const paperStyle = {
+  position: 'fixed',
+  width: 240,
+};
