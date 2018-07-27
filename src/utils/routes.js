@@ -22,12 +22,14 @@ export default {
     path: '/feed',
     component: loadable('Feed'),
     requiredRole: config.auth.user,
+    navTitle: 'Feed',
   },
 
   settings: {
     path: '/settings',
     component: loadable('Settings'),
     requiredRole: config.auth.user,
+    navTitle: 'Settings',
   },
 
   authStrava: {
@@ -38,6 +40,7 @@ export default {
   leagues: {
     path: '/leagues',
     component: loadable('League/Search'),
+    navTitle: 'Leagues',
   },
 
   league: {

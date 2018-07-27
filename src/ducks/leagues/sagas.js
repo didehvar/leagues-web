@@ -3,15 +3,11 @@ import { call, select, put, throttle, takeLatest } from 'redux-saga/effects';
 import types from './types';
 import { fetchLeagues, fetchLeague } from './api';
 import * as actions from './actions';
-import * as selectors from './selectors';
 
 function* getLeagues({ payload }) {
   try {
     const state = yield select();
-    const { results, total } = yield call(fetchLeagues, state, {
-      ...payload,
-      search: selectors.getSearch(state),
-    });
+    const { results, total } = yield call(fetchLeagues, state, payload);
     yield put(actions.fetchLeaguesSucceeded(results, total));
   } catch (ex) {
     yield put(actions.fetchLeaguesFailed(ex.message));

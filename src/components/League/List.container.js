@@ -7,6 +7,7 @@ import {
   getSearchLeagues,
   getSearchTotal,
   getUsersLeagues,
+  getSearch,
 } from '../../ducks/leagues';
 import List from '../UI/List';
 import LeagueCard from './LeagueCard';
@@ -29,8 +30,12 @@ export default connect(
   (state, { userId }) => ({
     data: userId ? getUsersLeagues(state, userId) : getSearchLeagues(state),
     totalCount: getSearchTotal(state),
+    search: getSearch(state),
   }),
-  (dispatch, { userId }) => ({
-    fetch: args => dispatch(fetchLeagues({ userId, ...args })),
+  (dispatch, { userId, search }) => ({
+    fetch: args =>
+      dispatch(
+        fetchLeagues({ userId, search: userId ? undefined : search, ...args }),
+      ),
   }),
 )(ListContainer);

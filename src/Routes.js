@@ -13,7 +13,7 @@ import { Container, Content } from './Routes.style';
 
 class Routes extends React.Component {
   render() {
-    const { history, loading, location } = this.props;
+    const { loading, history, location } = this.props;
 
     return (
       <Container>
@@ -23,11 +23,18 @@ class Routes extends React.Component {
           <TransitionGroup>
             <CSSTransition key={location.key} classNames="fade" timeout={300}>
               <Switch location={location}>
-                {loading && <Route component={FullPageLoading} />}
-
-                {Object.values(routes).map((route, i) => (
-                  <RouteWithSubRoutes key={i} history={history} {...route} />
-                ))}
+                {loading ? (
+                  <Route component={FullPageLoading} />
+                ) : (
+                  Object.values(routes).map(route => (
+                    <RouteWithSubRoutes
+                      key={route.path}
+                      history={history}
+                      location={location}
+                      {...route}
+                    />
+                  ))
+                )}
               </Switch>
             </CSSTransition>
           </TransitionGroup>

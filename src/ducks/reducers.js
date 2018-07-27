@@ -8,7 +8,7 @@ import users from './users/reducer';
 const usersPersistConfig = {
   key: 'impendulo.users',
   storage: storage,
-  whitelist: ['current'],
+  whitelist: ['current', 'rolesById'],
 };
 
 export default combineReducers({

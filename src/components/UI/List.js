@@ -22,6 +22,8 @@ class List extends React.PureComponent {
     totalCount: 0,
   };
 
+  infiniteLoaderRef = React.createRef();
+
   cache = new CellMeasurerCache({
     fixedWidth: true,
   });
@@ -29,6 +31,15 @@ class List extends React.PureComponent {
   componentDidMount() {
     this.props.fetch();
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.search !== this.props.search) {
+      this.cache.clearAll();
+      this.infiniteLoaderRef.current.resetLoadMoreRowsCache();
+    }
+  }
+
+  onResize = () => this.cache.clearAll();
 
   isRowLoaded = ({ index }) => !!this.props.data[index];
 
@@ -61,12 +72,13 @@ class List extends React.PureComponent {
       <WindowScroller>
         {({ height, isScrolling, onChildScroll, scrollTop, registerChild }) => (
           <div ref={registerChild}>
-            <AutoSizer disableHeight>
+            <AutoSizer disableHeight onResize={this.onResize}>
               {({ width }) => (
                 <InfiniteLoader
                   isRowLoaded={this.isRowLoaded}
                   loadMoreRows={this.loadMoreRows}
                   rowCount={totalCount}
+                  ref={this.infiniteLoaderRef}
                 >
                   {({ onRowsRendered, registerChild }) => (
                     <VirtualizedList

@@ -3,7 +3,6 @@ import Zoom from '@material-ui/core/Zoom';
 import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 
-import Spacer from '../UI/Spacer';
 import SearchBox from './SearchBox';
 import List from './List.container';
 
@@ -14,7 +13,6 @@ class Search extends React.PureComponent {
     return (
       <React.Fragment>
         <SearchBox />
-        <Spacer />
         <List />
 
         <AddFab>

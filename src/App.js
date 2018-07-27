@@ -23,8 +23,8 @@ class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
 
-        <Router history={history} loading={loading}>
-          <Routes />
+        <Router history={history}>
+          <Routes loading={loading} />
         </Router>
       </React.Fragment>
     );

@@ -16,6 +16,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import routes from '../../utils/routes';
 import Logout from '../Auth/Logout';
 import ChaportListItem from '../External/ChaportListItem';
+import NavRoutes from '../Route/NavRoutes';
 
 import { Title, TitleContent, Content, Link, Footer } from './DesktopNav.style';
 
@@ -29,9 +30,8 @@ class DesktopNav extends React.Component {
         >
           <Toolbar>
             <Typography variant="title" color="inherit">
-              News
+              <NavRoutes />
             </Typography>
-            <Button color="inherit">Login</Button>
           </Toolbar>
         </AppBar>
 
