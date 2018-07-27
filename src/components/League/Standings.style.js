@@ -14,13 +14,13 @@ export const PointsBadge = styled(Badge)`
     background-color: ${props => {
       switch (props.index) {
         case 0:
-          return '#e2bf00';
+          return '#efca00';
         case 1:
-          return '#c0c0c0';
+          return '#808080';
         case 2:
-          return '#cd7f32';
+          return '#c7813b';
         default:
-          return props.theme.palette.primary.main;
+          return props.theme.palette.grey[400];
       }
     }};
   }

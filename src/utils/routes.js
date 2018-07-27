@@ -48,16 +48,19 @@ export default {
     path: '/leagues/:id',
     pathWith: id => `/leagues/${id}`,
     component: loadable('League'),
+    exact: true,
   },
 
   leagueCreate: {
     path: '/leagues/create',
     component: loadable('League'),
+    exact: true,
   },
 
   round: {
     path: '/leagues/:id/rounds/:roundId',
     pathWith: (id, roundId) => `/leagues/${id}/rounds/${roundId}`,
-    component: loadable('League'),
+    component: loadable('League/Round.container'),
+    exact: true,
   },
 };

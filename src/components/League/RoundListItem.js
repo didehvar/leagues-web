@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'react-router-dom/Link';
 import withRouter from 'react-router-dom/withRouter';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -20,10 +21,14 @@ class RoundListItem extends React.PureComponent {
   };
 
   render() {
-    const { name, startDate, endDate } = this.props;
+    const { id, leagueId, name, startDate, endDate } = this.props;
 
     return (
-      <ListItem>
+      <ListItem
+        button
+        component={Link}
+        to={routes.round.pathWith(leagueId, id)}
+      >
         <ListItemText
           primary={name}
           secondary={

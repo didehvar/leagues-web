@@ -25,6 +25,8 @@ const generateClassName = createGenerateClassName();
 const jss = create(jssPreset());
 jss.options.insertionPoint = 'insertion-point-jss';
 
+console.log(theme);
+
 ReactDOM.render(
   <JssProvider jss={jss} generateClassName={generateClassName}>
     <MuiThemeProvider theme={theme}>

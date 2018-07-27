@@ -4,7 +4,7 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import Divider from '@material-ui/core/Divider';
 
 import RoundListItem from './RoundListItem';
-import StandingsPreview from './StandingsPreview';
+import Standings from './Standings';
 
 class League extends React.PureComponent {
   render() {
@@ -14,7 +14,7 @@ class League extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <StandingsPreview limit={3} pointIds={league.points} />
+        <Standings title="Top Standings" limit={3} pointIds={league.points} />
         {league.points && league.points.length > 0 && <Divider />}
 
         {rounds.length > 0 && (
