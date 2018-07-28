@@ -47,7 +47,7 @@ function created(state = {}, action = {}) {
       return {};
 
     case types.CREATE_ROUND_SUCCEEDED:
-      return Object.values(action.payload.leagues)[0];
+      return Object.values(action.payload.rounds)[0];
 
     default:
       return state;

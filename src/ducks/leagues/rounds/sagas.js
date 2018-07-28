@@ -7,7 +7,9 @@ import * as actions from './actions';
 function* doCreateRound({ payload }) {
   try {
     const state = yield select();
+    console.log(state, payload);
     const round = yield call(createRound, state, payload);
+    console.log(round);
     yield put(actions.createRoundSucceeded(round));
   } catch (ex) {
     yield put(actions.createRoundFailed(ex.message));

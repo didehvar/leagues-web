@@ -49,7 +49,6 @@ class CreateRoundForm extends React.PureComponent {
     return (
       <Form>
         <Field
-          required
           name="name"
           label="Round Name"
           component={FormikTextField}
@@ -167,7 +166,7 @@ class CreateRound extends React.PureComponent {
           segmentId: '',
         }}
         validationSchema={object().shape({
-          name: string().required(),
+          name: string(),
           startDate: date()
             .min(format(new Date(), 'YYYY-MM-DD'))
             .required(),

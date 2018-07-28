@@ -7,9 +7,9 @@ export const createRound = data => ({
   payload: data,
 });
 
-export const createRoundSucceeded = league => ({
+export const createRoundSucceeded = round => ({
   type: types.CREATE_ROUND_SUCCEEDED,
-  payload: normalize(league, schema.round).entities,
+  payload: normalize(round, schema.round).entities,
 });
 
 export const createRoundFailed = message => ({
