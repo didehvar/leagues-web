@@ -5,6 +5,8 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
 
+import Spacer from '../UI/Spacer';
+
 import { ListItemText, PointsBadge } from './Standings.style';
 
 class StandingItem extends React.PureComponent {
@@ -30,7 +32,7 @@ class Standings extends React.PureComponent {
   };
 
   static defaultProps = {
-    title: 'Standings',
+    title: undefined,
     points: [],
   };
 
@@ -41,9 +43,13 @@ class Standings extends React.PureComponent {
 
     return (
       <List {...props}>
-        <ListSubheader disableSticky color="primary">
-          {title}
-        </ListSubheader>
+        {title ? (
+          <ListSubheader disableSticky color="primary">
+            {title}
+          </ListSubheader>
+        ) : (
+          <Spacer padding={8} />
+        )}
 
         {points.map((point, index) => (
           <StandingItem key={point.id} {...point} index={index} />

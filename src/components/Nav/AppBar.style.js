@@ -21,6 +21,8 @@ export const IconButonMenu = styled(IconButton)`
 
   ${props => props.theme.breakpoints.up('md')} {
     display: block;
+    margin-left: -12px;
+    margin-right: 20px;
   }
 `;
 
