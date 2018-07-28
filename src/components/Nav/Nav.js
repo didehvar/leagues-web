@@ -1,21 +1,19 @@
 import React from 'react';
 import Hidden from '@material-ui/core/Hidden';
 
+import AppBar from './AppBar';
 import BottomNav from './BottomNav';
-import DesktopNav from './DesktopNav';
-import MobileAppBar from './MobileAppBar';
 
 class Nav extends React.Component {
   render() {
+    const { pathname } = this.props;
+
     return (
       <React.Fragment>
-        <Hidden mdUp>
-          <MobileAppBar />
-          <BottomNav />
-        </Hidden>
+        <AppBar pathname={pathname} />
 
-        <Hidden smDown>
-          <DesktopNav />
+        <Hidden mdUp>
+          <BottomNav pathname={pathname} />
         </Hidden>
       </React.Fragment>
     );

@@ -14,7 +14,12 @@ class League extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <Standings title="Top Standings" limit={3} points={points} />
+        <Standings
+          title="Top Standings"
+          limit={3}
+          points={points}
+          disablePadding
+        />
         {league.points && league.points.length > 0 && <Divider />}
 
         {rounds.length > 0 && (

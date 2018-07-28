@@ -11,7 +11,7 @@ import ChaportListItem from '../External/ChaportListItem';
 class Settings extends React.PureComponent {
   render() {
     return (
-      <List>
+      <List disablePadding>
         <Logout>
           {logout => (
             <ListItem button onClick={logout}>

@@ -35,12 +35,12 @@ class Standings extends React.PureComponent {
   };
 
   render() {
-    const { title, points } = this.props;
+    const { title, points, ...props } = this.props;
 
     if (!points.length) return null;
 
     return (
-      <List>
+      <List {...props}>
         <ListSubheader disableSticky color="primary">
           {title}
         </ListSubheader>

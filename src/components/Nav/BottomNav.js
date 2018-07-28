@@ -1,10 +1,9 @@
 import React from 'react';
-import withRouter from 'react-router-dom/withRouter';
 import Link from 'react-router-dom/Link';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 import Menu from '@material-ui/icons/Menu';
 import Group from '@material-ui/icons/Group';
-import MoreHoriz from '@material-ui/icons/MoreHoriz';
+import SettingsRounded from '@material-ui/icons/SettingsRounded';
 
 import routes from '../../utils/routes';
 
@@ -12,9 +11,7 @@ import { BottomNavigation } from './BottomNav.style';
 
 class BottomNav extends React.PureComponent {
   render() {
-    const {
-      location: { pathname },
-    } = this.props;
+    const { pathname } = this.props;
 
     return (
       <BottomNavigation
@@ -41,7 +38,7 @@ class BottomNav extends React.PureComponent {
         <BottomNavigationAction
           component={Link}
           label="Settings"
-          icon={<MoreHoriz />}
+          icon={<SettingsRounded />}
           value={routes.settings.path}
           to={routes.settings.path}
         />
@@ -50,4 +47,4 @@ class BottomNav extends React.PureComponent {
   }
 }
 
-export default withRouter(BottomNav);
+export default BottomNav;

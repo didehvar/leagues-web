@@ -6,7 +6,7 @@ const FullPageContainer = styled.div`
   right: 0px;
   top: 0px;
   bottom: 0px;
-  padding: 0 1.25rem;
+  padding: 1rem 1.25rem;
 
   ${props =>
     !props.full &&

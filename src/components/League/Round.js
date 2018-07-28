@@ -14,7 +14,6 @@ class Round extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <Spacer padding={12} />
         <Card>
           <CardContent>
             <Typography variant="headline">{name}</Typography>
