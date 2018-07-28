@@ -69,3 +69,6 @@ export const getCreatedLeague = state => reducer(state).created;
 
 export const isLeagueOwner = (state, id) =>
   (leagueById(state, id) || {}).user === getCurrentUserId(state);
+
+export const hasLeagueType = (state, id, type) =>
+  getLeague(state, id).type === type;

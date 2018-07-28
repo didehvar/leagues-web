@@ -18,6 +18,7 @@ import {
   getRoundError,
 } from '../../ducks/leagues/rounds';
 import { fetchStarredSegments } from '../../ducks/leagues/segments';
+import { hasLeagueType } from '../../ducks/leagues';
 import { FormikTextField } from '../UI/FormikControl';
 import Spacer from '../UI/Spacer';
 import StravaLink from '../UI/StravaLink';
@@ -25,6 +26,7 @@ import ModalContent from '../UI/ModalContent';
 import StarredSegments from './StarredSegments';
 
 import { Form } from './Create.style';
+import config from '../../utils/config';
 
 class CreateRoundForm extends React.PureComponent {
   state = {
@@ -44,7 +46,7 @@ class CreateRoundForm extends React.PureComponent {
 
   render() {
     const { starredOpen, segmentName } = this.state;
-    const { isSubmitting, errorMessage, isValid } = this.props;
+    const { isSubmitting, errorMessage, isValid, isDistance } = this.props;
 
     return (
       <Form>
@@ -76,36 +78,40 @@ class CreateRoundForm extends React.PureComponent {
 
         <Spacer padding={8} />
 
-        <Typography paragraph>
-          Select a Strava segment from your starred segments. If you need to
-          star some segments, head{' '}
-          <StravaLink href="https://www.strava.com/segments/search">
-            over to Strava
-          </StravaLink>{' '}
-          .
-        </Typography>
+        {!isDistance && (
+          <React.Fragment>
+            <Typography paragraph>
+              Select a Strava segment from your starred segments. If you need to
+              star some segments, head{' '}
+              <StravaLink href="https://www.strava.com/segments/search">
+                over to Strava
+              </StravaLink>{' '}
+              .
+            </Typography>
 
-        <Button
-          type="button"
-          variant="outlined"
-          color={segmentName ? 'default' : 'secondary'}
-          onClick={this.toggleStarred}
-        >
-          {segmentName ? 'Change' : 'Select'} Strava Segment
-        </Button>
+            <Button
+              type="button"
+              variant="outlined"
+              color={segmentName ? 'default' : 'secondary'}
+              onClick={this.toggleStarred}
+            >
+              {segmentName ? 'Change' : 'Select'} Strava Segment
+            </Button>
 
-        <Spacer padding={8} />
+            <Spacer padding={8} />
 
-        <TextField
-          required
-          name="segmentName"
-          label="Selected Segment"
-          value={segmentName}
-          disabled
-          fullWidth
-        />
+            <TextField
+              required
+              name="segmentName"
+              label="Selected Segment"
+              value={segmentName}
+              disabled
+              fullWidth
+            />
 
-        <Spacer padding={8} />
+            <Spacer padding={8} />
+          </React.Fragment>
+        )}
 
         {errorMessage && (
           <Typography color="error" paragraph>
@@ -155,7 +161,13 @@ class CreateRound extends React.PureComponent {
   }
 
   render() {
-    const { onSubmit, isSubmitting, errorMessage, leagueId } = this.props;
+    const {
+      onSubmit,
+      isSubmitting,
+      errorMessage,
+      leagueId,
+      isDistance,
+    } = this.props;
 
     return (
       <Formik
@@ -173,13 +185,14 @@ class CreateRound extends React.PureComponent {
           endDate: date()
             .min(format(addDays(new Date(), 1), 'YYYY-MM-DD'))
             .required(),
-          segmentId: number().required(),
+          segmentId: isDistance ? number() : number().required(),
         })}
         onSubmit={onSubmit}
         render={props => (
           <CreateRoundForm
             {...props}
             leagueId={leagueId}
+            isDistance={isDistance}
             isSubmitting={isSubmitting}
             errorMessage={errorMessage}
           />
@@ -190,11 +203,16 @@ class CreateRound extends React.PureComponent {
 }
 
 export default connect(
-  state => ({
+  (state, ownProps) => ({
     isSubmitting: isCreatingRound(state),
     roundId: getCreatedRound(state).id,
     leagueId: getCreatedRound(state).leagueId,
     errorMessage: getRoundError(state),
+    isDistance: hasLeagueType(
+      state,
+      ownProps.match.params.id,
+      config.leagues.distance,
+    ),
   }),
   (dispatch, ownProps) => ({
     onSubmit: values =>
