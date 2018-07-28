@@ -5,7 +5,7 @@ import withFetchId from '../../hocs/withFetchId';
 import {
   fetchLeague,
   isFetching,
-  getErrorMessage,
+  getLeagueError,
   getSortedPoints,
 } from '../../ducks/leagues';
 import { getRound } from '../../ducks/leagues/rounds';
@@ -20,7 +20,7 @@ export default flowRight(
       return {
         ...round,
         isFetching: isFetching(state),
-        errorMessage: getErrorMessage(state),
+        errorMessage: getLeagueError(state),
         points: getSortedPoints(state, round.points),
       };
     },

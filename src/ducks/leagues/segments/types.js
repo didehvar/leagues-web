@@ -1,3 +1,7 @@
 const prefix = 'leagues/segments';
 
-export default {};
+export default {
+  FETCH_STARRED_SEGMENTS: `${prefix}/FETCH_STARRED_SEGMENTS`,
+  FETCH_STARRED_SEGMENTS_SUCCEEDED: `${prefix}/FETCH_STARRED_SEGMENTS_SUCCEEDED`,
+  FETCH_STARRED_SEGMENTS_FAILED: `${prefix}/FETCH_STARRED_SEGMENTS_FAILED`,
+};

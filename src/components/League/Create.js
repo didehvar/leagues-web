@@ -6,6 +6,7 @@ import format from 'date-fns/format';
 import Radio from '@material-ui/core/Radio';
 import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Typography from '@material-ui/core/Typography';
 
 import config from '../../utils/config';
 import routes from '../../utils/routes';
@@ -13,6 +14,7 @@ import {
   createLeague,
   isCreating,
   getCreatedLeague,
+  getLeagueError,
 } from '../../ducks/leagues';
 import { FormikTextField, FormikRadioGroup } from '../UI/FormikControl';
 
@@ -28,7 +30,7 @@ class Create extends React.PureComponent {
   }
 
   render() {
-    const { onSubmit, isSubmitting } = this.props;
+    const { onSubmit, isSubmitting, errorMessage } = this.props;
 
     return (
       <Formik
@@ -140,6 +142,12 @@ class Create extends React.PureComponent {
               />
             </Field>
 
+            {errorMessage && (
+              <Typography color="error" paragraph>
+                {errorMessage}
+              </Typography>
+            )}
+
             <Button
               variant="contained"
               color="primary"
@@ -160,6 +168,7 @@ export default connect(
   state => ({
     isSubmitting: isCreating(state),
     leagueId: getCreatedLeague(state).id,
+    errorMessage: getLeagueError(state),
   }),
   dispatch => ({
     onSubmit: values => dispatch(createLeague(values)),

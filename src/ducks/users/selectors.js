@@ -22,4 +22,4 @@ export const currentUserHasRole = (state, roleName) =>
 
 export const isAuthenticated = state => !!getCurrentUser(state).token;
 
-export const getErrorMessage = state => reducer(state).errorMessage;
+export const getUserError = state => reducer(state).errorMessage;

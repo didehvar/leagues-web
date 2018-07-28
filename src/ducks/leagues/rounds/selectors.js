@@ -17,3 +17,5 @@ export const getRoundName = (state, id) => getRound(state, id).name;
 export const isCreatingRound = state => reducer(state).isCreating;
 
 export const getCreatedRound = state => reducer(state).created;
+
+export const getRoundError = state => reducer(state).errorMessage;

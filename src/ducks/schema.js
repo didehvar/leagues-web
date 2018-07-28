@@ -12,6 +12,9 @@ export const point = new schema.Entity('points', {
 });
 export const points = [point];
 
+export const starredSegment = new schema.Entity('starredSegments');
+export const starredSegments = [new schema.Entity('starredSegments')];
+
 export const segment = new schema.Entity('segments');
 
 export const round = new schema.Entity('rounds', {

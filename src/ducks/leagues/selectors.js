@@ -37,7 +37,7 @@ export const isFetching = state => reducer(state).isFetching;
 
 export const isCreating = state => reducer(state).isCreating;
 
-export const getErrorMessage = state => reducer(state).errorMessage;
+export const getLeagueError = state => reducer(state).errorMessage;
 
 export const getRounds = (state, id) => {
   const league = getLeague(state, id);
