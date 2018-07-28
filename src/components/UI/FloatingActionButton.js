@@ -16,7 +16,6 @@ const Container = styled.div`
     transform: none;
   }
 `;
-
 class FloatingActionButton extends React.PureComponent {
   state = { scrolling: true };
 
@@ -46,12 +45,13 @@ class FloatingActionButton extends React.PureComponent {
 
   render() {
     const { scrolling } = this.state;
-    const { children, ...props } = this.props;
+    const { icon: Icon, children, ...props } = this.props;
 
     return (
       <Container>
         <Zoom in={!scrolling}>
           <Button variant="extendedFab" color="primary" {...props}>
+            {Icon && <Icon style={{ marginRight: 8 }} />}
             {children}
           </Button>
         </Zoom>

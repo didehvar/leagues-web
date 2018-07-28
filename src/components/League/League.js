@@ -5,9 +5,11 @@ import ListSubheader from '@material-ui/core/ListSubheader';
 import Divider from '@material-ui/core/Divider';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import GroupAdd from '@material-ui/icons/GroupAdd';
 
 import RoundListItem from './RoundListItem';
 import Standings from './Standings';
+import FloatingActionButton from '../UI/FloatingActionButton';
 
 import { Center } from './League.style';
 import routes from '../../utils/routes';
@@ -53,6 +55,14 @@ class League extends React.PureComponent {
             )}
           </Center>
         )}
+
+        <FloatingActionButton
+          component={Link}
+          to={routes.leagueCreate.path}
+          icon={GroupAdd}
+        >
+          Join
+        </FloatingActionButton>
       </React.Fragment>
     );
   }

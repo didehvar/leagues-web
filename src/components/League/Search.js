@@ -15,8 +15,11 @@ class Search extends React.PureComponent {
         <SearchBox />
         <List />
 
-        <FloatingActionButton component={Link} to={routes.leagueCreate.path}>
-          <Add />
+        <FloatingActionButton
+          component={Link}
+          to={routes.leagueCreate.path}
+          icon={Add}
+        >
           Create
         </FloatingActionButton>
       </React.Fragment>
