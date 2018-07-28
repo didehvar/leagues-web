@@ -7,12 +7,13 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import GroupAdd from '@material-ui/icons/GroupAdd';
 
+import routes from '../../utils/routes';
 import RoundListItem from './RoundListItem';
 import Standings from './Standings';
+import Spacer from '../UI/Spacer';
 import FloatingActionButton from '../UI/FloatingActionButton';
 
-import { Center } from './League.style';
-import routes from '../../utils/routes';
+import { Center, Right } from './League.style';
 
 class League extends React.PureComponent {
   joinLeague = () => this.props.joinLeague(this.props.league.id);
@@ -30,7 +31,20 @@ class League extends React.PureComponent {
           points={points}
           disablePadding
         />
-        {league.points && league.points.length > 0 && <Divider />}
+
+        <Right>
+          <Button
+            size="small"
+            component={Link}
+            to={routes.leagueStandings.pathWith(league.id)}
+          >
+            View all standings
+          </Button>
+        </Right>
+
+        <Spacer padding={4} />
+
+        {points && points.length > 0 && <Divider />}
 
         {rounds.length > 0 ? (
           <List>

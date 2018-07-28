@@ -66,7 +66,7 @@ export const getLeagueUserPoint = (state, leagueId, userId) =>
 
 export const getSortedLeaguePoints = (state, id) => {
   const league = leagueById(state, id);
-  if (!league) return [];
+  if (!league || !league.participants) return [];
 
   return Object.values(
     league.participants.reduce((acc, userId) => {

@@ -15,7 +15,8 @@ class LeagueTitle extends React.PureComponent {
 
     return (
       <React.Fragment>
-        {match.params.roundId && (
+        {(match.path === routes.round.path ||
+          match.path === routes.leagueStandings.path) && (
           <Hidden mdUp>
             <IconButton color="inherit" component={Link} to={route}>
               <ArrowBackIos />

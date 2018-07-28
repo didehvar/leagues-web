@@ -40,7 +40,7 @@ class AppBar extends React.Component {
       <React.Fragment>
         <NavRoutes>
           {render => (
-            <MuiAppBar position="sticky">
+            <MuiAppBar position="fixed">
               <Toolbar>
                 <IconButonMenu
                   color="inherit"
