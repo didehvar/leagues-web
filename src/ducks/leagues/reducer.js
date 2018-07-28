@@ -103,7 +103,6 @@ function errorMessage(state = null, action = {}) {
 }
 
 function created(state = {}, action = {}) {
-  console.log(action.payload);
   switch (action.type) {
     case types.CREATE_LEAGUE:
     case types.CREATE_LEAGUE_FAILED:
