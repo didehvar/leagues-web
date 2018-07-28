@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import throttle from 'lodash/throttle';
-import Link from 'react-router-dom/Link';
 import Zoom from '@material-ui/core/Zoom';
 import Button from '@material-ui/core/Button';
 
@@ -26,6 +25,9 @@ class FloatingActionButton extends React.PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
+    if (this.scrollTimeout) {
+      clearTimeout(this.scrollTimeout);
+    }
   }
 
   startScrollTimeout = () =>

@@ -8,3 +8,6 @@ export const fetchLeague = async (state, id, query) =>
 
 export const createLeague = async (state, data) =>
   await api({ method: 'POST', url: 'leagues/create', body: data }, state);
+
+export const joinLeague = async (state, id) =>
+  await api({ url: `leagues/${id}/join` }, state);

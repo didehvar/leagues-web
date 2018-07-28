@@ -11,6 +11,19 @@ function byId(state = {}, action = {}) {
     case types.FETCH_LEAGUE_SUCCEEDED:
       return { ...state, ...action.payload.leagues };
 
+    case types.JOIN_LEAGUE_SUCCEEDED:
+      const id = action.payload.id;
+      return {
+        ...state,
+        [id]: {
+          ...state[id],
+          participants: uniq([
+            ...state[id].participants,
+            action.payload.userId,
+          ]),
+        },
+      };
+
     default:
       return state;
   }
@@ -87,6 +100,7 @@ function errorMessage(state = null, action = {}) {
     case types.FETCH_LEAGUES_FAILED:
     case types.FETCH_LEAGUE_FAILED:
     case types.CREATE_LEAGUE_FAILED:
+    case types.JOIN_LEAGUE_FAILED:
       return action.payload.message;
 
     case types.FETCH_LEAGUES:
@@ -95,6 +109,8 @@ function errorMessage(state = null, action = {}) {
     case types.FETCH_LEAGUE_SUCCEEDED:
     case types.CREATE_LEAGUE:
     case types.CREATE_LEAGUE_SUCCEEDED:
+    case types.JOIN_LEAGUE:
+    case types.JOIN_LEAGUE_SUCCEEDED:
       return null;
 
     default:

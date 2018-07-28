@@ -10,7 +10,10 @@ import {
   getLeagueError,
   getSortedPoints,
   isLeagueOwner,
+  isParticipating,
+  joinLeague,
 } from '../../ducks/leagues';
+import { getCurrentUserId } from '../../ducks/users';
 
 import League from './League';
 
@@ -19,6 +22,7 @@ export default flowRight(
     (state, ownProps) => {
       const leagueId = ownProps.match.params.id;
       const league = getLeague(state, leagueId);
+      const userId = getCurrentUserId(state);
 
       return {
         league,
@@ -26,10 +30,11 @@ export default flowRight(
         isFetching: isFetching(state),
         errorMessage: getLeagueError(state),
         points: getSortedPoints(state, league.points).slice(0, 3),
-        isOwner: isLeagueOwner(state, leagueId),
+        isOwner: isLeagueOwner(state, leagueId, userId),
+        isParticipating: isParticipating(state, leagueId, userId),
       };
     },
-    { fetch: fetchLeague },
+    { fetch: fetchLeague, joinLeague },
   ),
   withFetchId,
 )(League);

@@ -78,3 +78,25 @@ export const setSearch = search => ({
     search,
   },
 });
+
+export const joinLeague = id => ({
+  type: types.JOIN_LEAGUE,
+  payload: {
+    id,
+  },
+});
+
+export const joinLeagueSucceeded = (id, userId) => ({
+  type: types.JOIN_LEAGUE_SUCCEEDED,
+  payload: {
+    id,
+    userId,
+  },
+});
+
+export const joinLeagueFailed = message => ({
+  type: types.JOIN_LEAGUE_FAILED,
+  payload: {
+    message,
+  },
+});

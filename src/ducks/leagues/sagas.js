@@ -1,7 +1,7 @@
 import { call, select, put, takeLatest } from 'redux-saga/effects';
 
 import types from './types';
-import { fetchLeagues, fetchLeague, createLeague } from './api';
+import { fetchLeagues, fetchLeague, createLeague, joinLeague } from './api';
 import * as actions from './actions';
 
 function* getLeagues({ payload }) {
@@ -34,8 +34,19 @@ function* doCreateLeague({ payload }) {
   }
 }
 
+function* doJoinLeague({ payload: { id } }) {
+  try {
+    const state = yield select();
+    const { leagueId, userId } = yield call(joinLeague, state, id);
+    yield put(actions.joinLeagueSucceeded(leagueId, userId));
+  } catch (ex) {
+    yield put(actions.joinLeagueFailed(ex.message));
+  }
+}
+
 export default function* sagas() {
   yield takeLatest(types.FETCH_LEAGUES, getLeagues);
   yield takeLatest(types.FETCH_LEAGUE, getLeague);
   yield takeLatest(types.CREATE_LEAGUE, doCreateLeague);
+  yield takeLatest(types.JOIN_LEAGUE, doJoinLeague);
 }

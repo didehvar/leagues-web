@@ -15,8 +15,10 @@ import { Center } from './League.style';
 import routes from '../../utils/routes';
 
 class League extends React.PureComponent {
+  joinLeague = () => this.props.joinLeague(this.props.league.id);
+
   render() {
-    const { league, rounds, points, isOwner } = this.props;
+    const { league, rounds, points, isOwner, isParticipating } = this.props;
 
     if (!league) return false;
 
@@ -56,13 +58,11 @@ class League extends React.PureComponent {
           </Center>
         )}
 
-        <FloatingActionButton
-          component={Link}
-          to={routes.leagueCreate.path}
-          icon={GroupAdd}
-        >
-          Join
-        </FloatingActionButton>
+        {!isParticipating && (
+          <FloatingActionButton onClick={this.joinLeague} icon={GroupAdd}>
+            Join
+          </FloatingActionButton>
+        )}
       </React.Fragment>
     );
   }
