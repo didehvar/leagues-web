@@ -20,6 +20,6 @@ export const hasRole = (state, roleId, roleName) =>
 export const currentUserHasRole = (state, roleName) =>
   hasRole(state, getCurrentUserRoleId(state), roleName);
 
-export const isAuthenticated = state => !!getCurrentUser(state).id;
+export const isAuthenticated = state => !!getCurrentUser(state).token;
 
 export const getErrorMessage = state => reducer(state).errorMessage;

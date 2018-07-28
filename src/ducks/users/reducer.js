@@ -12,7 +12,10 @@ function byId(state = {}, action = {}) {
 function current(state = {}, action = {}) {
   switch (action.type) {
     case types.LOGIN_SUCCEEDED:
-      return Object.values(action.payload.users)[0];
+      return {
+        ...Object.values(action.payload.users)[0],
+        token: action.payload.token,
+      };
 
     case types.FETCH_REFRESH_TOKEN:
       return { ...state, lastRefresh: new Date() };

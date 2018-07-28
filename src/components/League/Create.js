@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Formik, Field } from 'formik';
 import { object, string, date } from 'yup';
 import format from 'date-fns/format';
@@ -7,12 +8,28 @@ import Button from '@material-ui/core/Button';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import config from '../../utils/config';
+import routes from '../../utils/routes';
+import {
+  createLeague,
+  isCreating,
+  getCreatedLeague,
+} from '../../ducks/leagues';
 import { FormikTextField, FormikRadioGroup } from '../UI/FormikControl';
 
 import { Form } from './Create.style';
 
 class Create extends React.PureComponent {
+  componentDidUpdate(prevProps) {
+    const { leagueId, history } = this.props;
+
+    if (!prevProps.leagueId && leagueId) {
+      history.push(routes.league.pathWith(leagueId));
+    }
+  }
+
   render() {
+    const { onSubmit, isSubmitting } = this.props;
+
     return (
       <Formik
         initialValues={{
@@ -45,10 +62,8 @@ class Create extends React.PureComponent {
             .matches(/(public|private)/)
             .required(),
         })}
-        onSubmit={(values, actions) => {
-          console.log('submit', values, actions);
-        }}
-        render={({ errors, touched, isSubmitting }) => (
+        onSubmit={onSubmit}
+        render={({ errors, touched }) => (
           <Form>
             <Field
               required
@@ -56,6 +71,7 @@ class Create extends React.PureComponent {
               label="Name"
               component={FormikTextField}
               fullWidth
+              autoFocus
             />
 
             <Field
@@ -140,4 +156,12 @@ class Create extends React.PureComponent {
   }
 }
 
-export default Create;
+export default connect(
+  state => ({
+    isSubmitting: isCreating(state),
+    leagueId: getCreatedLeague(state).id,
+  }),
+  dispatch => ({
+    onSubmit: values => dispatch(createLeague(values)),
+  }),
+)(Create);

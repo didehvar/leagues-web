@@ -33,6 +33,8 @@ export const getSearch = state => reducer(state).search;
 
 export const isFetching = state => reducer(state).isFetching;
 
+export const isCreating = state => reducer(state).isCreating;
+
 export const getErrorMessage = state => reducer(state).errorMessage;
 
 export const getRounds = (state, id) => {
@@ -60,3 +62,5 @@ export const getSortedPoints = (state, pointIds = []) =>
       return acc;
     }, {}),
   ).sort((a, b) => a.points < b.points);
+
+export const getCreatedLeague = state => reducer(state).created;

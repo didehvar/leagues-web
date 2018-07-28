@@ -52,6 +52,23 @@ export const fetchLeagueFailed = message => ({
   },
 });
 
+export const createLeague = data => ({
+  type: types.CREATE_LEAGUE,
+  payload: data,
+});
+
+export const createLeagueSucceeded = league => ({
+  type: types.CREATE_LEAGUE_SUCCEEDED,
+  payload: normalize(league, schema.league).entities,
+});
+
+export const createLeagueFailed = message => ({
+  type: types.CREATE_LEAGUE_FAILED,
+  payload: {
+    message,
+  },
+});
+
 export const setSearch = search => ({
   type: types.SEARCH,
   payload: {

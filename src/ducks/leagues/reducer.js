@@ -68,17 +68,49 @@ function isFetching(state = false, action = {}) {
   }
 }
 
+function isCreating(state = false, action = {}) {
+  switch (action.type) {
+    case types.CREATE_LEAGUE:
+      return true;
+
+    case types.CREATE_LEAGUE_SUCCEEDED:
+    case types.CREATE_LEAGUE_FAILED:
+      return false;
+
+    default:
+      return state;
+  }
+}
+
 function errorMessage(state = null, action = {}) {
   switch (action.type) {
     case types.FETCH_LEAGUES_FAILED:
     case types.FETCH_LEAGUE_FAILED:
+    case types.CREATE_LEAGUE_FAILED:
       return action.payload.message;
 
     case types.FETCH_LEAGUES:
-    case types.FETCH_LEAGUE:
     case types.FETCH_LEAGUES_SUCCEEDED:
+    case types.FETCH_LEAGUE:
     case types.FETCH_LEAGUE_SUCCEEDED:
+    case types.CREATE_LEAGUE:
+    case types.CREATE_LEAGUE_SUCCEEDED:
       return null;
+
+    default:
+      return state;
+  }
+}
+
+function created(state = {}, action = {}) {
+  console.log(action.payload);
+  switch (action.type) {
+    case types.CREATE_LEAGUE:
+    case types.CREATE_LEAGUE_FAILED:
+      return {};
+
+    case types.CREATE_LEAGUE_SUCCEEDED:
+      return Object.values(action.payload.leagues)[0];
 
     default:
       return state;
@@ -131,4 +163,6 @@ export default combineReducers({
   disciplines,
   type,
   points,
+  isCreating,
+  created,
 });
