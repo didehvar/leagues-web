@@ -13,11 +13,11 @@ import { Container, Content } from './Routes.style';
 
 class Routes extends React.Component {
   render() {
-    const { loading, history, location } = this.props;
+    const { loading, history, location, match } = this.props;
 
     return (
       <Container>
-        {location.pathname !== routes.home.path && <Nav />}
+        {location.pathname !== routes.home.path && <Nav match={match} />}
 
         <Content>
           <TransitionGroup>

@@ -10,9 +10,10 @@ export const Container = styled.div`
 `;
 
 export const Content = styled(Container)`
-  margin-bottom: 56px;
+  margin: 56px 0;
 
   ${props => props.theme.breakpoints.up('md')} {
+    margin-top: 64px;
     margin-bottom: 0;
   }
 `;

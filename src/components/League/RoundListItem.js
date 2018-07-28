@@ -31,11 +31,7 @@ class RoundListItem extends React.PureComponent {
       >
         <ListItemText
           primary={name}
-          secondary={
-            <span>
-              {formatDate(startDate)} &mdash; {formatDate(endDate)}
-            </span>
-          }
+          secondary={formatDate(startDate, endDate)}
         />
       </ListItem>
     );

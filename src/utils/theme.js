@@ -6,6 +6,7 @@ export default createMuiTheme({
   palette: {
     primary: blue,
     secondary: orange,
+    strava: '#fc4c02',
   },
   spacing: {
     page: '1em 1.25em',

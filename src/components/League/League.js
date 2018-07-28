@@ -8,13 +8,13 @@ import Standings from './Standings';
 
 class League extends React.PureComponent {
   render() {
-    const { league, rounds } = this.props;
+    const { league, rounds, points } = this.props;
 
     if (!league) return false;
 
     return (
       <React.Fragment>
-        <Standings title="Top Standings" limit={3} pointIds={league.points} />
+        <Standings title="Top Standings" limit={3} points={points} />
         {league.points && league.points.length > 0 && <Divider />}
 
         {rounds.length > 0 && (

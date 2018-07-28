@@ -7,17 +7,25 @@ import {
   getLeague,
   isFetching,
   getErrorMessage,
+  getSortedPoints,
 } from '../../ducks/leagues';
+import { getRound } from '../../ducks/leagues/rounds';
 
 import Round from './Round';
 
 export default flowRight(
   connect(
-    (state, ownProps) => ({
-      league: getLeague(state, ownProps.match.params.id),
-      isFetching: isFetching(state),
-      errorMessage: getErrorMessage(state),
-    }),
+    (state, ownProps) => {
+      const round = getRound(state, ownProps.match.params.roundId);
+      console.log('round points', round.points);
+
+      return {
+        isFetching: isFetching(state),
+        errorMessage: getErrorMessage(state),
+        ...round,
+        points: getSortedPoints(state, round.points),
+      };
+    },
     { fetch: fetchLeague },
   ),
   withFetchId,

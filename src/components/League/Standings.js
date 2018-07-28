@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import Avatar from '@material-ui/core/Avatar';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListSubheader from '@material-ui/core/ListSubheader';
-
-import { getLeaguePoints } from '../../ducks/leagues';
 
 import { ListItemText, PointsBadge } from './Standings.style';
 
@@ -29,16 +26,18 @@ class StandingItem extends React.PureComponent {
 class Standings extends React.PureComponent {
   static propTypes = {
     title: PropTypes.string,
+    points: PropTypes.Array,
   };
 
   static defaultProps = {
     title: 'Standings',
+    points: [],
   };
 
   render() {
-    const { title, users } = this.props;
+    const { title, points } = this.props;
 
-    if (!users.length) return null;
+    if (!points.length) return null;
 
     return (
       <List>
@@ -46,14 +45,12 @@ class Standings extends React.PureComponent {
           {title}
         </ListSubheader>
 
-        {users.map((user, index) => (
-          <StandingItem key={user.id} {...user} index={index} />
+        {points.map((point, index) => (
+          <StandingItem key={point.id} {...point} index={index} />
         ))}
       </List>
     );
   }
 }
 
-export default connect((state, ownProps) => ({
-  users: getLeaguePoints(state, ownProps.pointIds).slice(0, ownProps.limit),
-}))(Standings);
+export default Standings;

@@ -22,6 +22,7 @@
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.5",
     "normalizr": "^3.2.4",
+    "polished": "^1.9.3",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-loadable": "^5.4.0",
