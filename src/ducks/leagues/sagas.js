@@ -1,4 +1,4 @@
-import { call, select, put, throttle, takeLatest } from 'redux-saga/effects';
+import { call, select, put, takeLatest } from 'redux-saga/effects';
 
 import types from './types';
 import { fetchLeagues, fetchLeague } from './api';

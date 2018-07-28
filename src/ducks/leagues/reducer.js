@@ -3,6 +3,7 @@ import uniq from 'lodash/uniq';
 import types from './types';
 
 import rounds from './rounds/reducer';
+import segments from './segments/reducer';
 
 function byId(state = {}, action = {}) {
   switch (action.type) {
@@ -84,11 +85,11 @@ function errorMessage(state = null, action = {}) {
   }
 }
 
-function discipline(state = {}, action = {}) {
+function disciplines(state = {}, action = {}) {
   switch (action.type) {
     case types.FETCH_LEAGUES_SUCCEEDED:
     case types.FETCH_LEAGUE_SUCCEEDED:
-      return { ...state, ...action.payload.discipline };
+      return { ...state, ...action.payload.disciplines };
 
     default:
       return state;
@@ -99,7 +100,7 @@ function type(state = {}, action = {}) {
   switch (action.type) {
     case types.FETCH_LEAGUES_SUCCEEDED:
     case types.FETCH_LEAGUE_SUCCEEDED:
-      return { ...state, ...action.payload.type };
+      return { ...state, ...action.payload.types };
 
     default:
       return state;
@@ -119,13 +120,15 @@ function points(state = {}, action = {}) {
 
 export default combineReducers({
   rounds,
+  segments,
+
   byId,
   search,
   searchTotal,
   searchIds,
   isFetching,
   errorMessage,
-  discipline,
+  disciplines,
   type,
   points,
 });

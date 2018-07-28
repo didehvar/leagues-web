@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 const Link = styled(Typography)`
   color: ${props => props.theme.palette.strava};
+  text-decoration: none;
 
   &:hover {
     color: ${props => lighten(0.2, props.theme.palette.strava)};
@@ -13,13 +14,13 @@ const Link = styled(Typography)`
 
 class StravaLink extends React.PureComponent {
   render() {
-    const { segmentId } = this.props;
+    const { segmentId, ...props } = this.props;
 
     return (
       <Link
-        align="right"
         component="a"
         href={`https://www.strava.com/segments/${segmentId}`}
+        {...props}
       >
         View on Strava
       </Link>

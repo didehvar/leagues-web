@@ -28,8 +28,8 @@ function current(state = {}, action = {}) {
 }
 
 function rolesById(state = {}, action = {}) {
-  if (action.payload && action.payload.role) {
-    return { ...state, ...action.payload.role };
+  if (action.payload && action.payload.roles) {
+    return { ...state, ...action.payload.roles };
   }
 
   return state;

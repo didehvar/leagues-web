@@ -3,7 +3,7 @@ import { getUser } from '../users';
 
 const reducer = state => state.leagues;
 
-const getDiscipline = (state, id) => reducer(state).discipline[id].name;
+const getDiscipline = (state, id) => reducer(state).disciplines[id].name;
 const getType = (state, id) => reducer(state).type[id].name;
 
 export const getLeague = (state, id) => {

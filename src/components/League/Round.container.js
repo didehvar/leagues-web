@@ -4,7 +4,6 @@ import flowRight from 'lodash/flowRight';
 import withFetchId from '../../hocs/withFetchId';
 import {
   fetchLeague,
-  getLeague,
   isFetching,
   getErrorMessage,
   getSortedPoints,
@@ -19,9 +18,9 @@ export default flowRight(
       const round = getRound(state, ownProps.match.params.roundId);
 
       return {
+        ...round,
         isFetching: isFetching(state),
         errorMessage: getErrorMessage(state),
-        ...round,
         points: getSortedPoints(state, round.points),
       };
     },

@@ -6,8 +6,9 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 
 import routes from '../../utils/routes';
 import NavRoutes from '../Route/NavRoutes';
+import Title from './Title';
 
-import { Title, Flex, Toolbar } from './DesktopNav.style';
+import { Flex, Toolbar } from './DesktopNav.style';
 
 class DesktopNav extends React.Component {
   render() {
