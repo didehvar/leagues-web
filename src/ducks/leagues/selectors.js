@@ -44,11 +44,9 @@ export const getRounds = (state, id) => {
 
 export const getPoints = state => reducer(state).points;
 
-export const getSortedPoints = (state, pointIds = []) => {
-  console.log('gsp', pointIds);
-  return Object.values(
+export const getSortedPoints = (state, pointIds = []) =>
+  Object.values(
     pointIds.reduce((acc, pointId) => {
-      console.log(state, pointId);
       const { user, points } = getPoints(state)[pointId];
 
       if (!acc[user]) {
@@ -62,4 +60,3 @@ export const getSortedPoints = (state, pointIds = []) => {
       return acc;
     }, {}),
   ).sort((a, b) => a.points < b.points);
-};

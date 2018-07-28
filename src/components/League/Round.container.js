@@ -17,7 +17,6 @@ export default flowRight(
   connect(
     (state, ownProps) => {
       const round = getRound(state, ownProps.match.params.roundId);
-      console.log('round points', round.points);
 
       return {
         isFetching: isFetching(state),
