@@ -45,17 +45,18 @@ export default {
     exact: true,
   },
 
+  leagueCreate: {
+    path: '/leagues/create',
+    component: loadable('League/Create.container'),
+    navComponent: () => <span>Create your league</span>,
+    exact: true,
+  },
+
   league: {
     path: '/leagues/:id',
     pathWith: id => `/leagues/${id}`,
     component: loadable('League'),
     navComponent: loadable('Route/Nav/LeagueTitle'),
-    exact: true,
-  },
-
-  leagueCreate: {
-    path: '/leagues/create',
-    component: loadable('League'),
     exact: true,
   },
 

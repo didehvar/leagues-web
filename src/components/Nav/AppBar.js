@@ -1,11 +1,11 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import MuiAppBar from '@material-ui/core/AppBar';
-import IconButton from '@material-ui/core/IconButton';
+// import IconButton from '@material-ui/core/IconButton';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import AccountCircle from '@material-ui/icons/AccountCircle';
+// import AccountCircle from '@material-ui/icons/AccountCircle';
 import Menu from '@material-ui/icons/Menu';
 import Group from '@material-ui/icons/Group';
 import ListIcon from '@material-ui/icons/List';
@@ -19,7 +19,7 @@ import {
   Toolbar,
   IconButonMenu,
   Title,
-  Actions,
+  // Actions,
   List,
   ListItem,
 } from './AppBar.style';

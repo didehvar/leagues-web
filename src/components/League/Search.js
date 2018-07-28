@@ -1,5 +1,6 @@
 import React from 'react';
 import throttle from 'lodash/throttle';
+import Link from 'react-router-dom/Link';
 import Zoom from '@material-ui/core/Zoom';
 import Button from '@material-ui/core/Button';
 import Add from '@material-ui/icons/Add';
@@ -8,6 +9,7 @@ import SearchBox from './SearchBox';
 import List from './List.container';
 
 import { AddFab } from './Search.style';
+import routes from '../../utils/routes';
 
 class Search extends React.PureComponent {
   state = { scrolling: true };
@@ -46,7 +48,13 @@ class Search extends React.PureComponent {
 
         <AddFab>
           <Zoom in={!scrolling}>
-            <Button variant="extendedFab" color="primary" aria-label="Add">
+            <Button
+              variant="extendedFab"
+              color="primary"
+              aria-label="Create"
+              component={Link}
+              to={routes.leagueCreate.path}
+            >
               <Add />
               Create
             </Button>
