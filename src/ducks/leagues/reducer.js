@@ -41,7 +41,7 @@ function searchIds(state = [], action = {}) {
     case types.FETCH_LEAGUES_SUCCEEDED:
       return action.payload.search === undefined
         ? state
-        : uniq([...state, ...Object.keys(action.payload.leagues || {})]);
+        : uniq([...state, ...action.payload.originalIds]);
 
     case types.SEARCH:
       return [];

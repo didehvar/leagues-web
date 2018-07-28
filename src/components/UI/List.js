@@ -9,7 +9,7 @@ import {
   CellMeasurerCache,
 } from 'react-virtualized';
 
-class List extends React.PureComponent {
+class List extends React.Component {
   static propTypes = {
     component: PropTypes.func.isRequired,
     data: PropTypes.array,
@@ -50,7 +50,10 @@ class List extends React.PureComponent {
     this.fetch({ startIndex, stopIndex });
 
   rowRenderer = ({ key, index, parent, style }) => {
-    const { component: Component, data } = this.props;
+    const { data, component: Component } = this.props;
+    const league = data[index];
+
+    if (!league) return null;
 
     return (
       <div key={key} style={style}>
@@ -62,50 +65,41 @@ class List extends React.PureComponent {
           rowIndex={index}
           width={this._mostRecentWidth}
         >
-          <Component {...data[index]} />
+          <Component {...league} />
         </CellMeasurer>
       </div>
     );
   };
 
   render() {
-    const { totalCount, data } = this.props;
+    const { totalCount } = this.props;
 
     return (
-      <WindowScroller>
-        {({ height, isScrolling, onChildScroll, scrollTop, registerChild }) => (
-          <div ref={registerChild}>
-            <AutoSizer disableHeight onResize={this.onResize}>
-              {({ width }) => (
-                <InfiniteLoader
-                  isRowLoaded={this.isRowLoaded}
-                  loadMoreRows={this.loadMoreRows}
-                  rowCount={totalCount}
-                  ref={this.infiniteLoaderRef}
-                >
-                  {({ onRowsRendered, registerChild }) => (
-                    <VirtualizedList
-                      ref={registerChild}
-                      autoHeight
-                      height={height}
-                      isScrolling={isScrolling}
-                      onScroll={onChildScroll}
-                      rowCount={data.length}
-                      rowRenderer={this.rowRenderer}
-                      scrollTop={scrollTop}
-                      width={width}
-                      overscanRowCount={10}
-                      onRowsRendered={onRowsRendered}
-                      deferredMeasurementCache={this.cache}
-                      rowHeight={this.cache.rowHeight}
-                    />
-                  )}
-                </InfiniteLoader>
-              )}
-            </AutoSizer>
-          </div>
+      <InfiniteLoader
+        isRowLoaded={this.isRowLoaded}
+        loadMoreRows={this.loadMoreRows}
+        rowCount={totalCount}
+      >
+        {({ onRowsRendered, registerChild }) => (
+          <WindowScroller>
+            {({ height }) => (
+              <AutoSizer disableHeight>
+                {({ width }) => (
+                  <VirtualizedList
+                    height={height}
+                    width={width}
+                    onRowsRendered={onRowsRendered}
+                    ref={registerChild}
+                    rowCount={totalCount}
+                    rowHeight={this.cache.rowHeight}
+                    rowRenderer={this.rowRenderer}
+                  />
+                )}
+              </AutoSizer>
+            )}
+          </WindowScroller>
         )}
-      </WindowScroller>
+      </InfiniteLoader>
     );
   }
 }

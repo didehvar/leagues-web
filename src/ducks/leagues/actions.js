@@ -17,14 +17,17 @@ export const fetchLeagues = ({
   },
 });
 
-export const fetchLeaguesSucceeded = (leagues, total = 0, payload = {}) => ({
-  type: types.FETCH_LEAGUES_SUCCEEDED,
-  payload: {
-    ...normalize(leagues, schema.leagueList).entities,
-    total,
-    ...payload,
-  },
-});
+export const fetchLeaguesSucceeded = (leagues, total = 0, payload = {}) => {
+  return {
+    type: types.FETCH_LEAGUES_SUCCEEDED,
+    payload: {
+      ...normalize(leagues, schema.leagueList).entities,
+      originalIds: leagues.map(l => l.id),
+      total,
+      ...payload,
+    },
+  };
+};
 
 export const fetchLeaguesFailed = message => ({
   type: types.FETCH_LEAGUES_FAILED,
