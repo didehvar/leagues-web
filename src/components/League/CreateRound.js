@@ -156,7 +156,7 @@ class CreateRound extends React.PureComponent {
   }
 
   render() {
-    const { onSubmit, isSubmitting, errorMessage } = this.props;
+    const { onSubmit, isSubmitting, errorMessage, leagueId } = this.props;
 
     return (
       <Formik
@@ -179,9 +179,10 @@ class CreateRound extends React.PureComponent {
         onSubmit={onSubmit}
         render={props => (
           <CreateRoundForm
+            {...props}
+            leagueId={leagueId}
             isSubmitting={isSubmitting}
             errorMessage={errorMessage}
-            {...props}
           />
         )}
       />
@@ -196,8 +197,14 @@ export default connect(
     leagueId: getCreatedRound(state).leagueId,
     errorMessage: getRoundError(state),
   }),
-  dispatch => ({
-    onSubmit: values => dispatch(createRound(values)),
+  (dispatch, ownProps) => ({
+    onSubmit: values =>
+      dispatch(
+        createRound({
+          ...values,
+          leagueId: parseInt(ownProps.match.params.id, 10),
+        }),
+      ),
     fetchStarredSegments: () => dispatch(fetchStarredSegments()),
   }),
 )(CreateRound);

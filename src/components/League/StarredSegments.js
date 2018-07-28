@@ -26,17 +26,15 @@ class StarredSegments extends React.PureComponent {
     const { onSelect, segments } = this.props;
 
     return (
-      <React.Fragment>
-        <List disablePadding>
-          <ListSubheader disableSticky color="primary">
-            Your starred segments
-          </ListSubheader>
+      <List disablePadding>
+        <ListSubheader disableSticky color="primary">
+          Your starred segments
+        </ListSubheader>
 
-          {segments.map(segment => (
-            <SegmentItem key={segment.id} {...segment} onClick={onSelect} />
-          ))}
-        </List>
-      </React.Fragment>
+        {segments.map(segment => (
+          <SegmentItem key={segment.id} {...segment} onClick={onSelect} />
+        ))}
+      </List>
     );
   }
 }

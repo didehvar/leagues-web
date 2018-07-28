@@ -21,7 +21,7 @@ class ModalContent extends React.PureComponent {
   render() {
     const { children } = this.props;
 
-    return <Content>{children}</Content>;
+    return <Content tabIndex={-1}>{children}</Content>;
   }
 }
 
