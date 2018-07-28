@@ -1,12 +1,8 @@
 import styled, { css } from 'styled-components';
 
 const FullPageContainer = styled.div`
-  position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
   padding: 1rem 1.25rem;
+  margin-bottom: 56px;
 
   ${props =>
     !props.full &&

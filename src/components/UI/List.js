@@ -22,6 +22,8 @@ class List extends React.Component {
     totalCount: 0,
   };
 
+  static batchSize = 50;
+
   infiniteLoaderRef = React.createRef();
 
   cache = new CellMeasurerCache({
@@ -29,7 +31,7 @@ class List extends React.Component {
   });
 
   componentDidMount() {
-    this.fetch();
+    this.fetch({ stopIndex: List.batchSize });
   }
 
   componentDidUpdate(prevProps) {
@@ -74,18 +76,24 @@ class List extends React.Component {
   render() {
     const { totalCount } = this.props;
 
+    console.log('what is going on', totalCount);
+    console.log('the data', this.props.data);
+
     return (
       <InfiniteLoader
         isRowLoaded={this.isRowLoaded}
         loadMoreRows={this.loadMoreRows}
         rowCount={totalCount}
+        ref={this.infiniteLoaderRef}
+        batchSize={List.batchSize}
       >
         {({ onRowsRendered, registerChild }) => (
           <WindowScroller>
-            {({ height }) => (
+            {({ height, isScrolling, onChildScroll, scrollTop }) => (
               <AutoSizer disableHeight>
                 {({ width }) => (
                   <VirtualizedList
+                    autoHeight
                     height={height}
                     width={width}
                     onRowsRendered={onRowsRendered}
@@ -93,6 +101,10 @@ class List extends React.Component {
                     rowCount={totalCount}
                     rowHeight={this.cache.rowHeight}
                     rowRenderer={this.rowRenderer}
+                    scrollTop={scrollTop}
+                    onScroll={onChildScroll}
+                    isScrolling={isScrolling}
+                    deferredMeasurementCache={this.cache}
                   />
                 )}
               </AutoSizer>

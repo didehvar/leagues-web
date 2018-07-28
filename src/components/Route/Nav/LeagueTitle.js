@@ -15,15 +15,13 @@ class LeagueTitle extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <Hidden mdUp>
-          <IconButton
-            color="inherit"
-            component={Link}
-            to={match.params.roundId ? route : routes.leagues.path}
-          >
-            <ArrowBackIos />
-          </IconButton>
-        </Hidden>
+        {match.params.roundId && (
+          <Hidden mdUp>
+            <IconButton color="inherit" component={Link} to={route}>
+              <ArrowBackIos />
+            </IconButton>
+          </Hidden>
+        )}
 
         <Link to={route}>{name}</Link>
       </React.Fragment>
