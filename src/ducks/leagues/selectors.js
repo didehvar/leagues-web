@@ -6,7 +6,7 @@ const reducer = state => state.leagues;
 const getDiscipline = (state, id) => reducer(state).disciplines[id].name;
 const getType = (state, id) => reducer(state).type[id].name;
 
-const leagueById = (state, id) => reducer(state).byId[id];
+export const leagueById = (state, id) => reducer(state).byId[id];
 
 export const getLeague = (state, id) => {
   const league = leagueById(state, id);
@@ -48,23 +48,6 @@ export const getRounds = (state, id) => {
 
 export const getPoints = state => reducer(state).points;
 
-export const getSortedPoints = (state, pointIds = []) =>
-  Object.values(
-    pointIds.reduce((acc, pointId) => {
-      const { user, points } = getPoints(state)[pointId];
-
-      if (!acc[user]) {
-        acc[user] = {
-          ...getUser(state, user),
-          points: 0,
-        };
-      }
-
-      acc[user].points += points;
-      return acc;
-    }, {}),
-  ).sort((a, b) => a.points < b.points);
-
 export const getCreatedLeague = state => reducer(state).created;
 
 export const isLeagueOwner = (state, id, userId) =>
@@ -75,3 +58,30 @@ export const hasLeagueType = (state, id, type) =>
 
 export const isParticipating = (state, id, userId) =>
   ((leagueById(state, id) || {}).participants || []).includes(userId);
+
+export const getLeagueUserPoint = (state, leagueId, userId) =>
+  Object.values(getPoints(state)).find(
+    p => p.leagueId === leagueId && p.userId === userId,
+  );
+
+export const getSortedLeaguePoints = (state, id) => {
+  const league = leagueById(state, id);
+  if (!league) return [];
+
+  return Object.values(
+    league.participants.reduce((acc, userId) => {
+      const { points = 0 } = getLeagueUserPoint(state, id, userId) || {};
+
+      if (!acc[userId]) {
+        acc[userId] = {
+          ...getUser(state, userId),
+          points: 0,
+        };
+      }
+
+      if (points) acc[userId].points += points;
+
+      return acc;
+    }, {}),
+  ).sort((a, b) => b.points - a.points);
+};

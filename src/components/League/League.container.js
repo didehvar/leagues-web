@@ -8,7 +8,7 @@ import {
   getRounds,
   isFetching,
   getLeagueError,
-  getSortedPoints,
+  getSortedLeaguePoints,
   isLeagueOwner,
   isParticipating,
   joinLeague,
@@ -20,16 +20,15 @@ import League from './League';
 export default flowRight(
   connect(
     (state, ownProps) => {
-      const leagueId = ownProps.match.params.id;
-      const league = getLeague(state, leagueId);
+      const leagueId = parseInt(ownProps.match.params.id, 10);
       const userId = getCurrentUserId(state);
 
       return {
-        league,
+        league: getLeague(state, leagueId),
         rounds: getRounds(state, leagueId),
         isFetching: isFetching(state),
         errorMessage: getLeagueError(state),
-        points: getSortedPoints(state, league.points).slice(0, 3),
+        points: getSortedLeaguePoints(state, leagueId).slice(0, 3),
         isOwner: isLeagueOwner(state, leagueId, userId),
         isParticipating: isParticipating(state, leagueId, userId),
       };
