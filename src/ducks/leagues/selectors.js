@@ -1,13 +1,15 @@
 import { getRound } from './rounds';
-import { getUser } from '../users';
+import { getUser, getCurrentUserId } from '../users';
 
 const reducer = state => state.leagues;
 
 const getDiscipline = (state, id) => reducer(state).disciplines[id].name;
 const getType = (state, id) => reducer(state).type[id].name;
 
+const leagueById = (state, id) => reducer(state).byId[id];
+
 export const getLeague = (state, id) => {
-  const league = reducer(state).byId[id];
+  const league = leagueById(state, id);
   if (!league) return {};
   return {
     ...league,
@@ -64,3 +66,6 @@ export const getSortedPoints = (state, pointIds = []) =>
   ).sort((a, b) => a.points < b.points);
 
 export const getCreatedLeague = state => reducer(state).created;
+
+export const isLeagueOwner = (state, id) =>
+  (leagueById(state, id) || {}).user === getCurrentUserId(state);

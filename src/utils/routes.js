@@ -60,6 +60,14 @@ export default {
     exact: true,
   },
 
+  roundCreate: {
+    path: '/leagues/:id/rounds/create',
+    pathWith: id => `/leagues/${id}/rounds/create`,
+    component: loadable('League/CreateRound.container'),
+    navComponent: loadable('Route/Nav/LeagueTitle'),
+    exact: true,
+  },
+
   round: {
     path: '/leagues/:id/rounds/:roundId',
     pathWith: (id, roundId) => `/leagues/${id}/rounds/${roundId}`,

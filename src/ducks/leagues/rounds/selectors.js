@@ -13,3 +13,7 @@ export const getRound = (state, id) => {
 };
 
 export const getRoundName = (state, id) => getRound(state, id).name;
+
+export const isCreatingRound = state => reducer(state).isCreating;
+
+export const getCreatedRound = state => reducer(state).created;

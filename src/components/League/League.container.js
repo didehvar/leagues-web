@@ -9,6 +9,7 @@ import {
   isFetching,
   getErrorMessage,
   getSortedPoints,
+  isLeagueOwner,
 } from '../../ducks/leagues';
 
 import League from './League';
@@ -25,6 +26,7 @@ export default flowRight(
         isFetching: isFetching(state),
         errorMessage: getErrorMessage(state),
         points: getSortedPoints(state, league.points).slice(0, 3),
+        isOwner: isLeagueOwner(state, leagueId),
       };
     },
     { fetch: fetchLeague },

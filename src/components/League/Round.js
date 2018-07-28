@@ -24,7 +24,9 @@ class Round extends React.PureComponent {
               {segment.name}
             </Typography>
 
-            <StravaLink segmentId={segment.stravaId} />
+            <Typography>
+              <StravaLink segmentId={segment.stravaId} />
+            </Typography>
           </CardContent>
         </Card>
 

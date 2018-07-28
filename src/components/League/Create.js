@@ -63,7 +63,7 @@ class Create extends React.PureComponent {
             .required(),
         })}
         onSubmit={onSubmit}
-        render={({ errors, touched }) => (
+        render={({ isValid }) => (
           <Form>
             <Field
               required
@@ -145,9 +145,9 @@ class Create extends React.PureComponent {
               color="primary"
               type="submit"
               size="large"
-              disabled={isSubmitting}
+              disabled={!isValid || isSubmitting}
             >
-              Create
+              Create League
             </Button>
           </Form>
         )}

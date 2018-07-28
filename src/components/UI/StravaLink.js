@@ -1,9 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { lighten } from 'polished';
-import Typography from '@material-ui/core/Typography';
 
-const Link = styled(Typography)`
+const Link = styled.a`
   color: ${props => props.theme.palette.strava};
   text-decoration: none;
 
@@ -14,15 +13,14 @@ const Link = styled(Typography)`
 
 class StravaLink extends React.PureComponent {
   render() {
-    const { segmentId, ...props } = this.props;
+    const { segmentId, href, children, ...props } = this.props;
 
     return (
       <Link
-        component="a"
-        href={`https://www.strava.com/segments/${segmentId}`}
+        href={href || `https://www.strava.com/segments/${segmentId}`}
         {...props}
       >
-        View on Strava
+        {children || 'View on Strava'}
       </Link>
     );
   }

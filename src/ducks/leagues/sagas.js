@@ -1,4 +1,5 @@
 import { call, select, put, takeLatest } from 'redux-saga/effects';
+import rounds from './rounds/sagas';
 
 import types from './types';
 import { fetchLeagues, fetchLeague, createLeague } from './api';
@@ -38,4 +39,5 @@ export default function* sagas() {
   yield takeLatest(types.FETCH_LEAGUES, getLeagues);
   yield takeLatest(types.FETCH_LEAGUE, getLeague);
   yield takeLatest(types.CREATE_LEAGUE, doCreateLeague);
+  yield rounds();
 }
