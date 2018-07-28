@@ -26,7 +26,7 @@ class StandingItem extends React.PureComponent {
 class Standings extends React.PureComponent {
   static propTypes = {
     title: PropTypes.string,
-    points: PropTypes.Array,
+    points: PropTypes.array,
   };
 
   static defaultProps = {

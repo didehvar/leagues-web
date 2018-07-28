@@ -4,7 +4,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
 import { formatDate } from '../../utils/helpers';
-import Spacer from '../UI/Spacer';
 import StravaLink from '../UI/StravaLink';
 import Standings from './Standings';
 
