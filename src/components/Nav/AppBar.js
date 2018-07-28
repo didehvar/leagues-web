@@ -54,7 +54,7 @@ class AppBar extends React.Component {
                   {render}
                 </Title>
 
-                <Actions>
+                {/* <Actions>
                   <IconButton
                     color="inherit"
                     component={Link}
@@ -62,7 +62,7 @@ class AppBar extends React.Component {
                   >
                     <AccountCircle />
                   </IconButton>
-                </Actions>
+                </Actions> */}
               </Toolbar>
             </MuiAppBar>
           )}
