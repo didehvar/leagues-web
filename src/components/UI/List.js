@@ -76,9 +76,6 @@ class List extends React.Component {
   render() {
     const { totalCount } = this.props;
 
-    console.log('what is going on', totalCount);
-    console.log('the data', this.props.data);
-
     return (
       <InfiniteLoader
         isRowLoaded={this.isRowLoaded}
