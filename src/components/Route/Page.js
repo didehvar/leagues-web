@@ -7,18 +7,18 @@ class Page extends React.Component {
     const {
       component: Component,
       routes = {},
-      authenticated,
+      isAuthenticated,
       ...props
     } = this.props;
 
     return (
       <React.Fragment>
-        <Component {...props} />
+        <Component isAuthenticated={isAuthenticated} {...props} />
 
         {Object.values(routes).map(route => (
           <RouteWithSubRoutes
             key={route.path}
-            authenticated={authenticated}
+            isAuthenticated={isAuthenticated}
             {...route}
           />
         ))}
