@@ -48,6 +48,7 @@ export default {
   leagueCreate: {
     path: '/leagues/create',
     component: loadable('League/Create.container'),
+    requiredRole: config.auth.user,
     navComponent: () => <span>Create your league</span>,
     exact: true,
   },
@@ -72,6 +73,7 @@ export default {
     path: '/leagues/:id/rounds/create',
     pathWith: id => `/leagues/${id}/rounds/create`,
     component: loadable('League/CreateRound.container'),
+    requiredRole: config.auth.user,
     navComponent: loadable('Route/Nav/LeagueTitle'),
     exact: true,
   },
