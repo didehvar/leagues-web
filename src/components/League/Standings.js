@@ -15,7 +15,11 @@ class StandingItem extends React.PureComponent {
 
     return (
       <ListItem>
-        <PointsBadge badgeContent={points} color="primary" index={index}>
+        <PointsBadge
+          badgeContent={points}
+          color="primary"
+          index={points > 0 && index}
+        >
           <Avatar src={avatar} />
         </PointsBadge>
 
