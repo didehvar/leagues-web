@@ -3,6 +3,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
 import { displayName } from '../utils/helpers';
+import FullPageLoading from '../components/UI/FullPageLoading';
 
 export default WrappedComponent => {
   class WithFetchId extends React.PureComponent {
@@ -37,6 +38,10 @@ export default WrappedComponent => {
             )}
           </React.Fragment>
         );
+      }
+
+      if (isFetching) {
+        return <FullPageLoading />;
       }
 
       return <WrappedComponent {...props} />;

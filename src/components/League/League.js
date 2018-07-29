@@ -19,9 +19,16 @@ class League extends React.PureComponent {
   joinLeague = () => this.props.joinLeague(this.props.league.id);
 
   render() {
-    const { league, rounds, points, isOwner, isParticipating } = this.props;
+    const {
+      league,
+      rounds,
+      points,
+      isOwner,
+      isParticipating,
+      isFetching,
+    } = this.props;
 
-    if (!league) return false;
+    if (!league || isFetching) return false;
 
     return (
       <React.Fragment>
