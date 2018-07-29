@@ -5,7 +5,7 @@ export const displayName = WrappedComponent =>
   WrappedComponent.displayName || WrappedComponent.name || 'Component';
 
 export const formatDate = (dateFrom, dateTo) => {
-  if (!dateTo) return format(dateFrom, 'Do MMM');
+  if (!dateTo) return format(dateFrom, 'Do MMM YYYY');
   return (
     <span>
       {formatDate(dateFrom)} &mdash; {formatDate(dateTo)}
