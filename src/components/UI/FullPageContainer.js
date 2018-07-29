@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const FullPageContainer = styled.div`
-  padding: 1rem 1.25rem;
-  margin-bottom: 56px;
+  padding: 1rem 1.25rem 5rem;
 
   ${props =>
     props.full
