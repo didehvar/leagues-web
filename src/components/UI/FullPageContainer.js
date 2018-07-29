@@ -5,13 +5,20 @@ const FullPageContainer = styled.div`
   margin-bottom: 56px;
 
   ${props =>
-    !props.full &&
-    css`
-      ${props.theme.breakpoints.up('md')} {
-        max-width: ${props.theme.spacing.maxWidth};
-        margin: 0 auto;
-      }
-    `};
+    props.full
+      ? css`
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+        `
+      : css`
+          ${props.theme.breakpoints.up('md')} {
+            max-width: ${props.theme.spacing.maxWidth};
+            margin: 0 auto;
+          }
+        `};
 `;
 
 export default FullPageContainer;

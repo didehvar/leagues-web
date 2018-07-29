@@ -2,10 +2,10 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   position: absolute;
-  left: 0px;
-  right: 0px;
-  top: 0px;
-  bottom: 0px;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
 `;
 
 export const Content = styled(Container)`
