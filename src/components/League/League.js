@@ -26,6 +26,7 @@ class League extends React.PureComponent {
       isOwner,
       isParticipating,
       isFetching,
+      isAuthenticated,
     } = this.props;
 
     if (!league || isFetching) return false;
@@ -79,11 +80,12 @@ class League extends React.PureComponent {
           </Center>
         )}
 
-        {!isParticipating && (
-          <FloatingActionButton onClick={this.joinLeague} icon={GroupAdd}>
-            Join
-          </FloatingActionButton>
-        )}
+        {isAuthenticated &&
+          !isParticipating && (
+            <FloatingActionButton onClick={this.joinLeague} icon={GroupAdd}>
+              Join
+            </FloatingActionButton>
+          )}
       </React.Fragment>
     );
   }

@@ -13,7 +13,7 @@ import {
   isParticipating,
   joinLeague,
 } from '../../ducks/leagues';
-import { getCurrentUserId } from '../../ducks/users';
+import { getCurrentUserId, isAuthenticated } from '../../ducks/users';
 
 import League from './League';
 
@@ -31,6 +31,7 @@ export default flowRight(
         points: getSortedLeaguePoints(state, leagueId).slice(0, 3),
         isOwner: isLeagueOwner(state, leagueId, userId),
         isParticipating: isParticipating(state, leagueId, userId),
+        isAuthenticated: isAuthenticated(state),
       };
     },
     { fetch: fetchLeague, joinLeague },
