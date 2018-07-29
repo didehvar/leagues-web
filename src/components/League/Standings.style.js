@@ -1,3 +1,4 @@
+import React from 'react';
 import styled from 'styled-components';
 import Badge from '@material-ui/core/Badge';
 import MuiListItemText from '@material-ui/core/ListItemText';
@@ -6,7 +7,9 @@ export const ListItemText = styled(MuiListItemText)`
   word-wrap: break-word;
 `;
 
-export const PointsBadge = styled(Badge)`
+export const PointsBadge = styled(({ index, ...props }) => (
+  <Badge {...props} />
+))`
   margin-right: 8px;
 
   span {
