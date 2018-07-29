@@ -5,20 +5,13 @@ import Route from 'react-router-dom/Route';
 
 import routes from '../../utils/routes';
 
-const Nav404 = () => <div>Missing title</div>;
-
 class NavRoutes extends React.Component {
   static propTypes = {
     children: PropTypes.func.isRequired,
-    show404: PropTypes.bool,
-  };
-
-  static defaultProps = {
-    show404: true,
   };
 
   render() {
-    const { children, show404 } = this.props;
+    const { children } = this.props;
 
     const navRoutes = Object.values(routes)
       .filter(r => r.navComponent)
@@ -31,12 +24,7 @@ class NavRoutes extends React.Component {
         />
       ));
 
-    return (
-      <Switch>
-        {navRoutes}
-        {show404 && <Route component={Nav404} />}
-      </Switch>
-    );
+    return <Switch>{navRoutes}</Switch>;
   }
 }
 
