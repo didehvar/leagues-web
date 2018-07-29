@@ -1,11 +1,18 @@
-import * as leagues from './leagues/sagas';
+import leagues from './leagues/sagas';
+import rounds from './leagues/rounds/sagas';
+import segments from './leagues/segments/sagas';
+import users from './users/sagas';
 
 const sagas = {
-  ...leagues,
+  leagues,
+  rounds,
+  segments,
+
+  users,
 };
 
 export default function registerSagas(middleware) {
-  for (let name in sagas) {
+  for (const name in sagas) {
     middleware.run(sagas[name]);
   }
 }

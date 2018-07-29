@@ -1,10 +1,10 @@
 import { stringify } from 'querystring';
-import { getUserToken } from '../reducers';
+import { getCurrentToken } from './users';
 
 const apiUrl = process.env.REACT_APP_API_URL || 'http://localhost:3001';
 
 export const api = async ({ url, query, method = 'GET', body }, state = {}) => {
-  const token = getUserToken(state);
+  const token = getCurrentToken(state);
 
   const response = await fetch(`${apiUrl}/1.1/${url}?${stringify(query)}`, {
     method: method,
@@ -15,6 +15,11 @@ export const api = async ({ url, query, method = 'GET', body }, state = {}) => {
     },
   });
 
-  const { data } = await response.json();
+  const { data, error, message } = await response.json();
+
+  if (error) {
+    throw new Error(message);
+  }
+
   return data;
 };

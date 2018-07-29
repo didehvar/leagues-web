@@ -1,0 +1,13 @@
+const prefix = 'users';
+
+export default {
+  LOGIN: `${prefix}/LOGIN`,
+  LOGIN_SUCCEEDED: `${prefix}/LOGIN_SUCCEEDED`,
+  LOGIN_FAILED: `${prefix}/LOGIN_FAILED`,
+
+  LOGOUT: `${prefix}/LOGOUT`,
+
+  FETCH_REFRESH_TOKEN: `${prefix}/FETCH_REFRESH_TOKEN`,
+  FETCH_REFRESH_TOKEN_SUCCEEDED: `${prefix}/FETCH_REFRESH_TOKEN_SUCCEEDED`,
+  FETCH_REFRESH_TOKEN_FAILED: `${prefix}/FETCH_REFRESH_TOKEN_FAILED`,
+};
