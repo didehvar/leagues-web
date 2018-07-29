@@ -31,9 +31,10 @@ export const getRoundUserPoint = (state, roundId, userId) =>
 
 export const getSortedRoundPoints = (state, id) => {
   const round = roundById(state, id);
-  const league = leagueById(state, round.leagueId) || {};
+  if (!round) return [];
 
-  if (!round || !league.participants) return [];
+  const league = leagueById(state, round.leagueId) || {};
+  if (!league.participants) return [];
 
   return Object.values(
     league.participants.reduce((acc, userId) => {

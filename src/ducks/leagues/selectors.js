@@ -59,10 +59,10 @@ export const hasLeagueType = (state, id, type) =>
 export const isParticipating = (state, id, userId) =>
   ((leagueById(state, id) || {}).participants || []).includes(userId);
 
-export const getLeagueUserPoint = (state, leagueId, userId) =>
-  Object.values(getPoints(state)).find(
-    p => p.leagueId === leagueId && p.userId === userId,
-  );
+export const getLeagueUserPoints = (state, leagueId, userId) =>
+  Object.values(getPoints(state))
+    .filter(p => p.leagueId === leagueId && p.userId === userId)
+    .reduce((acc, point) => (acc += point.points), 0);
 
 export const getSortedLeaguePoints = (state, id) => {
   const league = leagueById(state, id);
@@ -70,7 +70,7 @@ export const getSortedLeaguePoints = (state, id) => {
 
   return Object.values(
     league.participants.reduce((acc, userId) => {
-      const { points = 0 } = getLeagueUserPoint(state, id, userId) || {};
+      const points = getLeagueUserPoints(state, id, userId) || 0;
 
       if (!acc[userId]) {
         acc[userId] = {
