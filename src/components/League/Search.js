@@ -10,18 +10,22 @@ import routes from '../../utils/routes';
 
 class Search extends React.PureComponent {
   render() {
+    const { isAuthenticated } = this.props;
+
     return (
       <React.Fragment>
         <SearchBox />
         <List />
 
-        <FloatingActionButton
-          component={Link}
-          to={routes.leagueCreate.path}
-          icon={Add}
-        >
-          Create
-        </FloatingActionButton>
+        {isAuthenticated && (
+          <FloatingActionButton
+            component={Link}
+            to={routes.leagueCreate.path}
+            icon={Add}
+          >
+            Create
+          </FloatingActionButton>
+        )}
       </React.Fragment>
     );
   }
