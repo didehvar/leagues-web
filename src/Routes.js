@@ -9,19 +9,19 @@ import Nav from './components/Nav';
 import RouteWithSubRoutes from './components/Route/RouteWithSubRoutes';
 import FullPageLoading from './components/UI/FullPageLoading';
 
-import { Container, Content } from './Routes.style';
+import { Container } from './Routes.style';
 
 class Routes extends React.Component {
   render() {
     const { loading, history, location } = this.props;
 
     return (
-      <Container>
+      <React.Fragment>
         {location.pathname !== routes.home.path && (
           <Nav pathname={location.pathname} />
         )}
 
-        <Content>
+        <Container>
           <TransitionGroup>
             <CSSTransition key={location.key} classNames="fade" timeout={300}>
               <Switch location={location}>
@@ -40,8 +40,8 @@ class Routes extends React.Component {
               </Switch>
             </CSSTransition>
           </TransitionGroup>
-        </Content>
-      </Container>
+        </Container>
+      </React.Fragment>
     );
   }
 }

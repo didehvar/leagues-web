@@ -6,9 +6,6 @@ export const Container = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
-`;
-
-export const Content = styled(Container)`
   margin: 56px 0;
 
   ${props => props.theme.breakpoints.up('md')} {
