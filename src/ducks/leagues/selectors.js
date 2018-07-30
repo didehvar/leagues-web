@@ -62,7 +62,13 @@ export const isParticipating = (state, id, userId) =>
 export const getLeagueUserPoints = (state, leagueId, userId) =>
   Object.values(getPoints(state))
     .filter(p => p.leagueId === leagueId && p.userId === userId)
-    .reduce((acc, point) => (acc += point.points), 0);
+    .reduce((acc, { id, points, ...rest }) => {
+      acc = {
+        points: (acc[id] || 0) + points,
+        ...rest,
+      };
+      return acc;
+    }, {});
 
 export const getSortedLeaguePoints = (state, id) => {
   const league = leagueById(state, id);
@@ -70,11 +76,12 @@ export const getSortedLeaguePoints = (state, id) => {
 
   return Object.values(
     league.participants.reduce((acc, userId) => {
-      const points = getLeagueUserPoints(state, id, userId) || 0;
+      const { points, ...rest } = getLeagueUserPoints(state, id, userId) || 0;
 
       if (!acc[userId]) {
         acc[userId] = {
           ...getUser(state, userId),
+          ...rest,
           points: 0,
         };
       }

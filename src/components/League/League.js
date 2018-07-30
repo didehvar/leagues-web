@@ -38,6 +38,7 @@ class League extends React.PureComponent {
           limit={3}
           points={points}
           disablePadding
+          preview
         />
 
         <Right>

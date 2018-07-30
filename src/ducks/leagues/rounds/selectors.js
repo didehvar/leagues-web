@@ -38,11 +38,13 @@ export const getSortedRoundPoints = (state, id) => {
 
   return Object.values(
     league.participants.reduce((acc, userId) => {
-      const { points = 0 } = getRoundUserPoint(state, id, userId) || {};
+      const { points = 0, ...rest } =
+        getRoundUserPoint(state, id, userId) || {};
 
       if (!acc[userId]) {
         acc[userId] = {
           ...getUser(state, userId),
+          ...rest,
           points: 0,
         };
       }

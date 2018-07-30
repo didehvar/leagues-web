@@ -11,7 +11,16 @@ import { ListItemText, PointsBadge } from './Standings.style';
 
 class StandingItem extends React.PureComponent {
   render() {
-    const { index, avatar, firstname, lastname, points } = this.props;
+    const {
+      preview,
+      index,
+      avatar,
+      firstname,
+      lastname,
+      points,
+      distance,
+      elapsedTime,
+    } = this.props;
 
     return (
       <ListItem>
@@ -24,6 +33,13 @@ class StandingItem extends React.PureComponent {
         </PointsBadge>
 
         <ListItemText primary={firstname} secondary={lastname} />
+        {!preview && (
+          <ListItemText
+            primary={
+              distance ? `${distance}m` : elapsedTime ? `${elapsedTime}s` : ''
+            }
+          />
+        )}
       </ListItem>
     );
   }
@@ -41,7 +57,7 @@ class Standings extends React.PureComponent {
   };
 
   render() {
-    const { title, points, ...props } = this.props;
+    const { preview, title, points, ...props } = this.props;
 
     if (!points.length) return null;
 
@@ -56,7 +72,12 @@ class Standings extends React.PureComponent {
         )}
 
         {points.map((point, index) => (
-          <StandingItem key={point.id} {...point} index={index} />
+          <StandingItem
+            key={point.id}
+            {...point}
+            index={index}
+            preview={preview}
+          />
         ))}
       </List>
     );
