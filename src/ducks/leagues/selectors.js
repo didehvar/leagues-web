@@ -64,7 +64,7 @@ export const getLeagueUserPoints = (state, leagueId, userId) =>
     .filter(p => p.leagueId === leagueId && p.userId === userId)
     .reduce((acc, { id, points, ...rest }) => {
       acc = {
-        points: (acc[id] || 0) + points,
+        points: (acc.points || 0) + points,
         ...rest,
       };
       return acc;
