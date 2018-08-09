@@ -3,6 +3,14 @@ import styled from 'styled-components';
 import Badge from '@material-ui/core/Badge';
 import MuiListItemText from '@material-ui/core/ListItemText';
 
+export const Container = styled.div`
+  td,
+  th {
+    border-bottom: 0;
+    border-top: 0;
+  }
+`;
+
 export const ListItemText = styled(MuiListItemText)`
   word-wrap: break-word;
 `;

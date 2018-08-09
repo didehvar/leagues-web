@@ -9,7 +9,7 @@ import Standings from './Standings';
 
 class Round extends React.PureComponent {
   render() {
-    const { name, startDate, endDate, points, segment } = this.props;
+    const { name, startDate, endDate, points, segment, type } = this.props;
 
     return (
       <React.Fragment>
@@ -30,7 +30,7 @@ class Round extends React.PureComponent {
           </CardContent>
         </Card>
 
-        <Standings points={points} />
+        <Standings points={points} type={type} />
       </React.Fragment>
     );
   }

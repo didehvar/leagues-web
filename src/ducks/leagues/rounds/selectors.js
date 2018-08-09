@@ -45,6 +45,7 @@ export const getSortedRoundPoints = (state, id) => {
         acc[userId] = {
           ...getUser(state, userId),
           ...rest,
+          result: rest.elapsedTime || rest.distance,
           points: 0,
         };
       }

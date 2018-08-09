@@ -1,3 +1,4 @@
+import config from '../../utils/config';
 import { getRound } from './rounds';
 import { getUser } from '../users';
 
@@ -82,6 +83,7 @@ export const getSortedLeaguePoints = (state, id) => {
         acc[userId] = {
           ...getUser(state, userId),
           ...rest,
+          result: rest.elapsedTime || rest.distance,
           points: 0,
         };
       }
@@ -91,4 +93,10 @@ export const getSortedLeaguePoints = (state, id) => {
       return acc;
     }, {}),
   ).sort((a, b) => b.points - a.points);
+};
+
+export const getLeagueType = (state, id) => {
+  const league = leagueById(state, id);
+  if (!league) return config.leagues.fastest;
+  return getType(state, league.type);
 };

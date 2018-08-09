@@ -37,9 +37,12 @@ class League extends React.PureComponent {
           title="Top Standings"
           limit={3}
           points={points}
-          disablePadding
-          preview
+          type={league.type}
+          hideResult
+          hideColumns
         />
+
+        <Spacer padding={4} />
 
         <Right>
           <Button

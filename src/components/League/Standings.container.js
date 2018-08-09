@@ -3,16 +3,25 @@ import { connect } from 'react-redux';
 import flowRight from 'lodash/flowRight';
 
 import withFetchId from '../../hocs/withFetchId';
-import { fetchLeague, getSortedLeaguePoints } from '../../ducks/leagues';
+import {
+  fetchLeague,
+  getSortedLeaguePoints,
+  getLeagueType,
+} from '../../ducks/leagues';
 
 import Standings from './Standings';
 
 class StandingsContainer extends React.PureComponent {
   render() {
-    const { points, fetch } = this.props;
+    const { type, points } = this.props;
 
     return (
-      <Standings title="Current Standings" points={points} fetch={fetch} />
+      <Standings
+        title="Current Standings"
+        points={points}
+        type={type}
+        hideResult
+      />
     );
   }
 }
@@ -22,6 +31,7 @@ export default flowRight(
     (state, ownProps) => {
       const leagueId = parseInt(ownProps.match.params.id, 10);
       return {
+        type: getLeagueType(state, leagueId),
         points: getSortedLeaguePoints(state, leagueId),
       };
     },
