@@ -23,9 +23,10 @@ class App extends React.Component {
       <React.Fragment>
         <CssBaseline />
 
-        <Router history={history}>
-          <Routes loading={loading} />
-        </Router>
+        <div style={{ textAlign: 'center', margin: '2rem' }}>
+          Unfortunately, Impendulo/Strava Leagues is no longer under active development.<br/>
+          We're sorry for any inconvenience caused.
+        </div>
       </React.Fragment>
     );
   }
